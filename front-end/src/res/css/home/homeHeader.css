@@ -1,0 +1,61 @@
+.header {
+  height: 100vh;
+  background-color: #30AADD;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 0;
+  position: relative;
+}
+
+.header-logo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-logo-title{
+  display: flex;
+  align-items: center;
+}
+
+.header-logo-title h1 {
+  font-size: 5em;
+  
+}
+
+.header-logo img{
+  width:3.5rem;
+  height: 3.5rem;
+}
+
+.header-logo h2 {
+  padding-top: 30px;
+  
+}
+
+.header .chat{
+  width:75px;
+  position:sticky;
+  top:85%;
+  left:85%;
+  z-index: 2;
+}
+
+@media screen and (max-width:425px)
+{
+  .header-logo h1 {
+    font-size: 3em;
+  }
+  
+  .header-logo img{
+    width:2.5rem;
+    height: 2.5rem;
+  }
+  .header-logo h2 {
+    padding-top: 10px;
+    
+    font-size:20px;
+  }
+}

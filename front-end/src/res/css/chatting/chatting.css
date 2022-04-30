@@ -1,0 +1,27 @@
+.chatting .row{
+  width:100vw;
+}
+
+.chatting ul {
+    min-height: calc(100vh - 120px);
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.chatting ul li {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .chatting .profile-img img {
+    width: 50px;
+    background-color: #dddddd;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
