@@ -1,0 +1,28 @@
+.login-component{
+  width:100vw;
+  height:100vh;
+  background-color: #ffd59e;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-component .card{
+  width:800px;
+}
+.login-component .card .card-header {
+  text-align: center;
+}
+
+.login-component .login-btns {
+  display: flex;
+  justify-content: center;
+}
+
+.login-component .login-btns button {
+  margin: 0 15px;
+}
+
+.login-component .signup-btn a {
+  color: white;
+}
