@@ -1,0 +1,90 @@
+.admin-post-management-rightside{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-post-management-rightside.active{
+    display:none;
+}
+
+.admin-post-management-rightside .admin-post-title{
+    margin:50px 0px;
+
+}
+
+.admin-post-management-rightside .admin-post-search{
+    display:flex;
+    align-items: center;
+    justify-content: right;
+    margin:50px 20px;
+    margin-top:0px;
+}
+
+.admin-post-management-rightside .admin-post-search .icon{
+    width:30px;
+    height: 30px;
+    margin:0 10px;
+}
+
+.admin-post-management-rightside .admin-post-search .searchText{
+    margin:0 10px;
+    margin-left:0px;
+}
+
+.admin-post-management-rightside .admin-post-search .searchBtn{
+    background-color: #F8B400;
+    border:1px solid black;
+}
+
+.admin-post-management-rightside .admin-post{
+    text-align: center;
+    font-size:2rem;
+}
+
+.admin-post-management-rightside .admin-post .admin-post-head{
+    margin-bottom:20px;
+    border-bottom:1px solid black;
+}
+
+@media screen and (max-width:1023px)
+{
+    .admin-post-management-rightside{
+        justify-content: normal;
+        width:100vw;
+    }
+
+    .admin-post-management-rightside .admin-post-search{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width:767px)
+{
+    .admin-post-management-rightside .admin-post{
+        text-align: center;
+        font-size:1.5rem;
+    }
+
+    .admin-post-management-rightside .admin-post-search .icon{
+        width:20px;
+        height:20px;
+    }
+}
+
+@media screen and (max-width:424px)
+{
+    .admin-post-management-rightside .admin-post{
+        text-align: center;
+        font-size:1rem;
+    }
+}
+
+@media screen and (max-width:319px)
+{
+    .admin-post-management-rightside .admin-post-search{
+        margin-left:0px;
+        margin-right:0px;
+        width:100%;
+    }
+}
