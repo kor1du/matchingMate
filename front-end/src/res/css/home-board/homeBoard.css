@@ -1,0 +1,129 @@
+.board .card {
+  margin: 10px 5px;
+}
+
+.board img {
+  width: 40px;
+  height: 40px;
+}
+.board p {
+  padding: 0;
+  margin: 0;
+}
+
+.board .new-hot {
+  margin-top: 30px;
+}
+
+.board .new-hot .col-12 {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.board .new-hot .col-12 a {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  font-size: 3rem;
+  margin:0 20px;
+}
+
+.board .new {
+  color: #42c2ff;
+}
+
+.board .hot {
+  color: #e83a14;
+}
+
+.board .card-header {
+  font-size: 1.5rem;
+}
+
+.board .card .info {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.board .card .info span {
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+.board-page .col-12 {
+  margin: 20px 0px;
+}
+
+.board .pagination {
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.board-detail{
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+.board-detail-btn{
+  width:50%;
+}
+
+@media screen and (min-width:2560px)
+{
+  .board{
+    margin:0 150px;
+  }
+}
+
+@media screen and (min-width:1440px) and (max-width:2559px)
+{
+  .board{
+    margin:0 130px;
+  }
+}
+
+@media screen and (min-width:1024px) and (max-width:1439px){
+  .board{
+    margin:0 100px;
+  }
+}
+
+@media screen and (min-width:425px) and (max-width:1023px){
+  .board{
+    margin:0 100px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:424px){
+  .board{
+    margin:0 50px;
+  }
+}
+
+@media screen and (max-width:550px) {
+  .board .pagination {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .board .new,
+  .board .hot{
+    width:100vw;
+    justify-content: center;
+  }
+
+  .board .new p,
+  .board .hot p{
+    font-size: 1.8rem;
+  }
+
+  .board .new-hot img{
+    width:20px;
+    height: 20px;
+  }
+}
