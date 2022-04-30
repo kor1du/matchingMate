@@ -1,0 +1,91 @@
+.chatting-right-side {
+  max-width: 100vw;
+  min-height: calc(100vh - 50px);
+  margin-top: 50px;
+  background-color: #ffd36f;
+}
+
+.chatting-right-side.active {
+  display: none;
+}
+
+.chatting-right-side ul li {
+  min-height: calc((100vh - 50px) / 8);
+}
+
+.chatting-right-side .text {
+  position: relative;
+  width: auto;
+  height: 50px;
+  background: #333333;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.chatting-right-side .text:after {
+  border-top: 15px solid #333333;
+  border-left: 15px solid transparent;
+  border-right: 0px solid #333333;
+  border-bottom: 0px solid #333333;
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -15px;
+}
+
+.chatting-right-side .text h3 {
+  margin: 0 5px;
+}
+
+.chatting-right-side .text-me {
+  justify-content: right !important;
+}
+
+.chatting-right-side .text-me .text {
+  background-color: white;
+  color: black;
+}
+
+.chatting-right-side .text-me .text:after {
+  border: 0 !important;
+}
+
+.chatting-right-side .keyboard {
+  display: flex;
+  justify-content: center;
+}
+
+.chatting-right-side .keyboard form {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatting-right-side .keyboard .btn {
+  width: 100px;
+  margin-left: 20px;
+}
+
+.chatting-right-side .keyboard form {
+  width: 90vw;
+}
+
+.chatting-right-side .keyboard .mb-3 {
+  width: 100%;
+  padding: 0;
+  margin: 0 !important;
+}
+
+.chatting-right-side.active {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .chatting-right-side {
+    width: 100vw;
+  }
+}

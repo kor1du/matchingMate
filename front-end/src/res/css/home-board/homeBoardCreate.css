@@ -1,0 +1,13 @@
+.make-post{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right:50px;
+}
+
+.make-post button{
+    width:auto;
+    
+    font-size:1.5rem;
+}
