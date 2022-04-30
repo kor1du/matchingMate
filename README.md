@@ -13,7 +13,11 @@
 
 - Dev Tools : IntelliJ, VS Code
 
+<<<<<<< HEAD
   > > > > > > > 1c6cbc9 (Update README.md)
+=======
+* Dev Toos : IntelliJ,  VS Code
+>>>>>>> 32bae48acb600a3ad8371ed85883fbdbd7854a32
 
 - 사용 기술
   - React
