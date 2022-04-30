@@ -9,7 +9,7 @@
 
 * DBMS : MySQL
 
-* Dev Tools : IntelliJ,  VS Code
+* Dev Toos : IntelliJ,  VS Code
 
 * 사용 기술
   - React
