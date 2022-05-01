@@ -136,11 +136,7 @@ public class ChattingService {
 
         // chatting_member 삭제
         ChattingMember chattingMember = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId()).get();
-<<<<<<< Updated upstream
-=======
-        System.out.println(chattingMessageList.size());
-        chattingMember.getChattingMessageList().removeAll(chattingMessageList);
->>>>>>> Stashed changes
+
 //        findChattingRoom.getChattingMemberList().removeIf(chattingMember1 -> chattingMember1.getMember())
         // 이 사람이 ready 상태이면 number_of_people --
         if (findChattingRoom.getMatchingPost().getIsCompleted()==0 && chattingMember.isReady() == true) findChattingRoom.getMatchingPost().updateMinusNumberOfPeople();
