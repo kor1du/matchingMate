@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/matchingMate/static/css/main.0637a013.css",
-    "main.js": "/matchingMate/static/js/main.3df55d00.js",
+    "main.js": "/matchingMate/static/js/main.8c7345a9.js",
     "static/media/default-profile.png": "/matchingMate/static/media/default-profile.af6eccf9ab9656c9be96.png",
     "static/media/person5.png": "/matchingMate/static/media/person5.8c904f8dbd87dd6b1f23.png",
     "static/media/carousel-prev-btn.png": "/matchingMate/static/media/carousel-prev-btn.d847018aa714a2abfe28.png",
@@ -20,10 +20,10 @@
     "static/media/carousel-next-btn.png": "/matchingMate/static/media/carousel-next-btn.f58f74d7acc66e0e0f23.png",
     "index.html": "/matchingMate/index.html",
     "main.0637a013.css.map": "/matchingMate/static/css/main.0637a013.css.map",
-    "main.3df55d00.js.map": "/matchingMate/static/js/main.3df55d00.js.map"
+    "main.8c7345a9.js.map": "/matchingMate/static/js/main.8c7345a9.js.map"
   },
   "entrypoints": [
     "static/css/main.0637a013.css",
-    "static/js/main.3df55d00.js"
+    "static/js/main.8c7345a9.js"
   ]
 }
