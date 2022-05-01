@@ -26,7 +26,7 @@
 }
 
 .nav-left-side .menus{
-    min-height: calc(100vh - 50px - 150px);
+    min-height: calc(100vh - 50px - 200px);
     display: flex;
     flex-direction: column;
     justify-content: space-around;

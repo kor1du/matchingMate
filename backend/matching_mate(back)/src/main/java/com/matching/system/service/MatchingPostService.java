@@ -123,6 +123,8 @@ public class MatchingPostService {
     // 매칭 공고 조회 -> 사용자 (최신) -> simple 이냐 모두냐
     public ResponseData readRecentPosts(PagingDTO paging)
     {
+
+        System.out.println(paging.getPageCount());
         Pageable pageable = PageRequest.of(paging.getFirstPage(), paging.getPageCount());
 
         List<MatchingPost> matchingPostList = matchingPostRepository.findByRecentPosts(pageable);

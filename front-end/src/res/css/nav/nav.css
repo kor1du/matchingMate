@@ -70,10 +70,6 @@
 
 @media screen and (max-width:1023px)
 {
-  #nav .nav-menus .login{
-    display: none;
-  }
-
   #nav .nav-menus .profile-component{
     display:none;
   }

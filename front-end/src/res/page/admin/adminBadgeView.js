@@ -2,8 +2,8 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import AdminBadgeView from "../../components/admin/AdminBadgeView";
 import AdminLeftside from "../../components/admin/AdminLeftside";
-import NavAdmin from "../../components/Nav/NavAdmin";
-import NavPagination from "../../components/Nav/NavPagination";
+import NavAdmin from "../../components/nav/NavAdmin";
+import NavPagination from "../../components/nav/NavPagination";
 
 export default function adminBadgeView() {
   return (

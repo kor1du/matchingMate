@@ -4,18 +4,32 @@
 
 .profile-component img {
   position: relative;
-  width: 40px;
+  width: 45px;
 }
 
-.profile-list {
-  right: 3px;
+/* .profile-list {
+  right: 50px;
   position: absolute;
-}
+} */
 
 .profile-list ul {
   display: none;
 }
 
+.profile-link{
+  min-height: 100px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-list{
+  color:black;
+}
+
+.profile-list span:hover{
+  color:white;
+}
 .profile-list ul.active {
   font-size: 0;
   display: flex;
@@ -28,17 +42,17 @@
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.profile-list li,
-.profile-list a {
-  font-size: 2rem;
+.profile-list li{
+  height:100px;
+}
+.profile-list a{
+  font-size: 1rem;
   text-align: center;
-  
-  width: 100%;
 }
 
 @media screen and (min-width: 425px) {
   .profile-list {
-    top: 45px;
+    top: 48px;
     right: 3px;
     position: absolute;
   }

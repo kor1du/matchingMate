@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 function toggleHandler(event) {
   event.preventDefault();
   const list = document.querySelector(".profile-list ul");
-  console.log("클릭됨!");
   list.classList.toggle("active");
 }
 
@@ -20,23 +19,13 @@ export default function Profile() {
       <div className="profile-list" onClick={toggleHandler}>
         <ul>
           <li>
-            <Link to="/admin" className="profile-link">
-              관리자
+            <Link to="/admin/post/management" className="profile-link">
+              <span>관리자</span>
             </Link>
           </li>
           <li>
-            <Link to="/chatting" className="profile-link">
-              관리자
-            </Link>
-          </li>
-          <li>
-            <Link to="/chatting" className="profile-link">
-              관리자
-            </Link>
-          </li>
-          <li>
-            <Link to="/chatting" className="profile-link">
-              관리자
+            <Link to="/admin/post/management" className="profile-link">
+              <span>관리자</span>
             </Link>
           </li>
         </ul>
