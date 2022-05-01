@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/matchingMate/static/css/main.0637a013.css",
-    "main.js": "/matchingMate/static/js/main.ba5b6a76.js",
+    "main.css": "/matchingMate/static/css/main.aa37462b.css",
+    "main.js": "/matchingMate/static/js/main.80b34874.js",
     "static/media/default-profile.png": "/matchingMate/static/media/default-profile.af6eccf9ab9656c9be96.png",
     "static/media/person5.png": "/matchingMate/static/media/person5.8c904f8dbd87dd6b1f23.png",
     "static/media/carousel-prev-btn.png": "/matchingMate/static/media/carousel-prev-btn.d847018aa714a2abfe28.png",
@@ -19,11 +19,11 @@
     "static/media/winkingIcon.png": "/matchingMate/static/media/winkingIcon.a4c59777f8ac962d36c8.png",
     "static/media/carousel-next-btn.png": "/matchingMate/static/media/carousel-next-btn.f58f74d7acc66e0e0f23.png",
     "index.html": "/matchingMate/index.html",
-    "main.0637a013.css.map": "/matchingMate/static/css/main.0637a013.css.map",
-    "main.ba5b6a76.js.map": "/matchingMate/static/js/main.ba5b6a76.js.map"
+    "main.aa37462b.css.map": "/matchingMate/static/css/main.aa37462b.css.map",
+    "main.80b34874.js.map": "/matchingMate/static/js/main.80b34874.js.map"
   },
   "entrypoints": [
-    "static/css/main.0637a013.css",
-    "static/js/main.ba5b6a76.js"
+    "static/css/main.aa37462b.css",
+    "static/js/main.80b34874.js"
   ]
 }
