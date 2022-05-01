@@ -52,8 +52,8 @@ public class MatchingPostControl {
 
     // 매칭 공고 조회 -> 사용자 (첫 페이지) -> 최신 우선       -> O
     @GetMapping(value = "")
-    public ResponseEntity readRecentPosts(@ModelAttribute("paging") PagingDTO paging) {
-        ResponseData responseData = matchingPostService.readRecentPosts(paging);
+    public ResponseEntity readRecentPosts() {
+        ResponseData responseData = matchingPostService.readRecentPosts();
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -62,8 +62,8 @@ public class MatchingPostControl {
 
     // 인기 공고 조회       -> O
     @GetMapping(value = "/popular")
-    public ResponseEntity readPopularPosts(@ModelAttribute("paging") PagingDTO paging, Model model) {
-        ResponseData responseData = matchingPostService.readPopularPosts(paging);
+    public ResponseEntity readPopularPosts() {
+        ResponseData responseData = matchingPostService.readPopularPosts();
 
         return ResponseEntity
                 .status(responseData.getStatus())
