@@ -36,6 +36,10 @@ public class MatchingHistory {
     List<Rating> ratingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "matchingHistory", cascade = CascadeType.ALL, orphanRemoval = true)
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     private List<MatchingMember> matchingMemberList = new ArrayList<>();
 
     public void addMatchingMember(MatchingMember matchingMember)

@@ -13,7 +13,15 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.1.3",
     "prop-types": "^15.8.1",
+<<<<<<< Updated upstream
     "react": "^18.1.0",
+=======
+<<<<<<< HEAD
+    "react": "^18.0.0",
+=======
+    "react": "^18.1.0",
+>>>>>>> jungYH
+>>>>>>> Stashed changes
     "react-async": "^10.0.1",
     "react-bootstrap": "^2.2.2",
     "react-dom": "^18.0.0",

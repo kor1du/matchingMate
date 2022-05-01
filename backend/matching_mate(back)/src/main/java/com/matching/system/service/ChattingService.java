@@ -128,12 +128,19 @@ public class ChattingService {
         ChattingRoom findChattingRoom = chattingRoomRepository.findById(chattingRoomInOutDTO.getRoomId()).get();
         Member findMember = memberRepository.findById(chattingRoomInOutDTO.getMemberId()).get();
 
-        // chatting_message 삭제
+
+
+//         chatting_message 삭제
         List<ChattingMessage> chattingMessageList = chattingMessageRepository.findByChattingRoomIdAndChattingMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId());
         findChattingRoom.getChattingMessageList().removeAll(chattingMessageList);
 
         // chatting_member 삭제
         ChattingMember chattingMember = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId()).get();
+<<<<<<< Updated upstream
+=======
+        System.out.println(chattingMessageList.size());
+        chattingMember.getChattingMessageList().removeAll(chattingMessageList);
+>>>>>>> Stashed changes
 //        findChattingRoom.getChattingMemberList().removeIf(chattingMember1 -> chattingMember1.getMember())
         // 이 사람이 ready 상태이면 number_of_people --
         if (findChattingRoom.getMatchingPost().getIsCompleted()==0 && chattingMember.isReady() == true) findChattingRoom.getMatchingPost().updateMinusNumberOfPeople();
@@ -187,7 +194,7 @@ public class ChattingService {
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 처리되었습니다.");
     }
-    
+
     // 매칭 완료 -> 공고 게시자
     public ResponseMessage completeMatching(ChattingDTO.CompleteMatching completeMatching)
     {

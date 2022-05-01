@@ -1,5 +1,6 @@
 package com.matching.system.domain;
 
+
 import lombok.*;
 
 import javax.persistence.*;

@@ -89,7 +89,7 @@ public class MatchingPostControl {
                 .status(responseData.getStatus())
                 .body(responseData);
     }
-    
+
     // 매칭 공고 채팅방 들어가기       -> O
     @PostMapping(value = "/matchingPost/detail/joinChat")
     public ResponseEntity joinChatting(@RequestBody ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO)
