@@ -50,6 +50,8 @@ public class Member implements Serializable {
                 .collect(Collectors.toList());
     }
 
+
+
     @Column(name = "name", nullable = false)
     private String name;
 

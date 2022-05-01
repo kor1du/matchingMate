@@ -1,13 +1,8 @@
 package com.matching.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,8 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@DynamicUpdate
-@DynamicInsert
+@Setter
 public class MatchingPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

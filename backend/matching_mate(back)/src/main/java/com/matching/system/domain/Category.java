@@ -1,9 +1,6 @@
 package com.matching.system.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Setter
 public class Category {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

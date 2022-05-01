@@ -4,6 +4,7 @@ import com.matching.system.domain.MatchingHistory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -18,8 +19,9 @@ public interface MatchingHistoryRepository extends JpaRepository<MatchingHistory
     Optional<MatchingHistory> findById(Long id);
 
     //sdfsdfsdfsdfsdfsadfsdfsd
-//    @Query("SELECT DISTINCT mh FROM MatchingHistory mh " +
+    @Query("SELECT  mh FROM MatchingHistory mh " +
 //            "JOIN FETCH mh.matchingMemberList " +
-//            "JOIN FETCH mh.matchingPost mp ")
+            "JOIN mh.matchingPost mp " +
+            "JOIN mp.member")
     Page<MatchingHistory> findAll(Pageable pageable);
 }

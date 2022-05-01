@@ -10,8 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,33 +22,41 @@ public class ChattingService {
     private final ChattingMessageRepository chattingMessageRepository;
     private final MatchingHistoryRepository matchingHistoryRepository;
     private final RatingRepository ratingRepository;
+    private final MemberRepository memberRepository;
 
     // 채팅 방 추가
     public void createRoom(MatchingPost matchingPost, Member member)
     {
         // 채팅 방 생성
+        Set<ChattingMember> chattingMember = new HashSet<>();
+
         ChattingRoom chattingRoom = ChattingRoom.builder()
                 .matchingPost(matchingPost)
+                .chattingMemberList(chattingMember)
                 .build();
 
         // 저장
-        chattingRoom = chattingRoomRepository.save(chattingRoom);
+
 
         // 채팅 회원 추가
-        ChattingMember chattingMember = ChattingMember.builder()
+        chattingRoom.addChattingMember(ChattingMember.builder()
                 .chattingRoom(chattingRoom)
                 .member(member)
                 .isReady(true)
-                .build();
+                .build());
 
-        chattingMemberRepository.save(chattingMember);
+        chattingRoom = chattingRoomRepository.save(chattingRoom);
+
+//        chattingMemberRepository.save(chattingMember);
     }
 
     // 내 채팅 방 목록 조회
     public ResponseData readList(Long memberId)
     {
+        Optional<Member> findMember = memberRepository.findById(memberId);
+
         // 내 방 조회
-        List<ChattingRoom> chattingRoomList = chattingMemberRepository.findAllByMemberId(memberId).stream()
+        List<ChattingRoom> chattingRoomList = chattingMemberRepository.findAllByMemberId(findMember.get()).stream()
                 .map(chattingMember -> chattingMember.getChattingRoom())
                 .collect(Collectors.toList());
 
@@ -61,7 +68,7 @@ public class ChattingService {
                                     .matchingPostName(chattingRoom.getMatchingPost().getPostName())
                                     .numberOfPeople(chattingRoom.getMatchingPost().getNumberOfPeople())
                                     .maxNumberOfPeople(chattingRoom.getMatchingPost().getMaxNumberOfPeople())
-                                    .roomNumberOfPeople(chattingMemberRepository.countByChattingRoomId(chattingRoom.getId()))
+                                    .roomNumberOfPeople(chattingRoom.getChattingMemberList().size())
                                     .registerDatetime(chattingRoom.getRegisterDatetime())
                                 .build())
                 .collect(Collectors.toList());
@@ -99,6 +106,7 @@ public class ChattingService {
                         .message(chattingMessage.getMessage())
                         .registerDatetime(chattingMessage.getRegisterDatetime())
                         .build())
+                .sorted(Comparator.comparing(ChattingDTO.ReadChattingMessageDTO::getRegisterDatetime))
                 .collect(Collectors.toList());
 
 
@@ -117,19 +125,20 @@ public class ChattingService {
     // 채팅방 퇴장
     public ResponseMessage outChattingRoom(ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO)
     {
-        ChattingRoom chattingRoom = chattingRoomRepository.findById(chattingRoomInOutDTO.getRoomId()).get();
+        ChattingRoom findChattingRoom = chattingRoomRepository.findById(chattingRoomInOutDTO.getRoomId()).get();
+        Member findMember = memberRepository.findById(chattingRoomInOutDTO.getMemberId()).get();
 
         // chatting_message 삭제
         List<ChattingMessage> chattingMessageList = chattingMessageRepository.findByChattingRoomIdAndChattingMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId());
-        chattingRoom.getChattingMessageList().removeAll(chattingMessageList);
+        findChattingRoom.getChattingMessageList().removeAll(chattingMessageList);
 
         // chatting_member 삭제
         ChattingMember chattingMember = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId()).get();
-
+//        findChattingRoom.getChattingMemberList().removeIf(chattingMember1 -> chattingMember1.getMember())
         // 이 사람이 ready 상태이면 number_of_people --
-        if (chattingMember.isReady() == true) chattingRoom.getMatchingPost().updateMinusNumberOfPeople();
+        if (findChattingRoom.getMatchingPost().getIsCompleted()==0 && chattingMember.isReady() == true) findChattingRoom.getMatchingPost().updateMinusNumberOfPeople();
 
-        chattingRoom.getChattingMemberList().remove(chattingMember);
+        findChattingRoom.getChattingMemberList().remove(chattingMember);
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 처리되었습니다.");
     }
@@ -167,7 +176,7 @@ public class ChattingService {
         MatchingPost findMatchingPost = findChattingMember.get().getChattingRoom().getMatchingPost();
 
         // maxNumberOfPeople 검사
-        if (findMatchingPost.getMaxNumberOfPeople() == findMatchingPost.getNumberOfPeople()) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "빈 자리가 없습니다.");
+        if (updateReadyState.isReady()==true && findMatchingPost.getMaxNumberOfPeople() == findMatchingPost.getNumberOfPeople()) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "빈 자리가 없습니다.");
 
         // chatting member update
         findChattingMember.get().updateReady(updateReadyState.isReady());
@@ -198,12 +207,15 @@ public class ChattingService {
         findMatchingPost.updateIsCompleted();
 
         // matching_history 추가
-        MatchingHistory newMatchingHistory = matchingHistoryRepository.save(MatchingHistory.builder()
+        List<MatchingMember> matchingMemberList = new ArrayList<>();
+
+        MatchingHistory newMatchingHistory = MatchingHistory.builder()
                 .matchingPost(findMatchingPost)
-                .build());
+                .matchingMemberList(matchingMemberList)
+                .build();
 
         // matching_member 저장
-        List<ChattingMember> chattingMemberList = findChattingRoom.get().getChattingMemberList();
+        Set<ChattingMember> chattingMemberList = findChattingRoom.get().getChattingMemberList();
 
         chattingMemberList.stream()
                 .filter(chattingMember -> chattingMember.isReady()==true)
@@ -213,6 +225,7 @@ public class ChattingService {
                                 .member(chattingMember.getMember())
                                 .build()));
 
+        matchingHistoryRepository.save(newMatchingHistory);
 
         // member - matching_count +1
         newMatchingHistory.getMatchingMemberList().stream()

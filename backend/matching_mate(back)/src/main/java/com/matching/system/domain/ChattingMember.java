@@ -9,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -39,7 +39,7 @@ public class ChattingMember {
     private Date registerDatetime;
 
     @OneToMany(mappedBy = "chattingMember", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ChattingMessage> chattingMessageList;
+    private Set<ChattingMessage> chattingMessageList;
 
     public void updateReady(boolean isReady) { this.isReady = isReady; }
 }

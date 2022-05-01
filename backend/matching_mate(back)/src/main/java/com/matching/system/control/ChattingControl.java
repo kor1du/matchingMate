@@ -9,11 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/chat")
+@CrossOrigin("http://localhost:3000")
 public class ChattingControl {
     private final ChattingService chattingService;
 
@@ -39,7 +38,7 @@ public class ChattingControl {
                 .body(responseData);
     }
 
-    // 채팅방 퇴장       -> O
+    // 채팅방 퇴장       -> O xXXXXXX
     @PostMapping("/out")
     public ResponseEntity outChattingRoom(@RequestBody ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO) {
         ResponseMessage responseMessage = chattingService.outChattingRoom(chattingRoomInOutDTO);

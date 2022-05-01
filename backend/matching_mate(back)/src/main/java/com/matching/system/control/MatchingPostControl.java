@@ -92,7 +92,7 @@ public class MatchingPostControl {
     
     // 매칭 공고 채팅방 들어가기       -> O
     @PostMapping(value = "/matchingPost/detail/joinChat")
-    public ResponseEntity joinChatting(ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO)
+    public ResponseEntity joinChatting(@RequestBody ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO)
     {
         ResponseMessage responseMessage = matchingPostService.joinChatting(chattingRoomInOutDTO);
 

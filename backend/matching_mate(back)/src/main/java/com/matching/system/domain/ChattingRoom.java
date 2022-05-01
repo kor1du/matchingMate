@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Getter
@@ -32,9 +30,15 @@ public class ChattingRoom {
     private Date registerDatetime;
 
     @OneToMany(mappedBy = "chattingRoom", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ChattingMember> chattingMemberList = new ArrayList<>();
+    private Set<ChattingMember> chattingMemberList = new HashSet<>();
+
+    public void addChattingMember(ChattingMember chattingMember)
+    {
+        this.chattingMemberList.add(chattingMember);
+
+    }
 
     @OneToMany(mappedBy = "chattingRoom", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ChattingMessage> chattingMessageList = new ArrayList<>();
+    private Set<ChattingMessage> chattingMessageList = new HashSet<>();
 
 }

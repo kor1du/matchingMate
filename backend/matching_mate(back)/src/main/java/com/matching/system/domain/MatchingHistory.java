@@ -36,10 +36,14 @@ public class MatchingHistory {
     List<Rating> ratingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "matchingHistory", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MatchingMember> matchingMemberList;
+    private List<MatchingMember> matchingMemberList = new ArrayList<>();
 
     public void addMatchingMember(MatchingMember matchingMember)
     {
-        this.matchingMemberList.add(matchingMember);
+        System.out.println(matchingMember.getMember().getId());
+        this.matchingMemberList
+                .add(matchingMember);
     }
+
+
 }

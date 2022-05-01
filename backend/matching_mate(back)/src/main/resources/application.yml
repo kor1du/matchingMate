@@ -1,4 +1,8 @@
 
+server:
+  port : 8080
+  servlet:
+    context-path: /
 
 spring:
 
@@ -42,6 +46,8 @@ spring:
   mvc:
     pathmatch:
       matching_strategy: ant_path_matcher
+    servlet:
+        load-on-startup: 1
 
   output:
     ansi:

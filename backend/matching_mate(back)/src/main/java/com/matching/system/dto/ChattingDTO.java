@@ -3,7 +3,6 @@ package com.matching.system.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
@@ -81,7 +80,7 @@ public class ChattingDTO {
     // 메시지 조회
     @Getter     @Builder
     @NoArgsConstructor    @AllArgsConstructor
-    public static class ReadChattingMessageDTO
+    public static class ReadChattingMessageDTO implements Comparable<Date>
     {
         public Long chattingMessageId;     // message PK
         public Long memberId;
@@ -90,6 +89,11 @@ public class ChattingDTO {
         @Temporal(TemporalType.TIMESTAMP)
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         private Date registerDatetime;
+
+        @Override
+        public int compareTo(Date o) {
+            return this.registerDatetime.compareTo(o);
+        }
     }
 
     // 준비상태 업데이트
