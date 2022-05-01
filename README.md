@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-"# matchingMate" 
-=======
->>>>>>> Stashed changes
+
 # MatchingMate
 
 
