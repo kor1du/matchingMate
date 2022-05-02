@@ -1,0 +1,10 @@
+백엔드
+쿼리 비밀번호 root로 변경
+Spring인식 불가시 .idea삭제후 재실행
+
+프론트엔드
+포트번호 8050 - > 8080
+포트번호 바꾸려면 components Axios axios에서 url만 수정
+axios post,get 컴포넌트로 변경
+react-scripts오류시 yarn react-scripts(yarn add global react-scripts) 설치
+nav오류시 components의 Nav폴더명을 nav로 변경

@@ -224,7 +224,6 @@ public class MemberService {
 
         if (member.isEmpty())
             return new ResponseData(HttpStatus.NOT_FOUND,"일치하는 회원이 존재하지 않습니다.", null);
-
         if (!passwordEncoder.matches(loginInfo.getUserPw(), member.get().getUserPw()))
             return new ResponseData(HttpStatus.NOT_FOUND,"비밀번호가 맞지 않습니다.", null);
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+
 public class MemberControl {
     private final MemberService memberService;
     private final JwtTokenUtil jwtTokenUtil;
@@ -94,7 +95,6 @@ public class MemberControl {
 
 //        HttpHeaders httpHeaders = new HttpHeaders();
 //        httpHeaders.add(JwtAuthenticationFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-
         ResponseData responseData = memberService.login(loginInfo);
 
         return ResponseEntity

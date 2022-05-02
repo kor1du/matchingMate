@@ -10,13 +10,14 @@ import Chess from "../../img/chess.png";
 import Gym from "../../img/gym.png";
 import Bowling from "../../img/bowling.png";
 
-function CarouselBody() {
+function CarouselBody(props) {
+  const { categoryFilter } = props;
   return (
     <Carousel interval={3000} indicators={null} pause={"hover"}>
       <Carousel.Item>
         <h1>어떤 운동 메이트를 찾고 계신가요?</h1>
         <Row className="carousel-row">
-          <Col lg="3" md="6" sm="6" xs="2" className="carousel-col">
+          <Col lg="3" md="6" sm="6" xs="2" className="carousel-col" onClick={(e) => categoryFilter(e, "축구")}>
             <a href="">
               <img src={Soccer} alt="" />
             </a>
