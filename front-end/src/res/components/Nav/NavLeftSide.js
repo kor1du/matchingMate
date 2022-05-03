@@ -19,7 +19,9 @@ export default function NavLeftSide() {
           <Link to="/admin/post/management">
             <h1>관리자메뉴</h1>
           </Link>
-          <h1>메뉴2</h1>
+          <Link to="/chatting/list">
+            <h1>채팅</h1>
+          </Link>
           <h1>메뉴3</h1>
           <h1>메뉴4</h1>
           <h1>메뉴5</h1>

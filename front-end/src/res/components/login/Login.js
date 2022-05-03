@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import { Card, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../css/login/login.css";
-import axios from "axios";
-import { setCookie } from "../cookie/Cookie";
+// import { setCookie } from "../cookie/Cookie";
+import { redirectURL } from "../url/CheckURL";
+import { axiosPost } from "../axios/Axios";
+
+export function isLogin() {
+  if (sessionStorage.getItem("jwtToken")) return true;
+  else return false;
+}
 
 function LoginComponent() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  // let navigate = useNavigate();
 
   function login(e) {
     e.preventDefault();
@@ -16,21 +21,15 @@ function LoginComponent() {
       userId: id,
       userPw: password,
     };
-    axios
-      .post("http://localhost:8080/login", data)
+    axiosPost("/login", data)
       .then((result) => {
-        window.location.replace("/");
+        redirectURL("login");
+        redirectURL("");
         const jwtToken = result.data.data.accessToken;
-        setCookie("jwtToken", jwtToken, {
-          path: "/",
-          secure: true,
-          sameSite: "none",
-        });
-        console.log("로그인 완료!");
+        sessionStorage.setItem("jwtToken", jwtToken);
       })
       .catch(() => {
         alert("아이디와 비밀번호를 확인해주세요.");
-        console.log("아이디없음");
       });
   }
 

@@ -14,21 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-//@CrossOrigin(origins = "http://localhost:3000")
+
 public class MemberControl {
     private final MemberService memberService;
     private final JwtTokenUtil jwtTokenUtil;
 
-    @PostMapping("/test")
-    public String test(String string){
-        System.out.println(string);
-        return string;
-    }
-
     // 회원가입     -> O
     @PostMapping("/signUp")
     public ResponseEntity signUp(@RequestBody MemberDTO.SignUpDTO signUpDTO) {
-        System.out.println(signUpDTO.toString());
         ResponseMessage responseMessage = memberService.save(signUpDTO);
 
         return ResponseEntity
@@ -96,7 +89,6 @@ public class MemberControl {
     }
 
     // 로그인 -> O
-
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody MemberDTO.LoginInfo loginInfo) {
 //        String jwt = memberService.login(loginInfo);

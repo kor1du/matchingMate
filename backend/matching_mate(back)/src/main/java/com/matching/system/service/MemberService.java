@@ -55,10 +55,6 @@ public class MemberService {
 
         if (findMember.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 가입되어 있는 유저입니다.");
 
-        System.out.println("Check!");
-        System.out.println("ID : "+signUpDTO.getUserPw());
-
-
         // 암호화
         signUpDTO.setUserPw(passwordEncoder.encode(signUpDTO.getUserPw()));
         
@@ -226,9 +222,8 @@ public class MemberService {
     {
         Optional<Member> member = memberRepository.findByUserId(loginInfo.getUserId());
 
-        if (member.isEmpty()) {
-            return new ResponseData(HttpStatus.NOT_FOUND, "일치하는 회원이 존재하지 않습니다.", null);
-        }
+        if (member.isEmpty())
+            return new ResponseData(HttpStatus.NOT_FOUND,"일치하는 회원이 존재하지 않습니다.", null);
         if (!passwordEncoder.matches(loginInfo.getUserPw(), member.get().getUserPw()))
             return new ResponseData(HttpStatus.NOT_FOUND,"비밀번호가 맞지 않습니다.", null);
 

@@ -46,8 +46,3 @@ spring:
   output:
     ansi:
       enabled: always
-
-server:
-        servlet:
-          encoding:
-            charset: UTF-8

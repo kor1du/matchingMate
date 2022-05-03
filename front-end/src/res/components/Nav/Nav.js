@@ -5,21 +5,16 @@ import ProfileComponent from "./Profile";
 import "../../css/nav/nav.css";
 import Bars from "../../img/bars-solid.png";
 import NavLeftSide from "./NavLeftSide";
-import { getCookie } from "../cookie/Cookie";
 import { logout } from "../logout/Logout";
+import { isLogin } from "../login/Login";
+import { toggle } from "../toggle/Toggle";
 
-const showLeft = (event) => {
+export function showLeft(event) {
   event.preventDefault();
-  const leftside = document.querySelector(".nav-left-side");
-  leftside.classList.toggle("active");
-};
+  toggle(".nav-left-side");
+}
 
-const isLogin = () => {
-  if (getCookie("jwtToken")) return true;
-  else return false;
-};
-
-const showLoginBtn = () => {
+export const showLoginBtn = () => {
   const loginCSS = document.querySelector(".login");
   const barCSS = document.querySelector(".bar");
   const profileCSS = document.querySelector(".profile-img");

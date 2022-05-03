@@ -5,7 +5,7 @@ import "./res/css/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./res/page/home";
 import Login from "./res/page/login";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./res/page/signup";
 import ChattingList from "./res/page/chattingList";
 import Chat from "./res/page/chatting";
@@ -17,10 +17,10 @@ import AdminCategoryView from "./res/page/admin/adminCategoryView";
 import AdminBadgeAdd from "./res/page/admin/adminBadgeAdd";
 import AdminBadgeModify from "./res/page/admin/adminBadgeModify";
 import AdminBadgeView from "./res/page/admin/adminBadgeView";
-import MemberProfile from "./res/page/memberProfile";
-import MatchProfile from "./res/page/matchProfile";
+import MatchProfile from "./res/page/matchProfile/matchProfile";
+import MemberProfile from "./res/page/memberProfile/memberProfile";
 
-function App() {
+export default function App() {
   const member = {
     name: "홍길동",
     nickname: "NickNAME",
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/login" element={<Login />} exact />
@@ -79,7 +79,10 @@ function App() {
             element={<AdminBadgeView />}
             exact
           ></Route>
-          <Route path="/match" element={<MatchProfile member={member} exact/>} />
+          <Route
+            path="/match"
+            element={<MatchProfile member={member} exact />}
+          />
           <Route
             path="/admin/badge/view"
             element={<AdminBadgeView />}
@@ -87,9 +90,7 @@ function App() {
           ></Route>
           <Route path="/member" element={<MemberProfile member={member} />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }
-
-export default App;

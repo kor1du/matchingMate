@@ -1,7 +1,10 @@
 import { Card, Form, Button } from "react-bootstrap";
 import React, { useState } from "react";
 import "../../css/signup/signup.css";
-import axios from "axios";
+import AddressInput from "./AddressInput";
+import Modal from "react-modal";
+import { axiosPost } from "../axios/Axios";
+import { redirectURL } from "../url/CheckURL";
 
 export default function Signup() {
   const [id, setId] = useState("");
@@ -12,6 +15,7 @@ export default function Signup() {
   const [nickname, setNickname] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [sex, setSex] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
 
   function postData(e) {
     e.preventDefault();
@@ -26,10 +30,9 @@ export default function Signup() {
       sex: sex,
     };
 
-    axios
-      .post("http://localhost:8080/signUp", data)
+    axiosPost("/signUp", data)
       .then(() => {
-        window.location.replace("/#/login");
+        redirectURL("login");
       })
       .catch(() => {
         alert("정보를 다시 입력해주세요.");
@@ -79,12 +82,51 @@ export default function Signup() {
                     <Form.Control
                       type="text"
                       placeholder="주소"
-                      onChange={(e) => {
-                        e.preventDefault();
-                        setAddress(e.target.value);
-                      }}
+                      readonly
+                      value={address}
+                      // onChange={(e) => {
+                      //   e.preventDefault();
+                      //   setAddress(e.target.value);
+                      // }}
                     />
+                    <Button onClick={() => setModalOpen(true)}>주소찾기</Button>
                   </Form.Group>
+
+                  <Modal
+                    isOpen={modalOpen}
+                    onRequestClose={() => setModalOpen(false)}
+                    style={{
+                      overlay: {
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: "rgba(126, 147, 149, 0.83)",
+                      },
+                      content: {
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        border: "1px solid #ccc",
+                        background: "#fff",
+                        overflow: "auto",
+                        WebkitOverflowScrolling: "touch",
+                        borderRadius: "4px",
+                        outline: "none",
+                        padding: "20px",
+                        width: "700px",
+                        height: "500px",
+                      },
+                    }}
+                  >
+                    <AddressInput
+                      setAddress={setAddress}
+                      setModalOpen={setModalOpen}
+                    />
+                    <button onClick={() => setModalOpen(false)}>닫기</button>
+                  </Modal>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>
@@ -145,18 +187,18 @@ export default function Signup() {
                     </Form.Label>
                     <Form.Check
                       type="radio"
-                      name="gender"
-                      value="남성"
-                      label="남성"
+                      name="sex"
+                      value="남자"
+                      label="남자"
                       onChange={(e) => {
                         setSex(e.target.value);
                       }}
                     />
                     <Form.Check
                       type="radio"
-                      name="gender"
-                      value="여성"
-                      label="여성"
+                      name="sex"
+                      value="여자"
+                      label="여자"
                       onChange={(e) => {
                         setSex(e.target.value);
                       }}
