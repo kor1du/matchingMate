@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/matchingMate/static/css/main.a1ce0f6d.css",
-    "main.js": "/matchingMate/static/js/main.ab952441.js",
-    "static/media/default-profile.png": "/matchingMate/static/media/default-profile.af6eccf9ab9656c9be96.png",
-    "static/media/person5.png": "/matchingMate/static/media/person5.8c904f8dbd87dd6b1f23.png",
-    "static/media/carousel-prev-btn.png": "/matchingMate/static/media/carousel-prev-btn.d847018aa714a2abfe28.png",
-    "static/media/person2.png": "/matchingMate/static/media/person2.37da479064117a6c051e.png",
-    "static/media/person6.png": "/matchingMate/static/media/person6.dfc9c13bc7f584092dd0.png",
-    "static/media/person1.png": "/matchingMate/static/media/person1.56e4a1f6a3e37f2907cf.png",
-    "static/media/biking.png": "/matchingMate/static/media/biking.c9ac606ad0148302b61b.png",
-    "static/media/baseball.png": "/matchingMate/static/media/baseball.792ec505bdad1df9a37b.png",
-    "static/media/person3.png": "/matchingMate/static/media/person3.62ad1d3879761bb6563d.png",
-    "static/media/fire.png": "/matchingMate/static/media/fire.0401dde483b82499f741.png",
-    "static/media/soccer.png": "/matchingMate/static/media/soccer.a049caf607cdb546efed.png",
-    "static/media/person4.png": "/matchingMate/static/media/person4.9b2ecbdb3814e36701f6.png",
-    "static/media/basketball.png": "/matchingMate/static/media/basketball.a987a72d98bb7b9591e0.png",
-    "static/media/gym.png": "/matchingMate/static/media/gym.d3ff5ba32ab40e1e4d2b.png",
-    "static/media/winkingIcon.png": "/matchingMate/static/media/winkingIcon.a4c59777f8ac962d36c8.png",
-    "static/media/carousel-next-btn.png": "/matchingMate/static/media/carousel-next-btn.f58f74d7acc66e0e0f23.png",
-    "index.html": "/matchingMate/index.html",
-    "main.a1ce0f6d.css.map": "/matchingMate/static/css/main.a1ce0f6d.css.map",
-    "main.ab952441.js.map": "/matchingMate/static/js/main.ab952441.js.map"
+    "main.css": "/static/css/main.f8b1cbf1.css",
+    "main.js": "/static/js/main.424cf1a5.js",
+    "static/media/default-profile.png": "/static/media/default-profile.af6eccf9ab9656c9be96.png",
+    "static/media/person5.png": "/static/media/person5.8c904f8dbd87dd6b1f23.png",
+    "static/media/carousel-prev-btn.png": "/static/media/carousel-prev-btn.d847018aa714a2abfe28.png",
+    "static/media/person2.png": "/static/media/person2.37da479064117a6c051e.png",
+    "static/media/person6.png": "/static/media/person6.dfc9c13bc7f584092dd0.png",
+    "static/media/person1.png": "/static/media/person1.56e4a1f6a3e37f2907cf.png",
+    "static/media/biking.png": "/static/media/biking.c9ac606ad0148302b61b.png",
+    "static/media/baseball.png": "/static/media/baseball.792ec505bdad1df9a37b.png",
+    "static/media/person3.png": "/static/media/person3.62ad1d3879761bb6563d.png",
+    "static/media/fire.png": "/static/media/fire.0401dde483b82499f741.png",
+    "static/media/soccer.png": "/static/media/soccer.a049caf607cdb546efed.png",
+    "static/media/person4.png": "/static/media/person4.9b2ecbdb3814e36701f6.png",
+    "static/media/basketball.png": "/static/media/basketball.a987a72d98bb7b9591e0.png",
+    "static/media/gym.png": "/static/media/gym.d3ff5ba32ab40e1e4d2b.png",
+    "static/media/winkingIcon.png": "/static/media/winkingIcon.a4c59777f8ac962d36c8.png",
+    "static/media/carousel-next-btn.png": "/static/media/carousel-next-btn.f58f74d7acc66e0e0f23.png",
+    "index.html": "/index.html",
+    "main.f8b1cbf1.css.map": "/static/css/main.f8b1cbf1.css.map",
+    "main.424cf1a5.js.map": "/static/js/main.424cf1a5.js.map"
   },
   "entrypoints": [
-    "static/css/main.a1ce0f6d.css",
-    "static/js/main.ab952441.js"
+    "static/css/main.f8b1cbf1.css",
+    "static/js/main.424cf1a5.js"
   ]
 }
