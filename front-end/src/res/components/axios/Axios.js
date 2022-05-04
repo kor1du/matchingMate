@@ -1,6 +1,7 @@
 import axios from "axios";
 
-var url = "http://kor1du.ddns.net:8080";
+// var url = "http://kor1du.ddns.net:8080";
+let url = "localhost:8050";
 
 export function axiosPost(path, data) {
   url += path;
