@@ -24,10 +24,10 @@ public class MatchingPostDTO {
         private String postName;
         private String postContents;
         @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private Date matchingDate;
         @Temporal(TemporalType.TIME)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
         private Date matchingTime;
         private String recommendedSkill;
         private Integer maxNumberOfPeople;
@@ -46,10 +46,10 @@ public class MatchingPostDTO {
         private String postName;
         private String postContents;
         @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private Date matchingDate;
         @Temporal(TemporalType.TIME)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
         private Date matchingTime;
         private String recommendedSkill;
         private Integer maxNumberOfPeople;
@@ -61,7 +61,7 @@ public class MatchingPostDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class ReadSimpleDTO112312312
+    public static class ReadSimpleDTO
     {
         private Long id;
         private Long memberId;
@@ -69,10 +69,10 @@ public class MatchingPostDTO {
         private String categoryName;
         private String postName;
         @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private Date matchingDate;
         @Temporal(TemporalType.TIME)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
         private Date matchingTime;
         private String recommendedSkill;
         private Integer numberOfPeople;
@@ -97,10 +97,10 @@ public class MatchingPostDTO {
         private String postName;
         private String postContents;
         @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private Date matchingDate;
         @Temporal(TemporalType.TIME)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
         private Date matchingTime;
         private String recommendedSkill;
         private Integer numberOfPeople;
@@ -110,7 +110,7 @@ public class MatchingPostDTO {
         private String detailPlace;
         private Integer isCompleted;
         @Temporal(TemporalType.TIMESTAMP)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private Date registerDatetime;
     }
 

@@ -13,9 +13,6 @@ import java.util.Optional;
 
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Long> {
-    @Query(value = "SELECT r.target_member_id, avg(r.skill_point) as skill_point, avg(r.manner_point) as manner_point FROM rating r WHERE r.target_member_id=:id GROUP BY r.target_member_id", nativeQuery =  true)
-    Rating findByMemberAvgPoint(@Param(value = "id") Long memberId);
-
     @Query("SELECT r FROM Rating r " +
             "JOIN FETCH r.matchingHistory " +
             "JOIN FETCH r.targetMember " +
@@ -23,13 +20,26 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
             "WHERE r.matchingHistory=:matchingHistory AND r.targetMember=:targetMember AND r.member=:member")
     Optional<Rating> findByMatchingHistoryIdAndMemberIdAndTargetMemberId(@Param("matchingHistory") MatchingHistory matchingHistory, @Param("member") Member member, @Param("targetMember") Member targetMember);
 
-    @Query(value = "SELECT AVG(r.manner_point) AS manner_point FROM Rating r WHERE r.target_member_id=:id GROUP BY r.target_member_id",nativeQuery = true)
-    Float findByAvgMannerPoint(Long id);
+    @Query(value = "SELECT AVG(r.manner_point) AS manner_point FROM Rating r " +
+            "WHERE r.target_member_id=:id " +
+            "GROUP BY r.target_member_id", nativeQuery = true)
+    Float findByAvgMannerPoint(@Param("id") Long id);
 
-    @Query(value = "SELECT AVG(r.skill_point) AS skill_point FROM Rating r WHERE r.target_member_id=:id GROUP BY r.target_member_id",nativeQuery = true)
-    Float findByAvgSkillPoint(Long id);
+    @Query(value = "SELECT AVG(r.skill_point) AS skill_point FROM Rating r " +
+            "WHERE r.target_member_id=:id " +
+            "GROUP BY r.target_member_id", nativeQuery = true)
+    Float findByAvgSkillPoint(@Param("id") Long id);
 
-    List<Rating> findByTargetMemberId(Long id);
+    @Query("SELECT r FROM Rating r " +
+            "JOIN FETCH r.targetMember " +
+            "JOIN FETCH r.member " +
+            "WHERE r.targetMember=:targetMember")
+    List<Rating> findByTargetMemberId(@Param("targetMember") Member targetMember);
+
+    @Query("SELECT r FROM Rating r " +
+            "JOIN FETCH r.targetMember " +
+            "JOIN FETCH r.member ")
+    List<Rating> findAll();
 
     List<Rating> findByMemberId(Long id);
 

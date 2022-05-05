@@ -28,7 +28,7 @@ public class MatchingHistory {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "matched_dateTime", columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
     private Date matchedDatetime;
 
@@ -36,10 +36,7 @@ public class MatchingHistory {
     List<Rating> ratingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "matchingHistory", cascade = CascadeType.ALL, orphanRemoval = true)
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
     private List<MatchingMember> matchingMemberList = new ArrayList<>();
 
     public void addMatchingMember(MatchingMember matchingMember)

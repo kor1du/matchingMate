@@ -1,6 +1,5 @@
 package com.matching.system.control;
 
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.dto.ReportDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
@@ -27,8 +26,8 @@ public class ReportControl {
 
     // 신고 조회  -> 전체     -> O
     @GetMapping("/admin/report")
-    public ResponseEntity readAllReports(PagingDTO paging) {
-        ResponseData responseData = reportService.readAllReports(paging);
+    public ResponseEntity readAllReports() {
+        ResponseData responseData = reportService.readAllReports();
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -37,8 +36,8 @@ public class ReportControl {
 
     // 신고 조회  -> 처리 완료      -> O
     @GetMapping("/admin/report/disposed")
-    public ResponseEntity readDisposed(PagingDTO paging) {
-        ResponseData responseData = reportService.readDisposed(paging);
+    public ResponseEntity readDisposed() {
+        ResponseData responseData = reportService.readDisposed();
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -47,8 +46,8 @@ public class ReportControl {
 
     // 신고 조회  -> 처리 전       -> O
     @GetMapping("/admin/report/notDisposed")
-    public ResponseEntity readNotDisposed(PagingDTO paging) {
-        ResponseData responseData = reportService.readNotDisposed(paging);
+    public ResponseEntity readNotDisposed() {
+        ResponseData responseData = reportService.readNotDisposed();
 
         return ResponseEntity
                 .status(responseData.getStatus())

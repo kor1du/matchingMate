@@ -30,18 +30,18 @@ public class ChattingControl {
 
     // 채팅방 입장 및 메시지 반환      -> O
     @GetMapping("/in")
-    public ResponseEntity inChattingRoom(@ModelAttribute("chatting") ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO, Model model) {
-       ResponseData responseData = chattingService.inChattingRoom(chattingRoomInOutDTO);
+    public ResponseEntity inChattingRoom(@ModelAttribute("chatting") ChattingDTO.ChattingRoomInDTO chattingRoomInDTO, Model model) {
+       ResponseData responseData = chattingService.inChattingRoom(chattingRoomInDTO);
 
         return ResponseEntity
                 .status(responseData.getStatus())
                 .body(responseData);
     }
 
-    // 채팅방 퇴장       -> O xXXXXXX
-    @PostMapping("/out")
-    public ResponseEntity outChattingRoom(@RequestBody ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO) {
-        ResponseMessage responseMessage = chattingService.outChattingRoom(chattingRoomInOutDTO);
+    // 채팅방 퇴장       -> O
+    @PostMapping("/out/{chatId}")
+    public ResponseEntity outChattingRoom(@PathVariable("chatId") Long chattingMemberId) {
+        ResponseMessage responseMessage = chattingService.outChattingRoom(chattingMemberId);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

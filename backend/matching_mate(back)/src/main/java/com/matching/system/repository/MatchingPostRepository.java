@@ -1,8 +1,10 @@
 package com.matching.system.repository;
 
+import com.matching.system.domain.Category;
 import com.matching.system.domain.MatchingPost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,13 +12,55 @@ import java.util.Optional;
 
 @Repository
 public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long> {
-    @Query(value = "SELECT mp.* FROM matching_post mp WHERE mp.is_completed = 0 AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matching_date ORDER BY mp.id DESC", nativeQuery = true)       // 수정 필요
-    List<MatchingPost> findByRecentPosts();
+    @Query("SELECT mp FROM MatchingPost mp " +
+            "JOIN FETCH mp.member " +
+            "JOIN FETCH mp.category " +
+            "WHERE mp.isCompleted = 0 " +
+                "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
+                "AND mp.place LIKE %:address% " +
+            "ORDER BY mp.id DESC")
+    List<MatchingPost> findByRecentPosts(@Param("address") String address);
 
-    @Query(value = "SELECT mp.* FROM matching_post mp WHERE mp.is_completed = 0 AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matching_date ORDER BY mp.views DESC", nativeQuery = true)       // 수정 필요
-    List<MatchingPost> findByPopularPosts();
+    @Query("SELECT mp FROM MatchingPost mp " +
+            "JOIN FETCH mp.member " +
+            "JOIN FETCH mp.category " +
+            "WHERE mp.category=:category " +
+                "AND mp.isCompleted = 0 " +
+                "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
+                "AND mp.place LIKE %:address% " +
+            "ORDER BY mp.id DESC")
+    List<MatchingPost> findByRecentCategoryPosts(@Param("category") Category category, @Param("address") String address);
 
-    Optional<MatchingPost> findById(Long id);
+    @Query("SELECT mp FROM MatchingPost mp " +
+            "JOIN FETCH mp.member " +
+            "JOIN FETCH mp.category " +
+            "WHERE mp.isCompleted = 0 " +
+                "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
+                "AND mp.place LIKE %:address% " +
+            "ORDER BY mp.views DESC")
+    List<MatchingPost> findByPopularPosts(@Param("address") String address);
+
+    @Query("SELECT mp FROM MatchingPost mp " +
+            "JOIN FETCH mp.member " +
+            "JOIN FETCH mp.category " +
+            "WHERE mp.category=:category " +
+                "AND mp.isCompleted = 0 " +
+                "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
+                "AND mp.place LIKE %:address% " +
+            "ORDER BY mp.views DESC")
+    List<MatchingPost> findByPopularCategoryPosts(@Param("category") Category category, @Param("address") String address);
+
+    @Query("SELECT mp FROM MatchingPost mp " +
+            "JOIN FETCH mp.member " +
+            "JOIN FETCH mp.category " +
+            "WHERE mp.id=:matchingPostId")
+    Optional<MatchingPost> findById(@Param("matchingPostId") Long matchingPostId);
+
+    @Query("SELECT mp FROM MatchingPost mp " +
+            "JOIN FETCH mp.member " +
+            "JOIN FETCH mp.category " +
+            "ORDER BY mp.id")
+    List<MatchingPost> findAll();
 
     List<MatchingPost> findByMemberId(Long memberId);
 

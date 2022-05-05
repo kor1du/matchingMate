@@ -3,9 +3,9 @@ package com.matching.system.service;
 import com.matching.system.config.AccessConfig;
 import com.matching.system.domain.*;
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
+import com.matching.system.image.ImageControl;
 import com.matching.system.jwt.JwtExpirationEnums;
 import com.matching.system.jwt.TokenDTO;
 import com.matching.system.jwt.redis.*;
@@ -15,11 +15,7 @@ import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.RatingRepository;
 import com.matching.system.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,8 +39,9 @@ public class MemberService {
     private final LogoutAccessTokenRedisRepository logoutAccessTokenRedisRepository;
     private final JwtTokenUtil jwtTokenUtil;
     private final AccessConfig accessConfig;
+    private final ImageControl imageControl;
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+//    private final Logger log = LoggerFactory.getLogger(getClass());
 
 
     // 회원가입
@@ -189,13 +186,10 @@ public class MemberService {
     }
 
     // 회원 조회 리스트 - 관리자
-    public ResponseData readMemberList(PagingDTO paging)
+    public ResponseData readMemberList()
     {
-        // 페이징
-        Pageable pageRequest = PageRequest.of(paging.getFirstPage(), paging.getPageCount());
-
         // 조회
-        List<Member> memberList = memberRepository.findAllUser("ROLE_USER", pageRequest);
+        List<Member> memberList = memberRepository.findAllUser("ROLE_USER");
 
         // DTO 변환
         List<MemberDTO.ReadMemberDTO> readMemberDTOList = memberList.stream()
@@ -303,8 +297,9 @@ public class MemberService {
         Optional<Member> findMember = memberRepository.findById(updateImgAddress.getId());
 
         if (findMember.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.");
+        String imageUrl = imageControl.getImageUrl(findMember.get().getUserId(), updateImgAddress.getFile());
 
-        findMember.get().updateProfileImgAddress(updateImgAddress.getProfileImgAddress());
+        findMember.get().updateProfileImgAddress(imageUrl);
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 수정했습니다.");
     }
@@ -313,7 +308,6 @@ public class MemberService {
     public ResponseMessage updateProfileContent(MemberDTO.UpdateProfileContent updateProfileContent)
     {
         Optional<Member> findMember = memberRepository.findById(updateProfileContent.getId());
-
         if (findMember.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.");
 
         findMember.get().updateProfileContent(updateProfileContent.getProfileContent());

@@ -1,16 +1,17 @@
 package com.matching.system.service;
 
 import com.matching.system.config.AccessConfig;
-import com.matching.system.domain.*;
+import com.matching.system.domain.MatchingHistory;
+import com.matching.system.domain.Member;
 import com.matching.system.dto.MatchingHistoryDTO;
 import com.matching.system.dto.MatchingPostDTO;
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.filter.ResponseData;
-import com.matching.system.repository.*;
+import com.matching.system.repository.MatchingHistoryRepository;
+import com.matching.system.repository.MatchingMemberRepository;
+import com.matching.system.repository.MemberRepository;
+import com.matching.system.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class MatchingHistoryService {
 
 
     // 매칭 내역 조회  -> 사용자
-    public ResponseData readMatchingHistories(Long memberId, String accessToken, PagingDTO paging)
+    public ResponseData readMatchingHistories(Long memberId, String accessToken)
     {
         Optional<Member> findMember = memberRepository.findById(memberId);
 
@@ -40,11 +41,8 @@ public class MatchingHistoryService {
 
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
-        // 페이징 설정
-        Pageable pageable = PageRequest.of(paging.getFirstPage(), paging.getPageCount());
-
         // 조회 및 변환
-        List<MatchingHistoryDTO> historyDTOList = matchingMemberRepository.findByMatchingMember(findMember.get(), pageable).stream()
+        List<MatchingHistoryDTO> historyDTOList = matchingMemberRepository.findByMatchingMember(findMember.get()).stream()
                 .map(matchingMember ->  buildHistoryDTO(matchingMember.getMatchingHistory(), findMember.get()))
                 .collect(Collectors.toList());
 
@@ -52,13 +50,10 @@ public class MatchingHistoryService {
     }
 
     // 매칭 내역 조회 -> 관리자
-    public ResponseData readAllMatchingHistories(PagingDTO paging)
+    public ResponseData readAllMatchingHistories()
     {
-        // 페이징 설정
-        Pageable pageable = PageRequest.of(paging.getFirstPage(), paging.getPageCount());
-
         // 조회 및 변환
-        List<MatchingHistoryDTO> historyDTOList = matchingHistoryRepository.findAll(pageable).stream()
+        List<MatchingHistoryDTO> historyDTOList = matchingHistoryRepository.findAll().stream()
                 .map(matchingHistory ->  MatchingHistoryDTO.builder()
                         .id(matchingHistory.getId())
                         .matchedDatetime(matchingHistory.getMatchedDatetime())

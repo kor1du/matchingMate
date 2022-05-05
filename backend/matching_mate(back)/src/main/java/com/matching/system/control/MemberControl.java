@@ -1,7 +1,6 @@
 package com.matching.system.control;
 
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
 import com.matching.system.jwt.util.JwtTokenUtil;
@@ -9,7 +8,6 @@ import com.matching.system.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -78,8 +76,8 @@ public class MemberControl {
     // 회원 전체 조회 - 관리자   -> O
     @GetMapping("/admin/member")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity readMemberList(@ModelAttribute("paging") PagingDTO pagingDTO, Model model) {
-        ResponseData responseData = memberService.readMemberList(pagingDTO);
+    public ResponseEntity readMemberList() {
+        ResponseData responseData = memberService.readMemberList();
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -130,7 +128,7 @@ public class MemberControl {
 
     // 사진 등록, ㅅ정        -> O
     @PostMapping("/matchingProfile/updateProfileImg")
-    public ResponseEntity updateProfileImg(@RequestBody MemberDTO.UpdateImgAddress createImgAddress) {
+    public ResponseEntity updateProfileImg(@ModelAttribute MemberDTO.UpdateImgAddress createImgAddress/*, MultipartFile file*/) {
         ResponseMessage responseMessage = memberService.updateProfileImg(createImgAddress);
 
         return ResponseEntity
@@ -143,7 +141,7 @@ public class MemberControl {
     @PostMapping("/matchingProfile/updateProfileContent")
     public ResponseEntity createProfileImg(@RequestBody MemberDTO.UpdateProfileContent createImgAddress) {
         ResponseMessage responseMessage = memberService.updateProfileContent(createImgAddress);
-
+//        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.OK, file.getName());
         return ResponseEntity
                 .status(responseMessage.getStatus())
                 .body(responseMessage);

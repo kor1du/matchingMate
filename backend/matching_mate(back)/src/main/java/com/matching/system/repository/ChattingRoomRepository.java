@@ -22,8 +22,5 @@ public interface ChattingRoomRepository extends JpaRepository<ChattingRoom, Long
             "WHERE cr.id=:chattingRoomId")
     Optional<ChattingRoom> findById(@Param("chattingRoomId") Long chattingRoomId);
 
-<<<<<<< Updated upstream
+
 }
-=======
-}
->>>>>>> Stashed changes

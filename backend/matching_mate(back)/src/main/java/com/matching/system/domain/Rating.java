@@ -45,7 +45,7 @@ public class Rating {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(name = "register_datetime")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
 
     public void deleteMember() { this.member = null; }

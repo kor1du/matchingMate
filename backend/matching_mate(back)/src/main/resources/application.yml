@@ -1,17 +1,4 @@
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-server:
-  port : 8080
-  servlet:
-    context-path: /
-<<<<<<< Updated upstream
-=======
->>>>>>> jungYH
->>>>>>> Stashed changes
 
 spring:
 
@@ -27,7 +14,7 @@ spring:
 
   properties:
     hibernate:
-      default_batch_fetch_size: 10
+      default_batch_fetch_size: 1000
 
   jwt:
     headar: Authorization
@@ -55,17 +42,15 @@ spring:
   mvc:
     pathmatch:
       matching_strategy: ant_path_matcher
-<<<<<<< Updated upstream
+
     servlet:
         load-on-startup: 1
-=======
-<<<<<<< HEAD
-=======
-    servlet:
-        load-on-startup: 1
->>>>>>> jungYH
->>>>>>> Stashed changes
+
 
   output:
     ansi:
       enabled: always
+
+  servlet:
+    multipart:
+      max-file-size: 10MB

@@ -34,13 +34,13 @@ public class MatchingPost {
     private String postContents;
 
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @Column(name = "matching_date", nullable = true)
     private Date matchingDate;
 
     @Temporal(TemporalType.TIME)
     @Column(name = "matching_time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
     private Date matchingTime;
 
     @Column(name = "recommended_skill", nullable = false)
@@ -64,7 +64,7 @@ public class MatchingPost {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "register_dateTime")
     @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
 
     @Column(name = "is_completed", columnDefinition = "TINYINT(1) default 0", length = 1)
@@ -74,10 +74,7 @@ public class MatchingPost {
 //    private MatchingHistory matchingHistory;
 
 
-
-
-
-//    @OneToOne(mappedBy = "matchingPost", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToOne(mappedBy = "matchingPost", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private ChattingRoom chattingRoom;
 
 

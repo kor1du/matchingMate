@@ -62,7 +62,7 @@ public class Member implements Serializable {
     private Integer sex;
 
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @Column(name = "birthday", nullable = false)
     private Date birthday;
 
@@ -80,6 +80,7 @@ public class Member implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
 
     @Column(name = "matching_count", columnDefinition = "int default 0")

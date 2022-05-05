@@ -1,12 +1,11 @@
 package com.matching.system.repository;
 
 import com.matching.system.domain.MatchingHistory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -23,5 +22,5 @@ public interface MatchingHistoryRepository extends JpaRepository<MatchingHistory
 //            "JOIN FETCH mh.matchingMemberList " +
             "JOIN mh.matchingPost mp " +
             "JOIN mp.member")
-    Page<MatchingHistory> findAll(Pageable pageable);
+    List<MatchingHistory> findAll();
 }

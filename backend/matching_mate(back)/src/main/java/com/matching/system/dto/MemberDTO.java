@@ -1,8 +1,8 @@
 package com.matching.system.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.matching.system.domain.Member;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -138,13 +138,14 @@ public class MemberDTO {
     }
 
     @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
     public static class UpdateImgAddress
     {
         private Long id;    // memberId
-        private String profileImgAddress;
+        private MultipartFile file;
     }
 
     @Getter

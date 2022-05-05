@@ -17,6 +17,9 @@ public interface ChattingMemberRepository extends JpaRepository<ChattingMember, 
 
     Optional<ChattingMember> findByChattingRoomIdAndMemberId(Long chattingRoomId, Long memberId);
 
+    @Query("SELECT cm FROM ChattingMember cm JOIN FETCH cm.chattingRoom cr JOIN FETCH cr.matchingPost JOIN FETCH cm.member WHERE cm.id=:chattingMemberId")
+    Optional<ChattingMember> findById(@Param("chattingMemberId") Long chattingMemberId);
+
     Optional<ChattingMember> findByMemberId(Long memberId);
 
     Integer countByChattingRoomId(Long chattingRoomId);

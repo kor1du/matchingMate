@@ -35,18 +35,18 @@ public class ChattingDTO {
 
     @Getter     @Builder    @Setter
     @NoArgsConstructor    @AllArgsConstructor
-    public static class ChattingRoomInOutDTO
+    public static class ChattingRoomInDTO
     {
         public Long roomId;
         public Long memberId;
     }
 
+
     @Getter     @Builder
     @NoArgsConstructor    @AllArgsConstructor
     public static class SendMessageDTO
     {
-        public Long roomId;
-        public Long memberId;
+        public Long chattingMemberId;
         public String message;
     }
 

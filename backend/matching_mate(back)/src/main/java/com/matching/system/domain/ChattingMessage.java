@@ -9,7 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -35,7 +34,7 @@ public class ChattingMessage {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "register_datetime")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
 
 }

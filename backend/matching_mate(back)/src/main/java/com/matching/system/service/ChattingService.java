@@ -35,9 +35,6 @@ public class ChattingService {
                 .chattingMemberList(chattingMember)
                 .build();
 
-        // 저장
-
-
         // 채팅 회원 추가
         chattingRoom.addChattingMember(ChattingMember.builder()
                 .chattingRoom(chattingRoom)
@@ -46,8 +43,6 @@ public class ChattingService {
                 .build());
 
         chattingRoom = chattingRoomRepository.save(chattingRoom);
-
-//        chattingMemberRepository.save(chattingMember);
     }
 
     // 내 채팅 방 목록 조회
@@ -79,7 +74,7 @@ public class ChattingService {
     // 채팅방 입장 -> 매칭 상세 조회에서 채팅방 입장
     // -> 준비 상태 여부 추가해야함
     // -> 게시자 memberId + 참여한 사라들 memberId 필요
-    public ResponseData inChattingRoom(ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO)
+    public ResponseData inChattingRoom(ChattingDTO.ChattingRoomInDTO chattingRoomInOutDTO)
     {
          // chatting_member 추가
         Optional<ChattingRoom> chattingRoom = chattingRoomRepository.findById(chattingRoomInOutDTO.getRoomId());
@@ -123,25 +118,17 @@ public class ChattingService {
     }
 
     // 채팅방 퇴장
-    public ResponseMessage outChattingRoom(ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO)
+    // 데이터 잘못됨
+
+    public ResponseMessage outChattingRoom(Long chattingMemberId)
     {
-        ChattingRoom findChattingRoom = chattingRoomRepository.findById(chattingRoomInOutDTO.getRoomId()).get();
-        Member findMember = memberRepository.findById(chattingRoomInOutDTO.getMemberId()).get();
+        ChattingMember findChattingMember = chattingMemberRepository.findById(chattingMemberId).get();
 
+        findChattingMember.getChattingMessageList().clear();
+        findChattingMember.getChattingRoom().getChattingMemberList().remove(findChattingMember);
 
-
-//         chatting_message 삭제
-        List<ChattingMessage> chattingMessageList = chattingMessageRepository.findByChattingRoomIdAndChattingMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId());
-        findChattingRoom.getChattingMessageList().removeAll(chattingMessageList);
-
-        // chatting_member 삭제
-        ChattingMember chattingMember = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId()).get();
-
-//        findChattingRoom.getChattingMemberList().removeIf(chattingMember1 -> chattingMember1.getMember())
         // 이 사람이 ready 상태이면 number_of_people --
-        if (findChattingRoom.getMatchingPost().getIsCompleted()==0 && chattingMember.isReady() == true) findChattingRoom.getMatchingPost().updateMinusNumberOfPeople();
-
-        findChattingRoom.getChattingMemberList().remove(chattingMember);
+        if (findChattingMember.getChattingRoom().getMatchingPost().getIsCompleted()==0 && findChattingMember.isReady() == true) findChattingMember.getChattingRoom().getMatchingPost().updateMinusNumberOfPeople();
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 처리되었습니다.");
     }
@@ -149,14 +136,11 @@ public class ChattingService {
     // 채팅방 내용 전송
     public ResponseMessage sendMessage(ChattingDTO.SendMessageDTO sendMessageDTO)
     {
-        Optional<ChattingRoom> findChattingRoom = chattingRoomRepository.findById(sendMessageDTO.getRoomId());
-        if (findChattingRoom.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 방이 존재하지 않습니다.");
-
-        Optional<ChattingMember> findChattingMember = chattingMemberRepository.findByChattingRoomIdAndMemberId(sendMessageDTO.getRoomId(), sendMessageDTO.getMemberId());
+        Optional<ChattingMember> findChattingMember = chattingMemberRepository.findById(sendMessageDTO.getChattingMemberId());
         if (findChattingMember.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.");
 
         ChattingMessage chattingMessage = ChattingMessage.builder()
-                .chattingRoom(findChattingRoom.get())
+                .chattingRoom(findChattingMember.get().getChattingRoom())
                 .chattingMember(findChattingMember.get())
                 .message(sendMessageDTO.getMessage())
                 .build();

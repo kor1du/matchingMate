@@ -18,9 +18,9 @@ public class MatchingHistoryControl {
     // 매칭 내역 조회 -> 사용자      -> O
     @GetMapping("/matchingProfile/history/{id}")
     public ResponseEntity readMatchingHistories(@RequestHeader("Authorization") String accessToken,
-                                                @PathVariable(value = "id") Long memberId, @ModelAttribute PagingDTO paging)
+                                                @PathVariable(value = "id") Long memberId)
     {
-        ResponseData responseData = matchingHistoryService.readMatchingHistories(memberId, accessToken, paging);
+        ResponseData responseData = matchingHistoryService.readMatchingHistories(memberId, accessToken);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -29,9 +29,9 @@ public class MatchingHistoryControl {
     
     // 매칭 내역 조회 -> 관리자      -> O
     @GetMapping("/admin/matchingHistory")
-    public ResponseEntity readAllMatchingHistories(@ModelAttribute PagingDTO paging)
+    public ResponseEntity readAllMatchingHistories()
     {
-        ResponseData responseData = matchingHistoryService.readAllMatchingHistories(paging);
+        ResponseData responseData = matchingHistoryService.readAllMatchingHistories();
 
         return ResponseEntity
                 .status(responseData.getStatus())

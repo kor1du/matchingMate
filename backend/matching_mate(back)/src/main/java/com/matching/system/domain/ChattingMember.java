@@ -35,7 +35,7 @@ public class ChattingMember {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(name = "register_datetime")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
 
     @OneToMany(mappedBy = "chattingMember", cascade = CascadeType.ALL, orphanRemoval = true)

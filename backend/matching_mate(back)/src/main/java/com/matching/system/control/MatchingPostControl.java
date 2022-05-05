@@ -2,13 +2,11 @@ package com.matching.system.control;
 
 import com.matching.system.dto.ChattingDTO;
 import com.matching.system.dto.MatchingPostDTO;
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
 import com.matching.system.service.MatchingPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +16,7 @@ public class MatchingPostControl {
     private final MatchingPostService matchingPostService;
 
     // 매칭 공고 추가     -> O
+    // 관심카테고리부터 테스트
     @PostMapping("/matchingPost/create")
     public ResponseEntity save(@RequestBody MatchingPostDTO.CreateDTO matchingPostCreateDTO) {
         ResponseMessage responseMessage = matchingPostService.save(matchingPostCreateDTO);
@@ -51,9 +50,12 @@ public class MatchingPostControl {
     }
 
     // 매칭 공고 조회 -> 사용자 (첫 페이지) -> 최신 우선       -> O
-    @GetMapping(value = "")
-    public ResponseEntity readRecentPosts() {
-        ResponseData responseData = matchingPostService.readRecentPosts();
+    @GetMapping(value = "/recent")
+    public ResponseEntity readRecentPosts(@RequestParam(value = "category", required = false) Long categoryId,
+                                          @RequestParam(value = "lat") Double latitude,
+                                          @RequestParam(value = "lng") Double longitude) {
+
+        ResponseData responseData = matchingPostService.readRecentPosts(categoryId, latitude, longitude);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -62,18 +64,21 @@ public class MatchingPostControl {
 
     // 인기 공고 조회       -> O
     @GetMapping(value = "/popular")
-    public ResponseEntity readPopularPosts() {
-        ResponseData responseData = matchingPostService.readPopularPosts();
+    public ResponseEntity readPopularPosts(@RequestParam(value = "category", required = false) Long categoryId,
+                                           @RequestParam(value = "lat") Double latitude,
+                                           @RequestParam(value = "lng") Double longitude) {
+        ResponseData responseData = matchingPostService.readPopularPosts(categoryId, latitude, longitude);
 
         return ResponseEntity
                 .status(responseData.getStatus())
                 .body(responseData);
     }
 
+
     // 매칭 공고 조회 -> 관리자       -> O
     @GetMapping(value = "/admin/matchingPost")
-    public ResponseEntity readAdminPosts(@ModelAttribute("paging") PagingDTO paging, Model model) {
-        ResponseData responseData = matchingPostService.readAdminPosts(paging);
+    public ResponseEntity readAdminPosts() {
+        ResponseData responseData = matchingPostService.readAdminPosts();
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -92,9 +97,9 @@ public class MatchingPostControl {
 
     // 매칭 공고 채팅방 들어가기       -> O
     @PostMapping(value = "/matchingPost/detail/joinChat")
-    public ResponseEntity joinChatting(@RequestBody ChattingDTO.ChattingRoomInOutDTO chattingRoomInOutDTO)
+    public ResponseEntity joinChatting(@RequestBody ChattingDTO.ChattingRoomInDTO chattingRoomInDTO)
     {
-        ResponseMessage responseMessage = matchingPostService.joinChatting(chattingRoomInOutDTO);
+        ResponseMessage responseMessage = matchingPostService.joinChatting(chattingRoomInDTO);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

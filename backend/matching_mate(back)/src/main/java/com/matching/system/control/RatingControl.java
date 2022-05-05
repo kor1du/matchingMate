@@ -1,6 +1,5 @@
 package com.matching.system.control;
 
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.dto.RatingDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
@@ -47,8 +46,8 @@ public class RatingControl {
 
     // 평점 조회 - 관리자    -> O
     @GetMapping("/admin/rating")
-    public ResponseEntity readAdminRating(PagingDTO paging) {
-        ResponseData responseData = ratingService.readAdminRating(paging);
+    public ResponseEntity readAdminRating() {
+        ResponseData responseData = ratingService.readAdminRating();
 
         return ResponseEntity
                 .status(responseData.getStatus())

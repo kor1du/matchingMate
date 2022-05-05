@@ -3,7 +3,6 @@ package com.matching.system.service;
 import com.matching.system.domain.MatchingHistory;
 import com.matching.system.domain.Member;
 import com.matching.system.domain.Rating;
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.dto.RatingDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
@@ -11,9 +10,6 @@ import com.matching.system.repository.MatchingHistoryRepository;
 import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,13 +68,15 @@ public class RatingService {
     // 평점 조회 - 사용자 (자기꺼 - targetMemberId)
     public ResponseData readMemberRating(Long targetMemberId)
     {
+        Optional<Member> findMember = memberRepository.findById(targetMemberId);
+        if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
+
         // 기술, 매너 평균
-//        Rating avgRating = ratingRepository.findByMemberAvgPoint(targetMemberId);
         Float avgSkillPoint = ratingRepository.findByAvgSkillPoint(targetMemberId);
         Float avgMannerPoint = ratingRepository.findByAvgMannerPoint(targetMemberId);
 
-        // 개별적으로 준 거 구해야함.
-        List<RatingDTO.ReadDetailRatingDTO> readDetailRatingDTOS = ratingRepository.findByTargetMemberId(targetMemberId).stream()
+        // 개별적으로 Rating.
+        List<RatingDTO.ReadDetailRatingDTO> readDetailRatingDTOS = ratingRepository.findByTargetMemberId(findMember.get()).stream()
                 .map(rating -> RatingDTO.ReadDetailRatingDTO.builder()
                         .id(rating.getId())
                         .targetMemberNickname(rating.getTargetMember()==null?null:rating.getTargetMember().getNickname())
@@ -96,11 +94,9 @@ public class RatingService {
     }
 
     // 평점 조회 - 관리자 (모든 리스트)
-    public ResponseData readAdminRating(PagingDTO paging)
+    public ResponseData readAdminRating()
     {
-        Pageable pageable = PageRequest.of(paging.getFirstPage(), paging.getPageCount());
-
-        Page<Rating> ratingList = ratingRepository.findAll(pageable);
+        List<Rating> ratingList = ratingRepository.findAll();
 
         List<RatingDTO.ReadDetailRatingDTO> readDetailRatingDTOList = ratingList.stream()
                 .map(rating -> RatingDTO.ReadDetailRatingDTO.builder()

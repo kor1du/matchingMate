@@ -3,7 +3,6 @@ package com.matching.system.service;
 import com.matching.system.domain.Member;
 import com.matching.system.domain.Notification;
 import com.matching.system.domain.Report;
-import com.matching.system.dto.PagingDTO;
 import com.matching.system.dto.ReportDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
@@ -11,9 +10,6 @@ import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.NotificationRepository;
 import com.matching.system.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,37 +55,36 @@ public class ReportService {
     }
 
     // 신고 조회 - 전체
-    public ResponseData readAllReports(PagingDTO paging) {
-        List<ReportDTO.ReportReadDTO> reportReadDTOList = read(1, paging);
+    public ResponseData readAllReports() {
+        List<ReportDTO.ReportReadDTO> reportReadDTOList = read(1);
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", reportReadDTOList);
     }
 
     // 신고 조회 - 처리 완료
-    public ResponseData readDisposed(PagingDTO paging) {
-        List<ReportDTO.ReportReadDTO> reportReadDTOList = read(2, paging);
+    public ResponseData readDisposed() {
+        List<ReportDTO.ReportReadDTO> reportReadDTOList = read(2);
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", reportReadDTOList);
     }
 
     // 신고 조회 - 처리 전
-    public ResponseData readNotDisposed(PagingDTO paging) {
-        List<ReportDTO.ReportReadDTO> reportReadDTOList = read(3, paging);
+    public ResponseData readNotDisposed() {
+        List<ReportDTO.ReportReadDTO> reportReadDTOList = read(3);
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", reportReadDTOList);
     }
 
     // 조회 처리
-    private List<ReportDTO.ReportReadDTO> read(int select, PagingDTO paging) {
-        Page<Report> reports;
-        Pageable pageable = PageRequest.of(paging.getFirstPage(), paging.getPageCount());
+    private List<ReportDTO.ReportReadDTO> read(int select) {
+        List<Report> reports;
 
         if (select == 1) {
-            reports = reportRepository.findAll(pageable);
+            reports = reportRepository.findAll();
         } else if (select == 2) {
-            reports = reportRepository.findByStatus(1, pageable);
+            reports = reportRepository.findByStatus(1);
         } else {
-            reports = reportRepository.findByStatus(0, pageable);
+            reports = reportRepository.findByStatus(0);
         }
 
         List<ReportDTO.ReportReadDTO> reportReadDTOs = reports.stream()
