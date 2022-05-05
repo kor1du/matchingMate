@@ -10,6 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*").allowedMethods("GET", "POST");
+                .allowedOrigins("*","http://kor1du.ddns.net:3000/");
     }
 }

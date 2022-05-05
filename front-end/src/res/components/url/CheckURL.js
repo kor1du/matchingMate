@@ -1,4 +1,4 @@
-function checkURL() {
+export function checkURL() {
   const url = document.URL;
 
   if (url.includes("localhost")) return "http://localhost:3000/";

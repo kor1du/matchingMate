@@ -1,10 +1,12 @@
 import { Card, Form, Button } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/signup/signup.css";
+import "../../css/signupComponent/signupComponent.css";
 import AddressInput from "./AddressInput";
 import Modal from "react-modal";
 import { axiosPost } from "../axios/Axios";
 import { redirectURL } from "../url/CheckURL";
+import CheckID from "./CheckID";
 
 export default function Signup() {
   const [id, setId] = useState("");
@@ -39,6 +41,11 @@ export default function Signup() {
       });
   }
 
+  useEffect(() => {
+    setId(id);
+    console.log("현재 ID는 : " + id);
+  });
+
   return (
     <div className="container signup-component">
       <Card>
@@ -53,14 +60,15 @@ export default function Signup() {
                 <div className="signup-part1">
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>ID</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="ID"
-                      onChange={(e) => {
-                        e.preventDefault();
-                        setId(e.target.value);
-                      }}
-                    />
+                    <div className="signup-checkID">
+                      <Form.Control
+                        type="text"
+                        placeholder="ID"
+                        readOnly
+                        value={id}
+                      />
+                      <CheckID setId={setId}></CheckID>
+                    </div>
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -79,17 +87,24 @@ export default function Signup() {
                     <Form.Label>
                       <p>주소</p>
                     </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="주소"
-                      readonly
-                      value={address}
-                      // onChange={(e) => {
-                      //   e.preventDefault();
-                      //   setAddress(e.target.value);
-                      // }}
-                    />
-                    <Button onClick={() => setModalOpen(true)}>주소찾기</Button>
+                    <div className="signup-find-address">
+                      <Form.Control
+                        type="text"
+                        placeholder="주소"
+                        readOnly
+                        value={address}
+                        // onChange={(e) => {
+                        //   e.preventDefault();
+                        //   setAddress(e.target.value);
+                        // }}
+                      />
+                      <Button
+                        onClick={() => setModalOpen(true)}
+                        className="btn-find-address"
+                      >
+                        <p>주소찾기</p>
+                      </Button>
+                    </div>
                   </Form.Group>
 
                   <Modal

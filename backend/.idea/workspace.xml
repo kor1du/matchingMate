@@ -5,33 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="729d2a48-20ef-45ac-b158-c3deaccdc7c0" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/control/MatchingPostControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/control/MatchingPostControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/control/MemberControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/control/MemberControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/repository/MatchingPostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/repository/MatchingPostRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/service/MatchingPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/service/MatchingPostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matching_mate(back)/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/matching_mate(back)/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/Nav/NavAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/components/Nav/NavAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/Nav/NavChatting.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/components/Nav/NavChatting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/cookie/Cookie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/home-board/HomeBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/components/home-board/HomeBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/home/HomeCarousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/components/home/HomeCarousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/components/login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/logout/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/components/logout/Logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/res/components/signup/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/components/signup/Signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/css/home-board/homeBoard.css" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/css/home-board/homeBoard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/res/page/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/res/page/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../수정사항.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../수정사항/4번째 ReadMe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../수정사항/4번째 ReadMe.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,15 +92,9 @@
     </task>
     <servers />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/matching_mate(back)/src/main/java/com/matching/system/control/MatchingPostControl.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/backend$MatchingMateApplication.ic" NAME="MatchingMateApplication 커버리지 결과" MODIFIED="1651727581945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.matching.system.*</FILTER>
+    </SUITE>
   </component>
 </project>

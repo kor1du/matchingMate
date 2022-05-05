@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import View from "../../img/view.png";
+import { axiosGet } from "../axios/Axios";
 import "../../css/adminComponents/adminPostManagementRightside.css";
 
 export default function AdminPostManagement() {
+  useEffect(() => {
+    axiosGet("/admin/matchingPost").then((data) => {
+      console.log(data);
+    });
+  });
+
   return (
     <>
       <Button className="admin-post-title">

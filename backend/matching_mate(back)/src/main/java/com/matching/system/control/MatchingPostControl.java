@@ -61,9 +61,10 @@ public class MatchingPostControl {
     }
 
     // 매칭 공고 조회 -> 관리자       -> O
+
     @GetMapping(value = "/admin/matchingPost")
-    public ResponseEntity readAdminPosts(@ModelAttribute("paging") PagingDTO paging, Model model) {
-        ResponseData responseData = matchingPostService.readAdminPosts(paging);
+    public ResponseEntity readAdminPosts(Model model) {
+        ResponseData responseData = matchingPostService.readAdminPosts();
 
         return ResponseEntity
                 .status(responseData.getStatus())

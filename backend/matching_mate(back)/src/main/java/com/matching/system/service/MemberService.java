@@ -88,6 +88,7 @@ public class MemberService {
     {
         Optional<Member> findMember = memberRepository.findByUserId(checkDuplicateId.getUserId());
 
+        System.out.println("user Id is ... "+memberRepository.findByUserId(checkDuplicateId.getUserId()));
         if (findMember.isEmpty())
             return new ResponseMessage(HttpStatus.OK, "가입 가능한 아이디입니다.");
 

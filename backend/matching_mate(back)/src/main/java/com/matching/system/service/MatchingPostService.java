@@ -149,10 +149,8 @@ public class MatchingPostService {
     }
 
     // admin 매칭 공고 조회
-    public ResponseData readAdminPosts(PagingDTO paging)
+    public ResponseData readAdminPosts()
     {
-        Pageable pageable = PageRequest.of(paging.getFirstPage(), paging.getPageCount());
-
         List<MatchingPost> matchingPostList = matchingPostRepository.findByRecentPosts();
 
         List<MatchingPostDTO.ReadDTO> readDTOList = matchingPostList.stream()
