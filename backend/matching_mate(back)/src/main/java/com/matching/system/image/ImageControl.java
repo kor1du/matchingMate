@@ -42,6 +42,8 @@ public class ImageControl {
         String changeName = changeName(userId, multipartFile);
         String imageEncoding = Base64.getEncoder().encodeToString(multipartFile.getBytes());
 
+        System.out.println("changeName = " + changeName);
+
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("key", "fca9e378a2116dae3e8e425ae77e058d");
         body.add("name", changeName);
