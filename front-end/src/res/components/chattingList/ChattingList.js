@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../css/chattingList/chattingList.css";
@@ -7,8 +7,19 @@ import Person2 from "../../img/person2.png";
 import Person3 from "../../img/person3.png";
 import Person4 from "../../img/person4.png";
 import Person5 from "../../img/person5.png";
+import { redirectURL } from "../url/CheckURL";
+import { isLogin } from "../login/Login";
 
 export default function ChattingListComponent() {
+  useEffect(() => {
+    if (!isLogin()) {
+      //로그인한 상태가 아니라면
+      const result = confirm("로그인이 필요합니다. 로그인하시겠습니까?");
+      if (result === true) redirectURL("login");
+      else redirectURL("");
+    }
+  });
+
   return (
     <Container className="chatting-list-component">
       <ul>

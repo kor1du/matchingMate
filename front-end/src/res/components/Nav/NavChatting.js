@@ -5,24 +5,19 @@ import ProfileComponent from "./Profile";
 import "../../css/nav/navChatting.css";
 import Bars from "../../img/bars-solid.png";
 import NavLeftSide from "./NavLeftSide";
-
-const showLeft = (event) => {
-  event.preventDefault();
-  const navLeftside = document.querySelector(".nav-left-side");
-  navLeftside.classList.toggle("active");
-};
+import { logout } from "../logout/Logout";
+import { showLeft, showLoginBtn } from "./Nav";
+import { toggle } from "../toggle/Toggle";
 
 const showChattingLeft = (event) => {
-  const chattingLeftside = document.querySelector(".chatting-left-side");
   event.preventDefault();
   disableChattingRight(event);
-  chattingLeftside.classList.toggle("active");
+  toggle(".chatting-left-side");
 };
 
 const disableChattingRight = (event) => {
   event.preventDefault();
-  const chattingRightside = document.querySelector(".chatting-right-side");
-  chattingRightside.classList.toggle("active");
+  toggle(".chatting-right-side");
 };
 
 const disableChattingLeftByWindowResize = (event) => {
@@ -30,19 +25,21 @@ const disableChattingLeftByWindowResize = (event) => {
   const windowWidth = document.documentElement.clientWidth;
   const chattingLeftside = document.querySelector(".chatting-left-side");
   const chattingRightside = document.querySelector(".chatting-right-side");
+
   if (
     windowWidth > 1023 &&
     chattingLeftside.classList.contains("active") &&
     chattingRightside.classList.contains("active")
   ) {
-    chattingLeftside.classList.toggle("active");
-    chattingRightside.classList.toggle("active");
+    toggle(".chatting-left-side");
+    toggle(".chatting-right-side");
   }
 };
 
 export default function navChatting() {
   useEffect(() => {
     window.addEventListener("resize", disableChattingLeftByWindowResize);
+    showLoginBtn();
     return () => {
       window.removeEventListener("resize", disableChattingLeftByWindowResize);
     };
@@ -60,6 +57,9 @@ export default function navChatting() {
           <Link to="/login" className="login">
             <p>로그인</p>
           </Link>
+          <p className="logout-1024px" onClick={logout}>
+            로그아웃
+          </p>
           <ProfileComponent></ProfileComponent>
           <p onClick={showChattingLeft} className="show-members">
             멤버

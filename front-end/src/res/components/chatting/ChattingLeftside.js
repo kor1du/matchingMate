@@ -6,6 +6,7 @@ import Person2 from "../../img/person2.png";
 import Person3 from "../../img/person3.png";
 import Person4 from "../../img/person4.png";
 import Person5 from "../../img/person5.png";
+import { toggle } from "../toggle/Toggle";
 
 function handleReadyBtn(event) {
   const userArr = document.querySelectorAll(".detail h3");
@@ -19,7 +20,7 @@ function handleReadyBtn(event) {
 
   if (targetUser.classList.contains("active")) targetUser.innerHTML = "준비중";
   else targetUser.innerHTML = "준비 완료!";
-  targetUser.classList.toggle("active");
+  toggle(targetUser);
 }
 
 export default function Chatting() {
