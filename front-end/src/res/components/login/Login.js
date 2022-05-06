@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import "../../css/login/login.css";
 import { setCookie } from "../cookie/Cookie";
 import { checkURL } from "../checkURL/CheckURL";
-import { axiosPost } from "../axios/Axios";
+import { axiosPost } from '../../axios/Axios';
+
 
 function LoginComponent() {
   const [id, setId] = useState("");

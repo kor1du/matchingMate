@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sparkles from "../../img/sparkles.png";
 import Fire from "../../img/fire.png";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 
 import HomeBoardCreate from "./HomeBoardCreate";
 import "../../css/home-board/homeBoard.css";
@@ -10,9 +10,11 @@ import BoardPagination from './BoardPagination';
 import styled from "styled-components";
 
 
+
+
 function Board(props) {
 
-  const { boards, getPopularBoards, getBoards } = props;
+  const { boards, getPopularBoards, getBoards, getLocation } = props;
 
 
   const limit = 8;
@@ -32,6 +34,7 @@ function Board(props) {
               <p >인기</p>
               <img src={Fire} alt="sparkles" />
             </div>
+            <Button onClick={() => getLocation()}>위치 갱신</Button>
           </Col>
           <Col>
             <HomeBoardCreate></HomeBoardCreate>

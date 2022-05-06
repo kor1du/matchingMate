@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 import View from "../../img/view.png";
@@ -11,25 +12,27 @@ const BoardItem = (props) => {
   return (
     <>
       <Col xl="3" lg="6" md="6" sm="6" className='board-item'>
-        <Card border="primary">
-          <Card.Header>
-            <p>{board.postName}</p>
-          </Card.Header>
-          <Card.Body>
-            <Card.Title>
-              <p>{board.matchingDate}</p>
-              <p>종목 : {board.categoryName}</p>
-              <p>시간 : {board.matchingTime}</p>
-              <p>장소 : {board.place}</p>
-              <p>모집인원 : {board.maxNumberOfPeople}</p>
-              <p>추천실력 : {board.recommendedSkill}</p>
-              <div className="info">
-                <img src={View} alt="View" />
-                <span>{board.views}</span>
-              </div>
-            </Card.Title>
-          </Card.Body>
-        </Card>
+        <Link to={`/post/${board.id}`}>
+          <Card border="primary">
+            <Card.Header>
+              <p>{board.postName}</p>
+            </Card.Header>
+            <Card.Body>
+              <Card.Title>
+                <p>{board.matchingDate}</p>
+                <p>종목 : {board.categoryName}</p>
+                <p>시간 : {board.matchingTime}</p>
+                <p>장소 : {board.place}</p>
+                <p>모집인원 : {board.maxNumberOfPeople}</p>
+                <p>추천실력 : {board.recommendedSkill}</p>
+                <div className="info">
+                  <img src={View} alt="View" />
+                  <span>{board.views}</span>
+                </div>
+              </Card.Title>
+            </Card.Body>
+          </Card>
+        </Link>
       </Col>
 
     </>

@@ -4,7 +4,8 @@ import "../../css/signup/signup.css";
 import AddressInput from "./AddressInput";
 import Modal from "react-modal";
 import { checkURL } from "../checkURL/CheckURL";
-import { axiosPost } from "../axios/Axios";
+import { axiosPost } from '../../axios/Axios';
+
 
 export default function Signup() {
   const [id, setId] = useState("");
@@ -85,10 +86,10 @@ export default function Signup() {
                       placeholder="주소"
                       readonly
                       value={address}
-                      // onChange={(e) => {
-                      //   e.preventDefault();
-                      //   setAddress(e.target.value);
-                      // }}
+                    // onChange={(e) => {
+                    //   e.preventDefault();
+                    //   setAddress(e.target.value);
+                    // }}
                     />
                     <Button onClick={() => setModalOpen(true)}>주소찾기</Button>
                   </Form.Group>

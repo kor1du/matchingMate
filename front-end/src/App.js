@@ -5,7 +5,7 @@ import "./res/css/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./res/page/home";
 import Login from "./res/page/login";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./res/page/signup";
 import ChattingList from "./res/page/chattingList";
 import Chat from "./res/page/chatting";
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/login" element={<Login />} exact />
@@ -87,7 +87,7 @@ function App() {
           ></Route>
           <Route path="/member" element={<MemberProfile member={member} />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }
