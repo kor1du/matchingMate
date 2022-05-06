@@ -17,9 +17,10 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
-public class ImageControl {
+public class ImageProcess {
+    private final String API_KEY = "fca9e378a2116dae3e8e425ae77e058d";
     public String getImageUrl(String userId, MultipartFile multipartFile) {
-        final String API_KEY = "fca9e378a2116dae3e8e425ae77e058d";
+
         String apiUrl = "https://api.imgbb.com/1/upload?key=" + API_KEY;
 
         String imageUrl = "";
@@ -45,7 +46,7 @@ public class ImageControl {
         System.out.println("changeName = " + changeName);
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("key", "fca9e378a2116dae3e8e425ae77e058d");
+        body.add("key", API_KEY);
         body.add("name", changeName);
         body.add("image", imageEncoding);
 

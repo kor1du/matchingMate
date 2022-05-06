@@ -5,7 +5,7 @@ import com.matching.system.domain.*;
 import com.matching.system.dto.MemberDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
-import com.matching.system.image.ImageControl;
+import com.matching.system.image.ImageProcess;
 import com.matching.system.jwt.JwtExpirationEnums;
 import com.matching.system.jwt.TokenDTO;
 import com.matching.system.jwt.redis.*;
@@ -39,10 +39,7 @@ public class MemberService {
     private final LogoutAccessTokenRedisRepository logoutAccessTokenRedisRepository;
     private final JwtTokenUtil jwtTokenUtil;
     private final AccessConfig accessConfig;
-    private final ImageControl imageControl;
-
-//    private final Logger log = LoggerFactory.getLogger(getClass());
-
+    private final ImageProcess imageControl;
 
     // 회원가입
     public ResponseMessage save(MemberDTO.SignUpDTO signUpDTO)

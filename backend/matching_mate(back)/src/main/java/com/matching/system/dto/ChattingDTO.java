@@ -29,7 +29,7 @@ public class ChattingDTO {
         private Integer maxNumberOfPeople;
         private Integer roomNumberOfPeople;
         @Temporal(TemporalType.TIMESTAMP)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private Date registerDatetime;
     }
 
@@ -47,6 +47,7 @@ public class ChattingDTO {
     public static class SendMessageDTO
     {
         public Long chattingMemberId;
+        public Long roomId;
         public String message;
     }
 
@@ -57,6 +58,14 @@ public class ChattingDTO {
     {
         private Long id; // room PK
         private Long postMemberId;  // 만든 사람
+        private String place;
+        private String detailPlace;
+        @Temporal(TemporalType.DATE)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+        private Date matchingDate;
+        @Temporal(TemporalType.TIME)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
+        private Date matchingTime;
         private Long myMemberId;    // 자기 id
         private Long chattingMemberId;
         private List<ReadChattingMessageDTO> readMessageList;
@@ -71,6 +80,7 @@ public class ChattingDTO {
         private Long chattingMemberId;    // chattingmemberId
         private Long memberId;
         private String nickname;
+        private String profileImgAddress;
         private Float avgSkillPoint;
         private Float avgMannerPoint;
         private boolean isReady;
@@ -85,9 +95,10 @@ public class ChattingDTO {
         public Long chattingMessageId;     // message PK
         public Long memberId;
         public String nickname;
+        public String profileImgAddress;
         public String message;
         @Temporal(TemporalType.TIMESTAMP)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private Date registerDatetime;
 
         @Override
@@ -115,6 +126,10 @@ public class ChattingDTO {
     public static class CompleteMatching
     {
         private Long chattingRoomId;    // chattingRoomId
+        private String detailPlace;
+        @Temporal(TemporalType.TIME)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
+        private Date matchingTime;
     }
 
 }

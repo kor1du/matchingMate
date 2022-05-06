@@ -70,6 +70,7 @@ public class ChattingControl {
 
     // 전체 준비 완료 = 매칭 완료 (공고 게시자)        -> O
     // ready 할때마다 10/10 이런 상태 확인 필요
+    // 주소나 시간 최종 입력
     @PostMapping("/in/complete")
     public ResponseEntity completeMatching(@RequestBody ChattingDTO.CompleteMatching completeMatching) {
         ResponseMessage responseMessage = chattingService.completeMatching(completeMatching);

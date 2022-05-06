@@ -5,7 +5,7 @@ import com.matching.system.dto.ChattingDTO;
 import com.matching.system.dto.MatchingPostDTO;
 import com.matching.system.filter.ResponseData;
 import com.matching.system.filter.ResponseMessage;
-import com.matching.system.map.MapControl;
+import com.matching.system.map.MapProcess;
 import com.matching.system.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class MatchingPostService {
     private final ChattingService chattingService;
     private final ChattingMemberRepository chattingMemberRepository;
     private final ChattingRoomRepository chattingRoomRepository;
-    @Autowired private final MapControl mapControl;
+    @Autowired private final MapProcess mapControl;
     
 
     // 매칭 공고 추가
