@@ -73,7 +73,7 @@ public class MemberDTO {
         private Long id;
         private String userPw;
         @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private Date birthday;
         private String sex;
         private String name;
@@ -92,7 +92,7 @@ public class MemberDTO {
         private String userId;
         private String userPw;
         @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private Date birthday;
         private String sex;
         private String name;

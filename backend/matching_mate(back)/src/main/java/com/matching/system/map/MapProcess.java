@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 @Component
-public class MapControl {
+public class MapProcess {
     public static String coordToAddr(double x, double y) {
         String url = "https://dapi.kakao.com/v2/local/geo/coord2address.json?x="+x+"&y="+y+"&input_coord=WGS84";
 
