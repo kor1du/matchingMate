@@ -5,7 +5,7 @@ import Nav from "../components/nav/Nav";
 import HomeCarousel from "../components/home/HomeCarousel";
 import Board from "../components/home-board/HomeBoard";
 import NavToChat from "../components/nav/NavToChat";
-import { axiosGet } from '../axios/Axios';
+// import { axiosGet } from '../axios/Axios';
 import axios from 'axios';
 
 
@@ -15,11 +15,12 @@ function Home() {
   const [longtitue, setLongitude] = useState("");
 
   const getPopularBoards = async () => {
-    const res = await (await axiosGet("/popular")).data;
+    // const res = await (await axiosGet("/popular")).data;
+    const res = await (await axios.get("http://localhost:8050/popular")).data;
     setBoards(res.data);
   };
 
-  // 기본 조회는 최신순
+  // 기본 조회는 최신순 zz
 
   const getBoards = async () => {
     console.log("axios 시작");

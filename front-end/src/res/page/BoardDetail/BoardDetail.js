@@ -1,53 +1,99 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './BoardDetail.module.css';
 import { useNavigate, useParams } from "react-router-dom";
 import Nav from '../../components/nav/Nav';
 import { BsArrowLeft } from "react-icons/bs";
 import { Button } from 'react-bootstrap';
 // import { axiosGet } from '../../axios/Axios';
-
+import Modal from "react-modal";
+import axios from 'axios';
 
 const BoardDetail = () => {
 
   const { id } = useParams();
   console.log("detail id : ", id);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
-  // const [board, setBoard] = useState();
+  const [board, setBoard] = useState(null);
+  const [isLoading, setisLoading] = useState(true);
 
-  // const getBoard = async () => {
-  //   const res = await (await axiosGet(`/matchingPost/detail/${id}`)).data;
-  //   console.log("통신데이터", res);
-  //   setBoard(res.data);
-  // };
+  const getBoard = async () => {
+    const res = await (await axios.get(`http://localhost:8050/matchingPost/detail/${id}`)).data;
+    // const res = await (await axiosGet(`/matchingPost/detail/${id}`)).data;
+    console.log("detail 조회 결과", res);
+    setBoard(res.data);
+    setisLoading(false);
+  };
 
   useEffect(() => {
-    // getBoard();
+    getBoard();
   }, []);
 
   return (
     <>
       <Nav />
-      <div className={styles.container}>
-        <section className={styles.header}>
-          <BsArrowLeft className={styles.backBtn} size="40" onClick={() => navigate(-1)}></BsArrowLeft>
-          <h1>제목 : 제목입니다.</h1>
-          <div>
-            <p>userId</p>
-            <p>종목 ?</p>
-            <p>시간 ?</p>
-            <div>
-              <span>장소 ?</span>
-              <Button>지도 보기</Button>
-            </div>
-            <p>추천 실력 ?</p>
-          </div>
-        </section>
-        <div className={styles.contentBox}>
+      {
+        isLoading === true ? <h2>로딩중입니다 ...</h2> : (
+          <div className={styles.container}>
+            <section className={styles.header}>
+              <BsArrowLeft className={styles.backBtn} size="40" onClick={() => navigate(-1)}></BsArrowLeft>
+              <h1>제목 : {board.postName}</h1>
+              <div>
+                <p>작성자 닉네임 : {board.nickname}</p>
+                <p>종목 : {board.categoryName}</p>
+                <p>시간 : {board.matchingTime}</p>
+                <div>
+                  <span>장소 ?</span>
+                  <Button onClick={() => setModalOpen(true)}>지도 보기</Button>
+                </div>
+                <p>추천 실력 {board.recommendedSkill}</p>
+              </div>
+            </section>
+            <Modal
+              isOpen={modalOpen}
+              onRequestClose={() => setModalOpen(false)}
+              style={{
+                overlay: {
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: "rgba(126, 147, 149, 0.83)",
+                },
+                content: {
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  border: "1px solid #ccc",
+                  background: "#fff",
+                  overflow: "auto",
+                  WebkitOverflowScrolling: "touch",
+                  borderRadius: "4px",
+                  outline: "none",
+                  padding: "20px",
+                  width: "700px",
+                  height: "500px",
+                },
+              }}
+            >
+              <h2>이렇게 지도 표시</h2>
+              <button onClick={() => setModalOpen(false)}>닫기</button>
+            </Modal>
 
-          <p>내용~~~~~~~~~~~~</p>
-        </div>
-      </div>
+            <div className={styles.contentBox}>
+
+              <p>내용~~~~~~~~~~~~</p>
+            </div>
+            <div className={styles.chatBtnBox}>
+              <Button>채팅방 참여하기</Button>
+            </div>
+          </div>
+        )
+      }
+
     </>
 
   );

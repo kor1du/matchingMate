@@ -23,3 +23,9 @@
   margin-top: 3rem;
   font-size: 1.5rem;
 }
+
+.chatBtnBox{
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
