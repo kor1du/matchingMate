@@ -19,6 +19,7 @@ import AdminBadgeModify from "./res/page/admin/adminBadgeModify";
 import AdminBadgeView from "./res/page/admin/adminBadgeView";
 import MatchProfile from './res/page/matchProfile/matchProfile';
 import MemberProfile from './res/page/memberProfile/memberProfile';
+import BoardDetail from './res/page/BoardDetail/BoardDetail';
 
 function App() {
   const member = {
@@ -32,11 +33,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} exact />
-          <Route path="/login" element={<Login />} exact />
-          <Route path="/signup" element={<Signup />} exact />
-          <Route path="/chatting/list" element={<ChattingList />} exact />
-          <Route path="/chatting" element={<Chat />} exact></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/chatting/list" element={<ChattingList />} />
+          <Route path="/chatting" element={<Chat />} ></Route>
+          <Route path="/post/:id" element={<BoardDetail />} ></Route>
           <Route
             path="/admin/post/management"
             element={<AdminPostManagement />}

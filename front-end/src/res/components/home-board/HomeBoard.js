@@ -27,7 +27,7 @@ function Board(props) {
         <Row className="new-hot">
           <Col xs="12">
             <div className='new' onClick={() => getBoards()}>
-              <p >최신</p>
+              <p>최신</p>
               <img src={Sparkles} alt="sparkles" />
             </div>
             <div className='hot' onClick={() => getPopularBoards()}>
