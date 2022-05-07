@@ -19,7 +19,3 @@
   - Geolocation API
   - 지도 API
   - Web Socket (채팅)
-<<<<<<< Updated upstream
-=======
->>>>>>> jungYH
->>>>>>> Stashed changes
