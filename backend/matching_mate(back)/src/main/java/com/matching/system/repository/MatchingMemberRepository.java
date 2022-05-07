@@ -10,13 +10,24 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MatchingMemberRepository extends JpaRepository<MatchingMember, Long> {
-    @Query("SELECT mm FROM MatchingMember mm JOIN FETCH mm.member WHERE mm.matchingHistory=:matchingHistory AND mm.member!=:member")
+    @Query("SELECT mm FROM MatchingMember mm " +
+            "JOIN FETCH mm.member " +
+            "WHERE mm.matchingHistory=:matchingHistory " +
+                "AND mm.member!=:member")
     List<MatchingMember> findByMatchingHistoryIdAndMemberIdNot(@Param("matchingHistory") MatchingHistory matchingHistory, @Param("member") Member member);
 
-    @Query("SELECT mm FROM MatchingMember mm JOIN FETCH mm.matchingHistory mh JOIN FETCH mh.matchingPost mp JOIN FETCH mp.category JOIN FETCH mm.member WHERE mm.member=:member")
+    @Query("SELECT mm FROM MatchingMember mm " +
+            "JOIN FETCH mm.matchingHistory mh " +
+            "JOIN FETCH mh.matchingPost mp " +
+            "JOIN FETCH mp.category " +
+            "JOIN FETCH mm.member " +
+            "WHERE mm.member=:member")
     List<MatchingMember> findByMatchingMember(@Param("member")Member member);
 
-    @Query("SELECT mm FROM MatchingMember mm JOIN FETCH mm.matchingHistory JOIN FETCH mm.member WHERE mm.matchingHistory=:matchingHistory")
+    @Query("SELECT mm FROM MatchingMember mm " +
+            "JOIN FETCH mm.matchingHistory " +
+            "JOIN FETCH mm.member " +
+            "WHERE mm.matchingHistory=:matchingHistory")
     List<MatchingMember> findByMatchingHistoryId(@Param("matchingHistory") MatchingHistory matchingHistory);
 
 }
