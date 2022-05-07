@@ -34,6 +34,7 @@ public class MatchingPostService {
     private final ChattingRoomRepository chattingRoomRepository;
     @Autowired private final MapProcess mapControl;
 
+
     // 매칭 공고 추가
     public ResponseMessage save(MatchingPostDTO.CreateDTO matchingPostCreateDTO) {
         // 카테고리 검색
