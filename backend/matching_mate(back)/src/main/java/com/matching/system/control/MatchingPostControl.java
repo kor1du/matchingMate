@@ -2,8 +2,8 @@ package com.matching.system.control;
 
 import com.matching.system.dto.ChattingDTO;
 import com.matching.system.dto.MatchingPostDTO;
-import com.matching.system.filter.ResponseData;
-import com.matching.system.filter.ResponseMessage;
+import com.matching.system.dto.response.ResponseData;
+import com.matching.system.dto.response.ResponseMessage;
 import com.matching.system.service.MatchingPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

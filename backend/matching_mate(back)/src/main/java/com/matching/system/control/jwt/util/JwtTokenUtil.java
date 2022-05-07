@@ -1,5 +1,6 @@
-package com.matching.system.jwt.util;
+package com.matching.system.control.jwt.util;
 
+import com.matching.system.control.jwt.JwtExpirationEnums;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,9 +14,6 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-
-import static com.matching.system.jwt.JwtExpirationEnums.ACCESS_TOKEN_EXPIRATION_TIME;
-import static com.matching.system.jwt.JwtExpirationEnums.REFRESH_TOKEN_EXPIRATION_TIME;
 
 
 @Component
@@ -57,11 +55,11 @@ public class JwtTokenUtil {
     }
 
     public String generateAccessToken(String userId) {
-        return doGenerateToken(userId, ACCESS_TOKEN_EXPIRATION_TIME.getValue());
+        return doGenerateToken(userId, JwtExpirationEnums.ACCESS_TOKEN_EXPIRATION_TIME.getValue());
     }
 
     public String generateRefreshToken(String userId) {
-        return doGenerateToken(userId, REFRESH_TOKEN_EXPIRATION_TIME.getValue());
+        return doGenerateToken(userId, JwtExpirationEnums.REFRESH_TOKEN_EXPIRATION_TIME.getValue());
     }
 
     private String doGenerateToken(String userId, long expireTime) {

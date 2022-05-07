@@ -1,4 +1,4 @@
-package com.matching.system.jwt.redis;
+package com.matching.system.control.jwt.redis;
 
 import lombok.Getter;
 

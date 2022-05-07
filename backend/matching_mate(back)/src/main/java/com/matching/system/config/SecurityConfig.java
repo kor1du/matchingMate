@@ -1,9 +1,9 @@
 package com.matching.system.config;
 
-import com.matching.system.jwt.JwtAccessDeniedHandler;
-import com.matching.system.jwt.JwtAuthenticationEntryPoint;
-import com.matching.system.jwt.JwtAuthenticationFilter;
-import com.matching.system.jwt.custom.userdetails.CustomUserDetailService;
+import com.matching.system.control.jwt.JwtAccessDeniedHandler;
+import com.matching.system.control.jwt.JwtAuthenticationEntryPoint;
+import com.matching.system.control.jwt.JwtAuthenticationFilter;
+import com.matching.system.control.jwt.custom.userdetails.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.matching.system.chat;
+package com.matching.system.control.chat;
 
 import com.matching.system.dto.ChattingDTO;
 import lombok.RequiredArgsConstructor;

@@ -3,8 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
 import AdminReportManagementRight from "../../components/admin/AdminReportManagement";
-import NavAdmin from "../../components/nav/NavAdmin";
-import NavPagination from "../../components/nav/NavPagination";
+import NavAdmin from "../../components/Nav/NavAdmin";
+import NavPagination from "../../components/Nav/NavPagination";
 
 export default function AdminPostManagement() {
   return (

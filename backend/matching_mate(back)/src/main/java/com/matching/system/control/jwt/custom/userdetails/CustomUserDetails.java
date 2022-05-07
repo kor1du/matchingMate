@@ -1,4 +1,4 @@
-package com.matching.system.jwt.custom.userdetails;
+package com.matching.system.control.jwt.custom.userdetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matching.system.domain.Member;

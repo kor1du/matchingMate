@@ -1,4 +1,4 @@
-package com.matching.system.jwt;
+package com.matching.system.control.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,14 +1,10 @@
 package com.matching.system.control;
 
-import com.matching.system.dto.NotificationDTO;
-import com.matching.system.filter.ResponseData;
+import com.matching.system.dto.response.ResponseData;
 import com.matching.system.service.NotificationService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

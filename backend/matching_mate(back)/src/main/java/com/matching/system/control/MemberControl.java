@@ -1,9 +1,9 @@
 package com.matching.system.control;
 
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.filter.ResponseData;
-import com.matching.system.filter.ResponseMessage;
-import com.matching.system.jwt.util.JwtTokenUtil;
+import com.matching.system.dto.response.ResponseData;
+import com.matching.system.dto.response.ResponseMessage;
+import com.matching.system.control.jwt.util.JwtTokenUtil;
 import com.matching.system.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

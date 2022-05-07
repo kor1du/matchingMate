@@ -1,6 +1,6 @@
-package com.matching.system.jwt.custom.userdetails;
+package com.matching.system.control.jwt.custom.userdetails;
 
-import com.matching.system.jwt.redis.CacheKey;
+import com.matching.system.control.jwt.redis.CacheKey;
 import com.matching.system.domain.Member;
 import com.matching.system.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

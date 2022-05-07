@@ -2,7 +2,7 @@ package com.matching.system.service;
 
 import com.matching.system.domain.Member;
 import com.matching.system.dto.NotificationDTO;
-import com.matching.system.filter.ResponseData;
+import com.matching.system.dto.response.ResponseData;
 import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;

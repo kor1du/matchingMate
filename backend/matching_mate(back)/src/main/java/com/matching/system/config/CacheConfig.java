@@ -1,6 +1,6 @@
 package com.matching.system.config;
 
-import com.matching.system.jwt.redis.CacheKey;
+import com.matching.system.control.jwt.redis.CacheKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

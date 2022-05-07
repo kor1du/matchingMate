@@ -1,15 +1,15 @@
 package com.matching.system.service;
 
 import com.matching.system.config.AccessConfig;
+import com.matching.system.control.jwt.redis.*;
 import com.matching.system.domain.*;
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.filter.ResponseData;
-import com.matching.system.filter.ResponseMessage;
-import com.matching.system.image.ImageProcess;
-import com.matching.system.jwt.JwtExpirationEnums;
-import com.matching.system.jwt.TokenDTO;
-import com.matching.system.jwt.redis.*;
-import com.matching.system.jwt.util.JwtTokenUtil;
+import com.matching.system.dto.response.ResponseData;
+import com.matching.system.dto.response.ResponseMessage;
+import com.matching.system.control.process.ImageProcess;
+import com.matching.system.control.jwt.JwtExpirationEnums;
+import com.matching.system.control.jwt.TokenDTO;
+import com.matching.system.control.jwt.util.JwtTokenUtil;
 import com.matching.system.repository.MatchingPostRepository;
 import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.RatingRepository;
