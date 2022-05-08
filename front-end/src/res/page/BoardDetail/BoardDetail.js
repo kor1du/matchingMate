@@ -74,8 +74,8 @@ const BoardDetail = () => {
                   borderRadius: "4px",
                   outline: "none",
                   padding: "20px",
-                  width: "700px",
-                  height: "500px",
+                  width: "800px",
+                  height: "800px",
                 },
               }}
             >
