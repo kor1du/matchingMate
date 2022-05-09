@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "../components/Nav/Nav";
+import Nav from "../components/nav/Nav";
 import SignupComponent from "../components/signup/Signup";
 
 export default function Signup() {

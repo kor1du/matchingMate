@@ -7353,7 +7353,7 @@
     "react-bootstrap" ">=0.23.0"
     "validator" "^3.41.3"
 
-"react-bootstrap@>=0.23.0":
+"react-bootstrap@^2.3.1", "react-bootstrap@>=0.23.0":
   "integrity" "sha512-+k68LdaSS62Zc/1gr18NC9QpDk/wwhNk+90QgcTMYSA8BzlXC1G2ogWWrz2LFuP2FlmCtVjcr/UXw3mpdxVmWw=="
   "resolved" "https://registry.npmjs.org/react-bootstrap/-/react-bootstrap-2.3.1.tgz"
   "version" "2.3.1"

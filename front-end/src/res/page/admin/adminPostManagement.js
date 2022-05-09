@@ -14,12 +14,8 @@ export default function AdminPostManagement() {
         <Col xs="4" className="admin-left-side">
           <AdminLeftside></AdminLeftside>
         </Col>
-        <Col
-          xs="8"
-          className="admin-post-management-rightside admin-right-side"
-        >
+        <Col xs="8" className="admin-post-management-rightside admin-right-side">
           <AdminPostManagementRight></AdminPostManagementRight>
-          <NavPagination></NavPagination>
         </Col>
       </Row>
     </>

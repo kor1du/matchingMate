@@ -8,6 +8,7 @@ import NavLeftSide from "./NavLeftSide";
 import { logout } from "../logout/Logout";
 import { showLeft, showLoginBtn } from "./Nav";
 import { toggle } from "../toggle/Toggle";
+import { isLogin } from "../login/Login";
 
 const toggleAdminActive = (event) => {
   event.preventDefault();
@@ -34,6 +35,13 @@ export default function NavAdmin() {
   useEffect(() => {
     window.addEventListener("resize", disableActiveOver1024px);
     showLoginBtn();
+
+    if (isLogin()) {
+      document.querySelector(".nav-admin-menus").style.display = "block";
+    } else {
+      document.querySelector(".nav-admin-menus").style.display = "none";
+    } //미로그인시에는 관리자메뉴 안보이게
+
     return () => {
       window.removeEventListener("resize", disableActiveOver1024px);
     };

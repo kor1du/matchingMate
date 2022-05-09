@@ -1,16 +1,16 @@
-import React from 'react';
-import { Card, Col } from 'react-bootstrap';
-
+import React from "react";
+import { Card, Col } from "react-bootstrap";
 
 import View from "../../img/view.png";
 
 const BoardItem = (props) => {
-
   const { board } = props;
+
+  console.log(props);
 
   return (
     <>
-      <Col xl="3" lg="6" md="6" sm="6" className='board-item'>
+      <Col xl="3" lg="6" md="6" sm="6" className="board-item">
         <Card border="primary">
           <Card.Header>
             <p>{board.postName}</p>
@@ -31,7 +31,6 @@ const BoardItem = (props) => {
           </Card.Body>
         </Card>
       </Col>
-
     </>
   );
 };

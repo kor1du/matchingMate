@@ -24,8 +24,8 @@ export default function Profile() {
             </Link>
           </li>
           <li>
-            <Link to="/admin/post/management" className="profile-link">
-              <span>관리자</span>
+            <Link to="/chatting/list" className="profile-link">
+              <span>채팅</span>
             </Link>
           </li>
         </ul>
