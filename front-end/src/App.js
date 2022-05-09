@@ -37,8 +37,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/chatting/list" element={<ChattingList />} />
-          <Route path="/chatting" element={<Chat />} ></Route>
-          <Route path="/post/:id" element={<BoardDetail />} ></Route>
+          <Route path="/chatting" element={<Chat />} />
+          <Route path="/post/:id" element={<BoardDetail />} />
+
           <Route
             path="/admin/post/management"
             element={<AdminPostManagement />}

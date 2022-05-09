@@ -14,7 +14,7 @@ import styled from "styled-components";
 
 function Board(props) {
 
-  const { boards, getPopularBoards, getBoards, getLocation } = props;
+  const { boards, getPopularBoards, getBoards, getLocation, lat, lng } = props;
 
 
   const limit = 8;
@@ -26,11 +26,11 @@ function Board(props) {
       <div className="board">
         <Row className="new-hot">
           <Col xs="12">
-            <div className='new' onClick={() => getBoards()}>
+            <div className='new' onClick={() => getBoards(lat, lng)}>
               <p>최신</p>
               <img src={Sparkles} alt="sparkles" />
             </div>
-            <div className='hot' onClick={() => getPopularBoards()}>
+            <div className='hot' onClick={() => getPopularBoards(lat, lng)}>
               <p >인기</p>
               <img src={Fire} alt="sparkles" />
             </div>

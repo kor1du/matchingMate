@@ -5,8 +5,8 @@ import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
 const GoogleMap = (props) => {
 
   const mapStyles = {
-    width: '800px',
-    height: '800px',
+    width: '750px',
+    height: '750px',
   };
 
   const center = {
@@ -31,5 +31,5 @@ const GoogleMap = (props) => {
 };
 
 export default GoogleApiWrapper({
-  apiKey: 'abcd'
+  apiKey: 'AIzaSyBYVvZNp_Hmlx6WHe61Z1LLc4FV3SMlR40'
 })(GoogleMap);

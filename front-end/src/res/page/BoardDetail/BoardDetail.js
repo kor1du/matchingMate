@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './BoardDetail.module.css';
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Nav from '../../components/nav/Nav';
 import { BsArrowLeft } from "react-icons/bs";
 import { Button } from 'react-bootstrap';
 // import { axiosGet } from '../../axios/Axios';
 import Modal from "react-modal";
 import axios from 'axios';
+import GoogleMap from '../../components/googleMap/googleMap';
 
 const BoardDetail = () => {
 
@@ -79,7 +80,7 @@ const BoardDetail = () => {
                 },
               }}
             >
-              <h2>이렇게 지도 표시</h2>
+              <GoogleMap />
               <button onClick={() => setModalOpen(false)}>닫기</button>
             </Modal>
 
@@ -88,7 +89,7 @@ const BoardDetail = () => {
               <p>내용~~~~~~~~~~~~</p>
             </div>
             <div className={styles.chatBtnBox}>
-              <Button>채팅방 참여하기</Button>
+              <Link to='/chatting' ><Button>채팅방 참여하기</Button></Link>
             </div>
           </div>
         )

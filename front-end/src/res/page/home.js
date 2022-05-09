@@ -14,18 +14,19 @@ function Home() {
   const [latitude, setLatitude] = useState("");
   const [longtitue, setLongitude] = useState("");
 
-  const getPopularBoards = async () => {
+  const getPopularBoards = async (lat, lng) => {
     // const res = await (await axiosGet("/popular")).data;
-    const res = await (await axios.get("http://localhost:8050/popular")).data;
+    const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}`)).data;
     setBoards(res.data);
   };
 
   // 기본 조회는 최신순 zz
 
-  const getBoards = async () => {
-    console.log("axios 시작");
+  const getBoards = async (lat, lng) => {
+    console.log("axios 조회 시작!!");
+    console.log("위도 ! 경도 ! ", lat, lng);
     // const res = await (await axiosGet("")).data;
-    const res = await (await axios.get("http://localhost:8050")).data;
+    const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
     setBoards(res.data);
   };
@@ -46,6 +47,7 @@ function Home() {
         const lng = position.coords.longitude;
         setLatitude(lat);
         setLongitude(lng);
+        getBoards(lat, lng);
         alert('위도 : ' + lat + ' 경도 : ' + lng);
         console.log('위도 : ' + latitude + ' 경도 : ' + longtitue); // 일단 but never used 에러창 방지
       }, function (error) {
@@ -63,7 +65,7 @@ function Home() {
 
   useEffect(() => {
     getLocation();
-    getBoards();
+
   }, []);
 
   return (
@@ -77,6 +79,8 @@ function Home() {
         getPopularBoards={getPopularBoards}
         getBoards={getBoards}
         getLocation={getLocation}
+        lat={latitude}
+        lng={longtitue}
       />
     </div>
   );

@@ -26,5 +26,7 @@ module.exports = {
       "error",
       { vars: "all", args: "after-used", ignoreRestSiblings: false },
     ],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   },
 };
