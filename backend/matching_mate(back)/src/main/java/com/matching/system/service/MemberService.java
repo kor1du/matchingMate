@@ -1,15 +1,15 @@
 package com.matching.system.service;
 
 import com.matching.system.config.AccessConfig;
-import com.matching.system.control.jwt.redis.*;
 import com.matching.system.domain.*;
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.dto.response.ResponseData;
-import com.matching.system.dto.response.ResponseMessage;
-import com.matching.system.control.process.ImageProcess;
-import com.matching.system.control.jwt.JwtExpirationEnums;
-import com.matching.system.control.jwt.TokenDTO;
-import com.matching.system.control.jwt.util.JwtTokenUtil;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
+import com.matching.system.jwt.redis.*;
+import com.matching.system.process.ImageProcess;
+import com.matching.system.jwt.JwtExpirationEnums;
+import com.matching.system.jwt.TokenDTO;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import com.matching.system.repository.MatchingPostRepository;
 import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.RatingRepository;
@@ -221,8 +221,8 @@ public class MemberService {
 
 
         String userId = member.get().getUserId();
-        String accessToken = jwtTokenUtil.generateAccessToken(userId);
-        RefreshToken refreshToken = saveRefreshToken(userId);
+        String accessToken = jwtTokenUtil.generateAccessToken(member.get().getId(), userId);
+        RefreshToken refreshToken = saveRefreshToken(member.get().getId(), userId);
 
         return new ResponseData(HttpStatus.OK, "성공적으로 로그인했습니다.", TokenDTO.of(accessToken, refreshToken.getRefreshToken()));
     }
@@ -241,9 +241,9 @@ public class MemberService {
         return new ResponseMessage(HttpStatus.OK, "정상적으로 로그아웃 되었습니다.");
     }
 
-    private RefreshToken saveRefreshToken(String userId) {
+    private RefreshToken saveRefreshToken(Long memberId, String userId) {
         return refreshTokenRedisRepository.save(RefreshToken.createRefreshToken(userId,
-                jwtTokenUtil.generateRefreshToken(userId), JwtExpirationEnums.REFRESH_TOKEN_EXPIRATION_TIME.getValue()));
+                jwtTokenUtil.generateRefreshToken(memberId, userId), JwtExpirationEnums.REFRESH_TOKEN_EXPIRATION_TIME.getValue()));
     }
 
 
@@ -266,13 +266,12 @@ public class MemberService {
 
 
     // 매칭 프로필  ->  이미지, 닉네임, 한줄소개, 매칭 횟수, 기술 평균, 매너 평균
-    public ResponseData readMatchingProfile(Long memberId, String accessToken)
+    public ResponseData readMatchingProfile(String accessToken)
     {
+        Long memberId = jwtTokenUtil.getMemberId(accessToken);
+
         // member 조회
         Optional<Member> findMember = memberRepository.findById(memberId);
-
-        if (! accessConfig.isNormal(findMember.get().getUserId(), accessToken))
-            return new ResponseData(HttpStatus.NOT_ACCEPTABLE, "정상적인 접근이 아닙니다.", null);
 
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 

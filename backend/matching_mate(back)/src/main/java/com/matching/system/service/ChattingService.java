@@ -2,8 +2,8 @@ package com.matching.system.service;
 
 import com.matching.system.domain.*;
 import com.matching.system.dto.ChattingDTO;
-import com.matching.system.dto.response.ResponseData;
-import com.matching.system.dto.response.ResponseMessage;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import com.matching.system.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,9 @@
 package com.matching.system.config;
 
-import com.matching.system.control.jwt.JwtAccessDeniedHandler;
-import com.matching.system.control.jwt.JwtAuthenticationEntryPoint;
-import com.matching.system.control.jwt.JwtAuthenticationFilter;
-import com.matching.system.control.jwt.custom.userdetails.CustomUserDetailService;
+import com.matching.system.jwt.JwtAccessDeniedHandler;
+import com.matching.system.jwt.JwtAuthenticationEntryPoint;
+import com.matching.system.jwt.JwtAuthenticationFilter;
+import com.matching.system.jwt.custom.userdetails.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -83,6 +83,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/member/**").hasRole("USER")
 //                .anyRequest().permitAll() // 그외 나머지 요청은 누구나 접근 가능
 
+                // 쉽게할려고
+//                .antMatchers("/**").permitAll()
+
+                // 설정 풀어야됨
                 .antMatchers("/signUp").permitAll()
                 .antMatchers("/signUp/checkId").permitAll()
                 .antMatchers("/login").permitAll()

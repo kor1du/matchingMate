@@ -1,8 +1,8 @@
 package com.matching.system.control;
 
 import com.matching.system.dto.ReportDTO;
-import com.matching.system.dto.response.ResponseData;
-import com.matching.system.dto.response.ResponseMessage;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import com.matching.system.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

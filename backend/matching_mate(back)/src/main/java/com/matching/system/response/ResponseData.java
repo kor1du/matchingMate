@@ -1,4 +1,4 @@
-package com.matching.system.dto.response;
+package com.matching.system.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

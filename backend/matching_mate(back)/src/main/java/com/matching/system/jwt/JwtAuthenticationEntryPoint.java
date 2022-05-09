@@ -1,4 +1,4 @@
-package com.matching.system.control.jwt;
+package com.matching.system.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

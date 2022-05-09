@@ -1,6 +1,6 @@
-package com.matching.system.control.jwt.util;
+package com.matching.system.jwt.util;
 
-import com.matching.system.control.jwt.JwtExpirationEnums;
+import com.matching.system.jwt.JwtExpirationEnums;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -40,10 +40,10 @@ public class JwtTokenUtil {
         return extractAllClaims(token).get("userId", String.class);
     }
 
-//    private Key getSigningKey(String secretKey) {
-//        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-//        return Keys.hmacShaKeyFor(keyBytes);
-//    }
+    public Long getMemberId(String token) {
+        return extractAllClaims(token).get("memberId", Long.class);
+    }
+
     private Key getSigningKey(String secretKey) {
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
@@ -54,16 +54,17 @@ public class JwtTokenUtil {
         return expiration.before(new Date());
     }
 
-    public String generateAccessToken(String userId) {
-        return doGenerateToken(userId, JwtExpirationEnums.ACCESS_TOKEN_EXPIRATION_TIME.getValue());
+    public String generateAccessToken(Long memberId, String userId) {
+        return doGenerateToken(memberId, userId, JwtExpirationEnums.ACCESS_TOKEN_EXPIRATION_TIME.getValue());
     }
 
-    public String generateRefreshToken(String userId) {
-        return doGenerateToken(userId, JwtExpirationEnums.REFRESH_TOKEN_EXPIRATION_TIME.getValue());
+    public String generateRefreshToken(Long memberId, String userId) {
+        return doGenerateToken(memberId, userId, JwtExpirationEnums.REFRESH_TOKEN_EXPIRATION_TIME.getValue());
     }
 
-    private String doGenerateToken(String userId, long expireTime) {
+    private String doGenerateToken(Long memberId, String userId, long expireTime) {
         Claims claims = Jwts.claims();
+        claims.put("memberId", memberId);
         claims.put("userId", userId);
 
         return Jwts.builder()

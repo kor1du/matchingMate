@@ -1,9 +1,9 @@
 package com.matching.system.control;
 
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.dto.response.ResponseData;
-import com.matching.system.dto.response.ResponseMessage;
-import com.matching.system.control.jwt.util.JwtTokenUtil;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import com.matching.system.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -116,10 +116,9 @@ public class MemberControl {
     }
 
     // 매칭 프로필 조회 -> 첫화면 ( 이미지, 닉네임, 한줄소개, 매칭 횟수, 기술 평균, 매너 평균  )    -> O
-    @GetMapping("/matchingProfile/{id}")
-    public ResponseEntity readMatchingProfile(@RequestHeader("Authorization") String accessToken,
-                                              @PathVariable(value = "id") Long memberId) {
-        ResponseData responseData = memberService.readMatchingProfile(memberId, accessToken);
+    @GetMapping("/matchingProfile")
+    public ResponseEntity readMatchingProfile(@RequestHeader("Authorization") String accessToken) {
+        ResponseData responseData = memberService.readMatchingProfile(accessToken);
 
         return ResponseEntity
                 .status(responseData.getStatus())

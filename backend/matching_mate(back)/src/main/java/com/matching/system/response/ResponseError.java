@@ -1,12 +1,14 @@
-package com.matching.system.dto.response;
+package com.matching.system.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Data
+@Getter
+@Builder
 @AllArgsConstructor
-public class ResponseMessage {
+public class ResponseError {
     private HttpStatus status;
     private String message;
 }

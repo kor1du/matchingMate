@@ -1,4 +1,4 @@
-package com.matching.system.control.jwt;
+package com.matching.system.jwt;
 
 import lombok.*;
 

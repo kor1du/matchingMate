@@ -12,7 +12,12 @@ import java.util.Optional;
 
 @Repository
 public interface ChattingMemberRepository extends JpaRepository<ChattingMember, Long> {
-    @Query("SELECT cm FROM ChattingMember cm JOIN FETCH cm.chattingRoom cr JOIN FETCH cr.chattingMemberList JOIN FETCH cr.matchingPost JOIN FETCH cm.member WHERE cm.member=:member")
+    @Query("SELECT DISTINCT cm FROM ChattingMember cm " +
+            "JOIN FETCH cm.chattingRoom cr " +
+            "JOIN FETCH cr.chattingMemberList " +
+            "JOIN FETCH cr.matchingPost " +
+            "JOIN FETCH cm.member " +
+            "WHERE cm.member=:member")
     List<ChattingMember> findAllByMemberId(@Param("member") Member member);
 
     Optional<ChattingMember> findByChattingRoomIdAndMemberId(Long chattingRoomId, Long memberId);

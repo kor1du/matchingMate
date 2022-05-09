@@ -1,6 +1,6 @@
 package com.matching.system.control;
 
-import com.matching.system.dto.response.ResponseData;
+import com.matching.system.response.ResponseData;
 import com.matching.system.service.MatchingHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

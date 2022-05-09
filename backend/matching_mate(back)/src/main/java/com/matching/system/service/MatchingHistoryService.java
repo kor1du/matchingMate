@@ -6,7 +6,7 @@ import com.matching.system.domain.Member;
 import com.matching.system.dto.MatchingHistoryDTO;
 import com.matching.system.dto.MatchingPostDTO;
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.dto.response.ResponseData;
+import com.matching.system.response.ResponseData;
 import com.matching.system.repository.MatchingHistoryRepository;
 import com.matching.system.repository.MatchingMemberRepository;
 import com.matching.system.repository.MemberRepository;

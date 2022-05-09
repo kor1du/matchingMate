@@ -3,9 +3,9 @@ package com.matching.system.service;
 import com.matching.system.domain.*;
 import com.matching.system.dto.ChattingDTO;
 import com.matching.system.dto.MatchingPostDTO;
-import com.matching.system.dto.response.ResponseData;
-import com.matching.system.dto.response.ResponseMessage;
-import com.matching.system.control.process.MapProcess;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
+import com.matching.system.process.MapProcess;
 import com.matching.system.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +131,8 @@ public class MatchingPostService {
     // 매칭 공고 조회 -> 사용자 (최신) -> simple 이냐 모두냐
     public ResponseData readRecentPosts(Long categoryId, Double latitude, Double longitude) {
         String address = mapControl.coordToAddr(longitude, latitude);
+
+        System.out.println("address = " + address);
 
         List<MatchingPost> matchingPostList;
 

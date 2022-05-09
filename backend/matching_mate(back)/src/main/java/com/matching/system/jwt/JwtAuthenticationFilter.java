@@ -1,8 +1,8 @@
-package com.matching.system.control.jwt;
+package com.matching.system.jwt;
 
-import com.matching.system.control.jwt.custom.userdetails.CustomUserDetailService;
-import com.matching.system.control.jwt.util.JwtTokenUtil;
-import com.matching.system.control.jwt.redis.LogoutAccessTokenRedisRepository;
+import com.matching.system.jwt.custom.userdetails.CustomUserDetailService;
+import com.matching.system.jwt.util.JwtTokenUtil;
+import com.matching.system.jwt.redis.LogoutAccessTokenRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

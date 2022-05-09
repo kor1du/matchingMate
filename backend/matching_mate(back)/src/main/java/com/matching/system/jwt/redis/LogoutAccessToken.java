@@ -1,4 +1,4 @@
-package com.matching.system.control.jwt.redis;
+package com.matching.system.jwt.redis;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,26 +8,24 @@ import org.springframework.data.redis.core.TimeToLive;
 
 import javax.persistence.Id;
 
-
-
 @Getter
-@RedisHash("refreshToken")
+@RedisHash("logoutAccessToken")
 @AllArgsConstructor
 @Builder
-public class RefreshToken {
+public class LogoutAccessToken {
 
     @Id
     private String id;
 
-    private String refreshToken;
+    private String userId;
 
     @TimeToLive
     private Long expiration;
 
-    public static RefreshToken createRefreshToken(String username, String refreshToken, Long remainingMilliSeconds) {
-        return RefreshToken.builder()
-                .id(username)
-                .refreshToken(refreshToken)
+    public static LogoutAccessToken of(String accessToken, String userId, Long remainingMilliSeconds) {
+        return LogoutAccessToken.builder()
+                .id(accessToken)
+                .userId(userId)
                 .expiration(remainingMilliSeconds / 1000)
                 .build();
     }

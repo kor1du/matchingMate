@@ -2,8 +2,8 @@ package com.matching.system.service;
 
 import com.matching.system.domain.Category;
 import com.matching.system.dto.CategoryDTO;
-import com.matching.system.dto.response.ResponseData;
-import com.matching.system.dto.response.ResponseMessage;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import com.matching.system.repository.CategoryRepository;
 import com.matching.system.repository.MatchingPostRepository;
 import lombok.RequiredArgsConstructor;

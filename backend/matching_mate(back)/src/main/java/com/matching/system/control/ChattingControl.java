@@ -1,8 +1,8 @@
 package com.matching.system.control;
 
 import com.matching.system.dto.ChattingDTO;
-import com.matching.system.dto.response.ResponseData;
-import com.matching.system.dto.response.ResponseMessage;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import com.matching.system.service.ChattingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/chat")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class ChattingControl {
     private final ChattingService chattingService;
 
@@ -49,7 +49,7 @@ public class ChattingControl {
     }
 
     // 채팅방 내용 전송       -> O
-    @PostMapping("/in")
+    @PostMapping("/in/send")
     public ResponseEntity sendMessage(@RequestBody ChattingDTO.SendMessageDTO sendMessageDTO) {
         ResponseMessage responseMessage = chattingService.sendMessage(sendMessageDTO);
 

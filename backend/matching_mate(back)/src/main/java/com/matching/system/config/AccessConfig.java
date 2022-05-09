@@ -1,6 +1,6 @@
 package com.matching.system.config;
 
-import com.matching.system.control.jwt.util.JwtTokenUtil;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
