@@ -45,8 +45,7 @@ public class MemberService {
     public ResponseMessage save(MemberDTO.SignUpDTO signUpDTO)
     {
         // 중복 확인
-        Optional<Member> findMember = memberRepository.findByUserIdAndPhone(signUpDTO.getUserId(), signUpDTO.getPhone());
-
+        Optional<Member> findMember = memberRepository.findByUserId(signUpDTO.getUserId());
         if (findMember.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 가입되어 있는 유저입니다.");
 
         // 암호화

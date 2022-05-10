@@ -149,6 +149,7 @@ public class MatchingPostService {
                 .map(matchingPost -> changeEntityToDTO(matchingPost))
                 .collect(Collectors.toList());
 
+
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTOList);
     }
 

@@ -140,6 +140,7 @@ public class MemberControl {
     @PostMapping("/matchingProfile/updateProfileContent")
     public ResponseEntity createProfileImg(@RequestBody MemberDTO.UpdateProfileContent createImgAddress) {
         ResponseMessage responseMessage = memberService.updateProfileContent(createImgAddress);
+
 //        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.OK, file.getName());
         return ResponseEntity
                 .status(responseMessage.getStatus())

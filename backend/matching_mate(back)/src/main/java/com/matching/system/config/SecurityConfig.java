@@ -84,21 +84,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().permitAll() // 그외 나머지 요청은 누구나 접근 가능
 
                 // 쉽게할려고
-//                .antMatchers("/**").permitAll()
+                .antMatchers("/**").permitAll()
 
                 // 설정 풀어야됨
-                .antMatchers("/signUp").permitAll()
-                .antMatchers("/signUp/checkId").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/logout").permitAll()
-                .antMatchers("/recent", "/popular").permitAll()
-                .antMatchers("/matchingPost/**").permitAll()
-                .antMatchers("/topic/**").permitAll()
-//                .antMatchers("/chat/**").permitAll()
-//                .antMatchers("/report/**").permitAll()
-                .antMatchers("/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/myAccount/**", "/matchingProfile/**/**", "/chat/**", "/report/**").hasRole("USER")
+//                .antMatchers("/signUp").permitAll()
+//                .antMatchers("/signUp/checkId").permitAll()
+//                .antMatchers("/login").permitAll()
+//                .antMatchers("/logout").permitAll()
+//                .antMatchers("/recent", "/popular").permitAll()
+//                .antMatchers("/matchingPost/**").permitAll()
+//                .antMatchers("/topic/**").permitAll()
+////                .antMatchers("/chat/**").permitAll()
+////                .antMatchers("/report/**").permitAll()
+//                .antMatchers("/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs").permitAll()
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/myAccount/**", "/matchingProfile/**/**", "/chat/**", "/report/**").hasRole("USER")
+//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                 .anyRequest().authenticated()
 
