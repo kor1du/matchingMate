@@ -2,6 +2,7 @@ package com.matching.system.service;
 
 import com.matching.system.domain.*;
 import com.matching.system.dto.ChattingDTO;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import com.matching.system.response.ResponseData;
 import com.matching.system.response.ResponseMessage;
 import com.matching.system.repository.*;
@@ -23,6 +24,7 @@ public class ChattingService {
     private final MatchingHistoryRepository matchingHistoryRepository;
     private final RatingRepository ratingRepository;
     private final MemberRepository memberRepository;
+    private final JwtTokenUtil jwtTokenUtil;
 
     // 채팅 방 추가
     public void createRoom(MatchingPost matchingPost, Member member)
@@ -46,8 +48,10 @@ public class ChattingService {
     }
 
     // 내 채팅 방 목록 조회
-    public ResponseData readList(Long memberId)
+    public ResponseData readList(String token)
     {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
         Optional<Member> findMember = memberRepository.findById(memberId);
 
         // 내 방 조회
@@ -74,8 +78,10 @@ public class ChattingService {
     // 채팅방 입장 -> 매칭 상세 조회에서 채팅방 입장
     // -> 준비 상태 여부 추가해야함
     // -> 게시자 memberId + 참여한 사라들 memberId 필요
-    public ResponseData inChattingRoom(ChattingDTO.ChattingRoomInDTO chattingRoomInOutDTO)
+    public ResponseData inChattingRoom(ChattingDTO.ChattingRoomInDTO chattingRoomInOutDTO, String token)
     {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
         Optional<ChattingRoom> chattingRoom = chattingRoomRepository.findById(chattingRoomInOutDTO.getRoomId());
         if (chattingRoom.isEmpty()) return  new ResponseData(HttpStatus.OK, "검색한 방이 존재하지 않습니다.", null);
 
@@ -86,8 +92,8 @@ public class ChattingService {
                         .memberId(chattingMember.getMember().getId())
                         .profileImgAddress(chattingMember.getMember().getProfileImgAddress())
                         .nickname(chattingMember.getMember().getNickname())
-                        .avgMannerPoint(ratingRepository.findByAvgMannerPoint(chattingRoomInOutDTO.getMemberId()))
-                        .avgSkillPoint(ratingRepository.findByAvgMannerPoint(chattingRoomInOutDTO.getMemberId()))
+                        .avgMannerPoint(ratingRepository.findByAvgMannerPoint(memberId))
+                        .avgSkillPoint(ratingRepository.findByAvgMannerPoint(memberId))
                         .isReady(chattingMember.isReady())
                         .build())
                 .collect(Collectors.toList());
@@ -113,8 +119,8 @@ public class ChattingService {
                 .detailPlace(chattingRoom.get().getMatchingPost().getDetailPlace() == null?null:chattingRoom.get().getMatchingPost().getDetailPlace())
                 .matchingDate(chattingRoom.get().getMatchingPost().getMatchingDate() == null?null:chattingRoom.get().getMatchingPost().getMatchingDate())
                 .matchingTime(chattingRoom.get().getMatchingPost().getMatchingTime() == null?null:chattingRoom.get().getMatchingPost().getMatchingTime())
-                .myMemberId(chattingRoomInOutDTO.getMemberId())
-                .chattingMemberId(chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInOutDTO.getRoomId(), chattingRoomInOutDTO.getMemberId()).get().getId())
+                .myMemberId(memberId)
+                .chattingMemberId(chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInOutDTO.getRoomId(), memberId).get().getId())
                 .readMemberList(readMemberDTOList)
                 .readMessageList(readMessageDTOList)
                 .build();

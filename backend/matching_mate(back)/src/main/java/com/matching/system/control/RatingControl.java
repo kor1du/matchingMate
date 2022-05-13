@@ -16,8 +16,9 @@ public class RatingControl {
 
     // 평점 추가    -> O
     @PostMapping("/matchingProfile/history/detail/rating")
-    public ResponseEntity createRating(@RequestBody RatingDTO.CreateRatingDTO createRatingDTO) {
-        ResponseMessage responseMessage = ratingService.createRating(createRatingDTO);
+    public ResponseEntity createRating(@RequestBody RatingDTO.CreateRatingDTO createRatingDTO,
+                                       @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = ratingService.createRating(createRatingDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -35,9 +36,9 @@ public class RatingControl {
     }
 
     // 평점 조회 - 사용자    -> O
-    @GetMapping("/matchingProfile/rating/{id}")
-    public ResponseEntity readMemberRating(@PathVariable(value = "id") Long memberId) {
-        ResponseData responseData = ratingService.readMemberRating(memberId);
+    @GetMapping("/matchingProfile/rating")
+    public ResponseEntity readMemberRating(@RequestHeader("Authorization") String token) {
+        ResponseData responseData = ratingService.readMemberRating(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())

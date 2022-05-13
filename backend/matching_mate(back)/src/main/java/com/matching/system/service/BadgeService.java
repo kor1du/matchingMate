@@ -3,6 +3,8 @@ package com.matching.system.service;
 import com.matching.system.domain.Badge;
 import com.matching.system.domain.Member;
 import com.matching.system.dto.BadgeDTO;
+import com.matching.system.jwt.util.JwtTokenUtil;
+import com.matching.system.process.ImageProcess;
 import com.matching.system.response.ResponseData;
 import com.matching.system.response.ResponseMessage;
 import com.matching.system.repository.BadgeRepository;
@@ -22,21 +24,26 @@ import java.util.stream.Collectors;
 public class BadgeService {
     private final BadgeRepository badgeRepository;
     private final MemberRepository memberRepository;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final ImageProcess imageProcess;
 
     // 뱃지 추가 -> 새로운 뱃지 기준을 추가
-    public ResponseMessage save(BadgeDTO.BadgeStandardDTO badgeStandardDTO)
+    public ResponseMessage save(BadgeDTO.CreateBadgeStandardDTO createBadgeDTO)
     {
 //        if (badgeStandardDTO.getName() == null || badgeStandardDTO.getImgAddress() == null)
 //            return new ResponseMessage(HttpStatus.BAD_REQUEST, "빈 값이 존재합니다.");
 
-        Optional<Badge> findBadge = badgeRepository.findByImgAddressAndOverMatchingCount(badgeStandardDTO.getImgAddress(), badgeStandardDTO.getOverMatchingCount());
+        Optional<Badge> findBadge = badgeRepository.findByOverMatchingCount(createBadgeDTO.getOverMatchingCount());
 
         if (findBadge.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 등록된 뱃지가 있습니다.");
 
+        // 사진 저장
+        String imageUrl = imageProcess.getImageUrl(createBadgeDTO.getOverMatchingCount().toString(), createBadgeDTO.getBadgeImgFile());
+
         // entity
         Badge newBadge = Badge.builder()
-                        .overMatchingCount(badgeStandardDTO.getOverMatchingCount())
-                        .imgAddress(badgeStandardDTO.getImgAddress())
+                        .overMatchingCount(createBadgeDTO.getOverMatchingCount())
+                        .imgAddress(imageUrl)
                         .build();
 
         badgeRepository.save(newBadge);
@@ -45,11 +52,16 @@ public class BadgeService {
     }
 
     // 뱃지 수정
-    public ResponseMessage update(BadgeDTO.BadgeStandardDTO badgeStandardDTO)
+    public ResponseMessage update(BadgeDTO.UpdateBadgeStandardDTO updateBadgeStandardDTO)
     {
         // entity
-        Badge badge = badgeRepository.findById(badgeStandardDTO.getId()).get();
-        badge.updateBadge(badgeStandardDTO);
+        Badge badge = badgeRepository.findById(updateBadgeStandardDTO.getBadgeId()).get();
+
+        // 사진 저장
+        String imageUrl = imageProcess.getImageUrl(updateBadgeStandardDTO.getOverMatchingCount().toString(), updateBadgeStandardDTO.getBadgeImgFile());
+
+        badge.updateOverMatchingCount(updateBadgeStandardDTO.getOverMatchingCount());
+        badge.updateImgAddress(imageUrl);
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 수정되었습니다.");
     }
@@ -65,15 +77,12 @@ public class BadgeService {
     }
 
     // 뱃지  조회 - 사용자*****************************************************
-    public ResponseData readMyBadge(Long memberId)
+    public BadgeDTO.MemberBadgeDTO readMyBadge(String token)
     {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
         // memberId, matching_count 조회
         Member findMember = memberRepository.findById(memberId).get();
-
-        // 뱃지 리스트
-        List<BadgeDTO.BadgeStandardDTO> badgeStandardList = badgeRepository.findAll().stream()
-                .map(badge -> new BadgeDTO.BadgeStandardDTO(badge.getId(), badge.getOverMatchingCount(), badge.getImgAddress()))
-                .collect(Collectors.toList());
 
         // 뱃지 비교  -> LAG 함수
         Optional<Badge> badge = badgeRepository.findMyBadge(findMember.getMatchingCount());
@@ -82,13 +91,9 @@ public class BadgeService {
         if (badge.isEmpty())
             badge = badgeRepository.findHighestBadge();
 
-        BadgeDTO.MemberBadgeDTO memberBadgeDTO = new BadgeDTO.MemberBadgeDTO(
-                                                                findMember.getId(),
-                                                                findMember.getMatchingCount(),
-                                                                badge.get().getImgAddress(),
-                                                                badgeStandardList);
+        return new BadgeDTO.MemberBadgeDTO(badge.get().getImgAddress());
 
-        return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", memberBadgeDTO);
+//        return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", memberBadgeDTO);
     }
 
 }

@@ -25,7 +25,8 @@ public class Notification {
     private Member member;      // targetMember로 수정
 
     @Column(name = "notification_type", nullable = false)
-    private String notificationType;
+    @Enumerated(EnumType.STRING)
+    private NotificationType notificationType;
 
     @Column(name = "message", nullable = false)
     private String message;

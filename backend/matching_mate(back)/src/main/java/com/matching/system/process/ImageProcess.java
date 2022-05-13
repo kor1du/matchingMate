@@ -19,14 +19,14 @@ import java.util.Date;
 @Component
 public class ImageProcess {
     private final String API_KEY = "fca9e378a2116dae3e8e425ae77e058d";
-    public String getImageUrl(String userId, MultipartFile multipartFile) {
+    public String getImageUrl(String name, MultipartFile multipartFile) {
 
         String apiUrl = "https://api.imgbb.com/1/upload?key=" + API_KEY;
 
         String imageUrl = "";
 
         try {
-            imageUrl = uploadImage(apiUrl, userId, multipartFile);
+            imageUrl = uploadImage(apiUrl, name, multipartFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,13 +34,13 @@ public class ImageProcess {
         return imageUrl;
     }
 
-    private String uploadImage(String apiUrl, String userId, MultipartFile multipartFile) throws Exception {
+    private String uploadImage(String apiUrl, String name, MultipartFile multipartFile) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        String changeName = changeName(userId, multipartFile);
+        String changeName = changeName(name, multipartFile);
         String imageEncoding = Base64.getEncoder().encodeToString(multipartFile.getBytes());
 
         System.out.println("changeName = " + changeName);

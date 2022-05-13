@@ -1,6 +1,5 @@
 package com.matching.system.domain;
 
-import com.matching.system.dto.BadgeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,10 +23,16 @@ public class Badge {
     @Column(name = "img_address", nullable = false)
     private String imgAddress;
 
-    public void updateBadge(BadgeDTO.BadgeStandardDTO badgeStandardDTO)
+    public void updateOverMatchingCount(Integer overMatchingCount)
     {
-        this.overMatchingCount = badgeStandardDTO.getOverMatchingCount();
-        this.imgAddress = badgeStandardDTO.getImgAddress();
+        this.overMatchingCount = overMatchingCount;
     }
+
+    public void updateImgAddress(String imgAddress)
+    {
+        this.imgAddress = imgAddress;
+    }
+
+
 
 }

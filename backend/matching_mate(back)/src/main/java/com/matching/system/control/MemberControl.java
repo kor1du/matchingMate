@@ -39,9 +39,9 @@ public class MemberControl {
     // 회원수정     -> O
     @PutMapping("/myAccount/update")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
-    public ResponseEntity updateMember(@RequestHeader("Authorization") String accessToken,
+    public ResponseEntity updateMember(@RequestHeader("Authorization") String token,
                                        @RequestBody MemberDTO.UpdateAccountDTO updateAccountDTO) {
-        ResponseMessage responseMessage = memberService.update(updateAccountDTO, accessToken);
+        ResponseMessage responseMessage = memberService.update(updateAccountDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -50,11 +50,10 @@ public class MemberControl {
 
 
     // 회원 탈퇴
-    @DeleteMapping("/myAccount/delete/{id}")
+    @DeleteMapping("/myAccount/delete")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
-    public ResponseEntity deleteMember(@RequestHeader("Authorization") String accessToken,
-                                       @PathVariable("id") Long memberId) {
-        ResponseMessage responseMessage = memberService.deleteMember(memberId, accessToken);
+    public ResponseEntity deleteMember(@RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = memberService.deleteMember(token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -62,11 +61,19 @@ public class MemberControl {
     }
 
     // 회원 조회 - 한명 (사용자 + 관리자)   -> O        (아무 인증 토큰 갖고 있으면 아무나 드갈 수 있음 -> 수정)
-    @GetMapping(value = {"/myAccount/{id}", "/admin/member/detail/{id}"})
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    public ResponseEntity readMember(@RequestHeader("Authorization") String accessToken,
-                                     @PathVariable("id") Long memberId) {
-        ResponseData responseData = memberService.readMember(memberId, accessToken);
+    @GetMapping(value = {"/admin/member/detail/{id}"})
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity readMemberOfAdmin(@PathVariable("id") Long memberId) {
+        ResponseData responseData = memberService.readMemberOfAdmin(memberId);
+
+        return ResponseEntity
+                .status(responseData.getStatus())
+                .body(responseData);
+    }
+
+    @GetMapping(value = {"/myAccount"})
+    public ResponseEntity readMemberOfUser(@RequestHeader("Authorization") String token) {
+        ResponseData responseData = memberService.readMemberOfUser(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -109,7 +116,6 @@ public class MemberControl {
 
         ResponseMessage responseMessage = memberService.logout(accessToken, userId);
 
-        System.out.println(123);
         return ResponseEntity
                 .status(responseMessage.getStatus())
                 .body(responseMessage);
@@ -117,8 +123,8 @@ public class MemberControl {
 
     // 매칭 프로필 조회 -> 첫화면 ( 이미지, 닉네임, 한줄소개, 매칭 횟수, 기술 평균, 매너 평균  )    -> O
     @GetMapping("/matchingProfile")
-    public ResponseEntity readMatchingProfile(@RequestHeader("Authorization") String accessToken) {
-        ResponseData responseData = memberService.readMatchingProfile(accessToken);
+    public ResponseEntity readMatchingProfile(@RequestHeader("Authorization") String token) {
+        ResponseData responseData = memberService.readMatchingProfile(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -127,8 +133,9 @@ public class MemberControl {
 
     // 사진 등록, ㅅ정        -> O
     @PostMapping("/matchingProfile/updateProfileImg")
-    public ResponseEntity updateProfileImg(@ModelAttribute MemberDTO.UpdateImgAddress createImgAddress/*, MultipartFile file*/) {
-        ResponseMessage responseMessage = memberService.updateProfileImg(createImgAddress);
+    public ResponseEntity updateProfileImg(@ModelAttribute MemberDTO.UpdateImgAddress createImgAddress,
+                                           @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = memberService.updateProfileImg(createImgAddress, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -138,10 +145,10 @@ public class MemberControl {
 
     // 한줄 소개 등록, 수정     -> O
     @PostMapping("/matchingProfile/updateProfileContent")
-    public ResponseEntity createProfileImg(@RequestBody MemberDTO.UpdateProfileContent createImgAddress) {
-        ResponseMessage responseMessage = memberService.updateProfileContent(createImgAddress);
+    public ResponseEntity createProfileImg(@RequestBody MemberDTO.UpdateProfileContent createImgAddress,
+                                           @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = memberService.updateProfileContent(createImgAddress, token);
 
-//        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.OK, file.getName());
         return ResponseEntity
                 .status(responseMessage.getStatus())
                 .body(responseMessage);

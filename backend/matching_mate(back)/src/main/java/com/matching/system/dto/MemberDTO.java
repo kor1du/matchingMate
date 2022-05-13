@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
@@ -24,7 +22,7 @@ public class MemberDTO {
         private String userId;
         private String userPw;
         private String nickname;
-        @Enumerated(EnumType.STRING)
+//        @Enumerated(EnumType.STRING)
 //        private String roleType;
         private String sex;
         @Temporal(TemporalType.DATE)
@@ -32,27 +30,6 @@ public class MemberDTO {
         private Date birthday;
         private String phone;
         private String address;
-//        public static MemberDTO.MemberDTOInfo memberDTOInfo(Member memberInfo)
-//        {
-//            return new MemberDTO.MemberDTOInfo(memberInfo.getId(), memberInfo.getName(), memberInfo.getUserId(), memberInfo.getUserPw(), memberInfo.getNickname(), /*memberInfo.getMemberAuthorities().get(0).getAuthority().toString(),*/
-//                    memberInfo.getSex(), memberInfo.getBirthday(), memberInfo.getPhone(), memberInfo.getAddress(), memberInfo.getProfileContent());
-//        }
-
-//        public static MemberDTOInfo.MemberDTOBuilder builder(Member memberInfo)
-//        {
-//            return new MemberDTOBuilder()
-//                    .id(memberInfo.getId())
-//                    .name(memberInfo.getName())
-//                    .userId(memberInfo.getUserId())
-////                    .roleType(memberInfo.getMemberAuthorities().get(0).getAuthority().toString())
-//                    .userPw(memberInfo.getUserPw())
-//                    .nickname(memberInfo.getNickname())
-//                    .sex(memberInfo.getSex())
-//                    .birthday(memberInfo.getBirthday())
-//                    .phone(memberInfo.getPhone())
-//                    .address(memberInfo.getAddress())
-//                    .profileContent(memberInfo.getProfileContent());
-//        }
     }
 
     @Getter
@@ -70,7 +47,6 @@ public class MemberDTO {
     @Builder
     public static class UpdateAccountDTO
     {
-        private Long id;
         private String userPw;
         @Temporal(TemporalType.DATE)
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
@@ -135,6 +111,7 @@ public class MemberDTO {
         private Integer matchingCount;
         private Float avgSkillPoint;
         private Float avgMannerPoint;
+        private BadgeDTO.MemberBadgeDTO badgeImgAddress;
     }
 
     @Getter
@@ -144,7 +121,6 @@ public class MemberDTO {
     @Builder
     public static class UpdateImgAddress
     {
-        private Long id;    // memberId
         private MultipartFile file;
     }
 
@@ -154,7 +130,6 @@ public class MemberDTO {
     @Builder
     public static class UpdateProfileContent
     {
-        private Long id;    // memberId
         private String profileContent;
     }
 

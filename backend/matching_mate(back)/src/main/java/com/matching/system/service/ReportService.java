@@ -1,9 +1,8 @@
 package com.matching.system.service;
 
-import com.matching.system.domain.Member;
-import com.matching.system.domain.Notification;
-import com.matching.system.domain.Report;
+import com.matching.system.domain.*;
 import com.matching.system.dto.ReportDTO;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import com.matching.system.response.ResponseData;
 import com.matching.system.response.ResponseMessage;
 import com.matching.system.repository.MemberRepository;
@@ -25,26 +24,32 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final MemberRepository memberRepository;
     private final NotificationRepository notificationRepository;
+    private final JwtTokenUtil jwtTokenUtil;
 
     // 신고 추가 = 신고하기
-    public ResponseMessage createReport(ReportDTO.ReportRegisterDTO reportRegisterDTO) {
+    public ResponseMessage createReport(ReportDTO.ReportRegisterDTO reportRegisterDTO, String token) {
+
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
         // 신고 중복
         Optional<Report> findReport = reportRepository.findByTargetIdAndMemberIdAndTargetMemberIdAndReportTypeAndReportClassify
-                (reportRegisterDTO.getTargetId(), reportRegisterDTO.getMemberId(), reportRegisterDTO.getTargetMemberId(), reportRegisterDTO.getReportType(), reportRegisterDTO.getReportClassify());
+                (reportRegisterDTO.getTargetId(), memberId, reportRegisterDTO.getTargetMemberId(), reportRegisterDTO.getReportType(), reportRegisterDTO.getReportClassify());
 
         if (findReport.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 같은 내용으로 신고하셨습니다.");
 
         // 회원
-        Member member = memberRepository.findById(reportRegisterDTO.getMemberId()).get();
+        Member member = memberRepository.findById(memberId).get();
         Member targetMember = memberRepository.findById(reportRegisterDTO.getTargetMemberId()).get();
+
+
 
         // entity
         Report newReport = Report.builder()
                 .member(member)
                 .targetMember(targetMember)
                 .targetId(reportRegisterDTO.getTargetId())
-                .reportClassify(reportRegisterDTO.getReportClassify())
-                .reportType(reportRegisterDTO.getReportType())
+                .reportClassify(reportRegisterDTO.getReportClassify())  // ER001인지>> 문자인ㅅ지
+                .reportType(ReportType.valueOf(reportRegisterDTO.getReportType()))
                 .contents(reportRegisterDTO.getContents())
                 .status(0)
                 .build();
@@ -92,8 +97,8 @@ public class ReportService {
                         .id(report.getId())
                         .memberId(report.getMember()==null?null:report.getMember().getId())
                         .targetMemberId(report.getTargetMember()==null?null:report.getTargetMember().getId())
-                        .reportClassify(getReportClassify(report.getReportClassify()))
-                        .reportType(report.getReportType())
+                        .reportClassify(report.getReportClassify())
+                        .reportType(report.getReportType().toString())
                         .contents(report.getContents())
                         .status((report.getStatus() == 1 ? "처리 완료" : "처리 전"))
                         .registerDatetime(report.getRegisterDatetime())
@@ -121,7 +126,7 @@ public class ReportService {
         // 신고 당한 알림 저장
         notificationRepository.save(Notification.builder()
                 .member(member)
-                .notificationType("신고처리 알림")
+                .notificationType(NotificationType.신고처리)
                 .message("신고한 내용이 " + reportDisposeDTO.getResult() + " 되었습니다.")
                 .url(null)
                 .build()
@@ -134,8 +139,8 @@ public class ReportService {
             // 신고 당한 알림 저장
             notificationRepository.save(Notification.builder()
                     .member(targetMember)
-                    .notificationType("신고처리 알림")
-                    .message(report.get().getReportType() + "에서 " + getReportClassify(report.get().getReportClassify()) + "(으)로 신고되었습니다. 주의해주세요!")
+                    .notificationType(NotificationType.신고처리)
+                    .message(report.get().getReportType() + "에서 " + report.get().getReportClassify() + "(으)로 신고되었습니다. 주의해주세요!")
                     .url(null)      // 신고당한 것으로 이동?
                     .build()
             );

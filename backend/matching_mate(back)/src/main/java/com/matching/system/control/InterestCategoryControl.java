@@ -16,8 +16,9 @@ public class InterestCategoryControl {
 
     // 관심 카테고리 추가   -> O
     @PostMapping("/interestCategory/create")
-    public ResponseEntity create(@RequestBody InterestCategoryDTO.CreateDTO interestCategoryDTO) {
-        ResponseMessage responseMessage = interestCategoryService.save(interestCategoryDTO);
+    public ResponseEntity create(@RequestBody InterestCategoryDTO.CreateDTO interestCategoryDTO,
+                                 @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = interestCategoryService.save(interestCategoryDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -26,8 +27,9 @@ public class InterestCategoryControl {
 
     // 관심 카테고리 수정   -> O
     @PutMapping("/interestCategory/update")
-    public ResponseEntity update(@RequestBody InterestCategoryDTO.UpdateDTO interestCategoryDTO) {
-        ResponseMessage responseMessage = interestCategoryService.update(interestCategoryDTO);
+    public ResponseEntity update(@RequestBody InterestCategoryDTO.UpdateDTO interestCategoryDTO,
+                                 @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = interestCategoryService.update(interestCategoryDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -45,10 +47,9 @@ public class InterestCategoryControl {
     }
 
     // 관심 카테고리 조회   -> O
-    @GetMapping("/interestCategory/{id}")
-    public ResponseEntity read(@RequestHeader("Authorization") String accessToken,
-                                @PathVariable(name = "id") Long memberId) {
-        ResponseData responseData =  interestCategoryService.read(memberId, accessToken);
+    @GetMapping("/interestCategory")
+    public ResponseEntity read(@RequestHeader("Authorization") String token) {
+        ResponseData responseData =  interestCategoryService.read(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())

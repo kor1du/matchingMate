@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 public class BadgeDTO {
     @Getter
@@ -19,6 +18,27 @@ public class BadgeDTO {
         private String imgAddress;
     }
 
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CreateBadgeStandardDTO
+    {
+        private Integer overMatchingCount;
+        private MultipartFile badgeImgFile;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class UpdateBadgeStandardDTO
+    {
+        private Long badgeId;
+        private Integer overMatchingCount;
+        private MultipartFile badgeImgFile;
+    }
+
 
     @Getter
     @Builder
@@ -26,9 +46,6 @@ public class BadgeDTO {
     @AllArgsConstructor
     public static class MemberBadgeDTO
     {
-        private Long memberId;
-        private Integer memberMatchingCount;
         private String imgAddress;
-        private List<BadgeStandardDTO> badgeStandardDTOS;
     }
 }

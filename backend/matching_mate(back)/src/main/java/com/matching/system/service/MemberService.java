@@ -1,19 +1,18 @@
 package com.matching.system.service;
 
-import com.matching.system.config.AccessConfig;
 import com.matching.system.domain.*;
 import com.matching.system.dto.MemberDTO;
-import com.matching.system.response.ResponseData;
-import com.matching.system.response.ResponseMessage;
-import com.matching.system.jwt.redis.*;
-import com.matching.system.process.ImageProcess;
 import com.matching.system.jwt.JwtExpirationEnums;
 import com.matching.system.jwt.TokenDTO;
+import com.matching.system.jwt.redis.*;
 import com.matching.system.jwt.util.JwtTokenUtil;
+import com.matching.system.process.ImageProcess;
 import com.matching.system.repository.MatchingPostRepository;
 import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.RatingRepository;
 import com.matching.system.repository.ReportRepository;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
@@ -38,8 +37,8 @@ public class MemberService {
     private final RefreshTokenRedisRepository refreshTokenRedisRepository;
     private final LogoutAccessTokenRedisRepository logoutAccessTokenRedisRepository;
     private final JwtTokenUtil jwtTokenUtil;
-    private final AccessConfig accessConfig;
-    private final ImageProcess imageControl;
+    private final ImageProcess imageProcess;
+    private final BadgeService badgeService;
 
     // 회원가입
     public ResponseMessage save(MemberDTO.SignUpDTO signUpDTO)
@@ -89,15 +88,14 @@ public class MemberService {
     }
 
     // 회원수정
-    public ResponseMessage update(MemberDTO.UpdateAccountDTO updateAccountDTO, String accessToken)
+    public ResponseMessage update(MemberDTO.UpdateAccountDTO updateAccountDTO, String token)
     {
-        Optional<Member> findMember = memberRepository.findById(updateAccountDTO.getId());
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
+        Optional<Member> findMember = memberRepository.findById(memberId);
 
         if (findMember.isEmpty())
             return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다..");
-
-        if (! accessConfig.isNormal(findMember.get().getUserId(), accessToken))
-            return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "정상적인 접근이 아닙니다.");
 
         // update
         findMember.get().updateUserPw(passwordEncoder.encode(updateAccountDTO.getUserPw()));
@@ -117,15 +115,14 @@ public class MemberService {
     // matching post -> memberId = null
     // report -> targetMemberId, memberId = null
     // rating -> targetMemberId, memberId = null
-    public ResponseMessage deleteMember(Long memberId, String accessToken)
+    public ResponseMessage deleteMember(String token)
     {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
         Optional<Member> findMember  = memberRepository.findById(memberId);
 
         if (findMember.isEmpty())
             return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.");
-
-        if (! accessConfig.isNormal(findMember.get().getUserId(), accessToken))
-            return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "정상적인 접근이 아닙니다.");
 
         // report - member
         reportRepository.findByMemberId(memberId)
@@ -153,12 +150,36 @@ public class MemberService {
     }
 
     // 회원 조회 - 한명
-    public ResponseData readMember(Long memberId, String accessToken)
+    public ResponseData readMemberOfAdmin(Long memberId)
     {
         Optional<Member> findMember  = memberRepository.findById(memberId);
 
-        if (! accessConfig.isNormal(findMember.get().getUserId(), accessToken))
-            return new ResponseData(HttpStatus.NOT_ACCEPTABLE, "정상적인 접근이 아닙니다.", null);
+        if (memberId == null) return new ResponseData(HttpStatus.NOT_FOUND, "탈퇴한 회원입니다.", null);
+
+
+        if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
+
+
+        MemberDTO.ReadMemberDTO findMemberDTO = MemberDTO.ReadMemberDTO.builder()
+                .id(findMember.get().getId())
+                .userId(findMember.get().getUserId())
+                .userPw(findMember.get().getUserPw())
+                .birthday(findMember.get().getBirthday())
+                .sex( (findMember.get().getSex() == 1?"남자":"여자") )
+                .name(findMember.get().getName())
+                .nickname(findMember.get().getNickname())
+                .phone(findMember.get().getPhone())
+                .address(findMember.get().getAddress())
+                .build();
+
+        return new ResponseData(HttpStatus.OK, "정상적으로 조회를 완료했습니다.", findMemberDTO);
+    }
+
+    public ResponseData readMemberOfUser(String token)
+    {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
+        Optional<Member> findMember  = memberRepository.findById(memberId);
 
         if (memberId == null) return new ResponseData(HttpStatus.NOT_FOUND, "탈퇴한 회원입니다.", null);
 
@@ -228,14 +249,14 @@ public class MemberService {
 
     // 로그아웃
     @CacheEvict(value = CacheKey.USER, key = "#userId")
-    public ResponseMessage logout(String accessToken, String userId)
+    public ResponseMessage logout(String token, String userId)
     {
-        String resolveAccessToken = resolveToken(accessToken);
+        String resolveToken = jwtTokenUtil.resolveToken(token);
 
-        long remainMilliSeconds = jwtTokenUtil.getRemainMilliSeconds(resolveAccessToken);
+        long remainMilliSeconds = jwtTokenUtil.getRemainMilliSeconds(resolveToken);
 
         refreshTokenRedisRepository.deleteById(userId);
-        logoutAccessTokenRedisRepository.save(LogoutAccessToken.of(resolveAccessToken, userId, remainMilliSeconds));
+        logoutAccessTokenRedisRepository.save(LogoutAccessToken.of(resolveToken, userId, remainMilliSeconds));
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 로그아웃 되었습니다.");
     }
@@ -243,12 +264,6 @@ public class MemberService {
     private RefreshToken saveRefreshToken(Long memberId, String userId) {
         return refreshTokenRedisRepository.save(RefreshToken.createRefreshToken(userId,
                 jwtTokenUtil.generateRefreshToken(memberId, userId), JwtExpirationEnums.REFRESH_TOKEN_EXPIRATION_TIME.getValue()));
-    }
-
-
-    private String resolveToken(String token)
-    {
-        return token.substring(7);
     }
 
 //    public TokenDto reissue(String refreshToken) {
@@ -263,22 +278,25 @@ public class MemberService {
 //    }
 
 
-
     // 매칭 프로필  ->  이미지, 닉네임, 한줄소개, 매칭 횟수, 기술 평균, 매너 평균
-    public ResponseData readMatchingProfile(String accessToken)
+    public ResponseData readMatchingProfile(String token)
     {
-        Long memberId = jwtTokenUtil.getMemberId(accessToken);
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
         // member 조회
         Optional<Member> findMember = memberRepository.findById(memberId);
 
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
+        // 뱃지
+//        String imgAddress = badgeService.readMyBadge(token).getMessage();
+
         MemberDTO.ReadMatchingProfile readMatchingProfile = MemberDTO.ReadMatchingProfile.builder()
                 .id(findMember.get().getId())
                 .profileImgAddress(findMember.get().getProfileImgAddress())
                 .profileContent(findMember.get().getProfileContent())
                 .matchingCount(findMember.get().getMatchingCount())
+                .badgeImgAddress(badgeService.readMyBadge(token))
                 .avgMannerPoint(ratingRepository.findByAvgMannerPoint(memberId))
                 .avgSkillPoint(ratingRepository.findByAvgSkillPoint(memberId))
                 .build();
@@ -287,12 +305,14 @@ public class MemberService {
     }
 
     // 사진등록,수정
-    public ResponseMessage updateProfileImg(MemberDTO.UpdateImgAddress updateImgAddress)
+    public ResponseMessage updateProfileImg(MemberDTO.UpdateImgAddress updateImgAddress, String token)
     {
-        Optional<Member> findMember = memberRepository.findById(updateImgAddress.getId());
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
+        Optional<Member> findMember = memberRepository.findById(memberId);
 
         if (findMember.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.");
-        String imageUrl = imageControl.getImageUrl(findMember.get().getUserId(), updateImgAddress.getFile());
+        String imageUrl = imageProcess.getImageUrl(findMember.get().getUserId(), updateImgAddress.getFile());
 
         findMember.get().updateProfileImgAddress(imageUrl);
 
@@ -300,9 +320,11 @@ public class MemberService {
     }
 
     // 한줄소개 등록, 수정
-    public ResponseMessage updateProfileContent(MemberDTO.UpdateProfileContent updateProfileContent)
+    public ResponseMessage updateProfileContent(MemberDTO.UpdateProfileContent updateProfileContent, String token)
     {
-        Optional<Member> findMember = memberRepository.findById(updateProfileContent.getId());
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
+        Optional<Member> findMember = memberRepository.findById(memberId);
         if (findMember.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.");
 
         findMember.get().updateProfileContent(updateProfileContent.getProfileContent());

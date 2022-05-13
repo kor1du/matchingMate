@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberAuthorityRepository extends JpaRepository<MemberAuthority, Long> {
     MemberAuthority save(MemberAuthority memberAuthority);
-
 }

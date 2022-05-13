@@ -6,6 +6,7 @@ import com.matching.system.domain.Member;
 import com.matching.system.dto.MatchingHistoryDTO;
 import com.matching.system.dto.MatchingPostDTO;
 import com.matching.system.dto.MemberDTO;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import com.matching.system.response.ResponseData;
 import com.matching.system.repository.MatchingHistoryRepository;
 import com.matching.system.repository.MatchingMemberRepository;
@@ -29,15 +30,15 @@ public class MatchingHistoryService {
     private final RatingRepository ratingRepository;
     private final MemberRepository memberRepository;
     private final AccessConfig accessConfig;
+    private final JwtTokenUtil jwtTokenUtil;
 
 
     // 매칭 내역 조회  -> 사용자
-    public ResponseData readMatchingHistories(Long memberId, String accessToken)
+    public ResponseData readMatchingHistories(String token)
     {
-        Optional<Member> findMember = memberRepository.findById(memberId);
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
-        if (! accessConfig.isNormal(findMember.get().getUserId(), accessToken))
-            return new ResponseData(HttpStatus.NOT_ACCEPTABLE, "정상적인 접근이 아닙니다.", null);
+        Optional<Member> findMember = memberRepository.findById(memberId);
 
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
@@ -103,9 +104,9 @@ public class MatchingHistoryService {
 //        return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", matchingHistoryDTO);
 //    }
 
-    private MatchingPostDTO.ReadDTO buildReadDTO(MatchingHistory matchingHistory)
+    private MatchingPostDTO.ReadPostDetailDTO buildReadDTO(MatchingHistory matchingHistory)
     {
-        return MatchingPostDTO.ReadDTO.builder()
+        return MatchingPostDTO.ReadPostDetailDTO.builder()
                     .id(matchingHistory.getMatchingPost().getId())
                     .memberId( matchingHistory.getMatchingPost().getMember()==null?null:matchingHistory.getMatchingPost().getMember().getId())
                     .nickname(matchingHistory.getMatchingPost().getMember()==null?null:matchingHistory.getMatchingPost().getMember().getNickname())
@@ -145,7 +146,7 @@ public class MatchingHistoryService {
                 .collect(Collectors.toList());
 
 
-        MatchingPostDTO.ReadDTO readDTO = buildReadDTO(matchingHistory);
+        MatchingPostDTO.ReadPostDetailDTO readDTO = buildReadDTO(matchingHistory);
 
         return MatchingHistoryDTO.builder()
                 .id(matchingHistory.getId())

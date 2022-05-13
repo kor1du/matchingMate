@@ -13,7 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Setter
 public class MatchingPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,10 +13,10 @@ public class NotificationControl {
     private final NotificationService notificationService;
     
     // 알림 조회  -> 하루 동안 알림 (메인 페이지)
-    @GetMapping("/recent/{id}")
-    public ResponseEntity readRecentNotification(@PathVariable(value = "id") Long memberId)
+    @GetMapping("/notification")
+    public ResponseEntity readRecentNotification(@RequestHeader("Authorization") String token)
     {
-        ResponseData responseData = notificationService.readRecentNotification(memberId);
+        ResponseData responseData = notificationService.readRecentNotification(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -24,10 +24,10 @@ public class NotificationControl {
     }
 
     // 알림 내역 조회 -> 전체
-    @GetMapping("/matchingProfile/notification/{id}")
-    public ResponseEntity readAllNotification(@PathVariable(value = "id") Long memberId)
+    @GetMapping("/matchingProfile/notification")
+    public ResponseEntity readAllNotification(@RequestHeader("Authorization") String token)
     {
-        ResponseData responseData = notificationService.readAllNotification(memberId);
+        ResponseData responseData = notificationService.readAllNotification(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -35,10 +35,10 @@ public class NotificationControl {
     }
 
     // 알림 내역 조회 -> 관심 카테고리
-    @GetMapping("/matchingProfile/notification/interest/{id}")
-    public ResponseEntity readInterestNotification(@PathVariable(value = "id") Long memberId)
+    @GetMapping("/matchingProfile/notification/interest")
+    public ResponseEntity readInterestNotification(@RequestHeader("Authorization") String token)
     {
-        ResponseData responseData = notificationService.readInterestNotification(memberId);
+        ResponseData responseData = notificationService.readInterestNotification(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -47,9 +47,9 @@ public class NotificationControl {
 
     // 알림 내역 조회 -> 신고
     @GetMapping("/matchingProfile/notification/report/{id}")
-    public ResponseEntity readReportNotification(@PathVariable(value = "id") Long memberId)
+    public ResponseEntity readReportNotification(@RequestHeader("Authorization") String token)
     {
-        ResponseData responseData =  notificationService.readReportNotification(memberId);
+        ResponseData responseData =  notificationService.readReportNotification(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())

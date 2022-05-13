@@ -4,6 +4,7 @@ import com.matching.system.domain.MatchingHistory;
 import com.matching.system.domain.Member;
 import com.matching.system.domain.Rating;
 import com.matching.system.dto.RatingDTO;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import com.matching.system.response.ResponseData;
 import com.matching.system.response.ResponseMessage;
 import com.matching.system.repository.MatchingHistoryRepository;
@@ -22,17 +23,19 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class RatingService {
-
     private final RatingRepository ratingRepository;
     private final MemberRepository memberRepository;
     private final MatchingHistoryRepository matchingHistoryRepository;
+    private final JwtTokenUtil jwtTokenUtil;
 
     // 평점 추가
-    public ResponseMessage createRating(RatingDTO.CreateRatingDTO createRatingDTO)
+    public ResponseMessage createRating(RatingDTO.CreateRatingDTO createRatingDTO, String token)
     {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
         // 중복 체크
         Optional<MatchingHistory> findMatchingHistory = matchingHistoryRepository.findById(createRatingDTO.getMatchingHistoryId());
-        Optional<Member> member = memberRepository.findById(createRatingDTO.getMemberId());
+        Optional<Member> member = memberRepository.findById(memberId);
         Optional<Member> targetMember = memberRepository.findById(createRatingDTO.getTargetMemberId());
 
         Optional<Rating> findRating = ratingRepository.findByMatchingHistoryIdAndMemberIdAndTargetMemberId(findMatchingHistory.get(), member.get(), targetMember.get());
@@ -66,8 +69,10 @@ public class RatingService {
     }
 
     // 평점 조회 - 사용자 (자기꺼 - targetMemberId)
-    public ResponseData readMemberRating(Long targetMemberId)
+    public ResponseData readMemberRating(String token)
     {
+        Long targetMemberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
         Optional<Member> findMember = memberRepository.findById(targetMemberId);
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 

@@ -38,7 +38,6 @@ public class ChattingDTO {
     public static class ChattingRoomInDTO
     {
         public Long roomId;
-        public Long memberId;
     }
 
 

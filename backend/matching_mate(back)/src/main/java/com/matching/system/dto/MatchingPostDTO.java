@@ -64,7 +64,6 @@ public class MatchingPostDTO {
     public static class ReadSimpleDTO
     {
         private Long id;
-        private Long memberId;
         private String nickname;
         private String categoryName;
         private String postName;
@@ -82,11 +81,10 @@ public class MatchingPostDTO {
         private String detailPlace;
     }
 
-    @Getter
+    @Getter @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
-    public static class ReadDTO
+    public static class ReadPostDetailDTO
     {
         private Long id;
         private Long memberId;
@@ -109,6 +107,24 @@ public class MatchingPostDTO {
         private String place;
         private String detailPlace;
         private Integer isCompleted;
+        @Temporal(TemporalType.TIMESTAMP)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+        private Date registerDatetime;
+
+        private boolean isMyPost;
+    }
+
+    @Getter @Builder
+    @NoArgsConstructor @AllArgsConstructor
+    public static class ReadPostOfAdminDTO
+    {
+        private Long id;
+        private String nickname;
+        private String categoryName;
+        private String postName;
+        private String postContents;
+        private String place;
+        private String detailPlace;
         @Temporal(TemporalType.TIMESTAMP)
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private Date registerDatetime;

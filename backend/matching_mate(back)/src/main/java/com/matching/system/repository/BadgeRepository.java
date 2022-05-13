@@ -18,6 +18,6 @@ public interface BadgeRepository extends JpaRepository<Badge, Long> {
     @Query(value = "SELECT b.* FROM badge b WHERE b.over_matching_count = (SELECT MAX(b1.over_matching_count) FROM badge b1)", nativeQuery = true)
     Optional<Badge> findHighestBadge();
 
-    Optional<Badge> findByImgAddressAndOverMatchingCount(String imgAddress, Integer overMatchingCount);
+    Optional<Badge> findByOverMatchingCount(Integer overMatchingCount);
 
 }

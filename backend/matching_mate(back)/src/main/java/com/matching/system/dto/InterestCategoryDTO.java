@@ -14,7 +14,6 @@ public class InterestCategoryDTO {
     public static class CreateDTO
     {
         private Long categoryId;
-        private Long memberId;
         private String region1;
         private String region2;
         private String region3;
@@ -28,7 +27,6 @@ public class InterestCategoryDTO {
     {
         private Long id;
         private Long categoryId;
-        private Long memberId;
         private String region1;
         private String region2;
         private String region3;
@@ -41,13 +39,21 @@ public class InterestCategoryDTO {
     public static class ReadDTO
     {
         private Long id;
-        private Long memberId;
         private Long categoryId;
         private String categoryName;
-        private String categoryImgAddress;
         private String region1;
         private String region2;
         private String region3;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberInterestCategoryDTO
+    {
+        private Long memberId;
+        private String categoryName;
     }
 
 }

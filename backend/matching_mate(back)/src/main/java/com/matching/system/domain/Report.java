@@ -29,7 +29,8 @@ public class Report {
     private Member targetMember;
 
     @Column(name = "report_classify", nullable = false)
-    private Integer reportClassify; // 음란, 욕설 및 혐오, 등
+//    @Enumerated(EnumType.STRING)
+    private String reportClassify;
 
     @Column(name = "contents", nullable = false)
     private String contents;
@@ -37,8 +38,9 @@ public class Report {
     @Column(name = "target_id", nullable = false)
     private Long targetId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "report_type", nullable = false)
-    private String reportType;      // 매칭 공고, 사람, 채팅
+    private ReportType reportType;
 
     @Column(name = "status", columnDefinition = "TINYINT default 0", length = 1)
     private Integer status;

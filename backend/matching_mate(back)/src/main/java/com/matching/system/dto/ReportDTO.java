@@ -16,10 +16,9 @@ public class ReportDTO {
     @Builder
     public static class ReportRegisterDTO
     {
-        private Long memberId;
         private Long targetMemberId;
         private String reportType;  // 매칭 공고, 사람, 채팅
-        private Integer reportClassify; // 음란, 욕설 등
+        private String reportClassify; // 음란, 욕설 등
         private String contents;
         private Long targetId;
     }

@@ -87,8 +87,9 @@ public class MatchingPostControl {
 
     // 매칭 공고 상세 조회 + 조회 수       -> O
     @GetMapping(value = {"/matchingPost/detail/{id}", "/admin/matchingPost/detail/{id}"})
-    public ResponseEntity readPostsDetail(@PathVariable(value = "id") Long postId) {
-        ResponseData responseData = matchingPostService.readPostsDetail(postId);
+    public ResponseEntity readPostsDetail(@PathVariable(value = "id") Long postId,
+                                          @RequestHeader("Authorization") String token) {
+        ResponseData responseData = matchingPostService.readPostsDetail(postId, token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -97,9 +98,10 @@ public class MatchingPostControl {
 
     // 매칭 공고 채팅방 들어가기       -> O
     @PostMapping(value = "/matchingPost/detail/joinChat")
-    public ResponseEntity joinChatting(@RequestBody ChattingDTO.ChattingRoomInDTO chattingRoomInDTO)
+    public ResponseEntity joinChatting(@RequestBody ChattingDTO.ChattingRoomInDTO chattingRoomInDTO,
+                                       @RequestHeader("Authorization") String token)
     {
-        ResponseMessage responseMessage = matchingPostService.joinChatting(chattingRoomInDTO);
+        ResponseMessage responseMessage = matchingPostService.joinChatting(chattingRoomInDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>{
     // 회원 가입, 수정
     Member save(Member member);
 
@@ -30,8 +30,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("SELECT DISTINCT m FROM Member m JOIN FETCH m.memberAuthorities WHERE m.userId=:userId")
     Optional<Member> findByUserId(@Param("userId") String userId);
 
-    // 중복 회원 가입
-    Optional<Member> findByUserIdAndPhone(String userId, String phone);
 
 
 

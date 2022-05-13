@@ -16,9 +16,9 @@ public class CategoryControl {
 
     // 카테고리 추가      -> O
     @PostMapping("/create")
-    public ResponseEntity save(@RequestBody CategoryDTO categoryDTO)
+    public ResponseEntity save(@RequestBody CategoryDTO.CreateCategoryDTO createCategoryDTO)
     {
-        ResponseMessage responseMessage = categoryService.save(categoryDTO);
+        ResponseMessage responseMessage = categoryService.save(createCategoryDTO);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -27,9 +27,9 @@ public class CategoryControl {
 
     // 카테고리 수정      -> O
     @PutMapping("/update")
-    public ResponseEntity update(@RequestBody CategoryDTO categoryDTO)
+    public ResponseEntity update(@RequestBody CategoryDTO.UpdateCategoryDTO updateCategoryDTO)
     {
-        ResponseMessage responseMessage = categoryService.update(categoryDTO);
+        ResponseMessage responseMessage = categoryService.update(updateCategoryDTO);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

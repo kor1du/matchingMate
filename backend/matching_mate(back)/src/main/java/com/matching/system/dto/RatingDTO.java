@@ -18,7 +18,6 @@ public class RatingDTO {
     @AllArgsConstructor
     @Builder
     public static class CreateRatingDTO {
-        private Long memberId;
         private Long matchingHistoryId;
         private Long targetMemberId;
         private String contents;

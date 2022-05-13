@@ -16,8 +16,9 @@ public class ReportControl {
 
     // 신고 추가 = 신고하기     -> O
     @PostMapping("/report/create")
-    public ResponseEntity createReport(@RequestBody ReportDTO.ReportRegisterDTO reportRegisterDTO) {
-        ResponseMessage responseMessage = reportService.createReport(reportRegisterDTO);
+    public ResponseEntity createReport(@RequestBody ReportDTO.ReportRegisterDTO reportRegisterDTO,
+                                       @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = reportService.createReport(reportRegisterDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

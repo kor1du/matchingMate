@@ -29,7 +29,7 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
             "WHERE r.id=:reportId")
     Optional<Report> findById(@Param("reportId") Long reportId);
 
-    Optional<Report> findByTargetIdAndMemberIdAndTargetMemberIdAndReportTypeAndReportClassify(Long targetId, Long memberId, Long targetMemberId, String reportType, Integer reportClassify);
+    Optional<Report> findByTargetIdAndMemberIdAndTargetMemberIdAndReportTypeAndReportClassify(Long targetId, Long memberId, Long targetMemberId, String reportType, String reportClassify);
 
     List<Report> findByMemberId(Long memberId);
 

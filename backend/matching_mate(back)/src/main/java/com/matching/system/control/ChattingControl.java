@@ -6,7 +6,6 @@ import com.matching.system.response.ResponseMessage;
 import com.matching.system.service.ChattingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,9 +18,9 @@ public class ChattingControl {
     // 채팅 방 추가 -> 매칭 공고에서 공고 추가
 
     // 채팅 방 목록 조회      -> O     (제일 최신에 채팅메시지 전송된걸 젤 위로 -> 수정)
-    @GetMapping("/{id}")
-    public ResponseEntity readList(@PathVariable(value = "id") Long memberId) {
-        ResponseData responseData = chattingService.readList(memberId);
+    @GetMapping("")
+    public ResponseEntity readList(@RequestHeader("Authorization") String token) {
+        ResponseData responseData = chattingService.readList(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -30,8 +29,9 @@ public class ChattingControl {
 
     // 채팅방 입장 및 메시지 반환      -> O
     @GetMapping("/in")
-    public ResponseEntity inChattingRoom(@ModelAttribute("chatting") ChattingDTO.ChattingRoomInDTO chattingRoomInDTO, Model model) {
-       ResponseData responseData = chattingService.inChattingRoom(chattingRoomInDTO);
+    public ResponseEntity inChattingRoom(@ModelAttribute("chatting") ChattingDTO.ChattingRoomInDTO chattingRoomInDTO,
+                                         @RequestHeader("Authorization") String token) {
+       ResponseData responseData = chattingService.inChattingRoom(chattingRoomInDTO, token);
 
         return ResponseEntity
                 .status(responseData.getStatus())

@@ -3,12 +3,12 @@ package com.matching.system.service;
 import com.matching.system.domain.*;
 import com.matching.system.dto.ChattingDTO;
 import com.matching.system.dto.MatchingPostDTO;
-import com.matching.system.response.ResponseData;
-import com.matching.system.response.ResponseMessage;
+import com.matching.system.jwt.util.JwtTokenUtil;
 import com.matching.system.process.MapProcess;
 import com.matching.system.repository.*;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +32,9 @@ public class MatchingPostService {
     private final ChattingService chattingService;
     private final ChattingMemberRepository chattingMemberRepository;
     private final ChattingRoomRepository chattingRoomRepository;
-    @Autowired private final MapProcess mapControl;
+    private final MapProcess mapControl;
+    private final JwtTokenUtil jwtTokenUtil;
+
 
 
     // 매칭 공고 추가
@@ -68,8 +70,8 @@ public class MatchingPostService {
         interestCategoryRepository.findByInterestCategoryMember(category.get(), newMatchingPost.getPlace()).stream()
                 .map(interestCategory -> notificationRepository.save(Notification.builder()
                         .member(interestCategory.getMember())
-                        .notificationType("관심 카테고리 알림")
-                        .message(category.get().getName() + "의 관심 카테고리 공고가 등록되었습니다.")
+                        .notificationType(NotificationType.관심공고)
+                        .message(interestCategory.getCategory().getName() + "의 관심 카테고리 공고가 등록되었습니다.")
                         .url("https://localhost:8080/matchingPost/detail/" + newMatchingPost.getId())
                         .build()
 
@@ -106,7 +108,7 @@ public class MatchingPostService {
         interestCategoryRepository.findByInterestCategoryMember(category.get(), findMatchingPost.get().getPlace()).stream()
                 .map(interestCategory -> notificationRepository.save(Notification.builder()
                         .member(interestCategory.getMember())
-                        .notificationType("관심 카테고리 알림")
+                        .notificationType(NotificationType.관심공고)
                         .message(category.get().getName() + "의 관심 카테고리 공고가 등록되었습니다.")
                         .url("https://localhost:8080/matchingPost/detail/" + findMatchingPost.get().getId())
                         .build()
@@ -145,8 +147,8 @@ public class MatchingPostService {
             matchingPostList = matchingPostRepository.findByRecentCategoryPosts(findCategory, address);
         }
 
-        List<MatchingPostDTO.ReadDTO> readDTOList = matchingPostList.stream()
-                .map(matchingPost -> changeEntityToDTO(matchingPost))
+        List<MatchingPostDTO.ReadSimpleDTO> readDTOList = matchingPostList.stream()
+                .map(matchingPost -> PostToSimpleDTO(matchingPost))
                 .collect(Collectors.toList());
 
 
@@ -167,70 +169,20 @@ public class MatchingPostService {
             matchingPostList = matchingPostRepository.findByPopularCategoryPosts(findCategory, address);
         }
 
-        List<MatchingPostDTO.ReadDTO> readDTOList = matchingPostList.stream()
-                .map(matchingPost -> changeEntityToDTO(matchingPost))
+        List<MatchingPostDTO.ReadSimpleDTO> readDTOList = matchingPostList.stream()
+                .map(matchingPost -> PostToSimpleDTO(matchingPost))
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTOList);
     }
 
-    // admin 매칭 공고 조회
-    public ResponseData readAdminPosts() {
-
-        List<MatchingPost> matchingPostList = matchingPostRepository.findAll();
-
-        List<MatchingPostDTO.ReadDTO> readDTOList = matchingPostList.stream()
-                .map(matchingPost -> changeEntityToDTO(matchingPost))
-                .collect(Collectors.toList());
-
-        return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTOList);
-    }
-
-    // 매칭 공고 상세 조회
-    public ResponseData readPostsDetail(Long postId) {
-        Optional<MatchingPost> findMatchingPost = matchingPostRepository.findById(postId);
-
-        if (findMatchingPost.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 매칭 공고가 존재하지 않습니다.", null);
-
-        // view ++
-        findMatchingPost.get().updateViews();
-
-//        MatchingPostDTO.ReadDTO readDTO = MatchingPostDTO.ReadDTO.builder()
-//                .id(findMatchingPost.get().getId())
-//                .memberId(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getId())
-//                .nickname(findMatchingPost.get().getMember().getNickname())
-//                .categoryId(findMatchingPost.get().getCategory().getId())
-//                .categoryImgAddress(findMatchingPost.get().getCategory().getImgAddress())
-//                .categoryName(findMatchingPost.get().getCategory().getName())
-//                .postName(findMatchingPost.get().getPostName())
-//                .postContents(findMatchingPost.get().getPostContents())
-//                .matchingDate(findMatchingPost.get().getMatchingDate())
-//                .matchingTime(findMatchingPost.get().getMatchingTime())
-//                .recommendedSkill(findMatchingPost.get().getRecommendedSkill())
-//                .numberOfPeople(findMatchingPost.get().getNumberOfPeople())
-//                .maxNumberOfPeople(findMatchingPost.get().getMaxNumberOfPeople())
-//                .views(findMatchingPost.get().getViews())
-//                .place(findMatchingPost.get().getPlace())
-//                .detailPlace(findMatchingPost.get().getDetailPlace())
-//                .isCompleted(findMatchingPost.get().getIsCompleted())
-//                .registerDatetime(findMatchingPost.get().getRegisterDatetime())
-//                .build();
-
-        MatchingPostDTO.ReadDTO readDTO = changeEntityToDTO(findMatchingPost.get());
-
-        return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTO);
-    }
-
-    public MatchingPostDTO.ReadDTO changeEntityToDTO(MatchingPost matchingPost) {
-        return MatchingPostDTO.ReadDTO.builder()
+    private MatchingPostDTO.ReadSimpleDTO PostToSimpleDTO(MatchingPost matchingPost)
+    {
+        return MatchingPostDTO.ReadSimpleDTO.builder()
                 .id(matchingPost.getId())
-                .memberId(matchingPost.getMember() == null ? null : matchingPost.getMember().getId())
-                .nickname(matchingPost.getMember() == null ? null : matchingPost.getMember().getNickname())
-                .categoryId(matchingPost.getCategory() == null ? null : matchingPost.getCategory().getId())
-                .categoryName(matchingPost.getCategory() == null ? null : matchingPost.getCategory().getName())
-                .categoryImgAddress(matchingPost.getCategory() == null ? null : matchingPost.getCategory().getImgAddress())
+                .nickname(matchingPost.getMember().getNickname())
+                .categoryName(matchingPost.getCategory().getName())
                 .postName(matchingPost.getPostName())
-                .postContents(matchingPost.getPostContents())
                 .matchingDate(matchingPost.getMatchingDate())
                 .matchingTime(matchingPost.getMatchingTime())
                 .recommendedSkill(matchingPost.getRecommendedSkill())
@@ -239,22 +191,75 @@ public class MatchingPostService {
                 .views(matchingPost.getViews())
                 .place(matchingPost.getPlace())
                 .detailPlace(matchingPost.getDetailPlace())
-                .isCompleted(matchingPost.getIsCompleted())
-                .registerDatetime(matchingPost.getRegisterDatetime())
                 .build();
     }
 
+    // admin 매칭 공고 조회
+    public ResponseData readAdminPosts() {
+
+        List<MatchingPost> matchingPostList = matchingPostRepository.findAll();
+
+        List<MatchingPostDTO.ReadPostOfAdminDTO> readDTOList = matchingPostList.stream()
+                .map(matchingPost -> MatchingPostDTO.ReadPostOfAdminDTO.builder()
+                        .id(matchingPost.getId())
+                        .categoryName(matchingPost.getCategory().getName())
+                        .postName(matchingPost.getPostName())
+                        .postContents(matchingPost.getPostContents())
+                        .place(matchingPost.getPlace())
+                        .detailPlace(matchingPost.getDetailPlace())
+                        .registerDatetime(matchingPost.getRegisterDatetime())
+                        .build())
+                .collect(Collectors.toList());
+
+        return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTOList);
+    }
+
+    // 매칭 공고 상세 조회
+    public ResponseData readPostsDetail(Long postId, String token) {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
+        Optional<MatchingPost> findMatchingPost = matchingPostRepository.findById(postId);
+
+        if (findMatchingPost.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 매칭 공고가 존재하지 않습니다.", null);
+
+        // view ++
+        findMatchingPost.get().updateViews();
+
+        MatchingPostDTO.ReadPostDetailDTO readDTO = MatchingPostDTO.ReadPostDetailDTO.builder()
+                .id(findMatchingPost.get().getId())
+                .nickname(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getNickname())
+                .categoryName(findMatchingPost.get().getCategory() == null ? null : findMatchingPost.get().getCategory().getName())
+                .categoryImgAddress(findMatchingPost.get().getCategory() == null ? null : findMatchingPost.get().getCategory().getImgAddress())
+                .postName(findMatchingPost.get().getPostName())
+                .postContents(findMatchingPost.get().getPostContents())
+                .matchingDate(findMatchingPost.get().getMatchingDate())
+                .matchingTime(findMatchingPost.get().getMatchingTime())
+                .recommendedSkill(findMatchingPost.get().getRecommendedSkill())
+                .numberOfPeople(findMatchingPost.get().getNumberOfPeople())
+                .maxNumberOfPeople(findMatchingPost.get().getMaxNumberOfPeople())
+                .views(findMatchingPost.get().getViews())
+                .place(findMatchingPost.get().getPlace())
+                .detailPlace(findMatchingPost.get().getDetailPlace())
+                .registerDatetime(findMatchingPost.get().getRegisterDatetime())
+                .isMyPost( memberId==findMatchingPost.get().getMember().getId() ? true:false )
+                .build();;
+
+        return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTO);
+    }
+
+
     // 채팅방 가입하기
-    public ResponseMessage joinChatting(ChattingDTO.ChattingRoomInDTO chattingRoomInDTO) {
+    public ResponseMessage joinChatting(ChattingDTO.ChattingRoomInDTO chattingRoomInDTO, String token) {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
         // 이미 가입 여부 확인
-        Optional<ChattingMember> validateDuplicateRoom = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInDTO.getRoomId(), chattingRoomInDTO.getMemberId());
+        Optional<ChattingMember> validateDuplicateRoom = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInDTO.getRoomId(), memberId);
         if (validateDuplicateRoom.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 방에 가입되어 있습니다.");
 
         // chatting_member 추가
         ChattingRoom chattingRoom = chattingRoomRepository.findById(chattingRoomInDTO.getRoomId()).get();
 
-        Member member = memberRepository.findById(chattingRoomInDTO.getMemberId()).get();
+        Member member = memberRepository.findById(memberId).get();
 
         chattingMemberRepository.save(ChattingMember.builder()
                 .chattingRoom(chattingRoom)

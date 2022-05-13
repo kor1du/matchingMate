@@ -16,13 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class BadgeControl {
     private final BadgeService badgeService;
 
-    ///
-
     // 뱃지 추가      -> O
     @PostMapping("/admin/badge/create")
-    public ResponseEntity createBadgeStandard(@RequestBody BadgeDTO.BadgeStandardDTO badgeStandardDTO)
+    public ResponseEntity createBadgeStandard(@RequestBody BadgeDTO.CreateBadgeStandardDTO createBadgeDTO)
     {
-        ResponseMessage responseMessage = badgeService.save(badgeStandardDTO);
+        ResponseMessage responseMessage = badgeService.save(createBadgeDTO);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -31,9 +29,9 @@ public class BadgeControl {
 
     // 뱃지 수정     -> O
     @PutMapping("/admin/badge/update")
-    public ResponseEntity updateBadgeStandard(@RequestBody BadgeDTO.BadgeStandardDTO badgeStandardDTO)
+    public ResponseEntity updateBadgeStandard(@RequestBody BadgeDTO.UpdateBadgeStandardDTO updateBadgeStandardDTO)
     {
-        ResponseMessage responseMessage = badgeService.update(badgeStandardDTO);
+        ResponseMessage responseMessage = badgeService.update(updateBadgeStandardDTO);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -53,14 +51,14 @@ public class BadgeControl {
     }
 
     // 뱃지  조회 - 사용자     -> O
-    @GetMapping("/matchingProfile/badge/{id}")
-    public ResponseEntity readMemberBadge(@PathVariable("id") Long memberId)
-    {
-        ResponseData responseData = badgeService.readMyBadge(memberId);
-
-        return ResponseEntity
-                .status(responseData.getStatus())
-                .body(responseData);
-    }
+//    @GetMapping("/matchingProfile/badge")
+//    public ResponseEntity readMemberBadge(@RequestHeader("Authorization") String token)
+//    {
+//        ResponseData responseData = badgeService.readMyBadge(token);
+//
+//        return ResponseEntity
+//                .status(responseData.getStatus())
+//                .body(responseData);
+//    }
 
 }
