@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import Sparkles from "../../img/sparkles.png";
 import Fire from "../../img/fire.png";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 
 import HomeBoardCreate from "./HomeBoardCreate";
 import "../../css/home-board/homeBoard.css";
-import BoardItem from './BoardItem';
-import BoardPagination from './BoardPagination';
+import BoardItem from "./BoardItem";
+import BoardPagination from "./BoardPagination";
 import styled from "styled-components";
 
-
 function Board(props) {
-
-  const { boards, getPopularBoards, getBoards } = props;
-
+  const { boards, getPopularBoards, getBoards, getLocation, lat, lng } = props;
 
   const limit = 8;
   const [page, setPage] = useState(1);
@@ -24,14 +21,15 @@ function Board(props) {
       <div className="board">
         <Row className="new-hot">
           <Col xs="12">
-            <div className='new' onClick={() => getBoards()}>
-              <p >최신</p>
+            <div className="new" onClick={() => getBoards(lat, lng)}>
+              <p>최신</p>
               <img src={Sparkles} alt="sparkles" />
             </div>
-            <div className='hot' onClick={() => getPopularBoards()}>
-              <p >인기</p>
+            <div className="hot" onClick={() => getPopularBoards(lat, lng)}>
+              <p>인기</p>
               <img src={Fire} alt="sparkles" />
             </div>
+            <Button onClick={() => getLocation()}>위치 갱신</Button>
           </Col>
           <Col>
             <HomeBoardCreate></HomeBoardCreate>
@@ -39,16 +37,13 @@ function Board(props) {
         </Row>
         <Row className="board-list">
           {/* {boards.map((board) => <BoardItem key={board.id} board={board} />)} */}
-          {boards.slice(offset, offset + limit).map((board) => <BoardItem key={board.id} board={board} />)}
+          {boards.slice(offset, offset + limit).map((board) => (
+            <BoardItem key={board.id} board={board} />
+          ))}
         </Row>
       </div>
       <footer>
-        <BoardPagination
-          total={boards.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-        />
+        <BoardPagination total={boards.length} limit={limit} page={page} setPage={setPage} />
       </footer>
     </Layout>
   );

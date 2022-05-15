@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import React from "react";
 import "./res/css/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +17,7 @@ import AdminBadgeModify from "./res/page/admin/adminBadgeModify";
 import AdminBadgeView from "./res/page/admin/adminBadgeView";
 import MatchProfile from "./res/page/matchProfile/matchProfile";
 import MemberProfile from "./res/page/memberProfile/memberProfile";
+import BoardDetail from "./res/page/BoardDetail/BoardDetail";
 
 export default function App() {
   const member = {
@@ -32,62 +31,24 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} exact />
-          <Route path="/login" element={<Login />} exact />
-          <Route path="/signup" element={<Signup />} exact />
-          <Route path="/chatting/list" element={<ChattingList />} exact />
-          <Route path="/chatting" element={<Chat />} exact></Route>
-          <Route
-            path="/admin/post/management"
-            element={<AdminPostManagement />}
-            exact
-          ></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/chatting/list" element={<ChattingList />} />
+          <Route path="/chatting" element={<Chat />} />
+          <Route path="/post/:id" element={<BoardDetail />} />
+          <Route path="/admin/post/management" element={<AdminPostManagement />}></Route>
 
-          <Route
-            path="/admin/report/management"
-            element={<AdminReportManagement />}
-            exact
-          ></Route>
+          <Route path="/admin/report/management" element={<AdminReportManagement />}></Route>
 
-          <Route
-            path="/admin/category/add"
-            element={<AdminCategoryAdd />}
-            exact
-          ></Route>
-          <Route
-            path="/admin/category/modify"
-            element={<AdminCategoryModify />}
-            exact
-          ></Route>
-          <Route
-            path="/admin/category/view"
-            element={<AdminCategoryView />}
-            exact
-          ></Route>
-          <Route
-            path="/admin/badge/add"
-            element={<AdminBadgeAdd />}
-            exact
-          ></Route>
-          <Route
-            path="/admin/badge/modify"
-            element={<AdminBadgeModify />}
-            exact
-          ></Route>
-          <Route
-            path="/admin/badge/view"
-            element={<AdminBadgeView />}
-            exact
-          ></Route>
-          <Route
-            path="/match"
-            element={<MatchProfile member={member} exact />}
-          />
-          <Route
-            path="/admin/badge/view"
-            element={<AdminBadgeView />}
-            exact
-          ></Route>
+          <Route path="/admin/category/add" element={<AdminCategoryAdd />}></Route>
+          <Route path="/admin/category/modify/" element={<AdminCategoryModify />}></Route>
+          <Route path="/admin/category/view" element={<AdminCategoryView />}></Route>
+          <Route path="/admin/badge/add" element={<AdminBadgeAdd />}></Route>
+          <Route path="/admin/badge/modify" element={<AdminBadgeModify />}></Route>
+          <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>
+          <Route path="/match" element={<MatchProfile member={member} />} />
+          <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>
           <Route path="/member" element={<MemberProfile member={member} />} />
         </Routes>
       </BrowserRouter>

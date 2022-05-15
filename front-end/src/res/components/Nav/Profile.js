@@ -28,6 +28,11 @@ export default function Profile() {
               <span>채팅</span>
             </Link>
           </li>
+          <li>
+            <Link to="/match" className="profile-link">
+              <span>매칭프로필</span>
+            </Link>
+          </li>
         </ul>
       </div>
     </Container>

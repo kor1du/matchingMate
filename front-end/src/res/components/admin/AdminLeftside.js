@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function parseCategoryName() {
   const entireUrl = document.location.href;
   const url = entireUrl.split("/");
-  const categoryName = url[url.length - 2] + url[url.length - 1];
+  const categoryName = url[4] + url[5];
   return categoryName;
 }
 
@@ -36,9 +36,7 @@ function changeCategoryName(categoryName) {
 }
 
 function findCategoryProperty(categoryName) {
-  const currentDocument = document.querySelector(
-    ".admin-left-side " + categoryName
-  );
+  const currentDocument = document.querySelector(".admin-left-side " + categoryName);
   return currentDocument;
 }
 
@@ -48,12 +46,14 @@ function changePropertyColor(property) {
 
 function highlightCurrentCategory() {
   var categoryName = parseCategoryName();
+  if (categoryName.includes("modify")) return;
+  else {
+    categoryName = changeCategoryName(categoryName);
 
-  categoryName = changeCategoryName(categoryName);
-
-  if (categoryName.indexOf(".") != -1) {
-    const property = findCategoryProperty(categoryName);
-    changePropertyColor(property);
+    if (categoryName.indexOf(".") != -1) {
+      const property = findCategoryProperty(categoryName);
+      changePropertyColor(property);
+    }
   }
 }
 
@@ -65,11 +65,7 @@ export default function AdminLeftside() {
   return (
     <>
       <div className="admin-profile">
-        <img
-          src={ProfileImg}
-          alt="admin-profile-img"
-          className="admin-profile-img"
-        />
+        <img src={ProfileImg} alt="admin-profile-img" className="admin-profile-img" />
         <span className="admin-profile-name">관리자님</span>
       </div>
 

@@ -40,6 +40,7 @@ export default function CheckID(props) {
         </Modal.Header>
         <Modal.Body className="modal-id-check-body">
           <input
+            className="id-chk-input"
             type="text"
             placeholder="ID를 입력해주세요."
             onChange={(e) => {

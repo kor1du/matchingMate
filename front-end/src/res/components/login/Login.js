@@ -67,12 +67,7 @@ function LoginComponent() {
                 />
               </Form.Group>
               <div className="login-btns">
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className="login-btn"
-                  onClick={login}
-                >
+                <Button variant="primary" type="submit" className="login-btn" onClick={login}>
                   <p>로그인</p>
                 </Button>
                 <Button variant="primary" className="signup-btn">

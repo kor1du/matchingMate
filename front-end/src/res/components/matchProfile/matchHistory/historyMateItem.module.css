@@ -1,0 +1,5 @@
+.btnBox {
+  display: flex;
+  width: 330px;
+  justify-content: space-between;
+}

@@ -1,0 +1,33 @@
+.container {
+  width: 48rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 10rem 1.5rem 5rem;
+}
+
+.ReactModal__Content {
+  padding: 0 !important;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.backBtn {
+  margin-bottom: 1.5rem;
+}
+
+.contentBox {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+}
+
+.chatBtnBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
