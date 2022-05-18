@@ -68,6 +68,39 @@
   display: none;
 }
 
+#nav .nav-notification {
+  width: 45px;
+  height: 45px;
+  margin: 0 15px;
+}
+
+#nav .notification-list {
+  width: 400px;
+  margin: 20px 0px;
+}
+
+#nav .notification-list p {
+  margin: 0 20px;
+  width: 360px;
+  height: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 2rem;
+  color: black;
+}
+
+#nav .nav-notification-box {
+  display: none;
+}
+
+#nav .nav-notification-box.active {
+  position: absolute;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 50px;
+}
+
 @media screen and (max-width: 1023px) {
   #nav .nav-menus .profile-component {
     display: none;

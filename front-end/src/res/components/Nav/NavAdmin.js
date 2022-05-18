@@ -34,7 +34,9 @@ const disableActiveOver1024px = (event) => {
 export default function NavAdmin() {
   useEffect(() => {
     window.addEventListener("resize", disableActiveOver1024px);
-    showLoginBtn();
+    const barCSS = document.querySelector(".bar");
+
+    if (document.querySelector(".bar")) showLoginBtn();
 
     if (isLogin() && document.documentElement.clientWidth < 1024) {
       document.querySelector(".nav-admin-menus").style.display = "block";
@@ -45,7 +47,7 @@ export default function NavAdmin() {
     return () => {
       window.removeEventListener("resize", disableActiveOver1024px);
     };
-  });
+  }, []);
 
   return (
     <Container fluid id="nav-admin">
