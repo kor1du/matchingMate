@@ -66,6 +66,15 @@ public class BadgeService {
         return new ResponseMessage(HttpStatus.OK, "정상적으로 수정되었습니다.");
     }
 
+    // 뱃지 삭제
+    public ResponseMessage delete(Long badgeId)
+    {
+        // 삭제
+        badgeRepository.deleteById(badgeId);
+
+        return new ResponseMessage(HttpStatus.OK, "정상적으로 삭제되었습니다.");
+    }
+
     // 뱃지 전체 조회 - 관리자
     public ResponseData readBadgeList()
     {

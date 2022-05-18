@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -80,17 +81,11 @@ public class RatingService {
         Float avgSkillPoint = ratingRepository.findByAvgSkillPoint(targetMemberId);
         Float avgMannerPoint = ratingRepository.findByAvgMannerPoint(targetMemberId);
 
+        SimpleDateFormat registerDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         // 개별적으로 Rating.
         List<RatingDTO.ReadDetailRatingDTO> readDetailRatingDTOS = ratingRepository.findByTargetMemberId(findMember.get()).stream()
-                .map(rating -> RatingDTO.ReadDetailRatingDTO.builder()
-                        .id(rating.getId())
-                        .targetMemberNickname(rating.getTargetMember()==null?null:rating.getTargetMember().getNickname())
-                        .memberNickname(rating.getMember()==null?null:rating.getMember().getNickname())
-                        .contents(rating.getContents())
-                        .skillPoint(rating.getSkillPoint())
-                        .mannerPoint(rating.getMannerPoint())
-                        .registerDatetime(rating.getRegisterDatetime())
-                        .build())
+                .map(rating -> changeEntityToReadDetailRatingDTO(rating))
                 .collect(Collectors.toList());
 
         RatingDTO.ReadRatingDTO readRatingDTO = new RatingDTO.ReadRatingDTO(avgSkillPoint, avgMannerPoint, readDetailRatingDTOS);
@@ -104,18 +99,25 @@ public class RatingService {
         List<Rating> ratingList = ratingRepository.findAll();
 
         List<RatingDTO.ReadDetailRatingDTO> readDetailRatingDTOList = ratingList.stream()
-                .map(rating -> RatingDTO.ReadDetailRatingDTO.builder()
-                        .id(rating.getId())
-                        .targetMemberNickname(rating.getTargetMember()==null?null:rating.getTargetMember().getNickname())
-                        .memberNickname(rating.getMember()==null?null:rating.getMember().getNickname())
-                        .contents(rating.getContents())
-                        .skillPoint(rating.getSkillPoint())
-                        .mannerPoint(rating.getMannerPoint())
-                        .registerDatetime(rating.getRegisterDatetime())
-                        .build())
+                .map(rating -> changeEntityToReadDetailRatingDTO(rating))
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", readDetailRatingDTOList);
+    }
+
+    private RatingDTO.ReadDetailRatingDTO changeEntityToReadDetailRatingDTO(Rating rating)
+    {
+        SimpleDateFormat registerDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return RatingDTO.ReadDetailRatingDTO.builder()
+                .id(rating.getId())
+                .targetMemberNickname(rating.getTargetMember()==null?null:rating.getTargetMember().getNickname())
+                .memberNickname(rating.getMember()==null?null:rating.getMember().getNickname())
+                .contents(rating.getContents())
+                .skillPoint(rating.getSkillPoint())
+                .mannerPoint(rating.getMannerPoint())
+                .registerDatetime(registerDate.format(rating.getRegisterDatetime()))
+                .build();
     }
 
 }

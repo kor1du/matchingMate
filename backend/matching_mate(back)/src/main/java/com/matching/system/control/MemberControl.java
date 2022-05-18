@@ -133,9 +133,9 @@ public class MemberControl {
 
     // 사진 등록, ㅅ정        -> O
     @PostMapping("/matchingProfile/updateProfileImg")
-    public ResponseEntity updateProfileImg(@ModelAttribute MemberDTO.UpdateImgAddress createImgAddress,
+    public ResponseEntity updateProfileImg(@ModelAttribute MemberDTO.UpdateImgAddress updateImgAddress,
                                            @RequestHeader("Authorization") String token) {
-        ResponseMessage responseMessage = memberService.updateProfileImg(createImgAddress, token);
+        ResponseMessage responseMessage = memberService.updateProfileImg(updateImgAddress, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

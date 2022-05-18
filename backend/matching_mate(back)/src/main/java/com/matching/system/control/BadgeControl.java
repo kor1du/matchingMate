@@ -18,9 +18,9 @@ public class BadgeControl {
 
     // 뱃지 추가      -> O
     @PostMapping("/admin/badge/create")
-    public ResponseEntity createBadgeStandard(@RequestBody BadgeDTO.CreateBadgeStandardDTO createBadgeDTO)
+    public ResponseEntity createBadgeStandard(@ModelAttribute BadgeDTO.CreateBadgeStandardDTO createBadgeStandardDTO)
     {
-        ResponseMessage responseMessage = badgeService.save(createBadgeDTO);
+        ResponseMessage responseMessage = badgeService.save(createBadgeStandardDTO);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -29,9 +29,19 @@ public class BadgeControl {
 
     // 뱃지 수정     -> O
     @PutMapping("/admin/badge/update")
-    public ResponseEntity updateBadgeStandard(@RequestBody BadgeDTO.UpdateBadgeStandardDTO updateBadgeStandardDTO)
+    public ResponseEntity updateBadgeStandard(@ModelAttribute BadgeDTO.UpdateBadgeStandardDTO updateBadgeStandardDTO)
     {
         ResponseMessage responseMessage = badgeService.update(updateBadgeStandardDTO);
+
+        return ResponseEntity
+                .status(responseMessage.getStatus())
+                .body(responseMessage);
+    }
+
+    @DeleteMapping("/admin/badge/delete/{id}")
+    public ResponseEntity deleteBadgeStandard(@PathVariable("id") Long badgeId)
+    {
+        ResponseMessage responseMessage = badgeService.delete(badgeId);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

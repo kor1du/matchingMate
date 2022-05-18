@@ -19,10 +19,10 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
 
     @Override
-    public Optional<MemberDTO.ReadMemberDTO> findById(Long memberId) {
+    public Optional<MemberDTO.ReadMemberInfoDTO> findById(Long memberId) {
         QMember qMember = QMember.member;
 
-        return Optional.ofNullable(jpaQueryFactory.select(Projections.fields(MemberDTO.ReadMemberDTO.class,
+        return Optional.ofNullable(jpaQueryFactory.select(Projections.fields(MemberDTO.ReadMemberInfoDTO.class,
                             qMember.id,
                             qMember.userId,
                             qMember.userPw,
@@ -40,11 +40,11 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     }
 
     @Override
-    public List<MemberDTO.ReadMemberDTO> findAllUser(String roleType) {
+    public List<MemberDTO.ReadMemberInfoDTO> findAllUser(String roleType) {
         QMember qMember = QMember.member;
         QMemberAuthority qMemberAuthority = QMemberAuthority.memberAuthority;
 
-        return jpaQueryFactory.select(Projections.fields(MemberDTO.ReadMemberDTO.class,
+        return jpaQueryFactory.select(Projections.fields(MemberDTO.ReadMemberInfoDTO.class,
                         qMember.id,
                         qMember.userId,
                         qMember.userPw,

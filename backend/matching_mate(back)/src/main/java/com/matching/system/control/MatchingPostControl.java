@@ -18,8 +18,9 @@ public class MatchingPostControl {
     // 매칭 공고 추가     -> O
     // 관심카테고리부터 테스트
     @PostMapping("/matchingPost/create")
-    public ResponseEntity save(@RequestBody MatchingPostDTO.CreateDTO matchingPostCreateDTO) {
-        ResponseMessage responseMessage = matchingPostService.save(matchingPostCreateDTO);
+    public ResponseEntity save(@RequestBody MatchingPostDTO.CreateDTO matchingPostCreateDTO,
+                               @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = matchingPostService.save(matchingPostCreateDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -51,11 +52,9 @@ public class MatchingPostControl {
 
     // 매칭 공고 조회 -> 사용자 (첫 페이지) -> 최신 우선       -> O
     @GetMapping(value = "/recent")
-    public ResponseEntity readRecentPosts(@RequestParam(value = "category", required = false) Long categoryId,
-                                          @RequestParam(value = "lat") Double latitude,
-                                          @RequestParam(value = "lng") Double longitude) {
+    public ResponseEntity readRecentPosts(@ModelAttribute MatchingPostDTO.SearchConditionDTO searchCondition) {
 
-        ResponseData responseData = matchingPostService.readRecentPosts(categoryId, latitude, longitude);
+        ResponseData responseData = matchingPostService.readRecentPosts(searchCondition);
 
         return ResponseEntity
                 .status(responseData.getStatus())
@@ -64,10 +63,8 @@ public class MatchingPostControl {
 
     // 인기 공고 조회       -> O
     @GetMapping(value = "/popular")
-    public ResponseEntity readPopularPosts(@RequestParam(value = "category", required = false) Long categoryId,
-                                           @RequestParam(value = "lat") Double latitude,
-                                           @RequestParam(value = "lng") Double longitude) {
-        ResponseData responseData = matchingPostService.readPopularPosts(categoryId, latitude, longitude);
+    public ResponseEntity readPopularPosts(@ModelAttribute MatchingPostDTO.SearchConditionDTO searchCondition) {
+        ResponseData responseData = matchingPostService.readPopularPosts(searchCondition);
 
         return ResponseEntity
                 .status(responseData.getStatus())

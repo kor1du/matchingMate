@@ -1,6 +1,7 @@
 package com.matching.system.service;
 
 import com.matching.system.domain.Category;
+import com.matching.system.domain.MatchingPost;
 import com.matching.system.dto.CategoryDTO;
 import com.matching.system.process.ImageProcess;
 import com.matching.system.response.ResponseData;
@@ -29,6 +30,8 @@ public class CategoryService {
     {
 //        if (categoryDTO.getName() == null || categoryDTO.getImgAddress() == null)
 //            return new ResponseMessage(HttpStatus.BAD_REQUEST, "빈 값이 존재합니다.");
+
+        System.out.println("createCategoryDTO = " + createCategoryDTO.getName());
 
         Optional<Category> findCategory = categoryRepository.findByName(createCategoryDTO.getName());
 
@@ -67,8 +70,14 @@ public class CategoryService {
     public ResponseMessage delete(Long categoryId)
     {
         // 연관 post에는 null
-        matchingPostRepository.findByCategoryId(categoryId).stream()
-                .forEach(matchingPost -> matchingPost.deleteCategory());
+//        matchingPostRepository.findByCategoryId(categoryId).stream()
+//                .forEach(matchingPost -> matchingPost.deleteCategory());
+        Category findCategory = categoryRepository.findById(categoryId).get();
+
+        Optional<MatchingPost> findMatchingPost = matchingPostRepository.findByExistCategory(findCategory);
+        if (! findMatchingPost.isEmpty())
+            return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "이미 이 카테고리는 사용중입니다.");
+
 
         categoryRepository.deleteById(categoryId);
 

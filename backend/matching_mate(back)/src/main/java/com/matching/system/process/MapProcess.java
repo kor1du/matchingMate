@@ -15,17 +15,13 @@ public class MapProcess {
     public static String coordToAddr(double x, double y) {
         String url = "https://dapi.kakao.com/v2/local/geo/coord2address.json?x="+x+"&y="+y+"&input_coord=WGS84";
 
-        String processAddress = "";
         try{
-            String address = getRegionAddress(getJSONData(url));
-
-            String[] splitAddress = address.split(" ");
-
-            processAddress = splitAddress[0] + " " + splitAddress[1] + " " + splitAddress[2];
+            return getRegionAddress(getJSONData(url));
         }catch(Exception e){
             e.printStackTrace();
         }
-        return processAddress;
+
+        return null;
     }
 
     private static String getJSONData(String apiUrl) throws Exception {
@@ -50,6 +46,7 @@ public class MapProcess {
 
     private static String getRegionAddress(String jsonString) {
         String value = "";
+
         JSONObject jObj = (JSONObject) JSONValue.parse(jsonString);
         JSONObject meta = (JSONObject) jObj.get("meta");
         long size = (long) meta.get("total_count");
@@ -58,7 +55,13 @@ public class MapProcess {
             JSONObject subJobj = (JSONObject) jArray.get(0);
             JSONObject address = (JSONObject) subJobj.get("address");
 
-            value = (String) address.get("address_name");
+            value = address.get("region_1depth_name") + " " + address.get("region_2depth_name") + " " + address.get("region_3depth_name");
+
+//
+//            JSONObject address_name = (JSONObject) address.get("address_name");
+//            String regionFirstDepthName = (String) address_name.get("region_1depth_name");
+//
+//            System.out.println("regionFirstDepthName = " + regionFirstDepthName);
 //            JSONObject roadAddress =  (JSONObject) subJobj.get("road_address");
 //            if(roadAddress == null){
 //                JSONObject subsubJobj = (JSONObject) subJobj.get("address");

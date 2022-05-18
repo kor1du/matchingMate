@@ -64,14 +64,15 @@ public class ImageProcess {
         return imageUrl;
     }
 
-    private String changeName(String userId, MultipartFile multipartFile) throws IOException {
+    private String changeName(String name, MultipartFile multipartFile) throws IOException {
+        System.out.println("multipartFile = " + multipartFile.getOriginalFilename());
         int i = -1;
         i = multipartFile.getOriginalFilename().lastIndexOf("."); // 파일 확장자 위치
 
         Date now = new Date(System.currentTimeMillis());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
-        String fileName = simpleDateFormat.format(now) + userId + multipartFile.getOriginalFilename().substring(i);
+        String fileName = simpleDateFormat.format(now) + name + multipartFile.getOriginalFilename().substring(i);
 
         return fileName;
     }

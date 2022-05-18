@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -15,8 +14,8 @@ import java.util.List;
 public class MatchingHistoryDTO {
 
     private Long id;
-    private Date matchedDatetime;
-    private MatchingPostDTO.ReadPostDetailDTO matchingPostDTO;
+    private String matchedDatetime;
+    private MatchingPostDTO.ReadDetailMatchingPostDTO matchingPostDTO;
     List<MemberDTO.HistoryMemberDTO> historyMembers;
 
     public void addHistoryMember(List<MemberDTO.HistoryMemberDTO> historyMembers)

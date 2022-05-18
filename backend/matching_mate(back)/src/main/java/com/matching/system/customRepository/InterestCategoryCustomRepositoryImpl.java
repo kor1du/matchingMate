@@ -9,7 +9,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -85,24 +84,5 @@ public class InterestCategoryCustomRepositoryImpl implements InterestCategoryCus
         );
     }
 
-    @Override
-    public List<InterestCategoryDTO.MemberInterestCategoryDTO> findByInterestCategoryMember(Long categoryId, String place) {
-        QInterestCategory qInterestCategory = QInterestCategory.interestCategory;
-        QCategory qCategory = QCategory.category;
-        QMember qMember = QMember.member;
 
-        return jpaQueryFactory.select(Projections.fields(InterestCategoryDTO.MemberInterestCategoryDTO.class,
-                            qInterestCategory.category.name,
-                            qInterestCategory.member.id))
-                    .from(qInterestCategory)
-                    .leftJoin(qInterestCategory.category, qCategory).fetchJoin()
-                    .leftJoin(qInterestCategory.member, qMember).fetchJoin()
-                    .where(qCategory.id.eq(categoryId)
-                            .and(
-                                    qInterestCategory.region1.like(place + "%")
-                                    .or(qInterestCategory.region2.like(place + "%"))
-                                    .or(qInterestCategory.region3.like(place + "%"))
-                            ))
-                    .fetch();
-    }
 }

@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -159,12 +160,11 @@ public class MemberService {
 
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
-
-        MemberDTO.ReadMemberDTO findMemberDTO = MemberDTO.ReadMemberDTO.builder()
+        MemberDTO.ReadMemberInfoDTO findMemberDTO = MemberDTO.ReadMemberInfoDTO.builder()
                 .id(findMember.get().getId())
                 .userId(findMember.get().getUserId())
                 .userPw(findMember.get().getUserPw())
-                .birthday(findMember.get().getBirthday())
+                .birthday(new SimpleDateFormat("yyyy-mm-dd").format(findMember.get().getBirthday()))
                 .sex( (findMember.get().getSex() == 1?"남자":"여자") )
                 .name(findMember.get().getName())
                 .nickname(findMember.get().getNickname())
@@ -186,12 +186,10 @@ public class MemberService {
 
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
-
-        MemberDTO.ReadMemberDTO findMemberDTO = MemberDTO.ReadMemberDTO.builder()
-                .id(findMember.get().getId())
+        MemberDTO.ReadMyInfoDTO findMemberDTO = MemberDTO.ReadMyInfoDTO.builder()
                 .userId(findMember.get().getUserId())
                 .userPw(findMember.get().getUserPw())
-                .birthday(findMember.get().getBirthday())
+                .birthday(new SimpleDateFormat("yyyy-mm-dd").format(findMember.get().getBirthday()))
                 .sex( (findMember.get().getSex() == 1?"남자":"여자") )
                 .name(findMember.get().getName())
                 .nickname(findMember.get().getNickname())
@@ -209,12 +207,12 @@ public class MemberService {
         List<Member> memberList = memberRepository.findAllUser("ROLE_USER");
 
         // DTO 변환
-        List<MemberDTO.ReadMemberDTO> readMemberDTOList = memberList.stream()
-                .map(member -> MemberDTO.ReadMemberDTO.builder()
+        List<MemberDTO.ReadMemberInfoDTO> readMemberDTOList = memberList.stream()
+                .map(member -> MemberDTO.ReadMemberInfoDTO.builder()
                         .id(member.getId())
                         .userId(member.getUserId())
                         .userPw(member.getUserPw())
-                        .birthday(member.getBirthday())
+                        .birthday(new SimpleDateFormat("yyyy-mm-dd").format(member.getBirthday()))
                         .sex( (member.getSex() == 1?"남자":"여자") )
                         .name(member.getName())
                         .nickname(member.getNickname())

@@ -17,7 +17,7 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
             "JOIN FETCH mp.category " +
             "WHERE mp.isCompleted = 0 " +
                 "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
-                "AND mp.place LIKE %:address% " +
+                "AND mp.place LIKE :address% " +
             "ORDER BY mp.id DESC")
     List<MatchingPost> findByRecentPosts(@Param("address") String address);
 
@@ -27,7 +27,7 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
             "WHERE mp.category=:category " +
                 "AND mp.isCompleted = 0 " +
                 "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
-                "AND mp.place LIKE %:address% " +
+                "AND mp.place LIKE :address% " +
             "ORDER BY mp.id DESC")
     List<MatchingPost> findByRecentCategoryPosts(@Param("category") Category category, @Param("address") String address);
 
@@ -36,7 +36,7 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
             "JOIN FETCH mp.category " +
             "WHERE mp.isCompleted = 0 " +
                 "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
-                "AND mp.place LIKE %:address% " +
+                "AND mp.place LIKE :address% " +
             "ORDER BY mp.views DESC")
     List<MatchingPost> findByPopularPosts(@Param("address") String address);
 
@@ -46,7 +46,7 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
             "WHERE mp.category=:category " +
                 "AND mp.isCompleted = 0 " +
                 "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
-                "AND mp.place LIKE %:address% " +
+                "AND mp.place LIKE :address% " +
             "ORDER BY mp.views DESC")
     List<MatchingPost> findByPopularCategoryPosts(@Param("category") Category category, @Param("address") String address);
 
@@ -65,4 +65,7 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
     List<MatchingPost> findByMemberId(Long memberId);
 
     List<MatchingPost> findByCategoryId(Long categoryId);
+
+    @Query("SELECT mp FROM MatchingPost mp WHERE mp.category=:category")
+    Optional<MatchingPost> findByExistCategory(@Param("category") Category category);
 }

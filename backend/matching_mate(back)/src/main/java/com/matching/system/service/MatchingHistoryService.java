@@ -7,16 +7,17 @@ import com.matching.system.dto.MatchingHistoryDTO;
 import com.matching.system.dto.MatchingPostDTO;
 import com.matching.system.dto.MemberDTO;
 import com.matching.system.jwt.util.JwtTokenUtil;
-import com.matching.system.response.ResponseData;
 import com.matching.system.repository.MatchingHistoryRepository;
 import com.matching.system.repository.MatchingMemberRepository;
 import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.RatingRepository;
+import com.matching.system.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,11 +54,13 @@ public class MatchingHistoryService {
     // 매칭 내역 조회 -> 관리자
     public ResponseData readAllMatchingHistories()
     {
+        SimpleDateFormat matchedTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         // 조회 및 변환
         List<MatchingHistoryDTO> historyDTOList = matchingHistoryRepository.findAll().stream()
                 .map(matchingHistory ->  MatchingHistoryDTO.builder()
                         .id(matchingHistory.getId())
-                        .matchedDatetime(matchingHistory.getMatchedDatetime())
+                        .matchedDatetime(matchedTimeFormat.format(matchingHistory.getMatchedDatetime()))
                         .matchingPostDTO(buildReadDTO(matchingHistory))
                         .historyMembers(matchingHistory.getMatchingMemberList().stream()
                                 .map(matchingMember -> MemberDTO.HistoryMemberDTO.builder()
@@ -104,25 +107,25 @@ public class MatchingHistoryService {
 //        return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", matchingHistoryDTO);
 //    }
 
-    private MatchingPostDTO.ReadPostDetailDTO buildReadDTO(MatchingHistory matchingHistory)
+    private MatchingPostDTO.ReadDetailMatchingPostDTO buildReadDTO(MatchingHistory matchingHistory)
     {
-        return MatchingPostDTO.ReadPostDetailDTO.builder()
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return MatchingPostDTO.ReadDetailMatchingPostDTO.builder()
                     .id(matchingHistory.getMatchingPost().getId())
-                    .memberId( matchingHistory.getMatchingPost().getMember()==null?null:matchingHistory.getMatchingPost().getMember().getId())
                     .nickname(matchingHistory.getMatchingPost().getMember()==null?null:matchingHistory.getMatchingPost().getMember().getNickname())
-                    .categoryId(matchingHistory.getMatchingPost().getCategory().getId())
                     .categoryName(matchingHistory.getMatchingPost().getCategory().getName())
                     .categoryImgAddress(matchingHistory.getMatchingPost().getCategory().getImgAddress())
                     .postName(matchingHistory.getMatchingPost().getPostName())
                     .postContents(matchingHistory.getMatchingPost().getPostContents())
-                    .matchingDate(matchingHistory.getMatchingPost().getMatchingDate())
-                    .matchingTime(matchingHistory.getMatchingPost().getMatchingTime())
+                    .matchingDate(matchingHistory.getMatchingPost().getMatchingDate().toString())
+                    .matchingTime(timeFormat.format(matchingHistory.getMatchingPost().getMatchingTime()))
                     .recommendedSkill(matchingHistory.getMatchingPost().getRecommendedSkill())
                     .maxNumberOfPeople(matchingHistory.getMatchingPost().getMaxNumberOfPeople())
                     .place(matchingHistory.getMatchingPost().getPlace())
                     .views(matchingHistory.getMatchingPost().getViews())
-                    .detailPlace(matchingHistory.getMatchingPost().getDetailPlace())
-                    .registerDatetime(matchingHistory.getMatchingPost().getRegisterDatetime())
+                    .registerDatetime(registerFormat.format(matchingHistory.getMatchingPost().getRegisterDatetime()))
                 .build();
     }
 
@@ -146,11 +149,13 @@ public class MatchingHistoryService {
                 .collect(Collectors.toList());
 
 
-        MatchingPostDTO.ReadPostDetailDTO readDTO = buildReadDTO(matchingHistory);
+        MatchingPostDTO.ReadDetailMatchingPostDTO readDTO = buildReadDTO(matchingHistory);
+
+        SimpleDateFormat matchedTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         return MatchingHistoryDTO.builder()
                 .id(matchingHistory.getId())
-                .matchedDatetime(matchingHistory.getMatchedDatetime())
+                .matchedDatetime(matchedTimeFormat.format(matchingHistory.getMatchedDatetime()))
                 .matchingPostDTO(readDTO)
                 .historyMembers(historyMembers)
                 .build();

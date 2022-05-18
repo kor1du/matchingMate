@@ -30,4 +30,5 @@ public interface ChattingMemberRepository extends JpaRepository<ChattingMember, 
     Integer countByChattingRoomId(Long chattingRoomId);
 
 
+
 }

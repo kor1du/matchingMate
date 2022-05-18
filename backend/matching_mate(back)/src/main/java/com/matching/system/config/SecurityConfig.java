@@ -85,6 +85,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 쉽게할려고
                 .antMatchers("/**").permitAll()
+                .antMatchers("/ws/info",
+                        "/ws/**"                        )
+                .permitAll()
+
 
                 // 설정 풀어야됨
 //                .antMatchers("/signUp").permitAll()
@@ -100,8 +104,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/myAccount/**", "/matchingProfile/**/**", "/chat/**", "/report/**").hasRole("USER")
 //                .antMatchers(HttpMethod5.OPTIONS, "/**").permitAll()
-
-                .anyRequest().authenticated()
+//                .antMatchers("/stomp/chat", "/pub/**", "/sub/**").permitAll()
+//                .anyRequest().authenticated()
 
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
