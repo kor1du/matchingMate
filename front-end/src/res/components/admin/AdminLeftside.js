@@ -36,7 +36,9 @@ function changeCategoryName(categoryName) {
 }
 
 function findCategoryProperty(categoryName) {
-  const currentDocument = document.querySelector(".admin-left-side " + categoryName);
+  const currentDocument = document.querySelector(
+    ".admin-left-side " + categoryName
+  );
   return currentDocument;
 }
 
@@ -45,7 +47,7 @@ function changePropertyColor(property) {
 }
 
 function highlightCurrentCategory() {
-  var categoryName = parseCategoryName();
+  let categoryName = parseCategoryName();
   if (categoryName.includes("modify")) return;
   else {
     categoryName = changeCategoryName(categoryName);
@@ -65,7 +67,11 @@ export default function AdminLeftside() {
   return (
     <>
       <div className="admin-profile">
-        <img src={ProfileImg} alt="admin-profile-img" className="admin-profile-img" />
+        <img
+          src={ProfileImg}
+          alt="admin-profile-img"
+          className="admin-profile-img"
+        />
         <span className="admin-profile-name">관리자님</span>
       </div>
 

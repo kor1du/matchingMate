@@ -3,7 +3,6 @@ import Sparkles from "../../img/sparkles.png";
 import Fire from "../../img/fire.png";
 import { Row, Col, Button } from "react-bootstrap";
 
-import HomeBoardCreate from "./HomeBoardCreate";
 import "../../css/home-board/homeBoard.css";
 import BoardItem from "./BoardItem";
 import BoardPagination from "./BoardPagination";
@@ -31,9 +30,6 @@ function Board(props) {
             </div>
             <Button onClick={() => getLocation()}>위치 갱신</Button>
           </Col>
-          <Col>
-            <HomeBoardCreate></HomeBoardCreate>
-          </Col>
         </Row>
         <Row className="board-list">
           {/* {boards.map((board) => <BoardItem key={board.id} board={board} />)} */}
@@ -43,7 +39,12 @@ function Board(props) {
         </Row>
       </div>
       <footer>
-        <BoardPagination total={boards.length} limit={limit} page={page} setPage={setPage} />
+        <BoardPagination
+          total={boards.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       </footer>
     </Layout>
   );

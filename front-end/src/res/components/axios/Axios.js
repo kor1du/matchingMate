@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// var url = "http://localhost:8080";
-var url = "http://localhost:8080";
+// let url = "http://localhost:8080";
+let url = "http://localhost:8080";
 
 export function axiosPost(path, data, header) {
   if (url !== "http://localhost:8080") {
@@ -22,6 +22,17 @@ export function axiosGet(path, headers) {
   }
 
   const getResult = axios.get(url, { headers });
+  return getResult;
+}
+
+export function axiosPut(path, data) {
+  if (url !== "http://localhost:8080") {
+    url = "http://localhost:8080" + path;
+  } else {
+    url += path;
+  }
+
+  const getResult = axios.put(url, data);
   return getResult;
 }
 

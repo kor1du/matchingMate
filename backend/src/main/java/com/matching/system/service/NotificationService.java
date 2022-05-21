@@ -1,17 +1,19 @@
 package com.matching.system.service;
 
 import com.matching.system.domain.Member;
+import com.matching.system.domain.Notification;
 import com.matching.system.domain.NotificationType;
 import com.matching.system.dto.NotificationDTO;
 import com.matching.system.jwt.util.JwtTokenUtil;
-import com.matching.system.response.ResponseData;
 import com.matching.system.repository.MemberRepository;
 import com.matching.system.repository.NotificationRepository;
+import com.matching.system.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,9 +31,10 @@ public class NotificationService {
     {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
+        SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         List<NotificationDTO> notificationDTOList = notificationRepository.readRecentNotification(memberId).stream()
-                .map(notification -> new NotificationDTO(notification.getId(), notification.getMember().getId(), notification.getNotificationType().toString(),
-                        notification.getMessage(), notification.getUrl(), notification.getRegisterDateTIme()))
+                .map(notification -> changeEntityToDTO(notification))
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", notificationDTOList);
@@ -45,9 +48,10 @@ public class NotificationService {
         Optional<Member> findMember = memberRepository.findById(memberId);
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
+        SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         List<NotificationDTO> notificationDTOList = notificationRepository.findByMemberId(findMember.get()).stream()
-                .map(notification -> new NotificationDTO(notification.getId(), notification.getMember().getId(), notification.getNotificationType().toString(),
-                        notification.getMessage(), notification.getUrl(), notification.getRegisterDateTIme()))
+                .map(notification -> changeEntityToDTO(notification))
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", notificationDTOList);
@@ -62,12 +66,12 @@ public class NotificationService {
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
         List<NotificationDTO> notificationDTOList = notificationRepository.findByMemberIdAndNotificationType(findMember.get(), NotificationType.관심공고.name()).stream()
-                .map(notification -> new NotificationDTO(notification.getId(), notification.getMember().getId(), notification.getNotificationType().toString(),
-                        notification.getMessage(), notification.getUrl(), notification.getRegisterDateTIme()))
+                .map(notification -> changeEntityToDTO(notification))
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK,"정상적으로 조회되었습니다.", notificationDTOList);
     }
+
     
     // 알림 내역 조회 -> 신고
     public ResponseData readReportNotification(String token)
@@ -78,11 +82,23 @@ public class NotificationService {
         if (findMember.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 회원이 존재하지 않습니다.", null);
 
         List<NotificationDTO> notificationDTOList = notificationRepository.findByMemberIdAndNotificationType(findMember.get(), NotificationType.신고처리.name()).stream()
-                .map(notification -> new NotificationDTO(notification.getId(), notification.getMember().getId(), notification.getNotificationType().toString(),
-                        notification.getMessage(), notification.getUrl(), notification.getRegisterDateTIme()))
+                .map(notification -> changeEntityToDTO(notification))
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", notificationDTOList);
+    }
+
+    private NotificationDTO changeEntityToDTO(Notification notification)
+    {
+        SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return NotificationDTO.builder()
+                .id(notification.getId())
+                .notificationType(notification.getNotificationType().toString())
+                .message(notification.getMessage())
+                .url(notification.getUrl())
+                .registerDateTIme(registerFormat.format(notification.getRegisterDateTIme()))
+                .build();
     }
 
     // 알림 전송 (신고) -> reportService

@@ -57,9 +57,6 @@ public class MatchingPost {
     @Column(name = "place", nullable = false)
     private String place;
 
-    @Column(name = "detail_place", columnDefinition = "varchar(255) default '미정'")
-    private String detailPlace;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "register_dateTime")
     @CreationTimestamp
@@ -100,9 +97,6 @@ public class MatchingPost {
     }
     public void updatePlace(String place) {
         this.place = place;
-    }
-    public void updateDetailPlace(String detailPlace) {
-        this.detailPlace = detailPlace;
     }
     public void updatePlusNumberOfPeople() { this.numberOfPeople++; }
     public void updateMinusNumberOfPeople() { this.numberOfPeople--; }

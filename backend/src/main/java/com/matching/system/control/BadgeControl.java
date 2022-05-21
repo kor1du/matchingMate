@@ -38,6 +38,16 @@ public class BadgeControl {
                 .body(responseMessage);
     }
 
+    @DeleteMapping("/admin/badge/delete/{id}")
+    public ResponseEntity deleteBadgeStandard(@PathVariable("id") Long badgeId)
+    {
+        ResponseMessage responseMessage = badgeService.delete(badgeId);
+
+        return ResponseEntity
+                .status(responseMessage.getStatus())
+                .body(responseMessage);
+    }
+
     // 뱃지 조회 - 관리자     -> O
     @GetMapping("/admin/badge")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -48,16 +58,6 @@ public class BadgeControl {
         return ResponseEntity
                 .status(responseData.getStatus())
                 .body(responseData);
-    }
-
-    @DeleteMapping("/admin/badge/delete/{id}")
-    public ResponseEntity deleteBadgeStandard(@PathVariable("id") Long badgeId)
-    {
-        ResponseMessage responseMessage = badgeService.delete(badgeId);
-
-        return ResponseEntity
-                .status(responseMessage.getStatus())
-                .body(responseMessage);
     }
 
     // 뱃지  조회 - 사용자     -> O

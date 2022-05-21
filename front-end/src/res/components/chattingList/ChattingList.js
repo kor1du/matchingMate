@@ -24,7 +24,7 @@ export default function ChattingListComponent() {
     <Container className="chatting-list-component">
       <ul>
         <li>
-          <Link to="/chatting">
+          <Link to="/chat">
             <img src={Person1} alt="person1" />
             <div className="detail">
               <h2>
@@ -35,7 +35,7 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
-          <Link to="/chatting">
+          <Link to="/chat">
             <img src={Person2} alt="person2" />
             <div className="detail">
               <h2>
@@ -46,7 +46,7 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
-          <Link to="/chatting">
+          <Link to="/chat">
             <img src={Person3} alt="person3" />
             <div className="detail">
               <h2>
@@ -57,7 +57,7 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
-          <Link to="/chatting">
+          <Link to="/chat">
             <img src={Person4} alt="person4" />
             <div className="detail">
               <h2>
@@ -68,7 +68,7 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
-          <Link to="/chatting">
+          <Link to="/chat">
             <img src={Person5} alt="person5" />
             <div className="detail">
               <h2>

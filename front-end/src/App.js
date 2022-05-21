@@ -1,5 +1,6 @@
 import React from "react";
 import "./res/css/global.css";
+import "animate.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./res/page/home";
 import Login from "./res/page/login";
@@ -18,6 +19,8 @@ import AdminBadgeView from "./res/page/admin/adminBadgeView";
 import MatchProfile from "./res/page/matchProfile/matchProfile";
 import MemberProfile from "./res/page/memberProfile/memberProfile";
 import BoardDetail from "./res/page/BoardDetail/BoardDetail";
+import ChatRoomList from "./res/page/YH/ChatRoomList";
+import ChatRoom from "./res/page/YH/ChatRoom";
 
 export default function App() {
   const member = {
@@ -34,13 +37,9 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/chatting/list" element={<ChattingList />} />
-          <Route path="/chatting" element={<Chat />} />
           <Route path="/post/:id" element={<BoardDetail />} />
           <Route path="/admin/post/management" element={<AdminPostManagement />}></Route>
-
           <Route path="/admin/report/management" element={<AdminReportManagement />}></Route>
-
           <Route path="/admin/category/add" element={<AdminCategoryAdd />}></Route>
           <Route path="/admin/category/modify/" element={<AdminCategoryModify />}></Route>
           <Route path="/admin/category/view" element={<AdminCategoryView />}></Route>
@@ -50,6 +49,8 @@ export default function App() {
           <Route path="/match" element={<MatchProfile member={member} />} />
           <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>
           <Route path="/member" element={<MemberProfile member={member} />} />
+          <Route path="/chat/" element={<ChatRoomList />} exact />
+          <Route path="/chat/in" element={<ChatRoom />} exact />
         </Routes>
       </BrowserRouter>
     </div>

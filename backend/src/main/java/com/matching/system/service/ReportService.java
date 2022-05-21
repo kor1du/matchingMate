@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,8 +41,6 @@ public class ReportService {
         // 회원
         Member member = memberRepository.findById(memberId).get();
         Member targetMember = memberRepository.findById(reportRegisterDTO.getTargetMemberId()).get();
-
-
 
         // entity
         Report newReport = Report.builder()
@@ -92,6 +91,8 @@ public class ReportService {
             reports = reportRepository.findByStatus(0);
         }
 
+        SimpleDateFormat registerDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         List<ReportDTO.ReportReadDTO> reportReadDTOs = reports.stream()
                 .map(report -> ReportDTO.ReportReadDTO.builder()
                         .id(report.getId())
@@ -101,7 +102,7 @@ public class ReportService {
                         .reportType(report.getReportType().toString())
                         .contents(report.getContents())
                         .status((report.getStatus() == 1 ? "처리 완료" : "처리 전"))
-                        .registerDatetime(report.getRegisterDatetime())
+                        .registerDatetime(registerDate.format(report.getRegisterDatetime()))
                         .build())
                 .collect(Collectors.toList());
 

@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface MemberCustomRepository {
 
-    Optional<MemberDTO.ReadMemberDTO> findById(Long memberId);
+    Optional<MemberDTO.ReadMemberInfoDTO> findById(Long memberId);
 
-    List<MemberDTO.ReadMemberDTO> findAllUser(String roleType);
+    List<MemberDTO.ReadMemberInfoDTO> findAllUser(String roleType);
 
     Optional<MemberDTO.CheckDuplicateId> findByUserId(String userId);
 }

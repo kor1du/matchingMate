@@ -1,6 +1,5 @@
 package com.matching.system.customRepository;
 
-import com.matching.system.domain.Category;
 import com.matching.system.domain.MatchingPost;
 import com.matching.system.dto.MatchingPostDTO;
 
@@ -11,17 +10,15 @@ public interface MatchingPostCustomRepository {
 
 //    List<MatchingPost> findByRecentPosts(String address);
 
-    List<MatchingPostDTO.ReadSimpleMatchingPostDTO> findByRecentCategoryPosts(Category category, String address);
+    List<MatchingPostDTO.ReadSimpleMatchingPostDTO> findByRecentCategoryPosts(Long categoryId, String address, String level);
 
 //    List<MatchingPost> findByPopularPosts(String address);
 
-    List<MatchingPostDTO.ReadSimpleMatchingPostDTO> findByPopularCategoryPosts(Category category, String address);
+    List<MatchingPostDTO.ReadSimpleMatchingPostDTO> findByPopularCategoryPosts(Long categoryId, String address, String level);
 
     Optional<MatchingPostDTO.ReadDetailMatchingPostDTO> findByDetailMatchingPost(Long matchingPostId);
 
     Optional<MatchingPost> findById(Long matchingPostId);
-
-
 
     List<MatchingPost> findAll();
 

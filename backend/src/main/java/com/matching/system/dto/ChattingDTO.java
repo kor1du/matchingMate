@@ -28,9 +28,7 @@ public class ChattingDTO {
         private Integer numberOfPeople;
         private Integer maxNumberOfPeople;
         private Integer roomNumberOfPeople;
-        @Temporal(TemporalType.TIMESTAMP)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-        private Date registerDatetime;
+        private String registerDatetime;
     }
 
     @Getter     @Builder    @Setter
@@ -41,11 +39,11 @@ public class ChattingDTO {
     }
 
 
-    @Getter     @Builder
+    @Getter     @Builder    @Setter
     @NoArgsConstructor    @AllArgsConstructor
     public static class SendMessageDTO
     {
-        public Long chattingMemberId;
+        public String token;
         public Long roomId;
         public String message;
     }
@@ -58,13 +56,8 @@ public class ChattingDTO {
         private Long id; // room PK
         private Long postMemberId;  // 만든 사람
         private String place;
-        private String detailPlace;
-        @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-        private Date matchingDate;
-        @Temporal(TemporalType.TIME)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
-        private Date matchingTime;
+        private String matchingDate;
+        private String matchingTime;
         private Long myMemberId;    // 자기 id
         private Long chattingMemberId;
         private List<ReadChattingMessageDTO> readMessageList;
@@ -89,21 +82,15 @@ public class ChattingDTO {
     // 메시지 조회
     @Getter     @Builder
     @NoArgsConstructor    @AllArgsConstructor
-    public static class ReadChattingMessageDTO implements Comparable<Date>
+    public static class ReadChattingMessageDTO
     {
         public Long chattingMessageId;     // message PK
         public Long memberId;
         public String nickname;
         public String profileImgAddress;
         public String message;
-        @Temporal(TemporalType.TIMESTAMP)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-        private Date registerDatetime;
+        private String registerDatetime;
 
-        @Override
-        public int compareTo(Date o) {
-            return this.registerDatetime.compareTo(o);
-        }
     }
 
     // 준비상태 업데이트
@@ -125,9 +112,10 @@ public class ChattingDTO {
     public static class CompleteMatching
     {
         private Long chattingRoomId;    // chattingRoomId
-        private String detailPlace;
-        @Temporal(TemporalType.TIME)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asia/Seoul")
+        private String place;
+        @Temporal(TemporalType.DATE)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
+//        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "hh:MM", timezone = "Asia/Seoul")
         private Date matchingTime;
     }
 

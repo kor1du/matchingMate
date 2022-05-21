@@ -22,5 +22,11 @@ public interface ChattingRoomRepository extends JpaRepository<ChattingRoom, Long
             "WHERE cr.id=:chattingRoomId")
     Optional<ChattingRoom> findById(@Param("chattingRoomId") Long chattingRoomId);
 
+    @Query("SELECT DISTINCT cr FROM ChattingRoom cr " +
+            "JOIN FETCH cr.matchingPost mp " +
+            "JOIN FETCH mp.member " +
+            "WHERE cr.id=:chattingRoomId")
+    Optional<ChattingRoom> existRoom(@Param("chattingRoomId") Long chattingRoomId);
+
 
 }

@@ -24,7 +24,7 @@ export default function Profile() {
             </Link>
           </li>
           <li>
-            <Link to="/chatting/list" className="profile-link">
+            <Link to="/chat" className="profile-link">
               <span>채팅</span>
             </Link>
           </li>

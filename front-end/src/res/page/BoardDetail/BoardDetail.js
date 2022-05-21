@@ -38,11 +38,7 @@ const BoardDetail = () => {
       ) : (
         <div className={styles.container}>
           <section className={styles.header}>
-            <BsArrowLeft
-              className={styles.backBtn}
-              size="40"
-              onClick={() => navigate(-1)}
-            ></BsArrowLeft>
+            <BsArrowLeft className={styles.backBtn} size="40" onClick={() => navigate(-1)}></BsArrowLeft>
             <h1>제목 : {board.postName}</h1>
             <div>
               <p>작성자 닉네임 : {board.nickname}</p>
@@ -92,7 +88,7 @@ const BoardDetail = () => {
             <p>{board.postContents}</p>
           </div>
           <div className={styles.chatBtnBox}>
-            <Link to="/chatting">
+            <Link to="/chat">
               <Button>채팅방 참여하기</Button>
             </Link>
           </div>

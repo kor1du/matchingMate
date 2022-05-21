@@ -122,7 +122,7 @@ public class MemberControl {
     }
 
     // 매칭 프로필 조회 -> 첫화면 ( 이미지, 닉네임, 한줄소개, 매칭 횟수, 기술 평균, 매너 평균  )    -> O
-    @GetMapping("/matchingProfile")
+    @GetMapping("/profile")
     public ResponseEntity readMatchingProfile(@RequestHeader("Authorization") String token) {
         ResponseData responseData = memberService.readMatchingProfile(token);
 

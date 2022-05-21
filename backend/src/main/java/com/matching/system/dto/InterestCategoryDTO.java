@@ -46,14 +46,5 @@ public class InterestCategoryDTO {
         private String region3;
     }
 
-    @Getter
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class MemberInterestCategoryDTO
-    {
-        private Long memberId;
-        private String categoryName;
-    }
 
 }

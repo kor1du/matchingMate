@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,13 +39,16 @@ public class MatchingPostService {
 
 
     // 매칭 공고 추가
-    public ResponseMessage save(MatchingPostDTO.CreateDTO matchingPostCreateDTO) {
+    public ResponseMessage save(MatchingPostDTO.CreateDTO matchingPostCreateDTO, String token) {
+
         // 카테고리 검색
         Optional<Category> category = categoryRepository.findById(matchingPostCreateDTO.getCategoryId());
         if (category.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 카테고리가 없습니다.");
 
         // 회원 검색
-        Member member = memberRepository.findById(matchingPostCreateDTO.getMemberId()).get();
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
+        Member member = memberRepository.findById(memberId).get();
 
         // 저장
         MatchingPost newMatchingPost = matchingPostRepository.save(MatchingPost.builder()
@@ -60,7 +64,6 @@ public class MatchingPostService {
                 .views(0)
                 .maxNumberOfPeople(matchingPostCreateDTO.getMaxNumberOfPeople())
                 .place(matchingPostCreateDTO.getPlace())
-                .detailPlace(matchingPostCreateDTO.getDetailPlace())
                 .build());
 
         // 채팅 방 추가 + 채팅 회원 추가
@@ -100,7 +103,6 @@ public class MatchingPostService {
         findMatchingPost.get().updateMatchingDate(matchingPostUpdateDTO.getMatchingDate());
         findMatchingPost.get().updateMatchingTime(matchingPostUpdateDTO.getMatchingTime());
         findMatchingPost.get().updatePlace(matchingPostUpdateDTO.getPlace());
-        findMatchingPost.get().updateDetailPlace(matchingPostUpdateDTO.getDetailPlace());
         findMatchingPost.get().updateMaxNumberOfPeople(matchingPostUpdateDTO.getMaxNumberOfPeople());
         findMatchingPost.get().updateRecommendedSKill(matchingPostUpdateDTO.getRecommendedSkill());
 
@@ -131,18 +133,18 @@ public class MatchingPostService {
     }
 
     // 매칭 공고 조회 -> 사용자 (최신) -> simple 이냐 모두냐
-    public ResponseData readRecentPosts(Long categoryId, Double latitude, Double longitude) {
-        String address = mapControl.coordToAddr(longitude, latitude);
+    public ResponseData readRecentPosts(MatchingPostDTO.SearchConditionDTO searchCondition) {
+        String address = getMemberAddress(searchCondition.getLng(), searchCondition.getLat());
 
         System.out.println("address = " + address);
 
         List<MatchingPost> matchingPostList;
 
-        if (categoryId == null) {
+        if (searchCondition.getCategoryId() == null) {
             matchingPostList = matchingPostRepository.findByRecentPosts(address);
         }
         else{
-            Category findCategory = categoryRepository.findById(categoryId).get();
+            Category findCategory = categoryRepository.findById(searchCondition.getCategoryId()).get();
 
             matchingPostList = matchingPostRepository.findByRecentCategoryPosts(findCategory, address);
         }
@@ -155,16 +157,16 @@ public class MatchingPostService {
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTOList);
     }
 
-    // 매칭 공고 조회 -> 사용자 (최신) -> simple 이냐 모두냐
-    public ResponseData readPopularPosts(Long categoryId, Double latitude, Double longitude) {
-        String address = mapControl.coordToAddr(longitude, latitude);
+    // 매칭 공고 조회 -> 인기
+    public ResponseData readPopularPosts(MatchingPostDTO.SearchConditionDTO searchCondition) {
+        String address = getMemberAddress(searchCondition.getLng(), searchCondition.getLat());
 
         List<MatchingPost> matchingPostList;
 
-        if (categoryId == null) {
+        if (searchCondition.getCategoryId() == null) {
             matchingPostList = matchingPostRepository.findByPopularPosts(address);
         } else {
-            Category findCategory = categoryRepository.findById(categoryId).get();
+            Category findCategory = categoryRepository.findById(searchCondition.getCategoryId()).get();
 
             matchingPostList = matchingPostRepository.findByPopularCategoryPosts(findCategory, address);
         }
@@ -176,21 +178,28 @@ public class MatchingPostService {
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTOList);
     }
 
+    private String getMemberAddress(Double longitude, Double latitude)
+    {
+        return mapControl.coordToAddr(longitude, latitude);
+    }
+
     private MatchingPostDTO.ReadSimpleMatchingPostDTO PostToSimpleDTO(MatchingPost matchingPost)
     {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         return MatchingPostDTO.ReadSimpleMatchingPostDTO.builder()
                     .id(matchingPost.getId())
                     .categoryName(matchingPost.getCategory().getName())
                     .postName(matchingPost.getPostName())
-                    .matchingDate(matchingPost.getMatchingDate())
-                    .matchingTime(matchingPost.getMatchingTime())
+                    .matchingDate(matchingPost.getMatchingDate().toString())
+                    .matchingTime(timeFormat.format(matchingPost.getMatchingTime()))
                     .recommendedSkill(matchingPost.getRecommendedSkill())
                     .numberOfPeople(matchingPost.getNumberOfPeople())
                     .maxNumberOfPeople(matchingPost.getMaxNumberOfPeople())
                     .views(matchingPost.getViews())
                     .place(matchingPost.getPlace())
-                    .detailPlace(matchingPost.getDetailPlace())
-                    .registerDatetime(matchingPost.getRegisterDatetime())
+                    .registerDatetime(registerFormat.format(matchingPost.getRegisterDatetime()))
                 .build();
     }
 
@@ -206,8 +215,7 @@ public class MatchingPostService {
                         .postName(matchingPost.getPostName())
                         .postContents(matchingPost.getPostContents())
                         .place(matchingPost.getPlace())
-                        .detailPlace(matchingPost.getDetailPlace())
-                        .registerDatetime(matchingPost.getRegisterDatetime())
+                        .registerDatetime(matchingPost.getRegisterDatetime().toString())
                         .build())
                 .collect(Collectors.toList());
 
@@ -225,6 +233,9 @@ public class MatchingPostService {
         // view ++
         findMatchingPost.get().updateViews();
 
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         MatchingPostDTO.ReadDetailMatchingPostDTO readDTO = MatchingPostDTO.ReadDetailMatchingPostDTO.builder()
                 .id(findMatchingPost.get().getId())
                 .nickname(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getNickname())
@@ -232,21 +243,19 @@ public class MatchingPostService {
                 .categoryImgAddress(findMatchingPost.get().getCategory() == null ? null : findMatchingPost.get().getCategory().getImgAddress())
                 .postName(findMatchingPost.get().getPostName())
                 .postContents(findMatchingPost.get().getPostContents())
-                .matchingDate(findMatchingPost.get().getMatchingDate())
-                .matchingTime(findMatchingPost.get().getMatchingTime())
+                .matchingDate(findMatchingPost.get().getMatchingDate().toString())
+                .matchingTime(timeFormat.format(findMatchingPost.get().getMatchingTime()))
                 .recommendedSkill(findMatchingPost.get().getRecommendedSkill())
                 .numberOfPeople(findMatchingPost.get().getNumberOfPeople())
                 .maxNumberOfPeople(findMatchingPost.get().getMaxNumberOfPeople())
                 .views(findMatchingPost.get().getViews())
                 .place(findMatchingPost.get().getPlace())
-                .detailPlace(findMatchingPost.get().getDetailPlace())
-                .registerDatetime(findMatchingPost.get().getRegisterDatetime())
+                .registerDatetime(registerFormat.format(findMatchingPost.get().getRegisterDatetime()))
                 .isMyPost( memberId==findMatchingPost.get().getMember().getId() ? true:false )
                 .build();;
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTO);
     }
-
 
     // 채팅방 가입하기
     public ResponseMessage joinChatting(ChattingDTO.ChattingRoomInDTO chattingRoomInDTO, String token) {
@@ -257,12 +266,13 @@ public class MatchingPostService {
         if (validateDuplicateRoom.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 방에 가입되어 있습니다.");
 
         // chatting_member 추가
-        ChattingRoom chattingRoom = chattingRoomRepository.findById(chattingRoomInDTO.getRoomId()).get();
+        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.existRoom(chattingRoomInDTO.getRoomId());
+        if (chattingRoom.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 채팅 방이 존재하지 않습니다.");
 
         Member member = memberRepository.findById(memberId).get();
 
         chattingMemberRepository.save(ChattingMember.builder()
-                .chattingRoom(chattingRoom)
+                .chattingRoom(chattingRoom.get())
                 .member(member)
                 .isReady(false)
                 .build());

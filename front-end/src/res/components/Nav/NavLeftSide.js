@@ -19,7 +19,7 @@ export default function NavLeftSide() {
           <Link to="/admin/post/management">
             <h1>관리자메뉴</h1>
           </Link>
-          <Link to="/chatting/list">
+          <Link to="/chat">
             <h1>채팅</h1>
           </Link>
           <h1>메뉴3</h1>

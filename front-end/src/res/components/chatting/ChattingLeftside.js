@@ -11,8 +11,8 @@ import { toggle } from "../toggle/Toggle";
 function handleReadyBtn(event) {
   const userArr = document.querySelectorAll(".detail h3");
   const targetUserName = event.target.previousSibling.innerHTML;
-  var targetUser = event.target;
-  for (var i = 0; i < userArr.length; i++) {
+  let targetUser = event.target;
+  for (let i = 0; i < userArr.length; i++) {
     if (userArr[i].innerHTML === targetUserName) {
       targetUser = userArr[i].nextSibling;
     }

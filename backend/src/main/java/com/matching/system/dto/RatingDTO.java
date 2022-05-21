@@ -1,14 +1,10 @@
 package com.matching.system.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
 import java.util.List;
 
 
@@ -45,8 +41,6 @@ public class RatingDTO {
         private String contents;
         private Float skillPoint;
         private Float mannerPoint;
-        @Temporal(TemporalType.TIMESTAMP)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-        private Date registerDatetime;
+        private String registerDatetime;
     }
 }

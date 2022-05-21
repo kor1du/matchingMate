@@ -10,7 +10,6 @@ import java.util.Date;
 
 public class MemberDTO {
 
-    // 이미지 주소 컬럼 추가
     @Getter
     @Setter
     @AllArgsConstructor
@@ -22,8 +21,6 @@ public class MemberDTO {
         private String userId;
         private String userPw;
         private String nickname;
-//        @Enumerated(EnumType.STRING)
-//        private String roleType;
         private String sex;
         @Temporal(TemporalType.DATE)
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -62,20 +59,35 @@ public class MemberDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class ReadMemberDTO
+    public static class ReadMyInfoDTO
     {
-        private Long id;
         private String userId;
         private String userPw;
-        @Temporal(TemporalType.DATE)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-        private Date birthday;
+        private String birthday;
         private String sex;
         private String name;
         private String nickname;
         private String phone;
         private String address;
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ReadMemberInfoDTO
+    {
+        private Long id;
+        private String userId;
+        private String userPw;
+        private String birthday;
+        private String sex;
+        private String name;
+        private String nickname;
+        private String phone;
+        private String address;
+    }
+
 
     @Getter
     @NoArgsConstructor
@@ -118,7 +130,6 @@ public class MemberDTO {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
     public static class UpdateImgAddress
     {
         private MultipartFile file;
@@ -127,7 +138,6 @@ public class MemberDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
     public static class UpdateProfileContent
     {
         private String profileContent;
