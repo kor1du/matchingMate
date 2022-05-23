@@ -24,7 +24,7 @@ public class NotificationControl {
     }
 
     // 알림 내역 조회 -> 전체
-    @GetMapping("/matchingProfile/notification")
+    @GetMapping("/profile/notification")
     public ResponseEntity readAllNotification(@RequestHeader("Authorization") String token)
     {
         ResponseData responseData = notificationService.readAllNotification(token);
@@ -35,7 +35,7 @@ public class NotificationControl {
     }
 
     // 알림 내역 조회 -> 관심 카테고리
-    @GetMapping("/matchingProfile/notification/interest")
+    @GetMapping("/profile/notification/interest")
     public ResponseEntity readInterestNotification(@RequestHeader("Authorization") String token)
     {
         ResponseData responseData = notificationService.readInterestNotification(token);
@@ -46,7 +46,7 @@ public class NotificationControl {
     }
 
     // 알림 내역 조회 -> 신고
-    @GetMapping("/matchingProfile/notification/report/{id}")
+    @GetMapping("/profile/notification/report")
     public ResponseEntity readReportNotification(@RequestHeader("Authorization") String token)
     {
         ResponseData responseData =  notificationService.readReportNotification(token);

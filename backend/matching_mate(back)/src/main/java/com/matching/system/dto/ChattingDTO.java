@@ -1,7 +1,11 @@
 package com.matching.system.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 import java.util.List;
 
 public class ChattingDTO {
@@ -31,7 +35,6 @@ public class ChattingDTO {
     @NoArgsConstructor    @AllArgsConstructor
     public static class ChattingRoomInDTO
     {
-        public Long memberId;
         public Long roomId;
     }
 
@@ -73,6 +76,8 @@ public class ChattingDTO {
         private Float avgSkillPoint;
         private Float avgMannerPoint;
         private boolean isReady;
+
+        private Integer priority;
     }
 
 
@@ -110,7 +115,9 @@ public class ChattingDTO {
     {
         private Long chattingRoomId;    // chattingRoomId
         private String place;
-        private String matchingTime;
+        @Temporal(TemporalType.DATE)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
+        private Date matchingTime;
     }
 
 }

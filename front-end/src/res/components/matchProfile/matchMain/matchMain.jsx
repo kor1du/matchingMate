@@ -3,11 +3,13 @@ import MatchHistory from '../matchHistory/matchHistory';
 import MatchRating from '../matchRating/matchRating';
 import Notice from '../../notice/notice';
 import Category from '../category/category';
+import styles from './matchMain.module.css'
+import ProfileContent from './mainProfileContent'
 
 const MatchMain = (props) => {
 
   const {menu} = props;
-
+  const profileInfo=props.profileInfo;
 
   if(menu === 'history') {
     return (
@@ -15,7 +17,7 @@ const MatchMain = (props) => {
     )
   } else if(menu === 'rating') {
     return (
-      <MatchRating/>
+      <MatchRating />
     )
   } else if(menu === 'notice') {
     return (
@@ -23,14 +25,13 @@ const MatchMain = (props) => {
     )
   } else if(menu === 'category') {
     return (
-      <Category/>
+      <Category />
     )
   }
-
   return (
-    <>
-      <h2>기본..메인..리턴 안보일 예정</h2>
-    </>
+    <div className={styles.main_container}>
+      <ProfileContent profileInfo={profileInfo} profileContent={profileInfo.profileContent}/>
+    </div>
   );
 };
 

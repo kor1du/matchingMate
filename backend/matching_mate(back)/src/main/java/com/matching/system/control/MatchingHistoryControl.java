@@ -15,7 +15,7 @@ public class MatchingHistoryControl {
     // 매칭 내역 추가 -> 매칭 공고 완료에 포함
 
     // 매칭 내역 조회 -> 사용자      -> O
-    @GetMapping("/matchingProfile/history")
+    @GetMapping("/profile/history")
     public ResponseEntity readMatchingHistories(@RequestHeader("Authorization") String token)
     {
         ResponseData responseData = matchingHistoryService.readMatchingHistories(token);

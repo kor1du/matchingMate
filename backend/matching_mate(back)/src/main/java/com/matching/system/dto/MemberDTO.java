@@ -42,13 +42,21 @@ public class MemberDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    public static class CheckDuplicateNickname
+    {
+        private String nickname;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class UpdateAccountDTO
     {
         private String userPw;
         @Temporal(TemporalType.DATE)
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private Date birthday;
-        private String sex;
         private String name;
         private String nickname;
         private String phone;
@@ -119,6 +127,7 @@ public class MemberDTO {
     {
         private Long id;    // memberId
         private String profileImgAddress;
+        private String memberNickname;
         private String profileContent;
         private Integer matchingCount;
         private Float avgSkillPoint;

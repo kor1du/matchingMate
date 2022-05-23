@@ -2,6 +2,7 @@ package com.matching.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -74,13 +75,15 @@ public class Member implements Serializable {
     @Column(name = "profile_content")
     private String profileContent;
 
-    @Column(name = "profile_img_address")
+    @ColumnDefault("'https://i.ibb.co/F8N7yP9/image.png'")
+    @Column(name = "profile_img_address", columnDefinition = "varchar(300) default 'https://i.ibb.co/F8N7yP9/image.png'")
     private String profileImgAddress;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
+
 
     @Column(name = "matching_count", columnDefinition = "int default 0")
     private Integer matchingCount;
@@ -103,7 +106,7 @@ public class Member implements Serializable {
     private List<Notification> notificationList;
 
     // matching member
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MatchingMember> matchingMemberList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)

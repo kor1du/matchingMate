@@ -36,7 +36,7 @@ public class RatingControl {
     }
 
     // 평점 조회 - 사용자    -> O
-    @GetMapping("/matchingProfile/rating")
+    @GetMapping("/profile/rating")
     public ResponseEntity readMemberRating(@RequestHeader("Authorization") String token) {
         ResponseData responseData = ratingService.readMemberRating(token);
 

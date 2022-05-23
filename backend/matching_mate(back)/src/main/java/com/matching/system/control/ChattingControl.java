@@ -20,7 +20,7 @@ public class ChattingControl {
     // 채팅 방 목록 조회      -> O     (제일 최신에 채팅메시지 전송된걸 젤 위로 -> 수정)
     @GetMapping("")
     public ResponseEntity readList(@RequestHeader("Authorization") String token) {
-//        System.out.println("id = " + id);
+
         ResponseData responseData = chattingService.readList(token);
 
         return ResponseEntity
@@ -31,11 +31,8 @@ public class ChattingControl {
     // 채팅방 입장 및 메시지 반환      -> O
     @GetMapping("/in/{roomId}")
     public ResponseEntity inChattingRoom(@PathVariable("roomId") Long roomId,
-                                         @RequestHeader("Authorization") String token
-            /*@ModelAttribute("chatting") ChattingDTO.ChattingRoomInDTO chattingRoomInDTO*//*,
-                                         @RequestHeader("Authorization") String token*/) {
-//       ResponseData responseData = chattingService.inChattingRoom(chattingRoomInDTO/*, token*/);
-        System.out.println("token = " + token);
+                                         @RequestHeader("Authorization") String token){
+
         ResponseData responseData = chattingService.inChattingRoomId(roomId, token);
 
         return ResponseEntity
@@ -52,16 +49,6 @@ public class ChattingControl {
                 .status(responseMessage.getStatus())
                 .body(responseMessage);
     }
-
-    // 채팅방 내용 전송       -> O
-//    @PostMapping("/in/send")
-//    public ResponseEntity sendMessage(@RequestBody ChattingDTO.SendMessageDTO sendMessageDTO) {
-//        ResponseMessage responseMessage = chattingService.sendMessage(sendMessageDTO);
-//
-//        return ResponseEntity
-//                .status(responseMessage.getStatus())
-//                .body(responseMessage);
-//    }
 
     // 채팅방 매칭 ready -> 개별 (공고 참가자)       -> O
     @PutMapping("/in")

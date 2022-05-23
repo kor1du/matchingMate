@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import View from "../../img/view.png";
+import { Button } from "react-bootstrap";
+
 import { axiosGet } from "../axios/Axios";
 import "../../css/adminComponents/adminPostManagementRightside.css";
 import AdminPostBoard from "./AdminPostBoard";
-import BoardPagination from "../home-board/BoardPagination";
+
 
 export default function AdminPostManagement() {
   const getPosts = async () => {

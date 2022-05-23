@@ -33,7 +33,7 @@ public class InterestCategoryService {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
         // null 체크
-        Optional<InterestCategory> findInterestCategory = interestCategoryRepository.findByMemberIdAndCategoryIdAndRegion1AndRegion2AndRegion3(memberId, createDTO.getCategoryId(), createDTO.getRegion1(), createDTO.getRegion2(), createDTO.getRegion3());
+        Optional<InterestCategory> findInterestCategory = interestCategoryRepository.findByMemberIdAndCategoryId(memberId, createDTO.getCategoryId());
         if (findInterestCategory.isPresent()) return  new ResponseMessage(HttpStatus.CONFLICT, "이미 동일한 관심 카테고리가 존재합니다.");
 
         // 카테고리 검색
@@ -97,8 +97,12 @@ public class InterestCategoryService {
 
         Optional<Member> findMember = memberRepository.findById(memberId);
 
-        List<InterestCategoryDTO.ReadDTO> updateReadDTOList = interestCategoryRepository.findByMemberId(findMember.get()).stream()
-                .map(interestCategory -> InterestCategoryDTO.ReadDTO.builder()
+        List<InterestCategory> interestCategoryList = interestCategoryRepository.findByMemberId(findMember.get());
+
+        if (interestCategoryList.isEmpty()) return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", null);
+
+        List<InterestCategoryDTO.ReadDTO> updateReadDTOList = interestCategoryList.stream()
+                .map(interestCategory ->  InterestCategoryDTO.ReadDTO.builder()
                         .id(interestCategory.getId())
                         .categoryId(interestCategory.getCategory().getId())
                         .categoryName(interestCategory.getCategory().getName())
@@ -110,7 +114,5 @@ public class InterestCategoryService {
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", updateReadDTOList);
     }
-
-
 
 }

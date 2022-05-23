@@ -1,6 +1,7 @@
 package com.matching.system.repository;
 
 import com.matching.system.domain.Report;
+import com.matching.system.domain.ReportType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,12 +30,14 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
             "WHERE r.id=:reportId")
     Optional<Report> findById(@Param("reportId") Long reportId);
 
-    Optional<Report> findByTargetIdAndMemberIdAndTargetMemberIdAndReportTypeAndReportClassify(Long targetId, Long memberId, Long targetMemberId, String reportType, String reportClassify);
+    Optional<Report> findByTargetIdAndMemberIdAndTargetMemberIdAndReportTypeAndReportClassify(Long targetId, Long memberId, Long targetMemberId, ReportType reportType, String reportClassify);
 
     List<Report> findByMemberId(Long memberId);
 
 
 
     void deleteByTargetMemberId(Long targetMemberId);
+
+    void deleteByMemberId(Long memberId);
 
 }

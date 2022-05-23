@@ -30,17 +30,18 @@ public class ReportService {
     // 신고 추가 = 신고하기
     public ResponseMessage createReport(ReportDTO.ReportRegisterDTO reportRegisterDTO, String token) {
 
+        StringToEnumConverter stringToEnumConverter = new StringToEnumConverter();
+
+        // 회원
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+        Member member = memberRepository.findById(memberId).get();
+        Member targetMember = memberRepository.findByNickname(reportRegisterDTO.getTargetMemberNickname()).get();
 
         // 신고 중복
         Optional<Report> findReport = reportRepository.findByTargetIdAndMemberIdAndTargetMemberIdAndReportTypeAndReportClassify
-                (reportRegisterDTO.getTargetId(), memberId, reportRegisterDTO.getTargetMemberId(), reportRegisterDTO.getReportType(), reportRegisterDTO.getReportClassify());
+                (reportRegisterDTO.getTargetId(), memberId, targetMember.getId(), stringToEnumConverter.convert(reportRegisterDTO.getReportType()), reportRegisterDTO.getReportClassify());
 
         if (findReport.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 같은 내용으로 신고하셨습니다.");
-
-        // 회원
-        Member member = memberRepository.findById(memberId).get();
-        Member targetMember = memberRepository.findById(reportRegisterDTO.getTargetMemberId()).get();
 
         // entity
         Report newReport = Report.builder()
@@ -48,7 +49,7 @@ public class ReportService {
                 .targetMember(targetMember)
                 .targetId(reportRegisterDTO.getTargetId())
                 .reportClassify(reportRegisterDTO.getReportClassify())  // ER001인지>> 문자인ㅅ지
-                .reportType(ReportType.valueOf(reportRegisterDTO.getReportType()))
+                .reportType(stringToEnumConverter.convert(reportRegisterDTO.getReportType()))
                 .contents(reportRegisterDTO.getContents())
                 .status(0)
                 .build();
@@ -141,7 +142,7 @@ public class ReportService {
             notificationRepository.save(Notification.builder()
                     .member(targetMember)
                     .notificationType(NotificationType.신고처리)
-                    .message(report.get().getReportType() + "에서 " + report.get().getReportClassify() + "(으)로 신고되었습니다. 주의해주세요!")
+                    .message(report.get().getReportType() + "에서 " + report.get().getReportClassify() + "(으)로 신고되었습니다.")
                     .url(null)      // 신고당한 것으로 이동?
                     .build()
             );

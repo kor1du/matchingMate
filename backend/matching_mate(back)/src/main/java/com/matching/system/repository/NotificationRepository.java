@@ -2,6 +2,7 @@ package com.matching.system.repository;
 
 import com.matching.system.domain.Member;
 import com.matching.system.domain.Notification;
+import com.matching.system.domain.NotificationType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -26,5 +27,5 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
             "JOIN FETCH n.member " +
             "WHERE n.member=:member " +
             "AND n.notificationType=:notificationType")
-    List<Notification> findByMemberIdAndNotificationType(@Param("member") Member member, @Param("notificationType") String notificationType);
+    List<Notification> findByMemberIdAndNotificationType(@Param("member") Member member, @Param("notificationType") NotificationType notificationType);
 }

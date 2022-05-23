@@ -111,7 +111,7 @@ public class RatingService {
 
         return RatingDTO.ReadDetailRatingDTO.builder()
                 .id(rating.getId())
-                .targetMemberNickname(rating.getTargetMember()==null?null:rating.getTargetMember().getNickname())
+                .targetMemberNickname(rating.getTargetMember().getNickname())
                 .memberNickname(rating.getMember()==null?null:rating.getMember().getNickname())
                 .contents(rating.getContents())
                 .skillPoint(rating.getSkillPoint())

@@ -4,7 +4,7 @@ import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
 import AdminPostManagementRight from "../../components/admin/AdminPostManagement";
 import NavAdmin from "../../components/nav/NavAdmin";
-import NavPagination from "../../components/nav/NavPagination";
+
 
 export default function AdminPostManagement() {
   return (

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/matchingProfile")
+@RequestMapping("/profile")
 public class InterestCategoryControl {
     private final InterestCategoryService interestCategoryService;
 
@@ -18,6 +18,7 @@ public class InterestCategoryControl {
     @PostMapping("/interestCategory/create")
     public ResponseEntity create(@RequestBody InterestCategoryDTO.CreateDTO interestCategoryDTO,
                                  @RequestHeader("Authorization") String token) {
+        System.out.println("interestCategoryDTO = " + interestCategoryDTO.getCategoryId() + ", " + interestCategoryDTO.getRegion1());
         ResponseMessage responseMessage = interestCategoryService.save(interestCategoryDTO, token);
 
         return ResponseEntity

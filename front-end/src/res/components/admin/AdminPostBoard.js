@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import Pagination from "../pagination/Pagination";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import Modal from "react-modal";
+
 import View from "../../img/view.png";
 
 function viewPostDetail({ post }) {
@@ -38,11 +36,13 @@ export default function AdminPostBoard(props) {
     );
   }
 
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
   const { posts } = props;
+
 
   if (props != null) {
     return (

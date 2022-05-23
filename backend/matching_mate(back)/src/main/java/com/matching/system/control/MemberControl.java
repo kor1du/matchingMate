@@ -36,6 +36,16 @@ public class MemberControl {
                 .body(responseMessage);
     }
 
+    // 닉네임 중복 체크
+    @PostMapping("signUp/checkNickname")
+    public ResponseEntity checkDuplicateNickname(@RequestBody MemberDTO.CheckDuplicateNickname checkDuplicateNickname) {
+        ResponseMessage responseMessage = memberService.checkDuplicateNickname(checkDuplicateNickname);
+
+        return ResponseEntity
+                .status(responseMessage.getStatus())
+                .body(responseMessage);
+    }
+
     // 회원수정     -> O
     @PutMapping("/myAccount/update")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
@@ -109,8 +119,7 @@ public class MemberControl {
 
     // 로그아웃
     @PostMapping(value = "/logout")
-    public ResponseEntity logout(@RequestHeader("Authorization") String accessToken,
-                                 @RequestHeader("RefreshToken") String refreshToken) {
+    public ResponseEntity logout(@RequestHeader("Authorization") String accessToken) {
 
         String userId = jwtTokenUtil.getUserId(accessToken.substring(7));
 
@@ -122,7 +131,7 @@ public class MemberControl {
     }
 
     // 매칭 프로필 조회 -> 첫화면 ( 이미지, 닉네임, 한줄소개, 매칭 횟수, 기술 평균, 매너 평균  )    -> O
-    @GetMapping("/matchingProfile")
+    @GetMapping("/profile")
     public ResponseEntity readMatchingProfile(@RequestHeader("Authorization") String token) {
         ResponseData responseData = memberService.readMatchingProfile(token);
 
@@ -132,7 +141,7 @@ public class MemberControl {
     }
 
     // 사진 등록, ㅅ정        -> O
-    @PostMapping("/matchingProfile/updateProfileImg")
+    @PostMapping("/profile/updateProfileImg")
     public ResponseEntity updateProfileImg(@ModelAttribute MemberDTO.UpdateImgAddress updateImgAddress,
                                            @RequestHeader("Authorization") String token) {
         ResponseMessage responseMessage = memberService.updateProfileImg(updateImgAddress, token);
@@ -144,7 +153,7 @@ public class MemberControl {
 
 
     // 한줄 소개 등록, 수정     -> O
-    @PostMapping("/matchingProfile/updateProfileContent")
+    @PostMapping("/profile/updateProfileContent")
     public ResponseEntity createProfileImg(@RequestBody MemberDTO.UpdateProfileContent createImgAddress,
                                            @RequestHeader("Authorization") String token) {
         ResponseMessage responseMessage = memberService.updateProfileContent(createImgAddress, token);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { axiosPost } from "../axios/Axios";
 
@@ -20,6 +20,7 @@ export default function CheckID(props) {
         console.log("ID사용가능");
         props.setId(id);
       })
+      // eslint-disable-next-line no-unused-vars
       .catch((error) => {
         alert("중복된 ID입니다 다른 ID를 사용해주세요!");
         props.setId("");

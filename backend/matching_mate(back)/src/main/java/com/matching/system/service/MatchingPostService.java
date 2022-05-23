@@ -33,7 +33,7 @@ public class MatchingPostService {
     private final ChattingService chattingService;
     private final ChattingMemberRepository chattingMemberRepository;
     private final ChattingRoomRepository chattingRoomRepository;
-    private final MapProcess mapControl;
+    private final MapProcess mapProcess;
     private final JwtTokenUtil jwtTokenUtil;
 
 
@@ -127,6 +127,11 @@ public class MatchingPostService {
         Optional<MatchingPost> findMatchingPost = matchingPostRepository.findById(postId);
         if (findMatchingPost.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 매칭 공고가 존재하지 않습니다.");
 
+        if (findMatchingPost.get().getIsCompleted() == 1) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "이미 매칭이 완료된 매칭 공고 입니다.");
+
+        chattingRoomRepository.findByMatchingPostId(postId)
+                .forEach(ChattingRoom::deleteMatchingPost);
+
         matchingPostRepository.deleteById(postId);
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 삭제했습니다.");
@@ -180,7 +185,7 @@ public class MatchingPostService {
 
     private String getMemberAddress(Double longitude, Double latitude)
     {
-        return mapControl.coordToAddr(longitude, latitude);
+        return mapProcess.coordToAddr(longitude, latitude);
     }
 
     private MatchingPostDTO.ReadSimpleMatchingPostDTO PostToSimpleDTO(MatchingPost matchingPost)
@@ -190,7 +195,7 @@ public class MatchingPostService {
 
         return MatchingPostDTO.ReadSimpleMatchingPostDTO.builder()
                     .id(matchingPost.getId())
-                    .categoryName(matchingPost.getCategory().getName())
+                    .categoryName(matchingPost.getCategory()==null?null:matchingPost.getCategory().getName())
                     .postName(matchingPost.getPostName())
                     .matchingDate(matchingPost.getMatchingDate().toString())
                     .matchingTime(timeFormat.format(matchingPost.getMatchingTime()))
@@ -211,7 +216,7 @@ public class MatchingPostService {
         List<MatchingPostDTO.ReadPostOfAdminDTO> readDTOList = matchingPostList.stream()
                 .map(matchingPost -> MatchingPostDTO.ReadPostOfAdminDTO.builder()
                         .id(matchingPost.getId())
-                        .categoryName(matchingPost.getCategory().getName())
+                        .categoryName(matchingPost.getCategory()==null?null:matchingPost.getCategory().getName())
                         .postName(matchingPost.getPostName())
                         .postContents(matchingPost.getPostContents())
                         .place(matchingPost.getPlace())
@@ -230,15 +235,24 @@ public class MatchingPostService {
 
         if (findMatchingPost.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 매칭 공고가 존재하지 않습니다.", null);
 
+
+        if (findMatchingPost.get().getMember()==null)
+            System.out.println("member null임 ");
+
         // view ++
         findMatchingPost.get().updateViews();
 
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+//        System.out.println("mapProcess = " + mapProcess.AddrToCoord(findMatchingPost.get().getPlace()));
+
+        Float[] coords = mapProcess.AddrToCoord(findMatchingPost.get().getPlace());
+
         MatchingPostDTO.ReadDetailMatchingPostDTO readDTO = MatchingPostDTO.ReadDetailMatchingPostDTO.builder()
                 .id(findMatchingPost.get().getId())
                 .nickname(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getNickname())
+                .profileImgAddress(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getProfileImgAddress())
                 .categoryName(findMatchingPost.get().getCategory() == null ? null : findMatchingPost.get().getCategory().getName())
                 .categoryImgAddress(findMatchingPost.get().getCategory() == null ? null : findMatchingPost.get().getCategory().getImgAddress())
                 .postName(findMatchingPost.get().getPostName())
@@ -246,17 +260,21 @@ public class MatchingPostService {
                 .matchingDate(findMatchingPost.get().getMatchingDate().toString())
                 .matchingTime(timeFormat.format(findMatchingPost.get().getMatchingTime()))
                 .recommendedSkill(findMatchingPost.get().getRecommendedSkill())
-                .numberOfPeople(findMatchingPost.get().getNumberOfPeople())
                 .maxNumberOfPeople(findMatchingPost.get().getMaxNumberOfPeople())
                 .views(findMatchingPost.get().getViews())
                 .place(findMatchingPost.get().getPlace())
                 .registerDatetime(registerFormat.format(findMatchingPost.get().getRegisterDatetime()))
-                .isMyPost( memberId==findMatchingPost.get().getMember().getId() ? true:false )
-                .build();;
+                .isMyPost( findMatchingPost.get().getMember()==null ?
+                            false:
+                            (memberId==findMatchingPost.get().getMember().getId() ?
+                                    true:
+                                    false))
+                .lat(coords[1])
+                .lng(coords[0])
+                .build();
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTO);
     }
-
 
     // 채팅방 가입하기
     public ResponseMessage joinChatting(ChattingDTO.ChattingRoomInDTO chattingRoomInDTO, String token) {
@@ -267,12 +285,13 @@ public class MatchingPostService {
         if (validateDuplicateRoom.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 방에 가입되어 있습니다.");
 
         // chatting_member 추가
-        ChattingRoom chattingRoom = chattingRoomRepository.findById(chattingRoomInDTO.getRoomId()).get();
+        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.existRoom(chattingRoomInDTO.getRoomId());
+        if (chattingRoom.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 채팅 방이 존재하지 않습니다.");
 
         Member member = memberRepository.findById(memberId).get();
 
         chattingMemberRepository.save(ChattingMember.builder()
-                .chattingRoom(chattingRoom)
+                .chattingRoom(chattingRoom.get())
                 .member(member)
                 .isReady(false)
                 .build());

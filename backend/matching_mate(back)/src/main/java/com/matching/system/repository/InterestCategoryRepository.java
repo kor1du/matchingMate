@@ -31,5 +31,5 @@ public interface InterestCategoryRepository extends JpaRepository<InterestCatego
             "OR ic.region3 LIKE %:region% )")
     List<InterestCategory> findByInterestCategoryMember(@Param("category") Category category, @Param("region") String region);
 
-    Optional<InterestCategory> findByMemberIdAndCategoryIdAndRegion1AndRegion2AndRegion3(Long memberId, Long categoryId, String region1, String region2, String region3);
+    Optional<InterestCategory> findByMemberIdAndCategoryId(Long memberId, Long categoryId);
 }

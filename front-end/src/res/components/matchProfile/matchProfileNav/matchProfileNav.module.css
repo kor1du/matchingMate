@@ -6,6 +6,7 @@
   height: 60px;
   white-space: normal;
   margin: 0;
+  padding-left: 10rem;
 }
 
 .li {
@@ -23,5 +24,4 @@
 .li .a:hover {
   color: rgb(6, 197, 197);
   font-weight: bold;
-
 }

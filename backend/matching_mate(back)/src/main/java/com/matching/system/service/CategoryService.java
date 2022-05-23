@@ -74,9 +74,11 @@ public class CategoryService {
 //                .forEach(matchingPost -> matchingPost.deleteCategory());
         Category findCategory = categoryRepository.findById(categoryId).get();
 
-        Optional<MatchingPost> findMatchingPost = matchingPostRepository.findByExistCategory(findCategory);
-        if (! findMatchingPost.isEmpty())
-            return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "이미 이 카테고리는 사용중입니다.");
+        matchingPostRepository.findByExistCategory(findCategory)
+                .forEach(MatchingPost::deleteCategory);
+
+//        if (! findMatchingPost.isEmpty())
+//            return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "이미 이 카테고리는 사용중입니다.");
 
 
         categoryRepository.deleteById(categoryId);

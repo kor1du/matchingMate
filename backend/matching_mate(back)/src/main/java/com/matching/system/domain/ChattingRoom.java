@@ -23,6 +23,7 @@ public class ChattingRoom {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "matching_post_id")
     private MatchingPost matchingPost;
 
     @CreationTimestamp
@@ -43,5 +44,6 @@ public class ChattingRoom {
     @OneToMany(mappedBy = "chattingRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ChattingMessage> chattingMessageList = new HashSet<>();
 
+    public void deleteMatchingPost() { this.matchingPost = null; }
 
 }

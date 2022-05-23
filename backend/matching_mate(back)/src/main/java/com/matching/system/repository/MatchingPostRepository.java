@@ -13,8 +13,8 @@ import java.util.Optional;
 @Repository
 public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long> {
     @Query("SELECT mp FROM MatchingPost mp " +
-            "JOIN FETCH mp.member " +
-            "JOIN FETCH mp.category " +
+            "LEFT JOIN mp.member m " +
+            "LEFT JOIN mp.category " +
             "WHERE mp.isCompleted = 0 " +
                 "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
                 "AND mp.place LIKE :address% " +
@@ -22,7 +22,7 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
     List<MatchingPost> findByRecentPosts(@Param("address") String address);
 
     @Query("SELECT mp FROM MatchingPost mp " +
-            "JOIN FETCH mp.member " +
+            "LEFT JOIN mp.member " +
             "JOIN FETCH mp.category " +
             "WHERE mp.category=:category " +
                 "AND mp.isCompleted = 0 " +
@@ -32,8 +32,8 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
     List<MatchingPost> findByRecentCategoryPosts(@Param("category") Category category, @Param("address") String address);
 
     @Query("SELECT mp FROM MatchingPost mp " +
-            "JOIN FETCH mp.member " +
-            "JOIN FETCH mp.category " +
+            "LEFT JOIN mp.member " +
+            "LEFT JOIN mp.category " +
             "WHERE mp.isCompleted = 0 " +
                 "AND DATE_FORMAT(now(), '%Y-%m-%d') <= mp.matchingDate " +
                 "AND mp.place LIKE :address% " +
@@ -41,7 +41,7 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
     List<MatchingPost> findByPopularPosts(@Param("address") String address);
 
     @Query("SELECT mp FROM MatchingPost mp " +
-            "JOIN FETCH mp.member " +
+            "LEFT JOIN mp.member " +
             "JOIN FETCH mp.category " +
             "WHERE mp.category=:category " +
                 "AND mp.isCompleted = 0 " +
@@ -51,14 +51,14 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
     List<MatchingPost> findByPopularCategoryPosts(@Param("category") Category category, @Param("address") String address);
 
     @Query("SELECT mp FROM MatchingPost mp " +
-            "JOIN FETCH mp.member " +
-            "JOIN FETCH mp.category " +
+            "LEFT JOIN mp.member m " +
+            "LEFT JOIN mp.category " +
             "WHERE mp.id=:matchingPostId")
     Optional<MatchingPost> findById(@Param("matchingPostId") Long matchingPostId);
 
     @Query("SELECT mp FROM MatchingPost mp " +
-            "JOIN FETCH mp.member " +
-            "JOIN FETCH mp.category " +
+            "LEFT JOIN mp.member " +
+            "LEFT JOIN mp.category " +
             "ORDER BY mp.id")
     List<MatchingPost> findAll();
 
@@ -67,5 +67,5 @@ public interface MatchingPostRepository extends JpaRepository<MatchingPost, Long
     List<MatchingPost> findByCategoryId(Long categoryId);
 
     @Query("SELECT mp FROM MatchingPost mp WHERE mp.category=:category")
-    Optional<MatchingPost> findByExistCategory(@Param("category") Category category);
+    List<MatchingPost> findByExistCategory(@Param("category") Category category);
 }

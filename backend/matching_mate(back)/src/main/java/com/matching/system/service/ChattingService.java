@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,8 +26,6 @@ public class ChattingService {
     private final RatingRepository ratingRepository;
     private final MemberRepository memberRepository;
     private final JwtTokenUtil jwtTokenUtil;
-//    private final ChannelTopic channelTopic;
-//    private final RedisTemplate redisTemplate;
 
     // 채팅 방 추가
     public void createRoom(MatchingPost matchingPost, Member member)
@@ -69,11 +66,11 @@ public class ChattingService {
         List<ChattingDTO.ChattingRoomListDTO> chattingRoomListDTOList = chattingRoomList.stream()
                 .map(chattingRoom -> ChattingDTO.ChattingRoomListDTO.builder()
                                     .id(chattingRoom.getId())
-                                    .matchingPostId(chattingRoom.getMatchingPost().getId())
-                                    .matchingPostName(chattingRoom.getMatchingPost().getPostName())
-                                    .numberOfPeople(chattingRoom.getMatchingPost().getNumberOfPeople())
-                                    .maxNumberOfPeople(chattingRoom.getMatchingPost().getMaxNumberOfPeople())
-                                    .roomNumberOfPeople(chattingRoom.getChattingMemberList().size())
+                                    .matchingPostId( chattingRoom.getMatchingPost()==null?null:chattingRoom.getMatchingPost().getId())
+                                    .matchingPostName( chattingRoom.getMatchingPost()==null?null:chattingRoom.getMatchingPost().getPostName())
+                                    .numberOfPeople( chattingRoom.getMatchingPost()==null?null:chattingRoom.getMatchingPost().getNumberOfPeople())
+                                    .maxNumberOfPeople( chattingRoom.getMatchingPost()==null?null:chattingRoom.getMatchingPost().getMaxNumberOfPeople())
+                                    .roomNumberOfPeople( chattingRoom.getChattingMemberList().size())
                                     .registerDatetime(registerFormat.format(chattingRoom.getRegisterDatetime()))
                                 .build())
                 .collect(Collectors.toList());
@@ -81,70 +78,16 @@ public class ChattingService {
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", chattingRoomListDTOList);
     }
 
-    // 채팅방 입장 -> 매칭 상세 조회에서 채팅방 입장
-    // -> 준비 상태 여부 추가해야함
-    // -> 게시자 memberId + 참여한 사라들 memberId 필요
-    public ResponseData inChattingRoom(ChattingDTO.ChattingRoomInDTO chattingRoomInOutDTO/*, String token*/)
-    {
-//        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
-        Long memberId = chattingRoomInOutDTO.getMemberId();
-
-        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.findById(chattingRoomInOutDTO.getRoomId());
-        if (chattingRoom.isEmpty()) return  new ResponseData(HttpStatus.OK, "검색한 방이 존재하지 않습니다.", null);
-
-        // chattingMember 조회
-        List<ChattingDTO.ReadChattingMemberDTO> readMemberDTOList = chattingRoom.get().getChattingMemberList().stream()
-                .map(chattingMember -> ChattingDTO.ReadChattingMemberDTO.builder()
-                        .chattingMemberId(chattingMember.getId())
-                        .memberId(chattingMember.getMember().getId())
-                        .profileImgAddress(chattingMember.getMember().getProfileImgAddress())
-                        .nickname(chattingMember.getMember().getNickname())
-                        .avgMannerPoint(ratingRepository.findByAvgMannerPoint(memberId))
-                        .avgSkillPoint(ratingRepository.findByAvgMannerPoint(memberId))
-                        .isReady(chattingMember.isReady())
-                        .build())
-                .collect(Collectors.toList());
-
-        SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        // 채팅 방 메시지 조회 및 반환
-        List<ChattingDTO.ReadChattingMessageDTO> readMessageDTOList = chattingRoom.get().getChattingMessageList().stream()
-                .map(chattingMessage -> ChattingDTO.ReadChattingMessageDTO.builder()
-                        .chattingMessageId(chattingMessage.getId())
-                        .memberId(chattingMessage.getChattingMember().getMember().getId())
-                        .profileImgAddress(chattingMessage.getChattingMember().getMember().getProfileImgAddress())
-                        .nickname(chattingMessage.getChattingMember().getMember().getNickname())
-                        .message(chattingMessage.getMessage())
-                        .registerDatetime(registerFormat.format(chattingMessage.getRegisterDatetime()))
-                        .build())
-                .sorted(Comparator.comparing(ChattingDTO.ReadChattingMessageDTO::getRegisterDatetime))
-                .collect(Collectors.toList());
-
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        ChattingDTO.ReadChattingMessageAndMemberDTO result = ChattingDTO.ReadChattingMessageAndMemberDTO.builder()
-                .id(chattingRoom.get().getId())
-                .postMemberId(chattingRoom.get().getMatchingPost().getMember() == null?null:chattingRoom.get().getMatchingPost().getMember().getId())
-                .place(chattingRoom.get().getMatchingPost().getPlace() == null?null:chattingRoom.get().getMatchingPost().getPlace())
-                .matchingDate(chattingRoom.get().getMatchingPost().getMatchingDate() == null?null:dateFormat.format(chattingRoom.get().getMatchingPost().getMatchingDate()))
-                .matchingTime(chattingRoom.get().getMatchingPost().getMatchingTime() == null?null:timeFormat.format(chattingRoom.get().getMatchingPost().getMatchingTime()))
-                .myMemberId(memberId)
-                .chattingMemberId(chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInOutDTO.getRoomId(), memberId).get().getId())
-                .readMemberList(readMemberDTOList)
-                .readMessageList(readMessageDTOList)
-                .build();
-
-        return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다", result);
-    }
-
     public ResponseData inChattingRoomId(Long roomId, String token)
     {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 //        Long memberId = chattingRoomInOutDTO.getMemberId();
 
-        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.findById(roomId);
+        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.existRoom(roomId);
         if (chattingRoom.isEmpty()) return  new ResponseData(HttpStatus.OK, "검색한 방이 존재하지 않습니다.", null);
+
+        // 나, 방장 먼저 넣기..
+        Long myChattingMemberId = chattingMemberRepository.findByChattingRoomIdAndMemberId(roomId, memberId).get().getId();
 
         // chattingMember 조회
         List<ChattingDTO.ReadChattingMemberDTO> readMemberDTOList = chattingRoom.get().getChattingMemberList().stream()
@@ -156,7 +99,16 @@ public class ChattingService {
                         .avgMannerPoint(ratingRepository.findByAvgMannerPoint(memberId))
                         .avgSkillPoint(ratingRepository.findByAvgMannerPoint(memberId))
                         .isReady(chattingMember.isReady())
+                        .priority(
+                                (myChattingMemberId.equals(chattingMember.getId()) ? 2 : (
+                                        chattingRoom.get().getMatchingPost().getMember()==null ? 0 : (
+                                                chattingRoom.get().getMatchingPost().getMember().getId().equals(chattingMember.getMember().getId()) ?
+                                                    1 :
+                                                    0
+                                        )))
+                        )
                         .build())
+                .sorted(Comparator.comparing(ChattingDTO.ReadChattingMemberDTO::getPriority).reversed())
                 .collect(Collectors.toList());
 
         SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -180,10 +132,10 @@ public class ChattingService {
 
         ChattingDTO.ReadChattingMessageAndMemberDTO result = ChattingDTO.ReadChattingMessageAndMemberDTO.builder()
                 .id(chattingRoom.get().getId())
-                .postMemberId(chattingRoom.get().getMatchingPost().getMember() == null?null:chattingRoom.get().getMatchingPost().getMember().getId())
-                .place(chattingRoom.get().getMatchingPost().getPlace() == null?null:chattingRoom.get().getMatchingPost().getPlace())
-                .matchingDate(chattingRoom.get().getMatchingPost().getMatchingDate() == null?null:dateFormat.format(chattingRoom.get().getMatchingPost().getMatchingDate()))
-                .matchingTime(chattingRoom.get().getMatchingPost().getMatchingTime() == null?null:timeFormat.format(chattingRoom.get().getMatchingPost().getMatchingTime()))
+                .postMemberId((chattingRoom.get().getMatchingPost()==null || chattingRoom.get().getMatchingPost().getMember() == null?null:chattingRoom.get().getMatchingPost().getMember().getId()))
+                .place(chattingRoom.get().getMatchingPost() == null?null:chattingRoom.get().getMatchingPost().getPlace())
+                .matchingDate(chattingRoom.get().getMatchingPost()==null || chattingRoom.get().getMatchingPost().getMatchingDate() == null?null:dateFormat.format(chattingRoom.get().getMatchingPost().getMatchingDate()))
+                .matchingTime(chattingRoom.get().getMatchingPost()==null || chattingRoom.get().getMatchingPost().getMatchingTime() == null?null:timeFormat.format(chattingRoom.get().getMatchingPost().getMatchingTime()))
                 .myMemberId(memberId)
                 .chattingMemberId(chattingMemberRepository.findByChattingRoomIdAndMemberId(roomId, memberId).get().getId())
                 .readMemberList(readMemberDTOList)
@@ -243,7 +195,9 @@ public class ChattingService {
 
         if (findChattingMember.get().isReady() == updateReadyState.isReady()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 준비를 하셨습니다.");
 
+
         MatchingPost findMatchingPost = findChattingMember.get().getChattingRoom().getMatchingPost();
+        if (findMatchingPost==null) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "해당 공고를 찾을 수 없습니다.");
 
         // maxNumberOfPeople 검사
         if (updateReadyState.isReady() && findMatchingPost.getMaxNumberOfPeople() == findMatchingPost.getNumberOfPeople()) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "빈 자리가 없습니다.");
@@ -260,10 +214,12 @@ public class ChattingService {
 
     // 매칭 완료 -> 공고 게시자
     public ResponseMessage completeMatching(ChattingDTO.CompleteMatching completeMatching)  {
-        Optional<ChattingRoom> findChattingRoom = chattingRoomRepository.findById(completeMatching.getChattingRoomId());
+        Optional<ChattingRoom> findChattingRoom = chattingRoomRepository.existRoom(completeMatching.getChattingRoomId());
         if (findChattingRoom.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 채팅 방이 존재하지 않습니다.");
 
+
         MatchingPost findMatchingPost = findChattingRoom.get().getMatchingPost();
+        if (findMatchingPost==null) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "해당 공고를 찾을 수 없습니다.");
 
         // maxNumberOfPeople 검사
         if (findMatchingPost.getMaxNumberOfPeople() > findMatchingPost.getNumberOfPeople()) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "아직 매칭 인원이 다 모이지 않았습니다.");
@@ -276,13 +232,7 @@ public class ChattingService {
 
         findMatchingPost.updateIsCompleted();
         findMatchingPost.updatePlace(completeMatching.getPlace());
-        try {
-            findMatchingPost.updateMatchingTime(timeFormat.parse(completeMatching.getMatchingTime()));
-        } catch (ParseException parseException)
-        {
-            System.out.println("parseException = " + parseException);
-        }
-
+        findMatchingPost.updateMatchingTime(completeMatching.getMatchingTime());
 
         // matching_history 추가
         List<MatchingMember> matchingMemberList = new ArrayList<>();

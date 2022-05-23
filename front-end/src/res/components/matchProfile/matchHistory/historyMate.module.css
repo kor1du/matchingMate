@@ -1,6 +1,10 @@
 .main {
-  padding-top: 38px;
+  padding-top: 30px;
   padding-left: 22px;
   padding-right: 22px;
   padding-bottom: 14px;
+}
+
+.mateList {
+  margin-bottom: 10px;
 }

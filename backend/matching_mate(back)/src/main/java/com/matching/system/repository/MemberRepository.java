@@ -30,6 +30,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
     @Query("SELECT DISTINCT m FROM Member m JOIN FETCH m.memberAuthorities WHERE m.userId=:userId")
     Optional<Member> findByUserId(@Param("userId") String userId);
 
+    Optional<Member> findByNickname(String nickname);
 
 
 

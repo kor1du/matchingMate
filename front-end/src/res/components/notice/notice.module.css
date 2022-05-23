@@ -1,5 +1,17 @@
-
 .container {
+}
 
-  
+.noticeTable {
+  text-align: center;
+}
+
+.radioBox {
+  display: inline-flex;
+}
+
+.message {
+  max-width: 360px;
+}
+.url {
+  max-width: 120px;
 }

@@ -28,10 +28,10 @@ public class InterestCategory {
     @Column(name = "region1", nullable = false)
     private String region1;
 
-    @Column(name = "region2", nullable = true)
+    @Column(name = "region2")
     private String region2;
 
-    @Column(name = "region3", nullable = true)
+    @Column(name = "region3")
     private String region3;
 
     public void updateCategory(Category category) { this.category = category; }
