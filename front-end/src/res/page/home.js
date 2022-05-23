@@ -17,7 +17,9 @@ function Home() {
 
   const getPopularBoards = async (lat, lng) => {
     // const res = await (await axiosGet("/popular")).data;
-    const res = await (await axios.get(`http://localhost:8080/popular?lat=${lat}&lng=${lng}`)).data;
+    const res = await (
+      await axios.get(`http://localhost:8080/popular?lat=${lat}&lng=${lng}`)
+    ).data;
     setBoards(res.data);
   };
 
@@ -25,13 +27,17 @@ function Home() {
 
   const getBoards = async (lat, lng) => {
     // const res = await (await axiosGet("")).data;
-    const res = await (await axios.get(`http://localhost:8080/recent?lat=${lat}&lng=${lng}`)).data;
+    const res = await (
+      await axios.get(`http://localhost:8080/recent?lat=${lat}&lng=${lng}`)
+    ).data;
     setBoards(res.data);
   };
 
   const categoryFilter = (e, category) => {
     e.preventDefault();
-    const filterData = boards.filter((board) => board.categoryName === category);
+    const filterData = boards.filter(
+      (board) => board.categoryName === category
+    );
     setBoards(filterData);
   };
 
@@ -79,7 +85,10 @@ function Home() {
       <NavToChat></NavToChat>
       <Nav></Nav>
       <HomeHeader></HomeHeader>
-      <HomeCarousel categoryFilter={categoryFilter} categorys={categorys}></HomeCarousel>
+      <HomeCarousel
+        categoryFilter={categoryFilter}
+        categorys={categorys}
+      ></HomeCarousel>
       <Board
         boards={boards}
         getPopularBoards={getPopularBoards}

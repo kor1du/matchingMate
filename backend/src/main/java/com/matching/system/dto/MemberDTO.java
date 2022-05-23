@@ -42,6 +42,15 @@ public class MemberDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    public static class CheckDuplicateNickname
+    {
+        private String nickname;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class UpdateAccountDTO
     {
         private String userPw;
@@ -119,6 +128,7 @@ public class MemberDTO {
     {
         private Long id;    // memberId
         private String profileImgAddress;
+        private String memberNickname;
         private String profileContent;
         private Integer matchingCount;
         private Float avgSkillPoint;

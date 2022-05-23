@@ -82,11 +82,12 @@ public class MatchingPostDTO {
         private String matchingDate;
         private String matchingTime;
         private String recommendedSkill;
-        private Integer numberOfPeople;
         private Integer maxNumberOfPeople;
         private Integer views;
         private String place;
         private String registerDatetime;
+        private Float lat;
+        private Float lng;
 
         private boolean isMyPost;
     }

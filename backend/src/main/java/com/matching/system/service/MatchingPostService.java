@@ -33,7 +33,7 @@ public class MatchingPostService {
     private final ChattingService chattingService;
     private final ChattingMemberRepository chattingMemberRepository;
     private final ChattingRoomRepository chattingRoomRepository;
-    private final MapProcess mapControl;
+    private final MapProcess mapProcess;
     private final JwtTokenUtil jwtTokenUtil;
 
 
@@ -180,7 +180,7 @@ public class MatchingPostService {
 
     private String getMemberAddress(Double longitude, Double latitude)
     {
-        return mapControl.coordToAddr(longitude, latitude);
+        return mapProcess.coordToAddr(longitude, latitude);
     }
 
     private MatchingPostDTO.ReadSimpleMatchingPostDTO PostToSimpleDTO(MatchingPost matchingPost)
@@ -236,6 +236,10 @@ public class MatchingPostService {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+//        System.out.println("mapProcess = " + mapProcess.AddrToCoord(findMatchingPost.get().getPlace()));
+
+        Float[] coords = mapProcess.AddrToCoord(findMatchingPost.get().getPlace());
+
         MatchingPostDTO.ReadDetailMatchingPostDTO readDTO = MatchingPostDTO.ReadDetailMatchingPostDTO.builder()
                 .id(findMatchingPost.get().getId())
                 .nickname(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getNickname())
@@ -246,13 +250,14 @@ public class MatchingPostService {
                 .matchingDate(findMatchingPost.get().getMatchingDate().toString())
                 .matchingTime(timeFormat.format(findMatchingPost.get().getMatchingTime()))
                 .recommendedSkill(findMatchingPost.get().getRecommendedSkill())
-                .numberOfPeople(findMatchingPost.get().getNumberOfPeople())
                 .maxNumberOfPeople(findMatchingPost.get().getMaxNumberOfPeople())
                 .views(findMatchingPost.get().getViews())
                 .place(findMatchingPost.get().getPlace())
                 .registerDatetime(registerFormat.format(findMatchingPost.get().getRegisterDatetime()))
                 .isMyPost( memberId==findMatchingPost.get().getMember().getId() ? true:false )
-                .build();;
+                .lat(coords[1])
+                .lng(coords[0])
+                .build();
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTO);
     }

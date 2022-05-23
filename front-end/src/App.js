@@ -6,8 +6,6 @@ import Home from "./res/page/home";
 import Login from "./res/page/login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./res/page/signup";
-import ChattingList from "./res/page/chattingList";
-import Chat from "./res/page/chatting";
 import AdminPostManagement from "./res/page/admin/adminPostManagement";
 import AdminReportManagement from "./res/page/admin/adminReportManagement";
 import AdminCategoryAdd from "./res/page/admin/adminCategoryAdd";
@@ -38,13 +36,25 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/post/:id" element={<BoardDetail />} />
-          <Route path="/admin/post/management" element={<AdminPostManagement />}></Route>
-          <Route path="/admin/report/management" element={<AdminReportManagement />}></Route>
-          <Route path="/admin/category/add" element={<AdminCategoryAdd />}></Route>
-          <Route path="/admin/category/modify/" element={<AdminCategoryModify />}></Route>
-          <Route path="/admin/category/view" element={<AdminCategoryView />}></Route>
+          <Route
+            path="/admin/post/management"
+            element={<AdminPostManagement />}
+          ></Route>
+          <Route
+            path="/admin/report/management"
+            element={<AdminReportManagement />}
+          ></Route>
+          <Route path="/admin/add" element={<AdminCategoryAdd />}></Route>
+          <Route
+            path="/admin/modify/"
+            element={<AdminCategoryModify />}
+          ></Route>
+          <Route path="/admin/view" element={<AdminCategoryView />}></Route>
           <Route path="/admin/badge/add" element={<AdminBadgeAdd />}></Route>
-          <Route path="/admin/badge/modify" element={<AdminBadgeModify />}></Route>
+          <Route
+            path="/admin/badge/modify"
+            element={<AdminBadgeModify />}
+          ></Route>
           <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>
           <Route path="/match" element={<MatchProfile member={member} />} />
           <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>

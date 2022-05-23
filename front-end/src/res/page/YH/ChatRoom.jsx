@@ -1,11 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
+import Nav from "../../components/nav/Nav";
 import sockjs from "sockjs-client";
 import stomp from "stompjs";
 import RoomMessage from "../../components/chatting/YH/RoomMessage";
 import ChattingMemberList from "../../components/chatting/YH/ChattingMemberList";
+import "../../css/chatting/chattingLeftside.css";
+import "../../css/chatting/chattingRightside.css";
+import "../../css/chatting/chatting.css";
 
 import { axiosGet } from "../../components/axios/Axios";
+import { Button, Col, Row } from "react-bootstrap";
 
 function ChatRoom() {
   let sockJS = new sockjs("http://localhost:8080/stomp/chat");
@@ -17,11 +22,7 @@ function ChatRoom() {
   const [newMessage, setNewMessage] = useState("");
   const [memberList, setMemberList] = useState("");
   const [roomHost, setRoomHost] = useState("");
-  const scrollRef = useRef();
-
-  function scrollDown() {
-    scrollRef.current.scrollIntoView(false);
-  }
+  const [myId,setMyId]=useState("");
 
   const roomId = Number(useLocation().state.roomId);
 
@@ -32,6 +33,7 @@ function ChatRoom() {
       Authorization: token,
     };
     axiosGet("/chat/in/" + roomId, header).then((res) => {
+      setMyId(()=>res.data.data.myMemberId);
       setRoomHost(() => res.data.data.postMemberId);
       setMemberList(() => res.data.data.readMemberList);
       setMessages(() => res.data.data.readMessageList);
@@ -41,8 +43,12 @@ function ChatRoom() {
   useEffect(() => {
     connectWS();
     getRoomInfo();
-    // setTimeout(scrollDown, 300);
   }, [newMessage]);
+  if (memberList.length > 0) {
+    memberList.sort(function (a, b) {
+      return a.priority > b.priority ? -1 : a.priority < b.priority ? 1 : 0;
+    });
+  }
   function waitForConnection(ws, callback) {
     setTimeout(
       function () {
@@ -92,48 +98,69 @@ function ChatRoom() {
       console.log(error);
     }
   }
-
   return (
-    <div>
-      {memberList.length > 0
-        ? memberList.map((member) => {
-            return (
-              <ChattingMemberList
-                key={member.memberId}
-                roomId={roomId}
-                roomHost={roomHost}
-                member={member}
-              ></ChattingMemberList>
-            );
-          })
-        : null}
-      <button type="submit" onClick={() => disconnectWS}>
-        <Link to="/chat/">나가기 </Link>
-      </button>
-      <div>
-        <RoomMessage messages={messages} roomId={roomId} />
-      </div>
-
-      <div ref={scrollRef}>
-        <span>내용 :</span>
-        <input
-          id="sendText"
-          type="text"
-          onChange={(e) => {
-            e.preventDefault();
-            setMessageText(() => e.target.value);
-          }}
-        />
-        <button
-          type="submit"
-          onClick={() => {
-            sendMessage();
-          }}
-        >
-          전송
-        </button>
-      </div>
-    </div>
+    <>
+      <Nav></Nav>
+      <Row className="chatting">
+        <Col xs="4">
+          <div className="chatting-left-side">
+            <div className="btn-exit-div">
+              <Button
+                className="btn-exit"
+                variant="danger"
+                type="submit"
+                onClick={() => disconnectWS}
+              >
+                <Link to="/chat/">
+                  <p>나가기</p>
+                </Link>
+              </Button>
+            </div>
+            <div className="chatting-member-list">
+              {memberList.length > 0
+                ? memberList.map((member) => {
+                    return (
+                      <ChattingMemberList
+                        key={member.memberId}
+                        roomId={roomId}
+                        roomHost={roomHost}
+                        member={member}
+                      ></ChattingMemberList>
+                    );
+                  })
+                : null}
+            </div>
+          </div>
+        </Col>
+        <Col xs="8">
+          <div className="chatting-right-side">
+            <div>
+              <RoomMessage messages={messages} setMessages={setMessages} myId={myId}/>
+            </div>
+            <div></div>
+            <div className="btn-send">
+              <input
+                id="sendText"
+                type="text"
+                onChange={(e) => {
+                  e.preventDefault();
+                  setMessageText(() => e.target.value);
+                }}
+              />
+              <Button
+                type="submit"
+                variant="success"
+                onClick={() => {
+                  sendMessage();
+                }}
+              >
+                전송
+              </Button>
+            </div>
+          </div>
+        </Col>
+      </Row>
+    </>
   );
 }
 

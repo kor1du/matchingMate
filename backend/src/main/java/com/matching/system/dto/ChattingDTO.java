@@ -76,6 +76,8 @@ public class ChattingDTO {
         private Float avgSkillPoint;
         private Float avgMannerPoint;
         private boolean isReady;
+
+        private Integer priority;
     }
 
 
@@ -115,7 +117,6 @@ public class ChattingDTO {
         private String place;
         @Temporal(TemporalType.DATE)
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
-//        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "hh:MM", timezone = "Asia/Seoul")
         private Date matchingTime;
     }
 

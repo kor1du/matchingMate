@@ -9,7 +9,7 @@ import Pagination from "../../pagination/Pagination";
 
 export function AdminCategoryItem({ categorys }) {
   function Item({ category }) {
-    const url = `/admin/category/modify?id=${category.id}&name=${category.name}&img=${category.imgAddress}`;
+    const url = `/admin/modify?id=${category.id}&name=${category.name}&img=${category.imgAddress}`;
     return (
       <Col lg="3" xs="6" className="category-item">
         <img src={category.imgAddress} alt="soccer-ball" className="icon" />
@@ -51,7 +51,12 @@ export function AdminCategoryItem({ categorys }) {
             return <Item key={category.id} category={category}></Item>;
           })}
         </Row>
-        <Pagination total={categorys.length} limit={limit} page={page} setPage={setPage} />
+        <Pagination
+          total={categorys.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       </div>
     );
   }

@@ -145,7 +145,10 @@ public class ChattingService {
         Optional<ChattingRoom> chattingRoom = chattingRoomRepository.existRoom(roomId);
         if (chattingRoom.isEmpty()) return  new ResponseData(HttpStatus.OK, "검색한 방이 존재하지 않습니다.", null);
 
-        // chattingMember 조회
+        // 나, 방장 먼저 넣기..
+        Long myChattingMemberId = chattingMemberRepository.findByChattingRoomIdAndMemberId(roomId, memberId).get().getId();
+
+                // chattingMember 조회
         List<ChattingDTO.ReadChattingMemberDTO> readMemberDTOList = chattingRoom.get().getChattingMemberList().stream()
                 .map(chattingMember -> ChattingDTO.ReadChattingMemberDTO.builder()
                         .chattingMemberId(chattingMember.getId())
@@ -155,7 +158,13 @@ public class ChattingService {
                         .avgMannerPoint(ratingRepository.findByAvgMannerPoint(memberId))
                         .avgSkillPoint(ratingRepository.findByAvgMannerPoint(memberId))
                         .isReady(chattingMember.isReady())
+                        .priority(
+                                (myChattingMemberId.equals(chattingMember.getId()) ? 2 : (
+                                            chattingRoom.get().getMatchingPost().getMember().getId().equals(chattingMember.getMember().getId())?1:0
+                                        ))
+                        )
                         .build())
+                .sorted(Comparator.comparing(ChattingDTO.ReadChattingMemberDTO::getPriority).reversed())
                 .collect(Collectors.toList());
 
         SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -254,7 +263,6 @@ public class ChattingService {
         if (updateReadyState.isReady()) findMatchingPost.updatePlusNumberOfPeople();
         else if (! updateReadyState.isReady()) findMatchingPost.updateMinusNumberOfPeople();
 
-        System.out.println(findMatchingPost.toString());
         return new ResponseMessage(HttpStatus.OK, "정상적으로 처리되었습니다.");
     }
 
@@ -277,8 +285,6 @@ public class ChattingService {
         findMatchingPost.updateIsCompleted();
         findMatchingPost.updatePlace(completeMatching.getPlace());
         findMatchingPost.updateMatchingTime(completeMatching.getMatchingTime());
-
-
 
         // matching_history 추가
         List<MatchingMember> matchingMemberList = new ArrayList<>();

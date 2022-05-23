@@ -1,51 +1,61 @@
-.chatting-left-side {
+.chatting-left-side{
+  min-height: calc(100vh - 50px);
   background-color: white;
 }
 
-.chatting-left-side.active{
-  width:100vw;
-}
-
-
-.chatting-left-side ul {
-  min-height: calc(100vh - 50px);
-  max-height: calc(100vh - 50px);
-  margin-top: 50px;
-  margin-bottom: 0px;
+.chatting-left-side .btn-exit-div{
   width:100%;
-}
-
-.chatting-left-side ul li{
+  display:flex;
   justify-content: center;
+  padding:10px 0px;
 }
 
-.chatting-left-side .me {
+.chatting-left-side .chatting-member-list{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 5px;
-  width: 30px;
-  height: 30px;
+  
+}
+
+.chatting-left-side .member,
+.chatting-left-side .host{
+  position:relative;
+  display: flex;
+  align-items: center;
+  padding:20px 0px;
+}
+
+.chatting-left-side .host-crown-img{
+  position: absolute;
+  width:30px;
+  height:30px;
+  top:27.5px;
+  left:200px;
+}
+
+.chatting-left-side .chatting-member-list .profile-img{
+  width:50px;
+  border:1px solid black;
+  border-radius: 50%;
+  margin-right:10px;
+}
+
+.chatting-left-side .chatting-member-list .member-nickname{
+  margin-right:10px;
+  width:50px;
+}
+
+.chatting-left-side .chatting-member-list .me{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:30px;
+  height:30px;
+  border:1px solid black;
   border-radius: 50%;
   background-color: black;
-  border: 1px solid black;
-  color: white;
-}
-
-.chatting-left-side .detail {
-  display: flex;
-  align-items: center;
-}
-
-.chatting-left-side .ready-btn.active {
-  background-color: red;
-}
-
-@media screen and (max-width: 1023px) {
-  .chatting-left-side {
-    display: none;
-  }
-  .chatting-left-side.active {
-    display: block;
-  }
+  color:white;
+  position:absolute;
+  left:202.5px;
 }

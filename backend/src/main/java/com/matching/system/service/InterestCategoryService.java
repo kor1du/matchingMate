@@ -15,9 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -97,16 +95,18 @@ public class InterestCategoryService {
 
         Optional<Member> findMember = memberRepository.findById(memberId);
 
-        List<InterestCategoryDTO.ReadDTO> updateReadDTOList = interestCategoryRepository.findByMemberId(findMember.get()).stream()
-                .map(interestCategory -> InterestCategoryDTO.ReadDTO.builder()
-                        .id(interestCategory.getId())
-                        .categoryId(interestCategory.getCategory().getId())
-                        .categoryName(interestCategory.getCategory().getName())
-                        .region1(interestCategory.getRegion1())
-                        .region2(interestCategory.getRegion2())
-                        .region3(interestCategory.getRegion3())
-                        .build())
-                .collect(Collectors.toList());
+        Optional<InterestCategory> interestCategory = interestCategoryRepository.findByMemberId(findMember.get());
+
+        if (interestCategory.isEmpty()) return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", null);
+
+        InterestCategoryDTO.ReadDTO updateReadDTOList = InterestCategoryDTO.ReadDTO.builder()
+                        .id(interestCategory.get().getId())
+                        .categoryId(interestCategory.get().getCategory().getId())
+                        .categoryName(interestCategory.get().getCategory().getName())
+                        .region1(interestCategory.get().getRegion1())
+                        .region2(interestCategory.get().getRegion2())
+                        .region3(interestCategory.get().getRegion3())
+                        .build();
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", updateReadDTOList);
     }

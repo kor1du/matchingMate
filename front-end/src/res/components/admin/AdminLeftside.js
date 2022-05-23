@@ -85,12 +85,12 @@ export default function AdminLeftside() {
 
         <ul className="category-management">
           <h1 className="category-title">카테고리관리</h1>
-          <Link to="/admin/category/add">
+          <Link to="/admin/add">
             <li className="category-item category-add">
               <p>카테고리추가</p>
             </li>
           </Link>
-          <Link to="/admin/category/view">
+          <Link to="/admin/view">
             <li className="category-item category-view">
               <p>카테고리조회</p>
             </li>

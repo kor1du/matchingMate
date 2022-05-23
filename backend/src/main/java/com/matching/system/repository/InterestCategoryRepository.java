@@ -18,7 +18,7 @@ public interface InterestCategoryRepository extends JpaRepository<InterestCatego
             "JOIN FETCH ic.category " +
             "JOIN FETCH ic.member " +
             "WHERE ic.member=:memberId")
-    List<InterestCategory> findByMemberId(@Param("memberId") Member member);
+    Optional<InterestCategory> findByMemberId(@Param("memberId") Member member);
 
 //    @Query(value = "SELECT ic.* FROM interest_category ic" +
 //            "WHERE ic.category_id=:categoryId AND ( ic.region1 LIKE %:region% OR ic.region2 LIKE %:region% OR ic.region3 LIKE %:region%) ", nativeQuery = true)
