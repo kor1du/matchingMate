@@ -1,0 +1,330 @@
+/*for Mobile user*/
+@media screen and (min-width: 320px) and (max-width: 424px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header .logo {
+    position: static;
+    width: 100vw;
+    background-size: 100vw 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .header .logo .title {
+    margin: 50px 0px;
+    bottom: 18.5%;
+  }
+
+  .header .logo .title h1 {
+    font-size: 4rem;
+  }
+
+  .header .logo .title h2 {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    width: 270px;
+  }
+
+  .header .logo .buttons {
+    bottom: 10%;
+  }
+
+  .header .logo .btn {
+    width: 150px;
+    height: 50px;
+    margin: 5px 5px;
+    color: black;
+  }
+
+  .header .logo .btn > p {
+    font-size: 1.4rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .header .introduce {
+    display: block;
+    position: static;
+    left: 0%;
+    width: calc(100vw - 50px);
+    max-height: 90vh;
+    text-align: center;
+  }
+
+  .header .introduce > p {
+    font-size: 3rem;
+  }
+
+  .header .introduce .caption-title {
+    font-size: 2rem;
+  }
+
+  .header .introduce .caption-text {
+    font-size: 1rem;
+  }
+}
+
+/*for Mobile user*/
+@media screen and (min-width: 425px) and (max-width: 764px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header .logo {
+    position: static;
+    width: 100vw;
+    background-size: 100vw 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .header .logo .title {
+    margin: 50px 0px;
+    bottom: 18.5%;
+  }
+
+  .header .logo .title h1 {
+    font-size: 5rem;
+  }
+
+  .header .logo .title h2 {
+    margin-top: 10px;
+    font-size: 2rem;
+    width: 360px;
+  }
+
+  .header .logo .buttons {
+    bottom: 10%;
+  }
+
+  .header .logo .btn {
+    width: 150px;
+    height: 50px;
+    color: black;
+    margin: 5px 15px;
+  }
+
+  .header .logo .btn > p {
+    font-size: 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .header .introduce {
+    display: block;
+    position: static;
+    left: 0%;
+    width: calc(100vw - 50px);
+    max-height: 90vh;
+    text-align: center;
+  }
+
+  .header .introduce > p {
+    font-size: 3rem;
+  }
+
+  .header .introduce .caption-title {
+    font-size: 2rem;
+  }
+
+  .header .introduce .caption-text {
+    font-size: 1rem;
+  }
+}
+
+/*for tablet user*/
+@media screen and (min-width: 765px) and (max-width: 1023px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header .logo {
+    position: static;
+    width: 100vw;
+    background-size: 100vw 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .header .logo .title {
+    margin: 50px 0px;
+    bottom: 17.5%;
+  }
+
+  .header .logo .title h1 {
+    font-size: 5rem;
+  }
+
+  .header .logo .title h2 {
+    margin-top: 10px;
+    font-size: 2rem;
+    width: 360px;
+  }
+
+  .header .logo .buttons {
+    bottom: 10%;
+  }
+
+  .header .logo .btn {
+    width: 190px;
+    height: 50px;
+    color: black;
+    margin: 5px 15px;
+  }
+
+  .header .logo .btn > p {
+    font-size: 2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .header .introduce {
+    display: block;
+    position: static;
+    left: 0%;
+    width: calc(100vw - 50px);
+    max-height: 90vh;
+    text-align: center;
+  }
+}
+
+/*for notebook user*/
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .header .logo .title {
+    margin: 50px 0px;
+    bottom: 20.5%;
+  }
+
+  .header .logo .title h1 {
+    font-size: 8rem;
+  }
+
+  .header .logo .title h2 {
+    margin-top: 10px;
+    font-size: 3rem;
+    width: 550px;
+  }
+
+  .header .logo .buttons {
+    bottom: 10%;
+  }
+
+  .header .logo .btn {
+    width: 300px;
+    color: black;
+    margin: 5px 20px;
+  }
+  .header .logo .btn > p {
+    font-family: "Nanum Pen Script", cursive;
+    font-size: 3rem;
+  }
+
+  .header .right .introduce {
+    background-size: 100% 100%;
+    left: 70%;
+    width: 30%;
+    height: 100vh;
+  }
+
+  .header .right .introduce > p {
+    width: 200px;
+  }
+
+  .header .introduce .caption-title {
+    font-size: 2rem;
+  }
+
+  .header .carousel {
+    width: 30vw;
+  }
+}
+
+/*for desktop user*/
+@media screen and (min-width: 1440px) {
+  .header .logo .title {
+    margin: 50px 0px;
+    bottom: 20%;
+  }
+
+  .header .logo .title h1 {
+    font-size: 8rem;
+  }
+
+  .header .logo .title h2 {
+    margin-top: 10px;
+    font-size: 3rem;
+    width: 550px;
+  }
+
+  .header .logo .buttons {
+    bottom: 10%;
+  }
+
+  .header .logo .btn {
+    width: 400px;
+    color: black;
+    margin: 5px 25px;
+  }
+
+  .header .logo .btn > p {
+    font-family: "Nanum Pen Script", cursive;
+    font-size: 4rem;
+  }
+
+  .header .right .introduce {
+    left: 70%;
+    width: 30%;
+    height: 100vh;
+  }
+}

@@ -16,6 +16,7 @@ import AdminBadgeModify from "./res/page/admin/adminBadgeModify";
 import AdminBadgeView from "./res/page/admin/adminBadgeView";
 import MatchProfile from "./res/page/matchProfile/matchProfile";
 import MemberProfile from "./res/page/memberProfile/memberProfile";
+import MemberEdit from "./res/page/memberEdit";
 import BoardDetail from "./res/page/BoardDetail/BoardDetail";
 import ChatRoomList from "./res/page/YH/ChatRoomList";
 import ChatRoom from "./res/page/YH/ChatRoom";
@@ -59,6 +60,7 @@ export default function App() {
           <Route path="/match" element={<MatchProfile member={member} />} />
           <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>
           <Route path="/member" element={<MemberProfile member={member} />} />
+          <Route path="/member/edit" element={<MemberEdit />} exact />
           <Route path="/chat/" element={<ChatRoomList />} exact />
           <Route path="/chat/in" element={<ChatRoom />} exact />
         </Routes>

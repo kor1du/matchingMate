@@ -11,6 +11,7 @@
     "eslint": "^8.15.0",
     "global": "^4.4.0",
     "google-maps-react": "^2.0.6",
+    "hover.css": "^2.3.2",
     "modal": "^1.2.0",
     "net": "^1.0.2",
     "query-string": "^7.1.1",

@@ -19,6 +19,7 @@ export default function CheckID(props) {
       .then(() => {
         console.log("ID사용가능");
         props.setId(id);
+        setShow(false);
       })
       .catch((error) => {
         alert("중복된 ID입니다 다른 ID를 사용해주세요!");

@@ -7,6 +7,7 @@ import Modal from "react-modal";
 import { axiosPost } from "../axios/Axios";
 import { redirectURL } from "../url/CheckURL";
 import CheckID from "./CheckID";
+import CheckNickname from "./CheckNickname";
 
 export default function Signup() {
   const [id, setId] = useState("");
@@ -60,7 +61,12 @@ export default function Signup() {
                 <Form.Group className="mb-3 " controlId="formBasicEmail">
                   <Form.Label>ID</Form.Label>
                   <div className="signup-checkID input-text">
-                    <Form.Control type="text" placeholder="ID" readOnly value={id} />
+                    <Form.Control
+                      type="text"
+                      placeholder="ID"
+                      readOnly
+                      value={id}
+                    />
                     <CheckID setId={setId}></CheckID>
                   </div>
                 </Form.Group>
@@ -93,7 +99,10 @@ export default function Signup() {
                       //   setAddress(e.target.value);
                       // }}
                     />
-                    <Button onClick={() => setModalOpen(true)} className="btn-find-address">
+                    <Button
+                      onClick={() => setModalOpen(true)}
+                      className="btn-find-address"
+                    >
                       <p>주소찾기</p>
                     </Button>
                   </div>
@@ -129,7 +138,10 @@ export default function Signup() {
                     },
                   }}
                 >
-                  <AddressInput setAddress={setAddress} setModalOpen={setModalOpen} />
+                  <AddressInput
+                    setAddress={setAddress}
+                    setModalOpen={setModalOpen}
+                  />
                   <button onClick={() => setModalOpen(false)}>닫기</button>
                 </Modal>
 
@@ -166,15 +178,23 @@ export default function Signup() {
                   <Form.Label>
                     <p>별명</p>
                   </Form.Label>
-                  <Form.Control
+                  <div className="signup-checkID input-text">
+                    <Form.Control
+                      type="text"
+                      placeholder="별명"
+                      readOnly
+                      value={nickname}
+                    />
+                    <CheckNickname setNickname={setNickname}></CheckNickname>
+                  </div>
+                  {/* <Form.Control
                     className=" input-text"
                     type="text"
                     placeholder="별명"
                     onChange={(e) => {
                       e.preventDefault();
                       setNickname(e.target.value);
-                    }}
-                  />
+                    }} */}
                 </Form.Group>
                 <Form.Group className="mb-3 " controlId="formBasicPassword">
                   <Form.Label>

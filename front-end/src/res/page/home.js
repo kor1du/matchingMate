@@ -85,7 +85,7 @@ function Home() {
       <NavToChat></NavToChat>
       <Nav></Nav>
       <HomeHeader></HomeHeader>
-      <HomeCarousel
+      {/* <HomeCarousel
         categoryFilter={categoryFilter}
         categorys={categorys}
       ></HomeCarousel>
@@ -96,7 +96,7 @@ function Home() {
         getLocation={getLocation}
         lat={latitude}
         lng={longtitue}
-      />
+      /> */}
     </div>
   );
 }
