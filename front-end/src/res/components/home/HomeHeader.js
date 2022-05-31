@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, Carousel, Container } from "react-bootstrap";
 import WinkingIcon from "../../img/winkingIcon.png";
 import "../../css/home/homeHeader.css";
 // import "../../css/home/homeHeader copy.css";
 import "../../css/home/homeHeaderAnimation.css";
+import "../../css/home/homeHeaderResponsive.css";
 import Slide from "../../img/background-image/homePage.png";
 import Map from "../../img/Image/map2.gif";
 import Chat from "../../img/Image/chat.gif";
@@ -12,8 +13,35 @@ import Badge from "../../img/Image/badge.gif";
 import Together from "../../img/Image/together.gif";
 
 function Header() {
+  function setObserver() {
+    if (document.querySelector(".fade-class")) {
+      console.log("Loaded...");
+      const targets = document.querySelectorAll(".fade-class");
+      const options = {
+        root: null,
+        threshold: 0.1,
+      };
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          const container = entry.target;
+          if (entry.isIntersecting) {
+            container.classList.add("fade-in");
+          } else container.classList.remove("fade-in");
+        });
+      }, options);
+      targets.forEach((target) => {
+        observer.observe(target);
+      });
+    }
+  }
+
+  useEffect(() => {
+    setObserver();
+  });
+
   return (
     <div className="header">
+      <div className="bg-img"></div>
       <div className="logo">
         <div className="title">
           <p>혼자서만 하는 운동, 지겹지 않으신가요?</p>
@@ -30,7 +58,7 @@ function Header() {
       </div>
       <div className="introduce">
         <p>운동메이트를 통해</p>
-        <div className="detail-white-background">
+        <div className="fade-class">
           <div className="img-box">
             <img src={Map} alt="" className="img-map" />
           </div>
@@ -40,7 +68,7 @@ function Header() {
           </div>
         </div>
 
-        <div className="detail-white-background">
+        <div className="fade-class">
           <div className="caption">
             <p className="title">자유로운 소통</p>
             <p className="text chat-text">
@@ -52,19 +80,19 @@ function Header() {
           </div>
         </div>
 
-        <div className="detail-white-background">
+        <div className="fade-class">
           <div className="img-box">
             <img src={Badge} alt="" className="img-muscle" />
           </div>
           <div className="caption">
-            <p className="title">내 실력은 어느정도일까?</p>
+            <p className="title">뱃지 시스템</p>
             <p className="text chat-text">
-              뱃지를 통해 나 혹은 상대방의 실력을 예상해보세요!
+              뱃지획득을 통해 성취감을 느껴보세요!
             </p>
           </div>
         </div>
 
-        <div className="detail-white-background">
+        <div className="fade-class">
           <div className="caption">
             <p className="title">체력 및 근력 향상</p>
             <p className="text injury-text">
@@ -76,7 +104,7 @@ function Header() {
           </div>
         </div>
 
-        <div className="detail-white-background">
+        <div className="fade-class">
           <div className="img-box">
             <img src={Together} alt="" className="img-muscle" />
           </div>

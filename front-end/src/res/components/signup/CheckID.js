@@ -29,17 +29,17 @@ export default function CheckID(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="btn-id-check">
+      <Button variant="success" onClick={handleShow} className="btn-id-check">
         <p>ID 중복확인</p>
       </Button>
 
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="modal-check-header">
           <Modal.Title>
             <p>ID 중복확인</p>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="modal-id-check-body">
+        <Modal.Body className="modal-check-body">
           <input
             className="id-chk-input"
             type="text"
@@ -49,7 +49,7 @@ export default function CheckID(props) {
               setId(e.target.value);
             }}
           />
-          <Button onClick={check} className="btn-id-check">
+          <Button variant="dark" onClick={check} className="btn-id-check">
             <p>중복확인</p>
           </Button>
         </Modal.Body>

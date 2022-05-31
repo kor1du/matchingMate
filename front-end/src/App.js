@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./res/page/home";
 import Login from "./res/page/login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Signup from "./res/page/signup";
 import AdminPostManagement from "./res/page/admin/adminPostManagement";
 import AdminReportManagement from "./res/page/admin/adminReportManagement";
 import AdminCategoryAdd from "./res/page/admin/adminCategoryAdd";
@@ -35,7 +34,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
           <Route path="/post/:id" element={<BoardDetail />} />
           <Route
             path="/admin/post/management"

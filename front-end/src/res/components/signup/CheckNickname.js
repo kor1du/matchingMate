@@ -8,6 +8,7 @@ export default function CheckNickname(props) {
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   function check() {
     const data = {
@@ -28,17 +29,17 @@ export default function CheckNickname(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="btn-id-check">
+      <Button variant="success" onClick={handleShow} className="btn-id-check">
         <p>별명 중복 확인</p>
       </Button>
 
-      <Modal show={show} centered>
-        <Modal.Header>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton className="modal-check-header">
           <Modal.Title>
             <p>별명 중복확인</p>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="modal-id-check-body">
+        <Modal.Body className="modal-check-body">
           <input
             className="id-chk-input"
             type="text"
@@ -48,15 +49,10 @@ export default function CheckNickname(props) {
               setNickname(e.target.value);
             }}
           />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={check} className="btn-id-check">
+          <Button variant="dark" onClick={check} className="btn-id-check">
             <p>중복확인</p>
           </Button>
-          <Button onClick={() => setShow(false)} className="btn-id-check">
-            <p>닫기</p>
-          </Button>
-        </Modal.Footer>
+        </Modal.Body>
       </Modal>
     </>
   );

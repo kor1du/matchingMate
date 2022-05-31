@@ -1,7 +1,6 @@
 .header .logo .title h1,
 .header .logo .buttons,
-.header .right > p,
-.header .detail-white-background {
+.header .right > p{
   animation: fadeInUp;
   animation-duration: 2s;
 }

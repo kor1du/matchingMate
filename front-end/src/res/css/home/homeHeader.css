@@ -7,16 +7,9 @@
 }
 
 .header .logo {
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("../../img/background-image/homepage3.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
 }
 
 .header .logo .title {
@@ -25,35 +18,24 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  top: 20%;
+
 }
 
-.header .logo .title > p {
+.header .logo .title>p {
   font-family: "Nanum Brush Script", cursive !important;
   background-color: rgb(0, 0, 0, 0.5);
   color: white;
-  font-size: 2rem;
   position: relative;
-  bottom: 10%;
 }
 
 .header .title h1 {
-  font-size: 6rem;
+
   font-family: "Nanum Brush Script", cursive !important;
-  margin-bottom: 20px;
   position: relative;
 }
 
 .header .buttons .btn {
   position: relative;
-  bottom: 10%;
-  width: 200px;
-  margin: 0 20px;
-  top: 15%;
-}
-
-.header .buttons .btn > p {
-  font-size: 2rem;
 }
 
 .header .logo .buttons {
@@ -93,19 +75,20 @@
 
 .header .introduce p {
   position: relative;
-  font-size: 4rem;
   font-family: "Nanum Brush Script", cursive !important;
-  padding: 30px 0px;
 }
 
 .header .introduce .detail-white-background {
   display: flex;
-  width: 100vw;
+
+}
+
+.header .fade-class {
+  display: flex;
+
 }
 
 .header .introduce .img-box {
-  width: 40%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,12 +96,10 @@
 
 .header .img-map {
   position: relative;
-  width: 400px;
-  height: 400px;
 }
 
 .header .caption {
-  width: 60%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -132,15 +113,35 @@
 .header .caption .text {
   display: flex;
   justify-content: center;
-  font-size: 3rem;
+
 }
 
 .header .img-muscle {
-  height: 300px;
-  width: 300px;
   border-radius: 50%;
 }
 
-.header .chat-text {
-  font-size: 2.5rem !important;
+.fade-class:nth-child(2n-1) {
+  position: relative;
+  left: 200px;
+  opacity: 0;
+  transition: left 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+}
+
+.fade-in:nth-child(2n-1) {
+  transition: left 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+  left: 0px;
+  opacity: 1;
+}
+
+.fade-class:nth-child(2n) {
+  position: relative;
+  right: 200px;
+  opacity: 0;
+  transition: right 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+}
+
+.fade-in:nth-child(2n) {
+  transition: right 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+  right: 0px;
+  opacity: 1;
 }
