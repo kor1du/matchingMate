@@ -26,7 +26,6 @@ function LoginComponent() {
         redirectURL("login");
         redirectURL("");
 
-        console.log(result.data.data);
         const jwtToken = result.data.data.tokenDTO.accessToken;
         sessionStorage.setItem("jwtToken", jwtToken);
         sessionStorage.setItem("nickname", result.data.data.nickname);

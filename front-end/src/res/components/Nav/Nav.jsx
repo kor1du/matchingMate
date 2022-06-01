@@ -27,7 +27,7 @@ export const showLoginBtn = () => {
   const loginCSS = document.querySelector(".login");
   const barCSS = document.querySelector(".bar");
   const profileCSS = document.querySelector(".profile-img");
-  const logoutCSS = document.querySelector(".logout-1024px");
+  // const logoutCSS = document.querySelector(".logout-1024px");
   const notificationCss = document.querySelector(".nav-notification");
 
   if (isLogin()) {
@@ -38,7 +38,7 @@ export const showLoginBtn = () => {
     loginCSS.style.display = "block";
     barCSS.style.display = "none";
     profileCSS.style.display = "none";
-    logoutCSS.style.display = "none";
+    // logoutCSS.style.display = "none";
     notificationCss.style.display = "none"
   }
 };
@@ -108,7 +108,7 @@ export default function Nav() {
     const alarms = document.querySelector(".nav-notification-box");
     alarms.classList.toggle("active");
 
-    axios.put('http://localhost:8080/notification', null, {
+    axios.put('http://localhost:8050/notification', null, {
       headers: headers
     }).then((res) => {
       setNoReadCount(0);

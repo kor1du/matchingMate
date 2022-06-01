@@ -45,7 +45,7 @@ const mainProfileContent = (props) => {
     const updateProfileContent = async () => {
         setProfileContent(inputText);
 
-        const res = await (await axios.post("http://localhost:8080/profile/updateProfileContent", {profileContent:inputText}, {headers:headers})).data;
+        const res = await (await axios.post("http://localhost:8050/profile/updateProfileContent", {profileContent:inputText}, {headers:headers})).data;
 
         console.log(res.data);
     };

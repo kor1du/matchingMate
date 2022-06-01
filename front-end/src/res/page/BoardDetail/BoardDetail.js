@@ -41,7 +41,7 @@ const BoardDetail = () => {
 
     console.log("신고 보내는 데이터", reportInfo);
 
-    axios.post('http://localhost:8080/report/create', reportInfo, {
+    axios.post('http://localhost:8050/report/create', reportInfo, {
       headers: {
         'Authorization': "Bearer " + token
       }
@@ -76,7 +76,7 @@ const BoardDetail = () => {
   }
 
   const getBoard = async () => {
-    const res = await (await axios.get(`http://localhost:8080/matchingPost/detail/${id}`, {
+    const res = await (await axios.get(`http://localhost:8050/matchingPost/detail/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

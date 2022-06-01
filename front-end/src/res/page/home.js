@@ -27,7 +27,7 @@ function Home() {
   // 기본 조회는 최신순 zzzz
 
   const getBoards = async (lat, lng) => {
-    const res = await (await axios.get(`http://localhost:8080/recent?lat=${lat}&lng=${lng}`)).data;
+    const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}`)).data;
     // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
     setBoards(res.data);
@@ -68,7 +68,7 @@ function Home() {
 
   const updateLocation = (addr, token) => {
     console.log("최근위치 업데이트 시작....");
-    axios.put('http://localhost:8080/location', { location: addr }, {
+    axios.put('http://localhost:8050/location', { location: addr }, {
       headers: {
         'Authorization': "Bearer " + token
       }

@@ -20,7 +20,7 @@ function InputCategory(props) {
 
     const saveInterest = async () => {
     
-        let rsp = (await axios.post("http://localhost:8080/profile/interestCategory/create", interestData, {headers:{'Authorization': token}})).data;
+        let rsp = (await axios.post("http://localhost:8050/profile/interestCategory/create", interestData, {headers:{'Authorization': token}})).data;
         setModalOpen(false);
         setInterestCategory(rsp.data);
 
