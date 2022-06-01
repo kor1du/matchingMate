@@ -7,9 +7,12 @@ import styles from './matchMain.module.css'
 import ProfileContent from './mainProfileContent'
 
 const MatchMain = (props) => {
-
   const {menu} = props;
-  const profileInfo=props.profileInfo;
+  const profileInfo = props.profileInfo;
+  const matchingCountLabelList = props.matchingCountLabelList;
+  const matchingCountDataList = props.matchingCountDataList;
+  const categoryLabelList = props.categoryLabelList;
+  const categoryDataList = props.categoryDataList;
 
   if(menu === 'history') {
     return (
@@ -30,7 +33,10 @@ const MatchMain = (props) => {
   }
   return (
     <div className={styles.main_container}>
-      <ProfileContent profileInfo={profileInfo} profileContent={profileInfo.profileContent}/>
+      <ProfileContent profileInfo={profileInfo} profileContent={profileInfo.profileContent} 
+        matchingCountLabelList={matchingCountLabelList} matchingCountDataList={matchingCountDataList}
+        categoryLabelList={categoryLabelList} categoryDataList={categoryDataList}
+      />
     </div>
   );
 };

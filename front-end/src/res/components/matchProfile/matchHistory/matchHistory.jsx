@@ -5,7 +5,7 @@ import styles from './matchHistory.module.css';
 import HistoryPost from './historyPost';
 import HistoryMate from './historyMate';
 
-function MatchHistory () {
+const MatchHistory = () => {
   // const match_historys = [ {id:1, title  : "매칭내역 1"},{id:2, title  : "매칭내역 2"}] ;
   const [matchingHistories, setMatchingHistories] = useState([]);
   const token = "Bearer " + sessionStorage.getItem("jwtToken");
@@ -24,8 +24,8 @@ function MatchHistory () {
     <div>
           { matchingHistories.map( (matchingHistory) => 
                 <main className={styles.main} key={matchingHistory.id} >
-                    <HistoryPost  matchingPostInfo={matchingHistory.matchingPostDTO}/>
-                    <HistoryMate matchingMatesInfo={matchingHistory.historyMembers}/>
+                    <HistoryPost matchingPostInfo={matchingHistory.matchingPostDTO}/>
+                    <HistoryMate matchingMatesInfo={matchingHistory.historyMembers} matchingHistoryId={matchingHistory.id}/>
                 </main>
            )}
     </div>

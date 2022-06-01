@@ -18,6 +18,12 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
             "AND n.target_member_id=:memberId", nativeQuery = true)
     List<Notification> readRecentNotification(@Param("memberId") Long memberId);
 
+    @Query(value = "SELECT n FROM Notification n " +
+            "JOIN FETCH n.member " +
+            "WHERE n.member=:member " +
+                "AND n.readDatetime IS NULL")
+    List<Notification> readNoReadNotification(@Param("member") Member member);
+
     @Query("SELECT n FROM Notification n " +
             "JOIN FETCH n.member " +
             "WHERE n.member=:member")

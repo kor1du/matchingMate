@@ -1,25 +1,25 @@
-.logout{
-    font-size:2rem;
-    width:100vw;
-    height:50px;
-    padding:0 50px;
-    color:black;
-    display:flex;
-    align-items: center;
-    justify-content: right;
+.logout {
+  font-size: 2rem;
+  width: 100vw;
+  height: 50px;
+  padding: 0 50px;
+  /* color: black; */
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
 
-.logout:hover{
-    color:white;
+/* .logout:hover {
+  color:white;
+} */
+
+.logout-1024px {
+  font-size: 2rem;
+  margin: 0 20px;
 }
 
-.logout-1024px{
-    font-size:2rem;
-    margin:0 20px;
-}
-
-@media screen and (max-width:1023px) {
-    .logout-1024px{
-        display:none;
-    }
+@media screen and (max-width: 1023px) {
+  .logout-1024px {
+    display: none;
+  }
 }

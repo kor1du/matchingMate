@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
-import AdminPostManagementRight from "../../components/admin/AdminPostManagement";
+import AdminPostManagementRight from "../../components/admin/adminPost/AdminPostManagement";
 import NavAdmin from "../../components/nav/NavAdmin";
 
 

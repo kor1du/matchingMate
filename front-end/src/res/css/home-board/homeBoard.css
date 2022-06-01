@@ -100,6 +100,12 @@
   width: 300px;
 }
 
+.board-item:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all 0.1s;
+}
+
 @media screen and (min-width:2560px)
 {
   .board{

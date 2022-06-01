@@ -25,11 +25,8 @@ public interface InterestCategoryRepository extends JpaRepository<InterestCatego
     @Query("SELECT DISTINCT ic FROM InterestCategory ic " +
             "JOIN FETCH ic.category " +
             "JOIN FETCH ic.member " +
-            "WHERE ic.category=:category " +
-            "AND ( ic.region1 LIKE %:region% " +
-            "OR ic.region2 LIKE %:region% " +
-            "OR ic.region3 LIKE %:region% )")
-    List<InterestCategory> findByInterestCategoryMember(@Param("category") Category category, @Param("region") String region);
+            "WHERE ic.category=:category")
+    List<InterestCategory> findByInterestCategoryMember(@Param("category") Category category);
 
     Optional<InterestCategory> findByMemberIdAndCategoryId(Long memberId, Long categoryId);
 }

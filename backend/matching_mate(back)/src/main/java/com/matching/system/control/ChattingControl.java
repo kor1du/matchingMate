@@ -40,10 +40,22 @@ public class ChattingControl {
                 .body(responseData);
     }
 
-    // 채팅방 퇴장       -> O
+    // 채팅 방 나가기
+    @PutMapping("/out/{chattingMemberId}")
+    public ResponseEntity outChattingRoom(@PathVariable("chattingMemberId") Long chattingMemberId,
+                                          @RequestHeader("Authorization") String token)
+    {
+        ResponseMessage responseMessage = chattingService.outChattingRoom(chattingMemberId, token);
+
+        return ResponseEntity
+                .status(responseMessage.getStatus())
+                .body(responseMessage);
+    }
+
+    // 채팅방 삭제       -> O
     @PostMapping("/out/{chatId}")
-    public ResponseEntity outChattingRoom(@PathVariable("chatId") Long chattingMemberId) {
-        ResponseMessage responseMessage = chattingService.outChattingRoom(chattingMemberId);
+    public ResponseEntity deleteChattingRoom(@PathVariable("chatId") Long chattingMemberId) {
+        ResponseMessage responseMessage = chattingService.deleteChattingRoom(chattingMemberId);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

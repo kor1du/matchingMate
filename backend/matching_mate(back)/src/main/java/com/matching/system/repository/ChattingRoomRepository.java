@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -30,5 +29,5 @@ public interface ChattingRoomRepository extends JpaRepository<ChattingRoom, Long
     Optional<ChattingRoom> existRoom(@Param("chattingRoomId") Long chattingRoomId);
 
 
-    List<ChattingRoom> findByMatchingPostId(Long matchingPostId);
+    Optional<ChattingRoom> findByMatchingPostId(Long matchingPostId);
 }

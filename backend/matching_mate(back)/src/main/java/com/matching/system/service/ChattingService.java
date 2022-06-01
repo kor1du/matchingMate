@@ -62,6 +62,8 @@ public class ChattingService {
                 .map(chattingMember -> chattingMember.getChattingRoom())
                 .collect(Collectors.toList());
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         // dto
         List<ChattingDTO.ChattingRoomListDTO> chattingRoomListDTOList = chattingRoomList.stream()
                 .map(chattingRoom -> ChattingDTO.ChattingRoomListDTO.builder()
@@ -72,7 +74,20 @@ public class ChattingService {
                                     .maxNumberOfPeople( chattingRoom.getMatchingPost()==null?null:chattingRoom.getMatchingPost().getMaxNumberOfPeople())
                                     .roomNumberOfPeople( chattingRoom.getChattingMemberList().size())
                                     .registerDatetime(registerFormat.format(chattingRoom.getRegisterDatetime()))
-                                .build())
+                                    .isCompleted(chattingRoom.getMatchingPost()==null?null:chattingRoom.getMatchingPost().getIsCompleted())
+                                    .noReadChatCount(
+                                            chattingRoom.getChattingMessageList().stream()
+                                                    .filter(chattingMessage -> chattingMessage.getRegisterDatetime().compareTo(
+                                                            chattingRoom.getChattingMemberList().stream()
+                                                                    .filter(chattingMember -> chattingMember.getChattingRoom().getId().equals(chattingRoom.getId()) && chattingMember.getMember().getId().equals(memberId)==true)
+                                                                    .collect(Collectors.toList()).stream().findFirst().get().getOutDatetime()
+                                                    ) == 1 )
+                                                    .collect(Collectors.toList())
+                                                    .size()
+                                    )
+                                .modifiedDatetime(dateFormat.format(chattingRoom.getModifiedDatetime()))
+                            .build())
+                .sorted(Comparator.comparing(ChattingDTO.ChattingRoomListDTO::getModifiedDatetime).reversed())
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", chattingRoomListDTOList);
@@ -87,7 +102,13 @@ public class ChattingService {
         if (chattingRoom.isEmpty()) return  new ResponseData(HttpStatus.OK, "검색한 방이 존재하지 않습니다.", null);
 
         // 나, 방장 먼저 넣기..
-        Long myChattingMemberId = chattingMemberRepository.findByChattingRoomIdAndMemberId(roomId, memberId).get().getId();
+        ChattingMember myChattingMember = chattingMemberRepository.findByChattingRoomIdAndMemberId(roomId, memberId).get();
+
+        Long myChattingMemberId = myChattingMember.getId();
+
+        Comparator<ChattingDTO.ReadChattingMemberDTO> compare = Comparator
+                .comparing(ChattingDTO.ReadChattingMemberDTO::getPriority).reversed()
+                .thenComparing(ChattingDTO.ReadChattingMemberDTO::getMemberId);
 
         // chattingMember 조회
         List<ChattingDTO.ReadChattingMemberDTO> readMemberDTOList = chattingRoom.get().getChattingMemberList().stream()
@@ -108,7 +129,7 @@ public class ChattingService {
                                         )))
                         )
                         .build())
-                .sorted(Comparator.comparing(ChattingDTO.ReadChattingMemberDTO::getPriority).reversed())
+                .sorted(compare)
                 .collect(Collectors.toList());
 
         SimpleDateFormat registerFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -125,6 +146,7 @@ public class ChattingService {
                         .build())
                 .sorted(Comparator.comparing(ChattingDTO.ReadChattingMessageDTO::getRegisterDatetime))
                 .collect(Collectors.toList());
+
 
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -145,13 +167,32 @@ public class ChattingService {
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다", result);
     }
 
-    // 채팅방 퇴장
-    public ResponseMessage outChattingRoom(Long chattingMemberId)
+    // 퇴장
+    public ResponseMessage outChattingRoom(Long  chattingMemberId, String token)
+    {
+        ChattingMember findChattingMember = chattingMemberRepository.findById(chattingMemberId).get();
+
+//        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+
+            findChattingMember.updateOutDatetime(date);
+//        } catch (ParseException e)
+//        {
+//            e.printStackTrace();
+//        }
+
+        return new ResponseMessage(HttpStatus.OK, "정상적으로 처리되었씁니다.");
+    }
+
+    // 채팅방 삭제
+    public ResponseMessage deleteChattingRoom(Long chattingMemberId)
     {
         ChattingMember findChattingMember = chattingMemberRepository.findById(chattingMemberId).get();
 
         findChattingMember.getChattingMessageList().clear();
         findChattingMember.getChattingRoom().getChattingMemberList().remove(findChattingMember);
+
 
         // 이 사람이 ready 상태이면 number_of_people --
         if (findChattingMember.getChattingRoom().getMatchingPost().getIsCompleted()==0 && findChattingMember.isReady() == true) findChattingMember.getChattingRoom().getMatchingPost().updateMinusNumberOfPeople();
@@ -163,6 +204,19 @@ public class ChattingService {
     public ChattingDTO.ReadChattingMessageDTO sendMessage(ChattingDTO.SendMessageDTO sendMessageDTO, Long memberId)
     {
         Optional<ChattingMember> findChattingMember = chattingMemberRepository.findByChattingRoomIdAndMemberId(sendMessageDTO.getRoomId(), memberId);
+
+//        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+
+            System.out.println("simpleDateFormat.parse(date.toString()) = " + simpleDateFormat.format(date));
+            findChattingMember.get().getChattingRoom().updateModifiedDatetime( date );
+//        } catch (ParseException e)
+//        {
+//            e.printStackTrace();
+//        }
+
+
 
         ChattingMessage chattingMessage = ChattingMessage.builder()
                 .chattingRoom(findChattingMember.get().getChattingRoom())

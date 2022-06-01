@@ -1,69 +1,72 @@
-.admin-category-modify-rightside{
-    display:flex;
-    flex-direction: column;
+.admin-category-modify-rightside {
+  display: flex;
+  flex-direction: column;
 }
 
-.admin-category-modify-rightside.active{
-    display:none;
+.admin-category-modify-rightside.active {
+  display: none;
 }
 
-.admin-category-modify-rightside .title{
-    margin:50px 0px;
+.admin-category-modify-rightside .title {
+  margin: 50px 0px;
 }
 
-.admin-category-modify-rightside .upload{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.admin-category-modify-rightside .upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.admin-category-modify-rightside .uploaded-img{
-    margin: 20px;
-    width:200px;
-    height:200px;
-    border:1px solid black;
+.admin-category-modify-rightside .uploaded-img {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
 }
 
-.admin-category-modify-rightside .detail{
-    width:100%;
+.admin-category-modify-rightside .detail {
+  width: 100%;
 }
 
-.admin-category-modify-rightside .detail input{
-    margin-left:10px;
+.admin-category-modify-rightside .detail input {
+  margin-left: 10px;
 }
 
 .admin-category-modify-rightside .detail .file,
 .admin-category-modify-rightside .detail .name,
-.admin-category-modify-rightside .detail .tag{
-    margin:20px 0px;
-    display:flex;
-    justify-content: center;
+.admin-category-modify-rightside .detail .tag {
+  margin: 20px 0px;
+  display: flex;
+  justify-content: center;
 }
 
-.admin-category-modify-rightside .btn-modify{
-    font-size:1.5rem;
+.admin-category-modify-rightside .modify {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-@media screen and (max-width:1023px)
-{
-    .admin-category-modify-rightside{
-        width:100%;
-    } 
+.admin-category-modify-rightside .btn-modify {
+  font-size: 1.5rem;
 }
 
-@media screen and (max-width:767px)
-{
-    .admin-category-modify-rightside .admin-category{
-        text-align: center;
-        font-size:1.5rem;
-    }
+@media screen and (max-width: 1023px) {
+  .admin-category-modify-rightside {
+    width: 100%;
+  }
 }
 
-@media screen and (max-width:424px)
-{
-    .admin-category-modify-rightside .admin-category{
-        text-align: center;
-        font-size:1rem;
-    }
+@media screen and (max-width: 767px) {
+  .admin-category-modify-rightside .admin-category {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .admin-category-modify-rightside .admin-category {
+    text-align: center;
+    font-size: 1rem;
+  }
 }

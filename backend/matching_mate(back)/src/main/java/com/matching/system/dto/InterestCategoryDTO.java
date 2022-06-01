@@ -14,9 +14,6 @@ public class InterestCategoryDTO {
     public static class CreateDTO
     {
         private Long categoryId;
-        private String region1;
-        private String region2;
-        private String region3;
     }
 
     @Getter
@@ -27,9 +24,6 @@ public class InterestCategoryDTO {
     {
         private Long id;
         private Long categoryId;
-        private String region1;
-        private String region2;
-        private String region3;
     }
 
     @Getter
@@ -41,9 +35,7 @@ public class InterestCategoryDTO {
         private Long id;
         private Long categoryId;
         private String categoryName;
-        private String region1;
-        private String region2;
-        private String region3;
+        private String categoryImgAddress;
     }
 
 

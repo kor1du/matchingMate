@@ -1,74 +1,71 @@
-.admin-badge-add-rightside{
-    display:flex;
-    flex-direction: column;
+.admin-badge-add-rightside {
+  display: flex;
+  flex-direction: column;
 }
 
-.admin-badge-add-rightside.active{
-    display:none;
+.admin-badge-add-rightside.active {
+  display: none;
 }
 
-.admin-badge-add-rightside .title{
-    margin:50px 0px;
+.admin-badge-add-rightside .title {
+  margin: 50px 0px;
 }
 
-.admin-badge-add-rightside .badge-img{
-    font-size:10rem;
-    border:1px solid black;
+.admin-badge-add-rightside .badge-img {
+  font-size: 10rem;
+  border: 1px solid black;
 }
 
-.admin-badge-add-rightside .upload{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.admin-badge-add-rightside .upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.admin-badge-add-rightside .uploaded-img{
-    margin: 20px;
-    width:200px;
-    height:200px;
-    border:1px solid black;
+.admin-badge-add-rightside .uploaded-img {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
 }
 
-.admin-badge-add-rightside .detail{
-    width:100%;
+.admin-badge-add-rightside .detail {
+  width: 100%;
 }
 
-.admin-badge-add-rightside .detail input{
-    margin-left:10px;
+.admin-badge-add-rightside .detail input {
+  margin-left: 10px;
 }
 
 .admin-badge-add-rightside .detail .file,
 .admin-badge-add-rightside .detail .name,
-.admin-badge-add-rightside .detail .tag{
-    margin:20px 0px;
-    display:flex;
-    justify-content: center;
+.admin-badge-add-rightside .detail .count {
+  margin: 20px 0px;
+  display: flex;
+  justify-content: center;
 }
 
-.admin-badge-add-rightside .btn-upload{
-    font-size:1.5rem;
+.admin-badge-add-rightside .btn-upload {
+  font-size: 1.5rem;
 }
 
-@media screen and (max-width:1023px)
-{
-    .admin-badge-add-rightside{
-        width:100%;
-    } 
+@media screen and (max-width: 1023px) {
+  .admin-badge-add-rightside {
+    width: 100%;
+  }
 }
 
-@media screen and (max-width:767px)
-{
-    .admin-badge-add-rightside .admin-category{
-        text-align: center;
-        font-size:1.5rem;
-    }
+@media screen and (max-width: 767px) {
+  .admin-badge-add-rightside .admin-category {
+    text-align: center;
+    font-size: 1.5rem;
+  }
 }
 
-@media screen and (max-width:424px)
-{
-    .admin-badge-add-rightside .admin-category{
-        text-align: center;
-        font-size:1rem;
-    }
+@media screen and (max-width: 424px) {
+  .admin-badge-add-rightside .admin-category {
+    text-align: center;
+    font-size: 1rem;
+  }
 }

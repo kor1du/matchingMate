@@ -3,14 +3,12 @@ import HistoryMateItem from './historyMateItem';
 import styles from './historyMate.module.css';
 
 const HistoryMate = (props) => {
-  const {matchingMatesInfo} = props;
-
+  const {matchingMatesInfo, matchingHistoryId} = props;
   return (
     <div className={styles.main}>
-      <h2 className={styles.mateList}>Mate List</h2>
-
+      <h2>Mate List</h2>
       { matchingMatesInfo.map( (matchingMate) => 
-              <HistoryMateItem key={matchingMate.id} matchingMate={matchingMate}/>
+              <HistoryMateItem key={matchingMate.id} matchingMate={matchingMate} matchingHistoryId={matchingHistoryId}/>
       )}
 
     </div>

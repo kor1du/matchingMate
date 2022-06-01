@@ -34,9 +34,12 @@ const disableActiveOver1024px = (event) => {
 export default function NavAdmin() {
   useEffect(() => {
     window.addEventListener("resize", disableActiveOver1024px);
-    showLoginBtn();
+    // eslint-disable-next-line no-unused-vars
+    const barCSS = document.querySelector(".bar");
 
-    if (isLogin()) {
+    if (document.querySelector(".bar")) showLoginBtn();
+
+    if (isLogin() && document.documentElement.clientWidth < 1024) {
       document.querySelector(".nav-admin-menus").style.display = "block";
     } else {
       document.querySelector(".nav-admin-menus").style.display = "none";
@@ -45,7 +48,7 @@ export default function NavAdmin() {
     return () => {
       window.removeEventListener("resize", disableActiveOver1024px);
     };
-  });
+  }, []);
 
   return (
     <Container fluid id="nav-admin">

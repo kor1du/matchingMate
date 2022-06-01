@@ -112,11 +112,11 @@ export default function Signup() {
                       backgroundColor: "rgba(126, 147, 149, 0.83)",
                     },
                     content: {
-                      // position: "absolute",
-                      // top: "50%",
-                      // left: "50%",
-                      // transform: "translate(-50%, -50%)",
-                      transform: "scale(0.7)",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+
                       border: "1px solid #ccc",
                       background: "#fff",
                       overflow: "auto",
@@ -124,8 +124,8 @@ export default function Signup() {
                       borderRadius: "4px",
                       outline: "none",
                       padding: "20px",
-                      width: "100%",
-                      height: "300px",
+                      width: "600px",
+                      height: "500px",
                     },
                   }}
                 >

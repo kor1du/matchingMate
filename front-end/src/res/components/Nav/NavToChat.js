@@ -5,7 +5,7 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 
 export default function NavToChat() {
   return (
-    <Link to="/chatting/list" className="nav-to-chat">
+    <Link to="/chat" className="nav-to-chat">
       <BsFillChatDotsFill className="chatIcon" />
     </Link>
   );

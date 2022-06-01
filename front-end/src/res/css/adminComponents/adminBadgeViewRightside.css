@@ -1,100 +1,90 @@
-.admin-badge-view-rightside{
-    display:flex;
-    flex-direction: column;
+.admin-badge-view-rightside {
+  display: flex;
+  flex-direction: column;
 }
 
-.admin-badge-view-rightside.active{
-    display:none;
+.admin-badge-view-rightside.active {
+  display: none;
 }
 
-.admin-badge-view-rightside .title-box{
-    display:flex;
-    align-items: center;
-    min-height: calc(100vh / 5 - 50px);
+.admin-badge-view-rightside .title-box {
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh / 5 - 50px);
 }
 
-.admin-badge-view-rightside .title{
-    width:100%;
+.admin-badge-view-rightside .title {
+  width: 100%;
 }
 
-.admin-badge-view-rightside .badge-box{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    min-height:calc(((100vh / 5) * 4) - 80px);
-    margin:0 30px;
+.admin-badge-view-rightside .badge-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: calc(((100vh / 5) * 4) - 80px);
+  margin: 0 30px;
 }
 
-.admin-badge-view-rightside .badge-box .row{
-    width:100%;
-    display:flex;
+.admin-badge-view-rightside .badge-item {
+  margin: 20px 0px;
+  display: flex;
 }
 
-.admin-badge-view-rightside .badge .badge-item{
-    margin:20px 0px;
+.admin-badge-view-rightside .icon {
+  border: 1px solid black;
+  width: 50%;
+}
+
+.admin-badge-view-rightside .repairAndDelete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+.admin-badge-view-rightside .badge-item a {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.admin-badge-view-rightside .badge-item svg {
+  width: 50%;
+  height: 100%;
+}
+.admin-badge-view-rightside .modify {
+  color: #4d96ff;
+}
+
+.admin-badge-view-rightside .delete {
+  color: #ff1818;
+}
+@media screen and (max-width: 1023px) {
+  .admin-badge-view-rightside {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .admin-badge-view-rightside .badge-box {
     display: flex;
-}
-
-.admin-badge-view-rightside .badge .icon{
-    border:1px solid black;
-    color:black;
-    width:50%;
-}
-
-.admin-badge-view-rightside .badge .repairAndDelete{
-    display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width:50%;
-    height:100%;
-}
+    min-height: calc((100vh / 5) * 4 - 80px);
+  }
 
-.admin-badge-view-rightside .badge .badge-item a{
-    width:100%;
-    height: 100%;
+  .admin-badge-view-rightside {
     text-align: center;
+    font-size: 1.5rem;
+  }
 }
 
-.admin-badge-view-rightside .badge .badge-item svg{
-    width:50%;
-    height: 100%;
-}
-.admin-badge-view-rightside .badge .modify{
-    color:#4D96FF;
-}
-
-.admin-badge-view-rightside .badge .delete{
-    color:#FF1818;
-}
-@media screen and (max-width:1023px)
-{
-    .admin-badge-view-rightside{
-        width:100%;
-    } 
-}
-
-@media screen and (max-width:767px)
-{
-    .admin-badge-view-rightside .badge-box{
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height:calc((100vh / 5) * 4 - 80px);
-    }
-
-    .admin-badge-view-rightside{
-        text-align: center;
-        font-size:1.5rem;
-    }
-}
-
-@media screen and (max-width:424px)
-{
-
-    .admin-badge-view-rightside{
-        text-align: center;
-        font-size:1rem;
-    }
+@media screen and (max-width: 424px) {
+  .admin-badge-view-rightside {
+    text-align: center;
+    font-size: 1rem;
+  }
 }

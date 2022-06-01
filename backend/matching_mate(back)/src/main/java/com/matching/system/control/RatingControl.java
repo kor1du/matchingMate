@@ -15,7 +15,7 @@ public class RatingControl {
     private final RatingService ratingService;
 
     // 평점 추가    -> O
-    @PostMapping("/matchingProfile/history/detail/rating")
+    @PostMapping("/profile/history/detail/rating")
     public ResponseEntity createRating(@RequestBody RatingDTO.CreateRatingDTO createRatingDTO,
                                        @RequestHeader("Authorization") String token) {
         ResponseMessage responseMessage = ratingService.createRating(createRatingDTO, token);

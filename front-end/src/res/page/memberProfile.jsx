@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../css/memberProfile.module/memberProfile.module.css';
-import { BsFillChatDotsFill } from 'react-icons/bs';
+// import { BsFillChatDotsFill } from 'react-icons/bs';
 
 const MemberProfile = (props) => {
 
@@ -21,7 +21,7 @@ const MemberProfile = (props) => {
         </div>
       </div>
       
-      <BsFillChatDotsFill size="30" color="yellow"/>
+      {/* <BsFillChatDotsFill size="30" color="yellow"/> */}
     </div>
   );
 };

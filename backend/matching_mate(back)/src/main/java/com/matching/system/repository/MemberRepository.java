@@ -23,7 +23,8 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
     Optional<Member> findById(Long memberId);
 
     // 전체 조회
-    @Query(value = "SELECT m.*, ma.* FROM member m, member_authority ma WHERE m.id = ma.member_id AND ma.authority=:roleType", nativeQuery = true)
+    @Query(value = "SELECT m.*, ma.* FROM member m, member_authority ma " +
+            "WHERE m.id = ma.member_id AND ma.authority=:roleType", nativeQuery = true)
     List<Member> findAllUser(@Param("roleType") String roleType);
 
     // 아이디 조회

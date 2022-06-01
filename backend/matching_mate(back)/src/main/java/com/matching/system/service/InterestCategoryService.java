@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,16 +30,16 @@ public class InterestCategoryService {
     private final JwtTokenUtil jwtTokenUtil;
 
     // 관심 카테고리 추가
-    public ResponseMessage save(InterestCategoryDTO.CreateDTO createDTO, String token) {
+    public ResponseData save(InterestCategoryDTO.CreateDTO createDTO, String token) {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
         // null 체크
         Optional<InterestCategory> findInterestCategory = interestCategoryRepository.findByMemberIdAndCategoryId(memberId, createDTO.getCategoryId());
-        if (findInterestCategory.isPresent()) return  new ResponseMessage(HttpStatus.CONFLICT, "이미 동일한 관심 카테고리가 존재합니다.");
+        if (findInterestCategory.isPresent()) return  new ResponseData(HttpStatus.CONFLICT, "이미 동일한 관심 카테고리가 존재합니다.", null);
 
         // 카테고리 검색
         Optional<Category> findCategory = categoryRepository.findById(createDTO.getCategoryId());
-        if (findCategory.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 카테고리가 존재하지 않습니다.");
+        if (findCategory.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 카테고리가 존재하지 않습니다.", null);
 
         // 회원 검색
         Member member = memberRepository.findById(memberId).get();
@@ -46,14 +47,11 @@ public class InterestCategoryService {
         InterestCategory interestCategory = InterestCategory.builder()
                 .category(findCategory.get())
                 .member(member)
-                .region1(createDTO.getRegion1())
-                .region2(createDTO.getRegion2())
-                .region3(createDTO.getRegion3())
                 .build();
 
         interestCategoryRepository.save(interestCategory);
 
-        return new ResponseMessage(HttpStatus.OK, "정상적으로 등록되었습니다.");
+        return new ResponseData(HttpStatus.OK, "정상적으로 등록되었습니다.", read(token).getData());
     }
 
     // 관심 카테고리 수정
@@ -75,9 +73,6 @@ public class InterestCategoryService {
 
         findInterestCategory.get().updateCategory(findCategory.get());
         findInterestCategory.get().updateMember(member);
-        findInterestCategory.get().updateRegion1(interestCategoryDTO.getRegion1());
-        findInterestCategory.get().updateRegion2(interestCategoryDTO.getRegion2());
-        findInterestCategory.get().updateRegion3(interestCategoryDTO.getRegion3());
 
         return  new ResponseMessage(HttpStatus.OK, "정상적으로 수정되었습니다.");
     }
@@ -106,10 +101,9 @@ public class InterestCategoryService {
                         .id(interestCategory.getId())
                         .categoryId(interestCategory.getCategory().getId())
                         .categoryName(interestCategory.getCategory().getName())
-                        .region1(interestCategory.getRegion1())
-                        .region2(interestCategory.getRegion2())
-                        .region3(interestCategory.getRegion3())
+                        .categoryImgAddress(interestCategory.getCategory().getImgAddress())
                         .build())
+                .sorted(Comparator.comparing(InterestCategoryDTO.ReadDTO::getId))
                 .collect(Collectors.toList());
 
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", updateReadDTOList);

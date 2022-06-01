@@ -18,4 +18,5 @@ public interface MatchingHistoryRepository extends JpaRepository<MatchingHistory
             "JOIN mh.matchingPost mp " +
             "JOIN mp.member")
     List<MatchingHistory> findAll();
+
 }

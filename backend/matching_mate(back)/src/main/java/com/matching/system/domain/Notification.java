@@ -38,7 +38,14 @@ public class Notification {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "register_datetime")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private Date registerDateTIme;
+    private Date registerDatetime;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "read_datetime")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private Date readDatetime;
+
+
+    public void updateReadDatetime() { this.readDatetime = new Date(); }
 
 }

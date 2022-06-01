@@ -88,6 +88,9 @@ public class Member implements Serializable {
     @Column(name = "matching_count", columnDefinition = "int default 0")
     private Integer matchingCount;
 
+    @Column(name = "recent_location")
+    private String recentLocation;
+
 
 //    // 평점
 //    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -119,11 +122,11 @@ public class Member implements Serializable {
 
     public void updateUserPw(String userPw) { this.userPw = userPw; }
     public void updateName(String name) { this.name = name; }
-    public void updateNickname(String nickname) { this.name = nickname  ; }
-    public void updatePhone(String phone) { this.name = phone; }
-    public void updateAddress(String address) { this.name = address; }
+    public void updateNickname(String nickname) { this.nickname = nickname  ; }
+    public void updatePhone(String phone) { this.phone = phone; }
+    public void updateAddress(String address) { this.address = address; }
     public void updateBirthday(Date birthday) { this.birthday = birthday; }
-    public void updateSex(Integer sex) { this.sex = sex; }
+    public void updateRecentLocation(String location) { this.recentLocation = location; }
     public void updateProfileImgAddress(String profileImgAddress) { this.profileImgAddress = profileImgAddress; }
     public void updateProfileContent(String profileContent) { this.profileContent = profileContent; }
     public void updatePlusMatchingCount() { this.matchingCount++; }

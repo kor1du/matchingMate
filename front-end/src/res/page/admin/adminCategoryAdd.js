@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
-import AdminCategoryAdd from "../../components/admin/AdminCategoryAdd";
+import AdminCategoryAdd from "../../components/admin/adminCategory/AdminCategoryAdd";
 import NavAdmin from "../../components/nav/NavAdmin";
 
 export default function adminCategoryAdd() {
