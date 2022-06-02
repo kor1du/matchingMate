@@ -50,7 +50,12 @@ export function AdminbadgeItem({ badges }) {
             return <Item key={badge.id} badge={badge}></Item>;
           })}
         </Row>
-        <Pagination total={badges.length} limit={limit} page={page} setPage={setPage} />
+        <Pagination
+          total={badges.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       </div>
     );
   }

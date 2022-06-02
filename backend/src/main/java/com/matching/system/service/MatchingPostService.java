@@ -14,12 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-//import org.json.JSONArray;
-//import org.json.JSONObject;
 
 @Service
 @Transactional
@@ -35,8 +33,6 @@ public class MatchingPostService {
     private final ChattingRoomRepository chattingRoomRepository;
     private final MapProcess mapProcess;
     private final JwtTokenUtil jwtTokenUtil;
-
-
 
     // 매칭 공고 추가
     public ResponseMessage save(MatchingPostDTO.CreateDTO matchingPostCreateDTO, String token) {
@@ -69,19 +65,35 @@ public class MatchingPostService {
         // 채팅 방 추가 + 채팅 회원 추가
         chattingService.createRoom(newMatchingPost, member);
 
+//        // 관심 카테고리 member 조회 + notification 저장
+        sendPostNotification(category.get(), matchingPostCreateDTO.getPlace(), newMatchingPost.getId());
+//        interestCategoryRepository.findByInterestCategoryMember(category.get(), newMatchingPost.getPlace()).stream()
+//                .map(interestCategory -> notificationRepository.save(Notification.builder()
+//                        .member(interestCategory.getMember())
+//                        .notificationType(NotificationType.관심공고)
+//                        .message(interestCategory.getCategory().getName() + "의 관심 카테고리 공고가 등록되었습니다.")
+//                        .url("https://localhost:8080/matchingPost/detail/" + newMatchingPost.getId())
+//                        .build()
+//
+//                ))
+//                .collect(Collectors.toList());
+
+        return new ResponseMessage(HttpStatus.OK, "정상적으로 등록했습니다.");
+    }
+
+    private void sendPostNotification(Category category, String address, Long matchingPostId) {
+        System.out.println("address = " + address);
         // 관심 카테고리 member 조회 + notification 저장
-        interestCategoryRepository.findByInterestCategoryMember(category.get(), newMatchingPost.getPlace()).stream()
-                .map(interestCategory -> notificationRepository.save(Notification.builder()
+        interestCategoryRepository.findByInterestCategoryMember(category).stream()
+                .filter(interestCategory -> address.contains(interestCategory.getMember().getRecentLocation()))
+                .forEach(interestCategory -> notificationRepository.save(Notification.builder()
                         .member(interestCategory.getMember())
                         .notificationType(NotificationType.관심공고)
                         .message(interestCategory.getCategory().getName() + "의 관심 카테고리 공고가 등록되었습니다.")
-                        .url("https://localhost:8080/matchingPost/detail/" + newMatchingPost.getId())
+                        .url("https://localhost:8080/matchingPost/detail/" + matchingPostId)
                         .build()
 
-                ))
-                .collect(Collectors.toList());
-
-        return new ResponseMessage(HttpStatus.OK, "정상적으로 등록했습니다.");
+            ));
     }
 
     // 매칭 공고 수정
@@ -97,6 +109,11 @@ public class MatchingPostService {
         if (findMatchingPost.get().getNumberOfPeople() > matchingPostUpdateDTO.getMaxNumberOfPeople())
             return new ResponseMessage(HttpStatus.CONFLICT, "현재 인원보다 더 적은 인원은 입력할 수 없습니다.");
 
+        // new 알림 전송 -> 지역 수정 시
+        if (! findMatchingPost.get().getPlace().contains(matchingPostUpdateDTO.getPlace()))
+            sendPostNotification(category.get(), matchingPostUpdateDTO.getPlace(), findMatchingPost.get().getId());
+
+
         findMatchingPost.get().updateCategory(category.get());
         findMatchingPost.get().updatePostName(matchingPostUpdateDTO.getPostName());
         findMatchingPost.get().updatePostContents(matchingPostUpdateDTO.getPostName());
@@ -106,18 +123,6 @@ public class MatchingPostService {
         findMatchingPost.get().updateMaxNumberOfPeople(matchingPostUpdateDTO.getMaxNumberOfPeople());
         findMatchingPost.get().updateRecommendedSKill(matchingPostUpdateDTO.getRecommendedSkill());
 
-        // 알림 전송 -> 지역 수정 시 (기존 알림은 제거)
-        interestCategoryRepository.findByInterestCategoryMember(category.get(), findMatchingPost.get().getPlace()).stream()
-                .map(interestCategory -> notificationRepository.save(Notification.builder()
-                        .member(interestCategory.getMember())
-                        .notificationType(NotificationType.관심공고)
-                        .message(category.get().getName() + "의 관심 카테고리 공고가 등록되었습니다.")
-                        .url("https://localhost:8080/matchingPost/detail/" + findMatchingPost.get().getId())
-                        .build()
-
-                ))
-                .collect(Collectors.toList());
-
         return new ResponseMessage(HttpStatus.OK, "정상적으로 수정했습니다.");
     }
 
@@ -126,6 +131,11 @@ public class MatchingPostService {
         // chatting room : matching post id 삭제
         Optional<MatchingPost> findMatchingPost = matchingPostRepository.findById(postId);
         if (findMatchingPost.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 매칭 공고가 존재하지 않습니다.");
+
+        if (findMatchingPost.get().getIsCompleted() == 1) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "이미 매칭이 완료된 매칭 공고 입니다.");
+
+        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.findByMatchingPostId(findMatchingPost.get().getId());
+        chattingRoom.get().deleteMatchingPost();
 
         matchingPostRepository.deleteById(postId);
 
@@ -190,7 +200,7 @@ public class MatchingPostService {
 
         return MatchingPostDTO.ReadSimpleMatchingPostDTO.builder()
                     .id(matchingPost.getId())
-                    .categoryName(matchingPost.getCategory().getName())
+                    .categoryName(matchingPost.getCategory()==null?null:matchingPost.getCategory().getName())
                     .postName(matchingPost.getPostName())
                     .matchingDate(matchingPost.getMatchingDate().toString())
                     .matchingTime(timeFormat.format(matchingPost.getMatchingTime()))
@@ -211,7 +221,7 @@ public class MatchingPostService {
         List<MatchingPostDTO.ReadPostOfAdminDTO> readDTOList = matchingPostList.stream()
                 .map(matchingPost -> MatchingPostDTO.ReadPostOfAdminDTO.builder()
                         .id(matchingPost.getId())
-                        .categoryName(matchingPost.getCategory().getName())
+                        .categoryName(matchingPost.getCategory()==null?null:matchingPost.getCategory().getName())
                         .postName(matchingPost.getPostName())
                         .postContents(matchingPost.getPostContents())
                         .place(matchingPost.getPlace())
@@ -230,6 +240,10 @@ public class MatchingPostService {
 
         if (findMatchingPost.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 매칭 공고가 존재하지 않습니다.", null);
 
+
+        if (findMatchingPost.get().getMember()==null)
+            System.out.println("member null임 ");
+
         // view ++
         findMatchingPost.get().updateViews();
 
@@ -243,6 +257,7 @@ public class MatchingPostService {
         MatchingPostDTO.ReadDetailMatchingPostDTO readDTO = MatchingPostDTO.ReadDetailMatchingPostDTO.builder()
                 .id(findMatchingPost.get().getId())
                 .nickname(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getNickname())
+                .profileImgAddress(findMatchingPost.get().getMember() == null ? null : findMatchingPost.get().getMember().getProfileImgAddress())
                 .categoryName(findMatchingPost.get().getCategory() == null ? null : findMatchingPost.get().getCategory().getName())
                 .categoryImgAddress(findMatchingPost.get().getCategory() == null ? null : findMatchingPost.get().getCategory().getImgAddress())
                 .postName(findMatchingPost.get().getPostName())
@@ -254,7 +269,11 @@ public class MatchingPostService {
                 .views(findMatchingPost.get().getViews())
                 .place(findMatchingPost.get().getPlace())
                 .registerDatetime(registerFormat.format(findMatchingPost.get().getRegisterDatetime()))
-                .isMyPost( memberId==findMatchingPost.get().getMember().getId() ? true:false )
+                .isMyPost( findMatchingPost.get().getMember()==null ?
+                            false:
+                            (memberId==findMatchingPost.get().getMember().getId() ?
+                                    true:
+                                    false))
                 .lat(coords[1])
                 .lng(coords[0])
                 .build();
@@ -279,16 +298,11 @@ public class MatchingPostService {
         chattingMemberRepository.save(ChattingMember.builder()
                 .chattingRoom(chattingRoom.get())
                 .member(member)
+                .outDatetime(new Date())
                 .isReady(false)
                 .build());
 
         return new ResponseMessage(HttpStatus.OK, "정상적으로 처리되었습니다.");
     }
-
-
-
-
-
-
 
 }

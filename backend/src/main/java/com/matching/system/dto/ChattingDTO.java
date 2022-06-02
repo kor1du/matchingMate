@@ -29,6 +29,11 @@ public class ChattingDTO {
         private Integer maxNumberOfPeople;
         private Integer roomNumberOfPeople;
         private String registerDatetime;
+
+        private Integer noReadChatCount;
+        private String modifiedDatetime;
+
+        private Integer isCompleted;
     }
 
     @Getter     @Builder    @Setter

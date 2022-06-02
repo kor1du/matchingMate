@@ -37,7 +37,7 @@ public class MemberControl {
     }
 
     // 닉네임 중복 체크
-    @PostMapping("signUp/checkNickname")
+    @PostMapping("/signUp/checkNickname")
     public ResponseEntity checkDuplicateNickname(@RequestBody MemberDTO.CheckDuplicateNickname checkDuplicateNickname) {
         ResponseMessage responseMessage = memberService.checkDuplicateNickname(checkDuplicateNickname);
 
@@ -124,6 +124,17 @@ public class MemberControl {
         String userId = jwtTokenUtil.getUserId(accessToken.substring(7));
 
         ResponseMessage responseMessage = memberService.logout(accessToken, userId);
+
+        return ResponseEntity
+                .status(responseMessage.getStatus())
+                .body(responseMessage);
+    }
+
+    @PutMapping(value = "/location")
+    public ResponseEntity locationUpdate(@RequestBody MemberDTO.UpdateLocation updateLocation,
+                                         @RequestHeader("Authorization") String accessToken)
+    {
+        ResponseMessage responseMessage = memberService.updateLocation(updateLocation, accessToken);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())

@@ -18,18 +18,15 @@ public interface InterestCategoryRepository extends JpaRepository<InterestCatego
             "JOIN FETCH ic.category " +
             "JOIN FETCH ic.member " +
             "WHERE ic.member=:memberId")
-    Optional<InterestCategory> findByMemberId(@Param("memberId") Member member);
+    List<InterestCategory> findByMemberId(@Param("memberId") Member member);
 
 //    @Query(value = "SELECT ic.* FROM interest_category ic" +
 //            "WHERE ic.category_id=:categoryId AND ( ic.region1 LIKE %:region% OR ic.region2 LIKE %:region% OR ic.region3 LIKE %:region%) ", nativeQuery = true)
     @Query("SELECT DISTINCT ic FROM InterestCategory ic " +
             "JOIN FETCH ic.category " +
             "JOIN FETCH ic.member " +
-            "WHERE ic.category=:category " +
-            "AND ( ic.region1 LIKE %:region% " +
-            "OR ic.region2 LIKE %:region% " +
-            "OR ic.region3 LIKE %:region% )")
-    List<InterestCategory> findByInterestCategoryMember(@Param("category") Category category, @Param("region") String region);
+            "WHERE ic.category=:category")
+    List<InterestCategory> findByInterestCategoryMember(@Param("category") Category category);
 
-    Optional<InterestCategory> findByMemberIdAndCategoryIdAndRegion1AndRegion2AndRegion3(Long memberId, Long categoryId, String region1, String region2, String region3);
+    Optional<InterestCategory> findByMemberIdAndCategoryId(Long memberId, Long categoryId);
 }

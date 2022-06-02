@@ -25,6 +25,17 @@ export function axiosGet(path, headers) {
   return getResult;
 }
 
+export function axiosDelete(path, headers) {
+  if (url !== "http://localhost:8080") {
+    url = "http://localhost:8080" + path;
+  } else {
+    url += path;
+  }
+
+  const getResult = axios.delete(url, { headers });
+  return getResult;
+}
+
 export function axiosPut(path, data) {
   if (url !== "http://localhost:8080") {
     url = "http://localhost:8080" + path;

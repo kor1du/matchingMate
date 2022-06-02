@@ -1,7 +1,7 @@
-import { check } from "prettier";
-import React, { useEffect, useState } from "react";
+// import { check } from "prettier";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { axiosPost, axiosPut } from "../../axios/Axios";
+import { axiosPut } from "../../axios/Axios";
 import InputModal from "../../Modal/InputModal";
 import Crown from "../../../img/crown.png";
 import ChattingInfoModal from "./ChattingInfoModal";
@@ -10,10 +10,10 @@ export default function ChattingMemberList(props) {
   const roomId = props.roomId;
   const roomHost = props.roomHost;
   const [show, setShow] = useState(false);
-  const [infoShow,setInfoShow]=useState(false);
+  const [infoShow, setInfoShow] = useState(false);
 
   const completeMatching = () => {
-    const members=document.querySelectorAll(".btn-ready");
+    const members = document.querySelectorAll(".btn-ready");
     if (checkReadyAll(members)) {
       setShow(true);
     } else {
@@ -52,16 +52,24 @@ export default function ChattingMemberList(props) {
     });
   };
 
-  const popupMemberInfo=()=>{
+  const popupMemberInfo = () => {
     setInfoShow(true);
-  }
+  };
   const { member } = props;
 
   if (member.memberId === roomHost) {
     return (
       <>
         <div className="host">
-          <img src={member.profileImgAddress} className="profile-img" alt="" onClick={(e)=>{e.preventDefault();popupMemberInfo()}}/>
+          <img
+            src={member.profileImgAddress}
+            className="profile-img"
+            alt=""
+            onClick={(e) => {
+              e.preventDefault();
+              popupMemberInfo();
+            }}
+          />
           <div className="member-nickname">
             <span>{member.nickname}</span>
           </div>
@@ -81,26 +89,36 @@ export default function ChattingMemberList(props) {
           ></InputModal>
           <img src={Crown} className="host-crown-img" alt="" />
         </div>
-        <ChattingInfoModal infoShow={infoShow} setInfoShow={setInfoShow} member={member}></ChattingInfoModal>
+        <ChattingInfoModal
+          infoShow={infoShow}
+          setInfoShow={setInfoShow}
+          member={member}
+        ></ChattingInfoModal>
       </>
     );
   } else {
     return (
       <div className="member">
-        <img src={member.profileImgAddress} className="profile-img" alt="" onClick={(e)=>{e.preventDefault();popupMemberInfo()}}/>
+        <img
+          src={member.profileImgAddress}
+          className="profile-img"
+          alt=""
+          onClick={(e) => {
+            e.preventDefault();
+            popupMemberInfo();
+          }}
+        />
         <div className="member-nickname">
           <span>{member.nickname}</span>
         </div>
-        {(member.ready === true) ? (
+        {member.ready === true ? (
           <Button
             className="btn-ready"
             variant="success"
             onClick={(e) => {
               e.preventDefault();
-              if(e.target.tagName==='P')
-              ready(e.target, member);
-              else
-              ready(e.target.childNodes[0],member)
+              if (e.target.tagName === "P") ready(e.target, member);
+              else ready(e.target.childNodes[0], member);
             }}
           >
             <p className="ready-text">준비완료</p>
@@ -111,18 +129,20 @@ export default function ChattingMemberList(props) {
             variant="warning"
             onClick={(e) => {
               e.preventDefault();
-              if(e.target.tagName==='P')
-              ready(e.target, member);
-              else
-              ready(e.target.childNodes[0],member)
+              if (e.target.tagName === "P") ready(e.target, member);
+              else ready(e.target.childNodes[0], member);
             }}
           >
             <p className="ready-text">준비하기</p>
           </Button>
         )}
 
-        {member.priority===2?<h4 className="me">나</h4>:null}
-        <ChattingInfoModal infoShow={infoShow} setInfoShow={setInfoShow} member={member}></ChattingInfoModal>
+        {member.priority === 2 ? <h4 className="me">나</h4> : null}
+        <ChattingInfoModal
+          infoShow={infoShow}
+          setInfoShow={setInfoShow}
+          member={member}
+        ></ChattingInfoModal>
       </div>
     );
   }

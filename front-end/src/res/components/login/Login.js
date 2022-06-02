@@ -102,8 +102,14 @@ function LoginComponent(props) {
       .then((result) => {
         redirectURL("login");
         redirectURL("");
-        const jwtToken = result.data.data.accessToken;
+
+        const jwtToken = result.data.data.tokenDTO.accessToken;
         sessionStorage.setItem("jwtToken", jwtToken);
+        sessionStorage.setItem("nickname", result.data.data.nickname);
+        sessionStorage.setItem(
+          "profileImgAddress",
+          result.data.data.profileImgAddress
+        );
       })
       .catch(() => {
         alert("아이디와 비밀번호를 확인해주세요.");
@@ -122,7 +128,7 @@ function LoginComponent(props) {
             showLogin();
           }}
         >
-          로그인
+          <p>로그인</p>
         </Button>
       </div>
       <div className="display-login">

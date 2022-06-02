@@ -47,6 +47,7 @@ public class MapProcess {
         while ((buf = br.readLine()) != null) {
             jsonString += buf;
         }
+
         return jsonString;
     }
 

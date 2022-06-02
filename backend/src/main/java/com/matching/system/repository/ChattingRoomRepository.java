@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface ChattingRoomRepository extends JpaRepository<ChattingRoom, Long> {
 
     @Query("SELECT DISTINCT cr FROM ChattingRoom cr " +
-            "JOIN FETCH cr.matchingPost mp " +
-            "JOIN FETCH mp.member " +
+            "LEFT JOIN cr.matchingPost mp " +
+            "LEFT JOIN mp.member " +
             "JOIN FETCH cr.chattingMemberList cMember " +
             "JOIN FETCH cMember.member " +
             "JOIN FETCH cr.chattingMessageList cMessage " +
@@ -23,10 +23,11 @@ public interface ChattingRoomRepository extends JpaRepository<ChattingRoom, Long
     Optional<ChattingRoom> findById(@Param("chattingRoomId") Long chattingRoomId);
 
     @Query("SELECT DISTINCT cr FROM ChattingRoom cr " +
-            "JOIN FETCH cr.matchingPost mp " +
-            "JOIN FETCH mp.member " +
+            "LEFT JOIN cr.matchingPost mp " +
+            "LEFT JOIN mp.member " +
             "WHERE cr.id=:chattingRoomId")
     Optional<ChattingRoom> existRoom(@Param("chattingRoomId") Long chattingRoomId);
 
 
+    Optional<ChattingRoom> findByMatchingPostId(Long matchingPostId);
 }

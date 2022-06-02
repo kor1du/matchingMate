@@ -1,0 +1,96 @@
+.container-match-profile .user-profile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container-match-profile .profile-img {
+  padding: 20px 10px;
+}
+
+.container-match-profile .profile-img img {
+  width: 150px;
+  height: 180px;
+}
+
+.container-match-profile .profile-img .form-profile {
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.container-match-profile .form-profile .label-img {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100px;
+  height: 40px;
+  margin: 5px 0px;
+}
+
+.container-match-profile .label-img span {
+  position: relative;
+  top: 3px;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.container-match-profile .profile-info {
+  padding: 20px 10px;
+}
+
+.container-match-profile .profile-info p {
+  font-size: 1.3rem;
+}
+
+.container-match-profile .profile-info .introduce {
+  display: flex;
+}
+
+.container-match-profile .profile-info .img-badge {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  bottom: 1.5px;
+  margin-left: 5px;
+}
+
+.container-match-profile .introduce > p {
+  width: 100px;
+  height: 31px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container-match-profile .introduce button {
+  width: 40px;
+  height: 20px;
+  padding: 0;
+  margin-left: 5px;
+  position: relative;
+  top: 5px;
+}
+
+.container-match-profile .introduce button > p {
+  font-size: 1rem;
+  position: relative;
+  bottom: 3px;
+}
+
+.container-match-profile .input-edit-introduce {
+  display: flex;
+  max-width: 145px;
+}
+
+.container-match-profile .input-edit-introduce input {
+  width: 100px;
+}
+
+.container-match-profile .input-edit-introduce .btn {
+  width: 45px;
+  height: 30px;
+}
+
+.container-match-profile .input-edit-introduce .btn > p {
+  position: relative;
+  top: 0.5px;
+}

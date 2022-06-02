@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import sockjs from "sockjs-client";
@@ -22,7 +22,7 @@ function ChatRoom() {
   const [newMessage, setNewMessage] = useState("");
   const [memberList, setMemberList] = useState("");
   const [roomHost, setRoomHost] = useState("");
-  const [myId,setMyId]=useState("");
+  const [myId, setMyId] = useState("");
 
   const roomId = Number(useLocation().state.roomId);
 
@@ -33,7 +33,7 @@ function ChatRoom() {
       Authorization: token,
     };
     axiosGet("/chat/in/" + roomId, header).then((res) => {
-      setMyId(()=>res.data.data.myMemberId);
+      setMyId(() => res.data.data.myMemberId);
       setRoomHost(() => res.data.data.postMemberId);
       setMemberList(() => res.data.data.readMemberList);
       setMessages(() => res.data.data.readMessageList);
@@ -135,7 +135,11 @@ function ChatRoom() {
         <Col xs="8">
           <div className="chatting-right-side">
             <div>
-              <RoomMessage messages={messages} setMessages={setMessages} myId={myId}/>
+              <RoomMessage
+                messages={messages}
+                setMessages={setMessages}
+                myId={myId}
+              />
             </div>
             <div></div>
             <div className="btn-send">

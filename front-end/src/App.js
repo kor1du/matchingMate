@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./res/page/home";
 import Login from "./res/page/login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Signup from "./res/page/signup";
 import AdminPostManagement from "./res/page/admin/adminPostManagement";
 import AdminReportManagement from "./res/page/admin/adminReportManagement";
 import AdminCategoryAdd from "./res/page/admin/adminCategoryAdd";
@@ -17,24 +18,20 @@ import MatchProfile from "./res/page/matchProfile/matchProfile";
 import MemberProfile from "./res/page/memberProfile/memberProfile";
 import MemberEdit from "./res/page/memberEdit";
 import BoardDetail from "./res/page/BoardDetail/BoardDetail";
+import BoardRegister from "./res/page/BoardRegister/BoardRegister";
 import ChatRoomList from "./res/page/YH/ChatRoomList";
 import ChatRoom from "./res/page/YH/ChatRoom";
 
 export default function App() {
-  const member = {
-    name: "홍길동",
-    nickname: "NickNAME",
-    contents: "안녕하세요 반갑습니다.",
-    phone: "010-1234-5678",
-  };
-
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/post/:id" element={<BoardDetail />} />
+          <Route path="/register" element={<BoardRegister />} />
           <Route
             path="/admin/post/management"
             element={<AdminPostManagement />}
@@ -55,9 +52,9 @@ export default function App() {
             element={<AdminBadgeModify />}
           ></Route>
           <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>
-          <Route path="/match" element={<MatchProfile member={member} />} />
           <Route path="/admin/badge/view" element={<AdminBadgeView />}></Route>
-          <Route path="/member" element={<MemberProfile member={member} />} />
+          <Route path="/member" element={<MemberProfile />} />
+          <Route path="/match" element={<MatchProfile />} />
           <Route path="/member/edit" element={<MemberEdit />} exact />
           <Route path="/chat/" element={<ChatRoomList />} exact />
           <Route path="/chat/in" element={<ChatRoom />} exact />

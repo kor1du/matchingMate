@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Col, Modal, Row } from "react-bootstrap";
 import Pagination from "../../pagination/Pagination";
 import "../../../css/adminComponents/adminReportBoard.css";
@@ -91,7 +91,12 @@ export default function AdminPostBoard(props) {
             return <Post key={post.id} post={post} />;
           })}
         </div>
-        <Pagination total={posts.length} limit={limit} page={page} setPage={setPage} />
+        <Pagination
+          total={posts.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       </>
     );
   }

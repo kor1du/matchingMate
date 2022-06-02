@@ -18,12 +18,11 @@ public class InterestCategoryControl {
     @PostMapping("/interestCategory/create")
     public ResponseEntity create(@RequestBody InterestCategoryDTO.CreateDTO interestCategoryDTO,
                                  @RequestHeader("Authorization") String token) {
-        System.out.println("interestCategoryDTO = " + interestCategoryDTO.getCategoryId() + ", " + interestCategoryDTO.getRegion1());
-        ResponseMessage responseMessage = interestCategoryService.save(interestCategoryDTO, token);
+        ResponseData responseData = interestCategoryService.save(interestCategoryDTO, token);
 
         return ResponseEntity
-                .status(responseMessage.getStatus())
-                .body(responseMessage);
+                .status(responseData.getStatus())
+                .body(responseData);
     }
 
     // 관심 카테고리 수정   -> O

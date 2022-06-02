@@ -32,7 +32,7 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     @Query("SELECT r FROM Rating r " +
             "JOIN FETCH r.targetMember " +
-            "JOIN FETCH r.member " +
+            "LEFT JOIN r.member " +
             "WHERE r.targetMember=:targetMember")
     List<Rating> findByTargetMemberId(@Param("targetMember") Member targetMember);
 

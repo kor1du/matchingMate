@@ -15,20 +15,20 @@ public interface ChattingMemberRepository extends JpaRepository<ChattingMember, 
     @Query("SELECT DISTINCT cm FROM ChattingMember cm " +
             "JOIN FETCH cm.chattingRoom cr " +
             "JOIN FETCH cr.chattingMemberList " +
-            "JOIN FETCH cr.matchingPost " +
+            "LEFT JOIN cr.matchingPost " +
             "JOIN FETCH cm.member " +
             "WHERE cm.member=:member")
     List<ChattingMember> findAllByMemberId(@Param("member") Member member);
 
     Optional<ChattingMember> findByChattingRoomIdAndMemberId(Long chattingRoomId, Long memberId);
 
-    @Query("SELECT cm FROM ChattingMember cm JOIN FETCH cm.chattingRoom cr JOIN FETCH cr.matchingPost JOIN FETCH cm.member WHERE cm.id=:chattingMemberId")
+    @Query("SELECT cm FROM ChattingMember cm " +
+            "JOIN FETCH cm.chattingRoom cr " +
+            "LEFT JOIN cr.matchingPost " +
+            "JOIN FETCH cm.member " +
+            "WHERE cm.id=:chattingMemberId")
     Optional<ChattingMember> findById(@Param("chattingMemberId") Long chattingMemberId);
 
     Optional<ChattingMember> findByMemberId(Long memberId);
-
-    Integer countByChattingRoomId(Long chattingRoomId);
-
-
 
 }

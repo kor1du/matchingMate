@@ -1,0 +1,29 @@
+.signup-component .mb-3 {
+  width: 317px;
+}
+
+.signup-component .signup-checkID,
+.signup-component .signup-find-address {
+  display: flex;
+  max-height: 36px;
+}
+
+.btn-id-check,
+.btn-find-address {
+  width: 120px;
+  font-size: 1rem;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.modal-id-check-body {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-id-check-body input,
+.modal-id-check-body button {
+  min-height: 40px;
+  max-height: 40px;
+  max-width: 50%;
+}

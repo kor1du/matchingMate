@@ -1,0 +1,67 @@
+
+
+.container {
+
+  max-width: 1040px;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 16px;
+  width: 1024px;
+  margin: 0 auto;
+  color: #333;
+  position: relative;
+
+}
+
+.header {
+  margin-top: 50px;
+  border-bottom: 1px solid #000;
+}
+
+.backBtn:hover {
+  cursor: pointer;
+}
+
+.ul {
+  margin-top: 3rem;
+  display: flex;
+  list-style: none;
+}
+
+
+.infoItem {
+  flex: 1 1;
+}
+
+.selectBox {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.datePicker {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgb(196, 192, 192);
+  border-radius: 4px;
+}
+
+.inputTime{
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgb(196, 192, 192);
+  border-radius: 4px;
+}
+
+.title {
+  width: 100%;
+}
+
+.contents {
+  width: 100%;
+}
+
+.btnBox {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}

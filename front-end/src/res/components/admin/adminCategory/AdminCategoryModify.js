@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import "../../../css/adminComponents/adminCategoryModifyRightside.css";
 import queryString from "query-string";
-import { axiosPost } from "../../axios/Axios";
 
 export default function AdminCategoryModify() {
   const location = useLocation();

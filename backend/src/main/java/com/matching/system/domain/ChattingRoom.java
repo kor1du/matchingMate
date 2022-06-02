@@ -23,6 +23,7 @@ public class ChattingRoom {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "matching_post_id")
     private MatchingPost matchingPost;
 
     @CreationTimestamp
@@ -30,6 +31,11 @@ public class ChattingRoom {
     @Column(name = "register_datetime")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modified_datetime")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date modifiedDatetime;
 
     @OneToMany(mappedBy = "chattingRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ChattingMember> chattingMemberList = new HashSet<>();
@@ -43,5 +49,7 @@ public class ChattingRoom {
     @OneToMany(mappedBy = "chattingRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ChattingMessage> chattingMessageList = new HashSet<>();
 
+    public void deleteMatchingPost() { this.matchingPost = null; }
+    public void updateModifiedDatetime(Date modifiedDatetime) { this.modifiedDatetime = modifiedDatetime; }
 
 }

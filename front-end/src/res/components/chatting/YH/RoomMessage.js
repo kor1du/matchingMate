@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 function RoomMessage(props) {
   const { messages, setMessages, myId } = props;

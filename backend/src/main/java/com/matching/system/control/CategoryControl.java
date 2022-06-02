@@ -16,7 +16,7 @@ public class CategoryControl {
     private final CategoryService categoryService;
 
     // 카테고리 추가      -> O
-    @PostMapping("/admin/category/create")
+    @PostMapping("/admin/create")
     public ResponseEntity save(@ModelAttribute CategoryDTO.CreateCategoryDTO createCategoryDTO)
     {
         ResponseMessage responseMessage = categoryService.save(createCategoryDTO);

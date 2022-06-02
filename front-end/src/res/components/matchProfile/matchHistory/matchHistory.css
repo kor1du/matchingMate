@@ -1,0 +1,153 @@
+.container-match-profile .history-matching {
+}
+
+.container-match-profile .history-matching > p {
+  text-align: center;
+  font-size: 2.25rem;
+  margin: 40px 0px;
+}
+
+.container-match-profile .history-matching .history {
+  display: flex;
+}
+
+.container-match-profile .history > div {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  width: 50%;
+}
+
+.container-match-profile .history .title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.container-match-profile .history p {
+  font-size: 1.2rem;
+}
+
+.container-match-profile .history .overflow {
+  min-width: 121px;
+  max-height: 28.8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container-match-profile .info-mate .info {
+  width: 100%;
+  display: flex;
+  margin: 5px 0px;
+}
+
+.container-match-profile .info-mate .info > p {
+  width: 60px;
+  position: relative;
+  top: 3px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container-match-profile .info-mate .info button {
+  width: 40px;
+  height: 30px;
+  padding: 6px 8px;
+}
+
+.container-match-profile .info-mate .info button p {
+  font-size: 0.9rem;
+  position: relative;
+  bottom: 3px;
+}
+
+.container-match-profile .info-mate .more {
+  width: 100%;
+  text-align: center;
+}
+
+.container-match-profile .info-mate .more label {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 5px;
+  position: relative;
+  left: 7px;
+  border-radius: 5%;
+  color: black;
+  width: 60px;
+  font-size: 1.2rem;
+}
+
+.input-raiting-modal {
+  width: 90vw !important;
+  height: 85vh !important;
+}
+
+.input-raiting-modal .text-raiting {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.input-raiting-modal .text-skill,
+.input-raiting-modal .text-manner {
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+.input-raiting-modal textarea {
+  margin: 10px 0px;
+}
+
+.input-raiting-modal .btns {
+  display: flex;
+  justify-content: center;
+}
+
+.input-raiting-modal button {
+  margin-right: 20px;
+  width: 80px;
+  height: 35px;
+}
+
+.input-raiting-modal button > p {
+  font-size: 1.5rem;
+  position: relative;
+  bottom: 6px;
+}
+
+.input-report-modal {
+  height: 100vh;
+}
+
+.input-report-modal .modal-dialog,
+.input-report-modal .modal-content {
+  overflow: scroll;
+  height: 90vh;
+}
+
+.input-report-modal .report-target {
+  width: 150px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.input-report-modal p,
+.input-report-modal label {
+  font-size: 1.5rem;
+}
+
+.input-report-modal .modal-footer {
+  justify-content: center;
+}
+
+.input-report-modal .modal-footer button {
+  width: 80px;
+  height: 35px;
+  margin: 0 10px;
+}
+
+.input-report-modal .modal-footer button p {
+  position: relative;
+  bottom: 6px;
+}

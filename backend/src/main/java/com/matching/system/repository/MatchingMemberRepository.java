@@ -19,7 +19,7 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember, 
     @Query("SELECT mm FROM MatchingMember mm " +
             "JOIN FETCH mm.matchingHistory mh " +
             "JOIN FETCH mh.matchingPost mp " +
-            "JOIN FETCH mp.category " +
+            "LEFT JOIN mp.category " +
             "JOIN FETCH mm.member " +
             "WHERE mm.member=:member")
     List<MatchingMember> findByMatchingMember(@Param("member")Member member);

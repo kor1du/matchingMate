@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import View from "../../../img/view.png";
 import "../../../css/adminComponents/adminReportManagementRightside.css";
 import { getAdminPosts } from "../../axios/Axios";

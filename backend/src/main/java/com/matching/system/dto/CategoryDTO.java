@@ -38,5 +38,11 @@ public class CategoryDTO {
         private MultipartFile categoryImgFile;
     }
 
+    @Getter
+    public static class ReadCategoryNameDTO
+    {
+        private String name;
+    }
+
 
 }

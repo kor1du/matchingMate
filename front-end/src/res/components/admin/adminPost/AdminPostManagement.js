@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import View from "../../../img/view.png";
-import { axiosGet, getAdminPosts } from "../../axios/Axios";
+import { Button } from "react-bootstrap";
+import { getAdminPosts } from "../../axios/Axios";
 import "../../../css/adminComponents/adminPostManagementRightside.css";
 import AdminPostBoard from "./AdminPostBoard";
 

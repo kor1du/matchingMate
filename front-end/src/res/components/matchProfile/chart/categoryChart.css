@@ -1,0 +1,15 @@
+.container-match-profile .chart-category {
+  display: flex;
+  justify-content: center;
+  margin: 40vh 0;
+}
+
+.container-match-profile .chart-category .chart {
+  width: 95%;
+}
+
+.container-match-profile .chart > p {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 20px 0px;
+}

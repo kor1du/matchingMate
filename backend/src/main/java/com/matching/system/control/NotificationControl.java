@@ -1,6 +1,7 @@
 package com.matching.system.control;
 
 import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import com.matching.system.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,17 @@ public class NotificationControl {
         return ResponseEntity
                 .status(responseData.getStatus())
                 .body(responseData);
+    }
+
+    // 알림 아이콘 누르는 순간
+    @PutMapping("/notification")
+    public ResponseEntity updateReadNotification(@RequestHeader("Authorization") String token) {
+
+        ResponseMessage responseMessage = notificationService.updateReadNotification(token);
+
+        return ResponseEntity
+                .status(responseMessage.getStatus())
+                .body(responseMessage);
     }
 
     // 알림 내역 조회 -> 전체

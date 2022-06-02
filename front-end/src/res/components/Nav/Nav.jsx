@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProfileComponent from "./Profile";
 import "../../css/nav/nav.css";
@@ -81,7 +81,10 @@ export default function Nav() {
           <p className="logout-1024px" onClick={logout}>
             로그아웃
           </p>
-          <AiFillBell className="nav-notification" onClick={clickBell}></AiFillBell>
+          <AiFillBell
+            className="nav-notification"
+            onClick={clickBell}
+          ></AiFillBell>
           {notifications.length > 0 ? (
             <div className="nav-notification-box">
               {notifications.map((notification) => {

@@ -121,7 +121,12 @@ function CarouselBody(props) {
             <Row className="carousel-row">
               <h1>어떤 운동 메이트를 찾고 계신가요?</h1>
               {categorys.slice(offset, limit).map((category) => {
-                return <ShowCategory key={category.id} category={category}></ShowCategory>;
+                return (
+                  <ShowCategory
+                    key={category.id}
+                    category={category}
+                  ></ShowCategory>
+                );
               })}
             </Row>
           </Carousel.Item>

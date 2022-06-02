@@ -104,7 +104,12 @@ export default function AdminReportBoard({ reports }) {
           return <ReportBoard key={report.id} report={report} />;
         })}
       </div>
-      <Pagination total={reports.length} limit={limit} page={page} setPage={setPage} />
+      <Pagination
+        total={reports.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </>
   );
 }

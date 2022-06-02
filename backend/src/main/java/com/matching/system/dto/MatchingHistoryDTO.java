@@ -7,20 +7,34 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Builder
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class MatchingHistoryDTO {
 
-    private Long id;
-    private String matchedDatetime;
-    private MatchingPostDTO.ReadDetailMatchingPostDTO matchingPostDTO;
-    List<MemberDTO.HistoryMemberDTO> historyMembers;
-
-    public void addHistoryMember(List<MemberDTO.HistoryMemberDTO> historyMembers)
-    {
-        this.historyMembers = historyMembers;
+    @Builder
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ReadMatchingHistoryDTO {
+        private Long id;
+        private String matchedDatetime;
+        private MatchingPostDTO.ReadDetailMatchingPostDTO matchingPostDTO;
+        List<MemberDTO.HistoryMemberDTO> historyMembers;
     }
+
+    @Builder
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ChartData {
+        private String label;
+        private Long data;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class ChartDataProcess {
+        private List<String> labelList;
+        private List<String> dataList;
+    }
+
 
 }

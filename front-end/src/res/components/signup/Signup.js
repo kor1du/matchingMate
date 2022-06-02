@@ -122,7 +122,9 @@ export default function Signup(props) {
           <span>새로운 운동메이트 시군요!!</span>
           <img src={PartyFace} />
         </div>
-        <Button onClick={() => showSignup()}>회원가입</Button>
+        <Button onClick={() => showSignup()}>
+          <p>회원가입</p>
+        </Button>
       </div>
       <div className="display-signup">
         <p className="btn-close" onClick={() => hideSignup()}>

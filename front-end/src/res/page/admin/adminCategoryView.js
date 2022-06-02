@@ -4,7 +4,6 @@ import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
 import AdminCategoryView from "../../components/admin/adminCategory/AdminCategoryView";
 import NavAdmin from "../../components/nav/NavAdmin";
-import NavPagination from "../../components/nav/NavPagination";
 
 export default function adminCategoryView() {
   return (

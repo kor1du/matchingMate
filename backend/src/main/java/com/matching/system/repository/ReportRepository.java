@@ -38,4 +38,6 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     void deleteByTargetMemberId(Long targetMemberId);
 
+    void deleteByMemberId(Long memberId);
+
 }
