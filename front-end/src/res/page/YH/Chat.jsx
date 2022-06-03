@@ -25,7 +25,7 @@ function Chat() {
 
   const [isCompleted, setIsCompleted] = useState(0);
 
-  let sockJS = new SockJS("http://localhost:8080/stomp/chat");
+  let sockJS = new SockJS("http://localhost:8050/stomp/chat");
   let stomp = Stomp.over(sockJS);
 
   const token = "Bearer " + sessionStorage.getItem("jwtToken");
@@ -59,7 +59,7 @@ function Chat() {
       console.log(error);
     }
     
-    axios.put(`http://localhost:8080/chat/out/${myChattingMemberId}`, "",{
+    axios.put(`http://localhost:8050/chat/out/${myChattingMemberId}`, "",{
       headers: {
         Authorization: token
       }

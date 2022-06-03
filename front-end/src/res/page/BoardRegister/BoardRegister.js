@@ -61,7 +61,7 @@ const BoardRegister = () => {
   const onCreate = (e) => {
     e.preventDefault();
     console.log("넣는데이터", postInfo);
-    axios.post('http://localhost:8080/matchingPost/create', postInfo, {
+    axios.post('http://localhost:8050/matchingPost/create', postInfo, {
       headers: {
         'Authorization': "Bearer " + token
       }
@@ -73,7 +73,7 @@ const BoardRegister = () => {
     const updateInfo = { ...postInfo, id };
 
     console.log("넣는데이터", updateInfo);
-    axios.put('http://localhost:8080/matchingPost/detail/update', updateInfo);
+    axios.put('http://localhost:8050/matchingPost/detail/update', updateInfo);
 
     navigate('/');
   }
