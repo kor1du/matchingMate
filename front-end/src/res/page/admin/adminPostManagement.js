@@ -1,4 +1,4 @@
-import React from "react";
+import React, {  } from "react";
 import { Col, Row } from "react-bootstrap";
 import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
@@ -7,6 +7,7 @@ import NavAdmin from "../../components/nav/NavAdmin";
 
 
 export default function AdminPostManagement() {
+
   return (
     <>
       <NavAdmin></NavAdmin>

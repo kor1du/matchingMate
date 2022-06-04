@@ -65,6 +65,7 @@ public class MatchingPostDTO {
         private Integer views;
         private String place;
         private String registerDatetime;
+        private Integer inChatNumber;
     }
 
     @Getter
@@ -83,6 +84,7 @@ public class MatchingPostDTO {
         private String matchingTime;
         private String recommendedSkill;
         private Integer maxNumberOfPeople;
+        private Integer inChatNumber;
         private Integer views;
         private String place;
         private String registerDatetime;

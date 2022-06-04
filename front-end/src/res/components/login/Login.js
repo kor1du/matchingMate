@@ -11,6 +11,11 @@ export function isLogin() {
   else return false;
 }
 
+export function isUser() {
+  if (sessionStorage.getItem("role").includes("ROLE_USER")) return true;
+  else return false;
+}
+
 function LoginComponent() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -23,14 +28,19 @@ function LoginComponent() {
     };
     axiosPost("/login", data)
       .then((result) => {
-        redirectURL("login");
-        redirectURL("");
 
-        console.log(result.data.data);
         const jwtToken = result.data.data.tokenDTO.accessToken;
         sessionStorage.setItem("jwtToken", jwtToken);
         sessionStorage.setItem("nickname", result.data.data.nickname);
         sessionStorage.setItem("profileImgAddress", result.data.data.profileImgAddress);
+        sessionStorage.setItem("role", result.data.data.role)
+        
+        if (String(result.data.data.role).includes("ROLE_USER") ) {  
+          redirectURL("");
+        } else {
+          redirectURL("admin/post/management");
+        }
+
       })
       .catch(() => {
         alert("아이디와 비밀번호를 확인해주세요.");

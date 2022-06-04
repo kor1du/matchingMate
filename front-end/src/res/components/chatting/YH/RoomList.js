@@ -1,7 +1,14 @@
 // import { Link } from "react-router-dom";
 import React from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 function RoomList(props) {
   const { setIsCompleted, room, chatStart, setShowMessage, setRoomId, isDarkMode } = props;
+
+
+  const deleteRoom = () => {
+    alert("삭제?")
+  }
   
   function SetMode (props) {
     const isDarkMode = props.isDarkMode;
@@ -9,6 +16,9 @@ function RoomList(props) {
     if (isDarkMode) {
       return (
           <li className="hvr-sweep-to-right-darkMode">
+            <div className="delete-icon-container">
+              <DeleteIcon onClick={() => { deleteRoom(); }}/>
+            </div>
             <div onClick={() => {setShowMessage(true); setIsCompleted(room.isCompleted); setRoomId(room.id); chatStart(room.id); }} state={{ roomId: room.id }}>
               <div className="isCompletedContainer">
                 <h5 className="isCompleted">{ room.isCompleted==1? "모집완료": "모집중"}</h5>
@@ -29,8 +39,12 @@ function RoomList(props) {
     } else {
       return (
           <li className="hvr-sweep-to-right-lightMode">
+            <div className="delete-icon-container">
+              <DeleteIcon onClick={() => { deleteRoom(); }}/>
+            </div>
             <div onClick={() => {setShowMessage(true); setIsCompleted(room.isCompleted); setRoomId(room.id); chatStart(room.id); }} state={{ roomId: room.id }}>
               <div className="isCompletedContainer">
+                
                 <h5 className="isCompleted">{ room.isCompleted==1? "모집완료": "모집중"}</h5>
                 { room.noReadChatCount==0 ? null : 
                     <div className="noReadChatCountContainer">

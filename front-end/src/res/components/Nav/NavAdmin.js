@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ProfileComponent from "./Profile";
+// import ProfileComponent from "./Profile";
 import "../../css/nav/navAdmin.css";
 import Bars from "../../img/bars-solid.png";
 import NavLeftSide from "./NavLeftSide";
@@ -54,7 +54,7 @@ export default function NavAdmin() {
     <Container fluid id="nav-admin">
       <Row>
         <Col xs="6" className="nav-logo">
-          <Link to="/">
+          <Link to="/admin/post/management">
             <p>운동메이트</p>
           </Link>
         </Col>
@@ -65,7 +65,7 @@ export default function NavAdmin() {
           <p className="logout-1024px" onClick={logout}>
             로그아웃
           </p>
-          <ProfileComponent></ProfileComponent>
+          {/* <ProfileComponent></ProfileComponent> */}
           <p className="nav-admin-menus" onClick={toggleAdminActive}>
             관리자 메뉴
           </p>

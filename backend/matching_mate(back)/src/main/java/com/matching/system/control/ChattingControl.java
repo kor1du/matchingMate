@@ -31,7 +31,7 @@ public class ChattingControl {
     // 채팅방 입장 및 메시지 반환      -> O
     @GetMapping("/in/{roomId}")
     public ResponseEntity inChattingRoom(@PathVariable("roomId") Long roomId,
-                                         @RequestHeader("Authorization") String token){
+                                         @RequestHeader("Authorization") String token) {
 
         ResponseData responseData = chattingService.inChattingRoomId(roomId, token);
 

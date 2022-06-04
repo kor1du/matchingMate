@@ -20,6 +20,13 @@ public interface ChattingMemberRepository extends JpaRepository<ChattingMember, 
             "WHERE cm.member=:member")
     List<ChattingMember> findAllByMemberId(@Param("member") Member member);
 
+    @Query("SELECT cm FROM ChattingMember cm " +
+            "JOIN FETCH cm.member m " +
+            "JOIN FETCH cm.chattingRoom cr " +
+            "JOIN FETCH cr.matchingPost mp " +
+            "WHERE mp.id=:matchingPostId AND m.id=:memberId")
+    Optional<ChattingMember> findByMatchingPostIdAndMemberId(@Param("matchingPostId") Long matchingPostId, @Param("memberId")Long memberId);
+
     Optional<ChattingMember> findByChattingRoomIdAndMemberId(Long chattingRoomId, Long memberId);
 
     @Query("SELECT cm FROM ChattingMember cm " +

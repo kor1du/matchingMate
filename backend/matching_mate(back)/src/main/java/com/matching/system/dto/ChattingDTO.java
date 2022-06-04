@@ -40,7 +40,7 @@ public class ChattingDTO {
     @NoArgsConstructor    @AllArgsConstructor
     public static class ChattingRoomInDTO
     {
-        public Long roomId;
+        public Long matchingPostId;
     }
 
 
@@ -65,8 +65,13 @@ public class ChattingDTO {
         private String matchingTime;
         private Long myMemberId;    // 자기 id
         private Long chattingMemberId;
+        private Integer numberOfPeople;
+        private Integer maxNumberOfPeople;
         private List<ReadChattingMessageDTO> readMessageList;
         private List<ReadChattingMemberDTO> readMemberList;
+
+
+        private Integer isCompleted;
     }
 
     // 매칭 멤버 조회  ( 참여자 + 공고자 )
@@ -108,7 +113,19 @@ public class ChattingDTO {
     public static class UpdateReadyState
     {
         private Long chattingMemberId;    // chattingMemberId;
-        private boolean ready;
+        private Boolean ready;
+        private Long roomId;
+    }
+
+    // 준비상태 답변
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ServerResponse
+    {
+        private String message;
+        private String sender;
     }
 
     // 준비 완료

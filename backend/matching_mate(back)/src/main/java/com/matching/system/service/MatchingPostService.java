@@ -1,5 +1,6 @@
 package com.matching.system.service;
 
+import com.matching.system.customRepository.MatchingPostCustomRepository;
 import com.matching.system.domain.*;
 import com.matching.system.dto.ChattingDTO;
 import com.matching.system.dto.MatchingPostDTO;
@@ -33,6 +34,7 @@ public class MatchingPostService {
     private final ChattingRoomRepository chattingRoomRepository;
     private final MapProcess mapProcess;
     private final JwtTokenUtil jwtTokenUtil;
+    private final MatchingPostCustomRepository matchingPostCustomRepository;
 
     // 매칭 공고 추가
     public ResponseMessage save(MatchingPostDTO.CreateDTO matchingPostCreateDTO, String token) {
@@ -203,13 +205,14 @@ public class MatchingPostService {
                     .categoryName(matchingPost.getCategory()==null?null:matchingPost.getCategory().getName())
                     .postName(matchingPost.getPostName())
                     .matchingDate(matchingPost.getMatchingDate().toString())
-                    .matchingTime(timeFormat.format(matchingPost.getMatchingTime()))
+                    .matchingTime( matchingPost.getMatchingTime()==null ? null : timeFormat.format(matchingPost.getMatchingTime()))
                     .recommendedSkill(matchingPost.getRecommendedSkill())
                     .numberOfPeople(matchingPost.getNumberOfPeople())
                     .maxNumberOfPeople(matchingPost.getMaxNumberOfPeople())
+                    .inChatNumber( matchingPostCustomRepository.getJoinChatNumber(matchingPost.getId()) )
                     .views(matchingPost.getViews())
                     .place(matchingPost.getPlace())
-                    .registerDatetime(registerFormat.format(matchingPost.getRegisterDatetime()))
+                    .registerDatetime( matchingPost.getRegisterDatetime()==null ? null : registerFormat.format(matchingPost.getRegisterDatetime()) )
                 .build();
     }
 
@@ -266,6 +269,7 @@ public class MatchingPostService {
                 .matchingTime(timeFormat.format(findMatchingPost.get().getMatchingTime()))
                 .recommendedSkill(findMatchingPost.get().getRecommendedSkill())
                 .maxNumberOfPeople(findMatchingPost.get().getMaxNumberOfPeople())
+                .inChatNumber( matchingPostCustomRepository.getJoinChatNumber(findMatchingPost.get().getId()) )
                 .views(findMatchingPost.get().getViews())
                 .place(findMatchingPost.get().getPlace())
                 .registerDatetime(registerFormat.format(findMatchingPost.get().getRegisterDatetime()))
@@ -286,11 +290,13 @@ public class MatchingPostService {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
         // 이미 가입 여부 확인
-        Optional<ChattingMember> validateDuplicateRoom = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInDTO.getRoomId(), memberId);
+        Optional<ChattingMember> validateDuplicateRoom = chattingMemberRepository.findByMatchingPostIdAndMemberId(chattingRoomInDTO.getMatchingPostId(), memberId);
         if (validateDuplicateRoom.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 방에 가입되어 있습니다.");
 
+        matchingPostRepository.findById(chattingRoomInDTO.getMatchingPostId());
+
         // chatting_member 추가
-        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.existRoom(chattingRoomInDTO.getRoomId());
+        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.findMatchingPostRoom(matchingPostRepository.findById(chattingRoomInDTO.getMatchingPostId()).get().getId());
         if (chattingRoom.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 채팅 방이 존재하지 않습니다.");
 
         Member member = memberRepository.findById(memberId).get();

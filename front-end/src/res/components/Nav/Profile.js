@@ -5,7 +5,7 @@ import "../../css/nav/profile.css";
 import { Link } from "react-router-dom";
 import { toggle } from "../toggle/Toggle";
 import { logout } from "../logout/Logout";
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 
 
 function showProfileMenus(event) {
@@ -33,40 +33,40 @@ export default function Profile() {
                 <img style={{width:"100px", height:"100px"}} className="profile-userInfo-img" src={profileImgAddress} alt="profileImg" />
               </div>
               <div className="profile-userInfo-info">
-                <h3>{nickname}</h3> 
-                {/* <h6>한줄소개</h6>  */}
+                <h3 className="font" style={{fontSize:"40px"}}>{nickname}</h3> 
+                {/* <Link to="/chat" className="profile-link">
+                  <Button sx={{width:"100%"}} variant="contained">채팅하러 가기~</Button>
+                </Link> */}
               </div>
-
-              
-                
               
             </div>
           </li>
           <li>
-            <div style={{display:"inline-flex", width:"100%", textAlign:"center"}}>
-              <div style={{width:"50%"}}>
-                <Link to="/member" className="profile-link">
-                  <Button sx={{width:"100%"}} variant="contained">계정 관리</Button>
-                </Link>
+            <div style={{display:"inline-flex", width:"100%", textAlign:"center", borderTop:"1px solid black"}}>
+            <Link style={{ width:"50%", borderRight:"1px solid black"}} to="/member" className="profile-link">
+              <div>
+                {/* <Link to="/member" className="profile-link"> */}
+                  {/* <Button sx={{width:"100%"}} variant="contained">계정 관리</Button> */}
+                  <h5 className="font" style={{ width:"100%"}}>계정 관리</h5>
+                {/* </Link> */}
                 </div>
-
-                <div style={{width:"50%"}}>
-                  <Link to="/match" className="profile-link">
-                    <Button sx={{width:"100%"}} variant="contained">프로필 관리</Button>
-                  </Link>
-              </div>
+            </Link>
+            <Link  style={{width:"50%"}} to="/match" className="profile-link">
+                <div>
+                  {/* <Link to="/match" className="profile-link"> */}
+                    {/* <Button sx={{width:"100%"}} variant="contained">프로필 관리</Button> */}
+                    <h5 className="font" style={{width:"100%"}}>프로필 관리</h5>
+                  {/* </Link> */}
+                </div>
+              </Link>
             </div>
           </li>
          
-          <li>
-            <div className='profile-userInfo-logout'>
-              <Button className='profile-userInfo-logout-btn'  onClick={logout} variant="contained">로그아웃</Button>
+          <li style= {{borderTop:"1px solid black"}}>
+            <div style={{width:"100%"}} className='profile-userInfo-logout' onClick={logout}>
+              {/* <Button className='profile-userInfo-logout-btn'  onClick={logout} variant="contained">로그아웃</Button> */}
+              <h5 className="font" style={{width:"100%", color:"red"}}>로그아웃</h5>
             </div>
-            {/* <div className="profile-link">
-              <p className="logout-1024px" onClick={logout}>
-                <span>로그아웃</span>
-              </p>
-            </div> */}
           </li>
         </ul>
       </div>

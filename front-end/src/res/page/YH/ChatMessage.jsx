@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import RoomMessage from '../../components/chatting/YH/RoomMessage';
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
+import ChatSend from './ChatSend'
 
 function ChatMessage(props) {
-    const { chatStart, messages, myId, sockJS, stomp, roomId, isDarkMode, setIsDarkMode} = props;
+    const { setIsCompleted, newMessage, setNewMessage, chatStart, messages, myId, sockJS, stomp, roomId, isDarkMode, setIsDarkMode} = props;
 
+    // const [roomInfo, setRoomInfo] = useState(null);
   
     // eslint-disable-next-line no-unused-vars
-    const [messageText, setMessageText] = useState("");
-    const [newMessage, setNewMessage] = useState("");
+    // const [messageText, setMessageText] = useState("");
+    // const [newMessage, setNewMessage] = useState("");
     
     const token = "Bearer " + sessionStorage.getItem("jwtToken");
 
@@ -34,10 +35,7 @@ function ChatMessage(props) {
   
     function sendMessage() {
       let message = document.querySelector("#sendText").value;
-      // console.log(message);
 
-      
-  
       waitForConnection(stomp, function () {
         
         stomp.send(
@@ -58,27 +56,39 @@ function ChatMessage(props) {
             "/sub/chat/in/" + roomId,
             (data) => {
               setNewMessage(() => JSON.parse(data.body).message);
+
+              if (JSON.parse(data.body).sender === "server" && String(JSON.parse(data.body).message).substring(0, 7) === "매칭시간 : ") {
+                setIsCompleted(1);
+              }
+
             },
             { Authorization: token }
           );
         });
       });
-      
+      // setRoomInfo(null);
     }
 
+    
+
     function SetMode () {
-      // const isDarkMode = isDarkMode;
-  
       if (isDarkMode) {
         return (
           <div className='message-list-dark'>
             <div className="chatting-right-side">
-                <div className="darkMode">
-              <FormControlLabel 
-                  checked={isDarkMode}
-                  onChange={(e) => { setIsDarkMode(e.target.checked); } }
-                  control={<MaterialUISwitch sx={{ m: 1 }}  />}
-              />
+                <div className="roomInfo-container">
+
+                  {/* <div className="roomInfo-text">
+                    <CheckServerMessage serverMessage={newMessage}/>
+                  </div> */}
+
+                  <div className="darkMode">
+                    <FormControlLabel 
+                    checked={isDarkMode}
+                    onChange={(e) => { setIsDarkMode(e.target.checked); } }
+                    control={<MaterialUISwitch sx={{ m: 1 }}  />}
+                    />
+                  </div>
               </div>
                 
               <div>
@@ -93,12 +103,20 @@ function ChatMessage(props) {
         return (
           <div className='message-list-light'>
             <div className="chatting-right-side">
+              <div className="roomInfo-container">
+
+              {/* <div className="roomInfo-text">
+                <CheckServerMessage serverMessage={newMessage}/>
+              </div> */}
+
+              
                 <div className="darkMode">
-              <FormControlLabel 
-                  checked={isDarkMode}
-                  onChange={(e) => { setIsDarkMode(e.target.checked); } }
-                  control={<MaterialUISwitch sx={{ m: 1 }}  />}
-              />
+                  <FormControlLabel 
+                      checked={isDarkMode}
+                      onChange={(e) => { setIsDarkMode(e.target.checked); } }
+                      control={<MaterialUISwitch sx={{ m: 1 }}  />}
+                  />
+                </div>
               </div>
                 
               <div>
@@ -109,7 +127,6 @@ function ChatMessage(props) {
           </div>
         );
       }
-  
     }
 
     useEffect(() => {
@@ -117,38 +134,35 @@ function ChatMessage(props) {
       chatStart(roomId);
     }, [newMessage])
 
+    // const CheckServerMessage = (serverMessage) => {
+    //   const serverMessageString = String(serverMessage.serverMessage);
+
+    //   if (serverMessageString.includes("server:"))
+    //   {
+    //     setRoomInfo( serverMessageString.substring(7, serverMessageString.length-1) );
+    //   }
+
+    //   return (
+        
+    //     <span id="roomInfoText">{roomInfo}</span>
+    //   );
+    // }
+    
     return (
       <div>
         <SetMode isDarkMode={isDarkMode} />
+
         <div className="btn-send">
-          <input
-            id="sendText"
-            type="text"
-            className='sendTextBox'
-            onChange={(e) => {
-              e.preventDefault();
-              setMessageText(() => e.target.value);
-            }}
-          />  
-            <Button
-              type="submit"
-              variant="success"
-              className='sendButton'
-              onClick={() => {
-                sendMessage();
-              }}
-            >
-              전송
-            </Button>
-          </div>
+          <ChatSend sendMessage={sendMessage}/>
+        </div>
+
+        
       </div>
       
     );
 }
 
 export default ChatMessage;
-
-
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,

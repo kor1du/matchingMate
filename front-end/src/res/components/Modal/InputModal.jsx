@@ -1,27 +1,18 @@
 import { React, useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "../../css/home-board/homeBoardCreate.css";
-import { axiosPost } from "../axios/Axios";
+// import { axiosPost } from "../axios/Axios";
 import ChattingAddressModal from "../chatting/YH/ChattingAddressModal";
 
 export default function InputModal(props) {
-  const show = props.show;
-  const setShow = props.setShow;
-  const roomId=props.roomId;
+  const { show , setShow, sendComplete } = props;
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
-  const postData=()=>{
-    const data={
-      chattingRoomId:roomId,
-      matchingTime:time,
-      place:address,
-    }
-    console.log(data.matchingTime);
-    axiosPost("/chat/in/complete",data).then((res)=>{
-      console.log(res);
-    });
+  const completeMatching=()=>{
+    sendComplete(address, time);
+
   }
   const handleClose = () => setShow(false);
   useEffect(() => {
@@ -60,7 +51,7 @@ export default function InputModal(props) {
           ></ChattingAddressModal>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="warning" onClick={()=>postData()}><p>전송</p></Button>
+          <Button variant="warning" onClick={()=>completeMatching()}><p>전송</p></Button>
           <Button variant="secondary" onClick={handleClose}>
            <p>닫기</p>
           </Button>

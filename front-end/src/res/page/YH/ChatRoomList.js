@@ -5,6 +5,7 @@ import { axiosGet } from "../../components/axios/Axios";
 // import Nav from "../../components/nav/Nav";
 import "../../css/chattingList/chattingList.css";
 
+
 function ChatRoomList(props) {
   const { setIsCompleted, setShowMessage, chatStart, setRoomId, isDarkMode } = props;
 
@@ -45,7 +46,6 @@ function ChatRoomList(props) {
     axiosGet("/chat", header).then((res) => {
       console.log(res.data.data);
       setRooms(() => res.data.data);
-
 
     });
   };
