@@ -11,10 +11,13 @@ import axios from "axios";
 import { axiosGet } from "../components/axios/Axios";
 
 function Home() {
+  const [liveAddr, setLiveAddr] = useState('');
   const [boards, setBoards] = useState([]);
   const [latitude, setLatitude] = useState("");
   const [longtitue, setLongitude] = useState("");
   const [categorys, setCategorys] = useState();
+
+  const token = sessionStorage.getItem("jwtToken");
 
   const getPopularBoards = async (lat, lng) => {
     // const res = await (await axiosGet("/popular")).data;

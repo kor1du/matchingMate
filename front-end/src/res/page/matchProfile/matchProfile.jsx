@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import UserProfile from "../../components/matchProfile/profile/userProfile";
 import CategoryChart from "../../components/matchProfile/chart/CategoryChart";
 import MatchingChart from "../../components/matchProfile/chart/MatchingChart";
-import Category from "../../components/matchProfile/category/Category";
-import MatchHistory from "../../components/matchProfile/matchHistory/MatchHistory";
+import Category from "../../components/matchProfile/category/category";
+import MatchHistory from "../../components/matchProfile/matchHistory/matchHistory";
 import NavMatchingProfile from "../../components/nav/matchingProfile/NavMatchingProfile";
-import MatchRating from "../../components/matchProfile/matchRating/MatchRating";
+import MatchRating from "../../components/matchProfile/matchRating/matchRating";
 import "./matchProfile.css";
 
 const MatchProfile = () => {
