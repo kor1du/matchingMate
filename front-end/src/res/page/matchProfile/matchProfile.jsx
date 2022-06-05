@@ -5,6 +5,9 @@ import CategoryChart from "../../components/matchProfile/chart/CategoryChart";
 import MatchingChart from "../../components/matchProfile/chart/MatchingChart";
 import Category from "../../components/matchProfile/category/Category";
 import MatchHistory from "../../components/matchProfile/matchHistory/MatchHistory";
+import NavMatchingProfile from "../../components/nav/matchingProfile/NavMatchingProfile";
+import MatchRating from "../../components/matchProfile/matchRating/MatchRating";
+import "./matchProfile.css";
 
 const MatchProfile = () => {
   const [menu, setMenu] = useState("home");
@@ -16,11 +19,6 @@ const MatchProfile = () => {
   const [categoryDataList, setCategoryDataList] = useState([]);
 
   const token = sessionStorage.getItem("jwtToken");
-
-  function changeMenu(menu) {
-    console.log("선택된 메뉴는 ", menu); //테스트
-    return setMenu(menu);
-  }
 
   const getProfileInfo = async () => {
     const res = await (
@@ -46,18 +44,26 @@ const MatchProfile = () => {
   return (
     <>
       <div className="container-match-profile">
-        <UserProfile profileInfo={profileInfo}></UserProfile>
-        <CategoryChart
-          nickname={profileInfo.memberNickname}
-          categoryLabelList={categoryLabelList}
-          categoryDataList={categoryDataList}
-        ></CategoryChart>
-        <MatchingChart
-          matchingCountDataList={matchingCountDataList}
-          matchingCountLabelList={matchingCountLabelList}
-        ></MatchingChart>
-        <Category></Category>
-        <MatchHistory></MatchHistory>
+        <div className="left">
+          <NavMatchingProfile></NavMatchingProfile>
+        </div>
+        <div className="right">
+          <UserProfile profileInfo={profileInfo}></UserProfile>
+          <Category></Category>
+
+          <MatchHistory></MatchHistory>
+          <MatchRating></MatchRating>
+
+          <CategoryChart
+            nickname={profileInfo.memberNickname}
+            categoryLabelList={categoryLabelList}
+            categoryDataList={categoryDataList}
+          ></CategoryChart>
+          <MatchingChart
+            matchingCountDataList={matchingCountDataList}
+            matchingCountLabelList={matchingCountLabelList}
+          ></MatchingChart>
+        </div>
       </div>
     </>
   );

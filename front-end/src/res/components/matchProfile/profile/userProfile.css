@@ -1,22 +1,24 @@
 .container-match-profile .user-profile {
-  width: 100%;
-  height: 100%;
+  width: 80vw;
   display: flex;
   justify-content: center;
 }
 
 .container-match-profile .profile-img {
-  padding: 20px 10px;
+  width: 50%;
 }
 
 .container-match-profile .profile-img img {
-  width: 150px;
-  height: 180px;
+  width: 100%;
+  height: 70%;
 }
 
 .container-match-profile .profile-img .form-profile {
-  text-align: center;
-  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  padding-top: 5px;
 }
 
 .container-match-profile .form-profile .label-img {
@@ -27,14 +29,15 @@
 }
 
 .container-match-profile .label-img span {
-  position: relative;
-  top: 3px;
   color: black;
   font-size: 1.5rem;
 }
 
 .container-match-profile .profile-info {
-  padding: 20px 10px;
+  padding-left: 10%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .container-match-profile .profile-info p {
@@ -43,7 +46,9 @@
 
 .container-match-profile .profile-info .introduce {
   display: flex;
+  align-items: center;
 }
+
 
 .container-match-profile .profile-info .img-badge {
   width: 20px;
@@ -53,9 +58,8 @@
   margin-left: 5px;
 }
 
-.container-match-profile .introduce > p {
-  width: 100px;
-  height: 31px;
+.container-match-profile .introduce>p {
+  max-width: 50vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -66,11 +70,9 @@
   height: 20px;
   padding: 0;
   margin-left: 5px;
-  position: relative;
-  top: 5px;
 }
 
-.container-match-profile .introduce button > p {
+.container-match-profile .introduce button>p {
   font-size: 1rem;
   position: relative;
   bottom: 3px;
@@ -78,7 +80,6 @@
 
 .container-match-profile .input-edit-introduce {
   display: flex;
-  max-width: 145px;
 }
 
 .container-match-profile .input-edit-introduce input {
@@ -90,7 +91,115 @@
   height: 30px;
 }
 
-.container-match-profile .input-edit-introduce .btn > p {
+.container-match-profile .input-edit-introduce .btn>p {
   position: relative;
   top: 0.5px;
+}
+
+@media screen and (min-width:425px) and (max-width:767px) {
+  .container-match-profile .profile-img img {
+    width: 200px;
+    height: 80%;
+  }
+
+  .container-match-profile .profile-info p {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .container-match-profile .profile-img img {
+    width: 100%;
+    height: 70%;
+  }
+
+
+  .container-match-profile .profile-info p {
+    font-size: 2.0rem;
+  }
+
+  .container-match-profile .introduce>p {
+    height: 48px;
+    width: 140px;
+  }
+
+  .container-match-profile .introduce button {
+    width: 70px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container-match-profile .introduce button>p {
+    font-size: 1.8rem;
+    top: 0px;
+    bottom: 0px;
+  }
+
+  .container-match-profile .form-profile .label-img {
+    width: 120px;
+    height: 40px;
+    margin: 5px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container-match-profile .label-img span {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .container-match-profile .user-profile {
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .container-match-profile .profile-img img {
+    width: 100%;
+    height: 70%;
+  }
+
+  .container-match-profile .profile-info {
+    margin-left: 50px;
+  }
+
+  .container-match-profile .profile-info p {
+    font-size: 2.0rem;
+  }
+
+  .container-match-profile .introduce>p {
+    height: 48px;
+    min-width: 140px;
+  }
+
+  .container-match-profile .introduce button {
+    width: 70px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container-match-profile .introduce button>p {
+    font-size: 1.8rem;
+    top: 0px;
+    bottom: 0px;
+  }
+
+  .container-match-profile .form-profile .label-img {
+    width: 120px;
+    height: 40px;
+    margin: 5px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container-match-profile .label-img span {
+    font-size: 2rem;
+  }
 }

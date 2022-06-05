@@ -1,91 +1,192 @@
-.container-match-profile .interest-category {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 40vh 0;
-}
+  .container-match-profile .interest-category {
+    display: none;
+  }
 
-.container-match-profile .interest-category > p {
-  font-size: 2.25rem;
-  margin: 20px 0px;
-}
+  .container-match-profile .interest-category.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 200px;
+  }
 
-.container-match-profile .interest-category > button {
-  text-align: center;
-  width: 100px;
-  height: 35px;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
+  .container-match-profile .interest-category>p {
+    font-size: 2.25rem;
+    margin: 20px 0px;
+  }
 
-.container-match-profile .interest-category > button > p {
-  position: relative;
-  bottom: 6px;
-}
+  .container-match-profile .interest-category>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100px;
+    height: 35px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
 
-.interest-category-input-modal {
-  width: 90vw !important;
-  height: 30vh !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  .interest-category-input-modal {
+    width: 90vw !important;
+    height: 30vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-.interest-category-input-modal .list {
-  margin: 20px 0px;
-}
+  .interest-category-input-modal .list {
+    margin: 20px 0px;
+  }
 
-.interest-category-input-modal .list p {
-  position: relative;
-  top: 6px;
-  font-size: 2rem;
-  margin-right: 20px;
-}
+  .interest-category-input-modal .list p {
+    position: relative;
+    top: 6px;
+    font-size: 2rem;
+    margin-right: 20px;
+  }
 
-.interest-category-input-modal .MuiOutlinedInput-root {
-  margin: 0;
-  width: 150px;
-  height: 40px;
-}
+  .interest-category-input-modal .MuiOutlinedInput-root {
+    margin: 0;
+    width: 150px;
+    height: 40px;
+  }
 
-.interest-category-input-modal button {
-  width: 100px;
-  height: 30px;
-}
+  .interest-category-input-modal button {
+    width: 100px;
+    height: 30px;
+  }
 
-.interest-category-input-modal button > p {
-  position: relative;
-  bottom: 8px;
-  font-size: 1.5rem;
-}
+  .interest-category-input-modal button>p {
+    position: relative;
+    bottom: 8px;
+    font-size: 1.5rem;
+  }
 
-.interest-category .category {
-  display: flex;
-}
+  .interest-category .category {
+    display: flex;
+    align-items: center;
+  }
 
-.interest-category .category img {
-  width: 30px;
-  height: 30px;
-  position: relative;
-  bottom: 2px;
-}
+  .interest-category .category img {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    bottom: 2px;
+  }
 
-.interest-category .category > p {
-  font-size: 1.5rem;
-  position: relative;
-  bottom: 6px;
-  margin-right: 10px;
-  min-width: 100px;
-  text-align: center;
-}
+  .interest-category .category>p {
+    font-size: 1.5rem;
+    position: relative;
+    bottom: 6px;
+    margin-right: 10px;
+    min-width: 100px;
+    text-align: center;
+  }
 
-.interest-category .category > button {
-  height: 25px;
-}
+  .interest-category .category>button {
+    height: 25px;
+  }
 
-.interest-category .category > button > p {
-  font-size: 1.5rem;
-  position: relative;
-  bottom: 12px;
-}
+  .interest-category .category>button>p {
+    font-size: 1.5rem;
+    position: relative;
+    bottom: 12px;
+  }
+
+  @media screen and (min-width:425px) and (max-width:767px) {
+    .container-match-profile .interest-category>p {
+      font-size: 3rem;
+    }
+
+    .container-match-profile .interest-category>button {
+      width: 100px;
+      height: 50px;
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+    }
+
+    .interest-category .category img {
+      width: 50px;
+      height: 50px;
+      bottom: 2px;
+    }
+
+    .interest-category .category>p {
+      font-size: 2rem;
+      bottom: 3px;
+    }
+
+    .interest-category .category>button {
+      height: 35px;
+      position: relative;
+      top: 5px;
+    }
+
+    .interest-category .category>button>p {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media screen and (min-width:768px) and (max-width:1023px) {
+    .container-match-profile .interest-category>p {
+      font-size: 3.5rem;
+    }
+
+    .container-match-profile .interest-category>button {
+      width: 120px;
+      height: 50px;
+      font-size: 2rem;
+    }
+
+    .interest-category .category img {
+      width: 80px;
+      height: 80px;
+      bottom: 2px;
+    }
+
+    .interest-category .category>p {
+      font-size: 4rem;
+    }
+
+    .interest-category .category>button {
+      height: 35px;
+      position: relative;
+      top: 5px;
+    }
+
+    .interest-category .category>button>p {
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (min-width:1024px) {
+    .container-match-profile .interest-category>p {
+      font-size: 4rem;
+    }
+
+    .container-match-profile .interest-category>button {
+      width: 120px;
+      height: 50px;
+      font-size: 2rem;
+    }
+
+    .interest-category .category img {
+      width: 80px;
+      height: 80px;
+      bottom: 2px;
+    }
+
+    .interest-category .category>p {
+      font-size: 4rem;
+    }
+
+    .interest-category .category>button {
+      height: 35px;
+      position: relative;
+      top: 5px;
+    }
+
+    .interest-category .category>button>p {
+      font-size: 2rem;
+    }
+  }

@@ -7,18 +7,13 @@ function Pagination({ total, limit, page, setPage }) {
 
   return (
     <div className="pagination">
-      <Button
-        onClick={() => setPage(page - 1)}
-        disabled={page === 1}
-        variant="dark"
-      >
+      <Button onClick={() => setPage(page - 1)} disabled={page === 1} variant="dark">
         <p>&lt;</p>
       </Button>
       {Array(numPages)
         .fill()
         .map((_, i) => (
           <Button
-            className="active"
             variant="danger"
             key={i + 1}
             onClick={() => setPage(i + 1)}
@@ -27,11 +22,7 @@ function Pagination({ total, limit, page, setPage }) {
             <p>{i + 1}</p>
           </Button>
         ))}
-      <Button
-        onClick={() => setPage(page + 1)}
-        disabled={page === numPages}
-        variant="dark"
-      >
+      <Button onClick={() => setPage(page + 1)} disabled={page === numPages} variant="dark">
         <p>&gt;</p>
       </Button>
     </div>

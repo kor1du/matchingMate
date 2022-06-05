@@ -13,16 +13,7 @@ import { Line } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import "./matchingChart.css";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ChartDataLabels);
 
 export default function MatchingChart(props) {
   const { matchingCountLabelList, matchingCountDataList } = props;
@@ -114,10 +105,8 @@ export default function MatchingChart(props) {
 
   return (
     <div className="chart-matching">
-      <div className="chart">
-        <p>매칭횟수</p>
-        <Line options={options} data={data} width={300} height={200} />
-      </div>
+      <p>매칭횟수</p>
+      <Line options={options} data={data} width={300} height={200} />
     </div>
   );
 }
@@ -224,6 +213,5 @@ const externalTooltipHandler = (context) => {
   tooltipEl.style.left = positionX + tooltip.caretX + "px";
   tooltipEl.style.top = positionY + tooltip.caretY + "px";
   tooltipEl.style.font = tooltip.options.bodyFont.string;
-  tooltipEl.style.padding =
-    tooltip.options.padding + "px " + tooltip.options.padding + "px";
+  tooltipEl.style.padding = tooltip.options.padding + "px " + tooltip.options.padding + "px";
 };

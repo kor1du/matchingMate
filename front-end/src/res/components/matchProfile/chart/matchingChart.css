@@ -1,16 +1,35 @@
-.container-match-profile .chart-matching {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 25vh 0;
-}
+  .container-match-profile .chart-matching {
+    display: none;
+  }
 
-.container-match-profile .chart-matching .chart {
-  width: 95%;
-}
+  .container-match-profile .chart-matching.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
 
-.container-match-profile .chart > p {
-  text-align: center;
-  font-size: 2.25rem;
-  margin: 20px 0px;
-}
+  .container-match-profile .chart-matching>p {
+    text-align: center;
+    font-size: 2.25rem;
+    margin: 20px 0px;
+  }
+
+  @media screen and (min-width:768px) and (max-width:1023px) {
+    .container-match-profile .chart-matching>p {
+      font-size: 3rem;
+    }
+  }
+
+  @media screen and (min-width:1024px) {
+    .container-match-profile .chart-matching>p {
+      text-align: center;
+      font-size: 3.5rem;
+      margin: 20px 0px;
+    }
+
+    .container-match-profile .chart-matching.active {
+      width: 50%;
+    }
+  }

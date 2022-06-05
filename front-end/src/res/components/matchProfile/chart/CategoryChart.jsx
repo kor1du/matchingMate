@@ -81,10 +81,8 @@ export default function CategoryChart(props) {
 
   return (
     <div className="chart-category">
-      <div className="chart">
-        <p>종목</p>
-        <Doughnut data={data} options={options} />
-      </div>
+      <p>종목</p>
+      <Doughnut data={data} options={options} />
     </div>
   );
 }

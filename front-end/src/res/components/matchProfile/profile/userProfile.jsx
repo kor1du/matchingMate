@@ -74,13 +74,7 @@ const UserProfile = (props) => {
         <div className="profile-img">
           <img src={previewImg ? previewImg : profileImgAddress} alt="noImg" />
           <form className="form-profile">
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={onLoadFile}
-              style={{ display: "none" }}
-            />
+            <input type="file" id="image" accept="image/*" onChange={onLoadFile} style={{ display: "none" }} />
             {file && <p>{file[0].name}</p>}
             <label htmlFor="image" className="label-img">
               <span>이미지 변경</span>
@@ -105,21 +99,16 @@ const UserProfile = (props) => {
         <div className="profile-info">
           <p>닉네임 : {profileInfo.memberNickname}</p>
           <div className="introduce">
-            <p>한줄 소개 : {profileContent}</p>
-            <EditIntroduce
-              setProfileContent={setProfileContent}
-            ></EditIntroduce>
+            <p>한줄소개 : {profileContent}</p>
+            <EditIntroduce setProfileContent={setProfileContent}></EditIntroduce>
           </div>
           <p>매너점수 : {profileInfo.avgMannerPoint}</p>
           <p>기술점수 : {profileInfo.avgSkillPoint}</p>
           <p>
             뱃지 :
-            <img
-              src={profileInfo.badgeImgAddress.imgAddress}
-              alt=""
-              className="img-badge"
-            />
+            <img src={profileInfo.badgeImgAddress.imgAddress} alt="" className="img-badge" />
           </p>
+          <p>매칭횟수 : {profileInfo.matchingCount}</p>
         </div>
       </div>
     );
