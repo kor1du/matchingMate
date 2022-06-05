@@ -33,13 +33,13 @@ export const showLoginBtn = () => {
   if (isLogin()) {
     loginCSS.style.display = "none";
     barCSS.style.display = "block;";
-    notificationCss.style.display = "block"
+    if (notificationCss != null) notificationCss.style.display = "block"
   } else {
     loginCSS.style.display = "block";
     barCSS.style.display = "none";
     profileCSS.style.display = "none";
     // logoutCSS.style.display = "none";
-    notificationCss.style.display = "none"
+    if (notificationCss != null) notificationCss.style.display = "none"
   }
 };
 
@@ -77,7 +77,6 @@ export default function Nav() {
   };
 
   function ShowNotification({ notification }) {
-    
     return (
       <Link style={{height:"20px", fontSize:"0rem"}} to='/match'>
       <li className="notification-list" >
@@ -85,22 +84,27 @@ export default function Nav() {
         <p style={{width:"40px", margin:"0px", marginLeft:"10px"}}>
         { notification.notificationType === '신고처리' ? 
           <Avatar sx={{ bgcolor: blue[600] }}>
-          <ReportIcon />
-        </Avatar>
+            <ReportIcon />
+          </Avatar>
         :
-         <Avatar sx={{ bgcolor: pink[500] }}>
-        <FavoriteBorderIcon />
-        </Avatar>
+          <Avatar sx={{ bgcolor: pink[500] }}>
+            <FavoriteBorderIcon />
+          </Avatar>
         }
-        {/* <Avatar sx={{ bgcolor: pink[500] }}>
-          <FavoriteBorderIcon />
-        </Avatar> */}
         </p>
-        <p style={{paddingTop:"7px"}}>{notification.message}</p>
-        <p style={{margin:"0px", paddingTop:"7px",  width:"90px"}}>{notification.registerDatetime}</p>
+        <p className="font" style={{}}>{notification.message}</p>
+        <p className="font" style={{margin:"0px",  width:"90px"}}>{notification.registerDatetime}</p>
         
       </li>
       </Link>
+    );
+  }
+
+  function ShowNoNotification() {
+    return (
+      <li style={{textAlign:"center"}} className="notification-list" >
+        <p >오늘 알림이 없습니다.</p>
+      </li>
     );
   }
 
@@ -108,7 +112,7 @@ export default function Nav() {
     const alarms = document.querySelector(".nav-notification-box");
     alarms.classList.toggle("active");
 
-    axios.put('http://localhost:8050/notification', null, {
+    axios.put('http://localhost:8080/notification', null, {
       headers: headers
     }).then((res) => {
       setNoReadCount(0);
@@ -147,13 +151,13 @@ export default function Nav() {
       <Row>
         <Col xs="6" className="nav-logo">
           <Link to="/">
-            <p>운동메이트</p>
+            <p>운동 메이트</p>
           </Link>
 
         </Col>
         <Col xs="6" className="nav-menus">
           <Link to="/login" className="login" ref={ref}>
-            <p>로그인</p>
+            <p className="font">로그인</p>
           </Link>
           {/* <p className="logout-1024px" onClick={logout}>
             로그아웃
@@ -173,7 +177,12 @@ export default function Nav() {
                 );
               })}
             </div>
-          ) : null}
+          ) 
+          : 
+          <div className="nav-notification-box">
+            <ShowNoNotification />
+          </div>
+          }
 
 
           <ProfileComponent></ProfileComponent>

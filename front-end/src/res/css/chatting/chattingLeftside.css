@@ -99,6 +99,14 @@
   width: 25%;
 }
 
+.delete-icon-container {
+  text-align: right;
+  width: 30px;
+  position: relative;
+  left: 100px;
+  z-index: 1;
+}
+
 .chatting-left-side .chatting-member-list .me {
   display: flex;
   align-items: center;

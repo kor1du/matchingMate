@@ -23,6 +23,7 @@ function Board(props) {
 
   const navigate = useNavigate();
   console.log("보드진입 : 현위치는요? :", liveAddr);
+  console.log("보드데이터: ",boards );
 
   return (
     <Layout>

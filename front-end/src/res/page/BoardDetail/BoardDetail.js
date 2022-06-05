@@ -7,9 +7,10 @@ import { Button } from 'react-bootstrap';
 // import { axiosGet } from '../../axios/Axios';
 import Modal from "react-modal";
 import axios from 'axios';
-import GoogleMap from '../../components/googleMap/googleMap';
+// import GoogleMap from '../../components/googleMap/googleMap';
 import { axiosDelete } from '../../components/axios/Axios';
 import BoardReport from '../../components/home-board/BoardReport';
+import KakaoMap from '../../components/googleMap/kakaoMap';
 
 
 const BoardDetail = () => {
@@ -67,10 +68,13 @@ const BoardDetail = () => {
     navigate(-1);
   }
 
-  const handleInChat = () => {
+  const handleInChat = (e) => {
+    e.preventDefault();
 
     if(!board.myPost) {
-      axios.post('http://localhost:8050/matchingPost/detail/joinChat', {postId : id}, {
+      console.log("채팅 가입하기할떄 매칭포스트아이디 : ",id)
+
+      axios.post('http://localhost:8050/matchingPost/detail/joinChat', {matchingPostId : id}, {
         headers: {
           'Authorization': "Bearer " + token
         }
@@ -175,7 +179,7 @@ const BoardDetail = () => {
                 }}
               >
                 <BoardReport reportInfo={reportInfo} setReportInfo={setReportInfo} handleReport={handleReport} />
-                <button onClick={() => setReportInfo(false)}>닫기</button>
+                <button onClick={() => setReportModalOpen(false)}>닫기</button>
                 <button onClick={handleReport}>등록</button>
               </Modal>
               <ul className={styles.boardInfo}>
@@ -233,7 +237,8 @@ const BoardDetail = () => {
                 },
               }}
             >
-              <GoogleMap lat={board.lat} lng={board.lng} />
+              <KakaoMap lat={board.lat} lng={board.lng} />
+              {/* <GoogleMap lat={board.lat} lng={board.lng} /> */}
               <button onClick={() => setModalOpen(false)}>닫기</button>
             </Modal>
 
@@ -245,8 +250,14 @@ const BoardDetail = () => {
             </div>
             <div className={styles.chatBtnBox}>
               {
+                board.inChatNumber === board.maxNumberOfPeople ?
+                  <Button>현재 채팅방이 가득 찼어요</Button>
+                  :
+                  <Button onClick={(e)=> handleInChat(e)}>채팅방 참여하기</Button>
+              }
+              {
                 (board.myPost) &&
-                <>
+                <div className={styles.myBtn}>
                   <Button onClick={() => {
                     navigate('/register', {
                       state: {
@@ -259,9 +270,9 @@ const BoardDetail = () => {
                   }}>수정</Button>
 
                   <Button onClick={() => boardDelete()}>삭제</Button>
-                </>
+                </div>
               }
-              <Button onClick={()=> handleInChat()}>채팅방 참여하기</Button>
+              
             </div>
           </div>
         )
