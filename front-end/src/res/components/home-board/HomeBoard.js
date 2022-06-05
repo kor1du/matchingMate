@@ -52,7 +52,7 @@ function Board(props) {
         </Row>
         <Row className="board-list">
           {/* {boards.map((board) => <BoardItem key={board.id} board={board} />)} */}
-          {boards.slice(offset, offset + limit).map((board) => <BoardItem key={board.id} board={board} categorys={categorys} boardDelete={boardDelete} />)}
+          {boards.slice(offset, offset + limit).map((board) => <BoardItem key={board.id} board={board} categorys={categorys} />)}
         </Row>
       </div>
       <footer>
