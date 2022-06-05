@@ -1,8 +1,9 @@
 import React, { useEffect, } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ChattingMemberList from '../../components/chatting/YH/ChattingMemberList'
+
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ChattingMemberList from './ChattingMemberList';
 
 function ChatMemberList(props) {
     const { myChattingMemberId, newMessage, sockJS, stomp, maxNumberOfPeople, numberOfPeople, memberList, myId, isCompleted, setIsCompleted, setShowMessage, roomId, roomHost, disconnectWS, isDarkMode} = props;

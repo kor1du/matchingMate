@@ -1,0 +1,5 @@
+
+.boardBox {
+    display: flex;
+    flex-direction: column;
+}

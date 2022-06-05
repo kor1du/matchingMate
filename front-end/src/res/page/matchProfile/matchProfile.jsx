@@ -22,7 +22,7 @@ const MatchProfile = () => {
 
   const getProfileInfo = async () => {
     const res = await (
-      await axios.get("http://localhost:8080/profile", {
+      await axios.get("http://localhost:8050/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

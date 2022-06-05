@@ -1,0 +1,132 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-items: center;
+    
+}
+
+.nav {
+    margin: 0 auto;
+    max-width: 1180px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 200px;
+    padding: 0 10px;   
+    background-color: aquamarine;
+}
+
+.liveAddr {
+    text-transform: uppercase;
+    background-image: linear-gradient(
+        -225deg,
+        #231557 0%,
+        #44107a 29%,
+        #ff1361 67%,
+        #fff800 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+        font-size: 50px;
+    }
+
+    @keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.slider{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 330px;
+    background-color: bisque;
+}
+
+.container {
+    max-width: 1150px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 auto;
+}
+
+.ull {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.filter .newhot {
+    display: flex;
+}
+
+.newhot .new {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #42c2ff;
+    margin: 0 20px;
+}
+.newhot .hot {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #e83a14;
+}
+.location {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #000;
+}
+
+.categoryBox {
+    width: 100%;
+    padding-left: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.headerBox {
+    margin: 70px 0;
+    padding: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #E3FDF5 0%, #FFE6FA 100%);
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 5rem;
+    
+    
+}

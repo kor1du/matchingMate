@@ -39,7 +39,7 @@ export function axiosGet(path, headers) {
     url += path;
   }
 
-  const getResult = axios.delete(url, { headers });
+  const getResult = axios.get(url, { headers });
   return getResult;
 }
 

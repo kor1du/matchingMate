@@ -1,13 +1,15 @@
+/* eslint-disable no-undef */
+
 import React from "react";
 import "./res/css/global.css";
-import "animate.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Home from "./res/page/home";
 import Login from "./res/page/login";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Signup from "./res/page/signup";
-import "./res/css/global.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import SignUp from "./res/page/signup";
 import AdminPostManagement from "./res/page/admin/adminPostManagement";
 import AdminReportManagement from "./res/page/admin/adminReportManagement";
 import AdminCategoryAdd from "./res/page/admin/adminCategoryAdd";
@@ -18,23 +20,28 @@ import AdminBadgeModify from "./res/page/admin/adminBadgeModify";
 import AdminBadgeView from "./res/page/admin/adminBadgeView";
 import MatchProfile from "./res/page/matchProfile/matchProfile";
 import MemberProfile from "./res/page/memberProfile/memberProfile";
-import MemberEdit from "./res/page/memberEdit";
-import BoardDetail from "./res/page/BoardDetail/BoardDetail";
-import BoardRegister from "./res/page/BoardRegister/BoardRegister";
-import ChatRoomList from "./res/page/YH/ChatRoomList";
-import ChatRoom from "./res/page/chat/ChatRoom";
-import ChatIn from "./res/page/chat/ChatIn";
-import Chat from "./res/page/YH/Chat";
+import BoardDetail from './res/page/BoardDetail/BoardDetail';
+import BoardRegister from './res/page/BoardRegister/BoardRegister';
+// import ChatRoomList from './res/page/YH/ChatRoomList';
+import ChatRoom from './res/page/chat/ChatRoom';
+import ChatIn from './res/page/chat/ChatIn'
+// import Chat from './res/page/YH/Chat'
+
 import UserPrivateRoute from "./lib/UserPrivateRoute";
 import AdminPrivateRoute from "./lib/AdminPrivateRoute";
 import UserPublicRoute from "./lib/UserPublicRoute";
+import Main2 from './res/page/main/main2';
+
 
 export default function App() {
+
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
+
+        <Route
             path="/"
             element={
               <UserPublicRoute>
@@ -42,41 +49,48 @@ export default function App() {
               </UserPublicRoute>
             }
           />
-
           <Route
-            path="/signUp"
+            path="/main"
             element={
-              <UserPublicRoute restricted={true}>
-                <Signup />
+              <UserPublicRoute>
+                <Main2 />
               </UserPublicRoute>
             }
           />
+          <Route 
+            path="/signUp" 
+            element={
+              <UserPublicRoute restricted={true}>
+                <SignUp />
+              </UserPublicRoute>
+            } 
+          />
 
-          <Route
-            path="/login"
+          <Route 
+            path="/login" 
             element={
               <UserPublicRoute restricted={true}>
                 <Login />
               </UserPublicRoute>
-            }
+            } 
           />
 
-          <Route
-            path="/post/:id"
+          <Route 
+            path="/post/:id" 
             element={
               <UserPrivateRoute>
                 <BoardDetail />
               </UserPrivateRoute>
-            }
+            } 
           />
 
-          <Route
-            path="/register"
-            element={
+          <Route 
+            path="/register" 
+            element={ 
               <UserPrivateRoute>
                 <BoardRegister />
               </UserPrivateRoute>
-            }
+            } 
           />
 
           <Route
@@ -88,6 +102,7 @@ export default function App() {
             }
           />
 
+
           <Route
             path="/admin/report/management"
             element={
@@ -97,8 +112,8 @@ export default function App() {
             }
           />
 
-          <Route
-            path="/admin/add"
+          <Route 
+            path="/admin/add" 
             element={
               <AdminPrivateRoute>
                 <AdminCategoryAdd />
@@ -112,11 +127,11 @@ export default function App() {
               <AdminPrivateRoute>
                 <AdminCategoryModify />
               </AdminPrivateRoute>
-            }
+              }
           />
 
-          <Route
-            path="/admin/view"
+          <Route 
+            path="/admin/view" 
             element={
               <AdminPrivateRoute>
                 <AdminCategoryView />
@@ -124,8 +139,8 @@ export default function App() {
             }
           />
 
-          <Route
-            path="/admin/badge/add"
+          <Route 
+            path="/admin/badge/add" 
             element={
               <AdminPrivateRoute>
                 <AdminBadgeAdd />
@@ -142,8 +157,8 @@ export default function App() {
             }
           />
 
-          <Route
-            path="/admin/badge/view"
+          <Route 
+            path="/admin/badge/view" 
             element={
               <AdminPrivateRoute>
                 <AdminBadgeView />
@@ -151,17 +166,17 @@ export default function App() {
             }
           />
 
-          <Route
-            path="/member"
+          <Route 
+            path="/member" 
             element={
               <UserPrivateRoute>
                 <MemberProfile />
               </UserPrivateRoute>
-            }
+            } 
           />
 
-          <Route
-            path="/match"
+          <Route 
+            path="/match" 
             element={
               <UserPrivateRoute>
                 <MatchProfile />
@@ -169,47 +184,30 @@ export default function App() {
             }
           />
 
-          <Route
-            path="/chat"
-            element={
-              <UserPrivateRoute>
-                <Chat />
-              </UserPrivateRoute>
-            }
-            exact
-          />
-          {/* <Route 
-            path="/chat/in" 
+          {/*  */}
+          <Route 
+            path="/chat" 
             element={
               <UserPrivateRoute>
                 <ChatRoom />
               </UserPrivateRoute>
             } 
             exact 
-          /> */}
-
-          {/*  */}
-          <Route
-            path="/newChat"
-            element={
-              <UserPrivateRoute>
-                <ChatRoom />
-              </UserPrivateRoute>
-            }
-            exact
           />
 
-          <Route
-            path="/newChat/in/:id"
+          <Route 
+            path="/chat/in/:id" 
             element={
               <UserPrivateRoute>
                 <ChatIn />
               </UserPrivateRoute>
-            }
-            exact
+            } 
+            exact 
           />
+
         </Routes>
       </BrowserRouter>
+      
     </div>
   );
 }

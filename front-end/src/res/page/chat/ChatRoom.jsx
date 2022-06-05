@@ -4,9 +4,14 @@ import ChatRightSide from "./ChatRightSide";
 import { Col, Row } from "react-bootstrap";
 import Nav from "../../components/nav/Nav";
 import { axiosGet } from '../../components/axios/Axios';
+import { useLocation } from 'react-router-dom';
+
+
 
 function ChatRoom() {
-    const [isDarkMode, setIsDarkMode]  = useState(false);
+    const state = useLocation().state;
+
+    const [isDarkMode, setIsDarkMode] = useState(state===null?false:state.isDarkMode);
 
     const [rooms, setRooms] = useState([]);
 
@@ -24,7 +29,7 @@ function ChatRoom() {
 
     useEffect(() => {
         getChattingList();
-    }, []);
+    }, [useLocation()]);
 
     return (
     <div>

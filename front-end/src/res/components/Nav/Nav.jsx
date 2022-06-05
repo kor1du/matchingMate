@@ -75,7 +75,7 @@ export default function Nav() {
 
   const ref = useRef(null);
   const headers = {
-    Authorization: "Bearer " + sessionStorage.getItem("jwtToken"),
+    'Authorization': "Bearer " + sessionStorage.getItem("jwtToken"),
   };
 
   function ShowNotification({ notification }) {

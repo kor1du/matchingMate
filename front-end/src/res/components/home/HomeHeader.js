@@ -11,8 +11,16 @@ import Chat from "../../img/Image/chat.gif";
 import Muscle from "../../img/Image/muscle.gif";
 import Badge from "../../img/Image/badge.gif";
 import Together from "../../img/Image/together.gif";
+import { useNavigate } from 'react-router-dom';
 
-function Header() {
+const Header = (props) => {
+
+  const {categorys , liveAddr} = props;
+
+  console.log("홈헤더에서 정보나와야되요.,.",categorys,liveAddr);
+
+  const navigate = useNavigate();
+
   function setObserver() {
     if (document.querySelector(".fade-class")) {
       console.log("Loaded...");
@@ -47,10 +55,17 @@ function Header() {
           <p>혼자서만 하는 운동, 지겹지 않으신가요?</p>
           <h1>운동메이트</h1>
           <div className="buttons">
-            <Button className="btn btn-category-find">
+            <Button className="btn btn-category-find" onClick={()=> navigate("/main")}>
               <p>운동메이트 찾기</p>
             </Button>
-            <Button className="btn btn-category-create">
+            <Button className="btn btn-category-create" onClick={() => {
+              navigate('/register', {
+                state: {
+                  categorys: categorys,
+                  liveAddr: liveAddr
+                }
+              });
+            }}>
               <p>운동메이트 모집하기</p>
             </Button>
           </div>
