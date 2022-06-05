@@ -26,7 +26,9 @@
   transition-duration: 0.3s;
   -webkit-transition-property: transform;
   transition-property: transform;
+  cursor: pointer;
 }
+
 .hvr_grow:hover,
 .hvr_grow:focus,
 .hvr_grow:active {
@@ -46,12 +48,13 @@
 
 .report-icon {
   width: 25px;
+  cursor: pointer;
 }
 
 .chatting-left-side .chatting-member-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -88,6 +91,10 @@
   margin-left: 10px;
 }
 
+.profile-img {
+  cursor: pointer;
+}
+
 .chatting-left-side .chatting-member-list .member-nickname {
   margin-right: 10px;
   margin-left: 5px;
@@ -100,19 +107,21 @@
 }
 
 .delete-icon-container {
+
   text-align: right;
   width: 30px;
   position: relative;
   left: 100px;
+
   z-index: 1;
 }
 
 .chatting-left-side .chatting-member-list .me {
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   width: 30px;
-  height: 30px;
+  /* height: 30px; */
   border: 1px solid black;
   border-radius: 50%;
   background-color: black;
@@ -120,4 +129,25 @@
   margin-left: 10px;
   /* position: absolute; */
   /* left: 270px; */
+}
+
+.me {
+  justify-content: center;
+}
+
+.chatting-member-list {
+  height: 750px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.chatting-out-container {
+  text-align: center;
+  background-color: red;
+  cursor: pointer;
+}
+
+.chatting-out-container h3 {
+  padding-top: 30px;
+  height: 79px;
 }

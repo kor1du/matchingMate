@@ -10,12 +10,14 @@
 .rightSideBackgroundImg {
   opacity: 0.8;
 }
+
 .noMessageContainer-lightMode {
   height: 100%;
   background-color: white;
   display: block;
   font: black;
 }
+
 .noMessageContainer-darkMode {
   height: 100%;
   background-color: rgb(48, 48, 48);
@@ -68,6 +70,7 @@
   background-color: #8a8a89;
   /* height: 650 px; */
 }
+
 .messageContainer-ligth {
   background-color: #fff3d1;
   /* height: 650px; */
@@ -95,6 +98,7 @@
   margin-right: 20px;
   color: black;
 }
+
 .sendButton {
   width: 10%;
   height: 50px;
@@ -115,10 +119,12 @@
   margin-bottom: -10px;
   background-color: white;
 }
+
 .messageProfileImage-dark {
   margin-top: 20px;
   margin-bottom: -10px;
 }
+
 .rightSide {
   height: 100%;
   width: 100%;
@@ -237,18 +243,18 @@ svg.checkbox .outer-ring {
   animation: resetRing 0.35s ease-in-out forwards;
 }
 
-input[type="checkbox"].switch_3:checked + svg.checkbox .outer-ring {
+input[type="checkbox"].switch_3:checked+svg.checkbox .outer-ring {
   -webkit-animation: animateRing 0.35s ease-in-out forwards;
   animation: animateRing 0.35s ease-in-out forwards;
 }
 
-input[type="checkbox"].switch_3:checked + svg.checkbox .is_checked {
+input[type="checkbox"].switch_3:checked+svg.checkbox .is_checked {
   opacity: 1;
   -webkit-transform: translateX(0) rotate(0deg);
   transform: translateX(0) rotate(0deg);
 }
 
-input[type="checkbox"].switch_3:checked + svg.checkbox .is_unchecked {
+input[type="checkbox"].switch_3:checked+svg.checkbox .is_unchecked {
   opacity: 0;
   -webkit-transform: translateX(-200%) rotate(180deg);
   transform: translateX(-200%) rotate(180deg);

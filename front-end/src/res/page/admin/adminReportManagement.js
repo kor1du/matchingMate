@@ -6,7 +6,6 @@ import AdminReportManagementRight from "../../components/admin/adminReport/Admin
 import NavAdmin from "../../components/nav/NavAdmin";
 
 
-
 export default function AdminPostManagement() {
   return (
     <>

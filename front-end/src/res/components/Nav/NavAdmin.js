@@ -21,11 +21,7 @@ const disableActiveOver1024px = (event) => {
   const windowWidth = document.documentElement.clientWidth;
   const adminLeftside = document.querySelector(".admin-left-side");
   const adminRightside = document.querySelector(".admin-right-side");
-  if (
-    windowWidth > 1023 &&
-    adminLeftside.classList.contains("active") &&
-    adminRightside.classList.contains("active")
-  ) {
+  if (windowWidth > 1023 && adminLeftside.classList.contains("active") && adminRightside.classList.contains("active")) {
     toggle(".admin-left-side");
     toggle(".admin-right-side");
   }

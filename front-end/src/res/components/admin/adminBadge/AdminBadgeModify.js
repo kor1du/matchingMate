@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import "../../../css/adminComponents/adminBadgeModifyRightside.css";
 import queryString from "query-string";
 
-
 export default function AdminbadgeModify() {
   const location = useLocation();
   const [imgFile, setImgFile] = useState("");

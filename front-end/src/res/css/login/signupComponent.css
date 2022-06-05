@@ -1,0 +1,241 @@
+.signup-component {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-component.active {
+    width: 100%;
+}
+
+.signup-component .greeting-btn {
+    display: none;
+}
+
+.signup-component .btn-show-signup.active {
+    display: none;
+}
+
+.signup-component .btn-show-signup>button {
+    width: 120px;
+    height: 50px;
+    font-family: 'Jua', sans-serif;
+    font-size: 1.5rem;
+    line-height: 20%;
+    background-color: gray;
+    border: none;
+}
+
+.signup-component .display-signup {
+    display: none;
+    width: 90%;
+    height: 90%;
+    overflow: scroll;
+}
+
+.signup-component .display-signup.active {
+    display: block;
+}
+
+.signup-component ::-webkit-scrollbar,
+.modal-address ::-webkit-scrollbar {
+    display: none;
+}
+
+.signup-component .greeting {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 5px 0px;
+}
+
+.signup-component .greeting>p {
+    position: relative;
+    top: 1px;
+}
+
+.signup-component .greeting>img {
+    width: 15px;
+    height: 15px;
+    margin: 0 2px;
+}
+
+.signup-component .input-text-btn {
+    width: 100%;
+    display: flex;
+    height: 35px;
+}
+
+.signup-component .input-text-btn .form-control {
+    width: 65%;
+    margin-right: 10px;
+}
+
+.signup-component .input-text-btn .btn {
+    width: 35%;
+    padding: 2px 4px;
+    margin-left: 0 10px;
+}
+
+.modal-check-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+    height: 50px;
+}
+
+.modal-check-header .btn-close {
+    position: absolute;
+    left: 85%;
+}
+
+.modal-check-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 5px 0px;
+    height: 70px;
+    justify-content: center;
+}
+
+.modal-check-body>input,
+.modal-check-body>button {
+    height: 35px;
+}
+
+.modal-check-body>input {
+    margin-right: 20px;
+}
+
+.ReactModalPortal .modal-address {
+    position: absolute;
+    width: 80vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ReactModalPortal .modal-address .btn-close {
+    position: relative;
+    right: 10px;
+    background: none;
+    margin: 10px 0px;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    opacity: 1;
+}
+
+.signup-component .check-gender {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-component .form-check {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.signup-component .btn-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+    .signup-component .greeting>p {
+        font-size: 2rem;
+    }
+
+    .signup-component .greeting>img {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        bottom: 2px;
+    }
+
+    .mb-3 label {
+        font-size: 2rem;
+    }
+
+    .signup-component .form-check input {
+        position: relative;
+        top: 10px;
+        right: 5px;
+    }
+
+    .signup-component .btn-signup>button {
+        width: 100px;
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (min-width:1024px) {
+
+    .mb-3 label {
+        font-size: 2rem;
+    }
+
+    .signup-component .form-check input {
+        position: relative;
+        top: 10px;
+        right: 5px;
+    }
+
+    .signup-component .btn-signup>button {
+        width: 100px;
+        font-size: 1.2rem;
+    }
+
+    .signup-component.active {
+        width: 100%;
+    }
+
+    .signup-component .btn-show-signup.active {
+        display: block;
+        width: 50%;
+    }
+
+    .signup-component .display-signup.active {
+        display: block;
+        width: 50%;
+        padding: 5px 10px;
+    }
+
+    .signup-component .display-signup .greeting {
+        display: none;
+    }
+
+    .signup-component .greeting-btn {
+        display: none;
+    }
+
+    .signup-component .greeting-btn.active {
+        display: block;
+        text-align: center;
+        font-size: 4rem;
+    }
+
+    .signup-component .greeting-btn.active img {
+        position: relative;
+        bottom: 5px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .signup-component .btn-show-signup button.active {
+        display: none;
+    }
+}

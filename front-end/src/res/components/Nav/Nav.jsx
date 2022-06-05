@@ -1,22 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import {  Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProfileComponent from "./Profile";
 import "../../css/nav/nav.css";
 import Bars from "../../img/bars-solid.png";
 import NavLeftSide from "./NavLeftSide";
-// import { logout } from "../logout/Logout";
 import { isLogin } from "../login/Login";
 import { toggle } from "../toggle/Toggle";
-import Badge from '@mui/material/Badge';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import Badge from "@mui/material/Badge";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { axiosGet } from "../axios/Axios";
 import axios from "axios";
-import ReportIcon from '@mui/icons-material/Report';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Avatar from '@mui/material/Avatar';
-import {pink, blue } from '@mui/material/colors';
-
+import ReportIcon from "@mui/icons-material/Report";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import Avatar from "@mui/material/Avatar";
+import { pink, blue } from "@mui/material/colors";
 
 export function showLeft(event) {
   event.preventDefault();
@@ -33,13 +31,17 @@ export const showLoginBtn = () => {
   if (isLogin()) {
     loginCSS.style.display = "none";
     barCSS.style.display = "block;";
-    if (notificationCss != null) notificationCss.style.display = "block"
+
+    if (notificationCss != null) notificationCss.style.display = "block";
+
   } else {
     loginCSS.style.display = "block";
     barCSS.style.display = "none";
     profileCSS.style.display = "none";
     // logoutCSS.style.display = "none";
-    if (notificationCss != null) notificationCss.style.display = "none"
+
+    if (notificationCss != null) notificationCss.style.display = "none";
+
   }
 };
 
@@ -52,7 +54,7 @@ export const showLoginBtn = () => {
 //   useEffect(() => {
 //     setSavedCallback(callback);
 //   }, [callback]);
-  
+
 //   // mount가 끝나고 1번 일어남
 //   // 맨 처음 mount가 끝나고 savedCallback은 null이기 때문에 setInterval의 executeCallback이 제대로 실행되지 않음 (null이기 때문에)
 //   useEffect(() => {
@@ -78,32 +80,37 @@ export default function Nav() {
 
   function ShowNotification({ notification }) {
     return (
-      <Link style={{height:"20px", fontSize:"0rem"}} to='/match'>
-      <li className="notification-list" >
-        
-        <p style={{width:"40px", margin:"0px", marginLeft:"10px"}}>
-        { notification.notificationType === '신고처리' ? 
-          <Avatar sx={{ bgcolor: blue[600] }}>
-            <ReportIcon />
-          </Avatar>
-        :
-          <Avatar sx={{ bgcolor: pink[500] }}>
-            <FavoriteBorderIcon />
-          </Avatar>
-        }
-        </p>
-        <p className="font" style={{}}>{notification.message}</p>
-        <p className="font" style={{margin:"0px",  width:"90px"}}>{notification.registerDatetime}</p>
-        
-      </li>
+
+      <Link style={{ height: "20px", fontSize: "0rem" }} to="/match">
+        <li className="notification-list">
+          <p style={{ width: "40px", margin: "0px", marginLeft: "10px" }}>
+            {notification.notificationType === "신고처리" ? (
+              <Avatar sx={{ bgcolor: blue[600] }}>
+                <ReportIcon />
+              </Avatar>
+            ) : (
+              <Avatar sx={{ bgcolor: pink[500] }}>
+                <FavoriteBorderIcon />
+              </Avatar>
+            )}
+          </p>
+          <p className="font" style={{}}>
+            {notification.message}
+          </p>
+          <p className="font" style={{ margin: "0px", width: "90px" }}>
+            {notification.registerDatetime}
+          </p>
+        </li>
+
       </Link>
     );
   }
 
   function ShowNoNotification() {
     return (
-      <li style={{textAlign:"center"}} className="notification-list" >
-        <p >오늘 알림이 없습니다.</p>
+
+      <li style={{ textAlign: "center" }} className="notification-list">
+        <p>오늘 알림이 없습니다.</p>
       </li>
     );
   }
@@ -112,13 +119,14 @@ export default function Nav() {
     const alarms = document.querySelector(".nav-notification-box");
     alarms.classList.toggle("active");
 
-    axios.put('http://localhost:8080/notification', null, {
-      headers: headers
-    }).then((res) => {
-      setNoReadCount(0);
-      console.log(res.data);
-    })
-
+    axios
+      .put("http://localhost:8050/notification", null, {
+        headers: headers,
+      })
+      .then((res) => {
+        setNoReadCount(0);
+        console.log(res.data);
+      });
   };
 
   const getTodayNotification = () => {
@@ -134,14 +142,13 @@ export default function Nav() {
         setNoReadCount(data.noReadCount);
       });
     }
-  }
+  };
 
   // useInterval(() => {
   //   getTodayNotification();
   // }, 60000);
 
   useEffect(() => {
-    
     getTodayNotification();
     showLoginBtn();
   }, []);
@@ -153,7 +160,6 @@ export default function Nav() {
           <Link to="/">
             <p>운동 메이트</p>
           </Link>
-
         </Col>
         <Col xs="6" className="nav-menus">
           <Link to="/login" className="login" ref={ref}>
@@ -163,26 +169,21 @@ export default function Nav() {
             로그아웃
           </p> */}
           {/* <AiFillBell className="nav-notification" onClick={clickBell}></AiFillBell> */}
-          <Badge className="nav-notification" badgeContent={noReadCount} color="warning" >
-            <NotificationsIcon  color="white" onClick={clickBell} />
+          <Badge className="nav-notification" badgeContent={noReadCount} color="warning">
+            <NotificationsIcon color="white" onClick={clickBell} />
           </Badge>
           {notifications.length > 0 ? (
             <div className="nav-notification-box">
               {notifications.map((notification) => {
-                return (
-                  <ShowNotification
-                    key={notification.id}
-                    notification={notification}
-                  ></ShowNotification>
-                );
+                return <ShowNotification key={notification.id} notification={notification}></ShowNotification>;
               })}
             </div>
-          ) 
-          : 
-          <div className="nav-notification-box">
-            <ShowNoNotification />
-          </div>
-          }
+
+          ) : (
+            <div className="nav-notification-box">
+              <ShowNoNotification />
+            </div>
+          )}
 
 
           <ProfileComponent></ProfileComponent>

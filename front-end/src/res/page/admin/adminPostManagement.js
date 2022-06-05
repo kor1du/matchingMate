@@ -5,7 +5,6 @@ import AdminLeftside from "../../components/admin/AdminLeftside";
 import AdminPostManagementRight from "../../components/admin/adminPost/AdminPostManagement";
 import NavAdmin from "../../components/nav/NavAdmin";
 
-
 export default function AdminPostManagement() {
   return (
     <>

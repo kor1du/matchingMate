@@ -42,7 +42,6 @@ function RoomMessage(props) {
   
   useEffect(() => {
     setTimeout(scrollDown);
-    
   }, [messages]);
 
   

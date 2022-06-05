@@ -1,61 +1,515 @@
+/*1440px 이상*/
 .header {
-  height: 100vh;
-  background-color: #30AADD;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   z-index: 0;
   position: relative;
 }
 
-.header-logo{
+.header .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header .logo .title {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+
 }
 
-.header-logo-title{
+.header .logo .title>p {
+  font-family: "Nanum Brush Script", cursive !important;
+  background-color: rgb(0, 0, 0, 0.5);
+  color: white;
+  position: relative;
+}
+
+.header .title h1 {
+
+  font-family: "Nanum Brush Script", cursive !important;
+  position: relative;
+}
+
+.header .buttons .btn {
+  position: relative;
+}
+
+.header .logo .buttons {
+  position: relative;
   display: flex;
+}
+
+.header .logo .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.header .btn p {
+  font-family: "Nanum Pen Script", cursive;
+}
+
+.header .logo .btn-category-find {
+  background: none;
+  color: black;
+  border: none;
+}
+
+.header .logo .btn-category-create {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: black;
+}
+
+.header .introduce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .introduce p {
+  position: relative;
+  font-family: "Nanum Brush Script", cursive !important;
+}
+
+.header .introduce .detail-white-background {
+  display: flex;
+
+}
+
+.header .fade-class {
+  display: flex;
+
+}
+
+.header .introduce .img-box {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.header-logo-title h1 {
-  font-size: 5em;
-  
+.header .img-map {
+  position: relative;
 }
 
-.header-logo img{
-  width:3.5rem;
-  height: 3.5rem;
+.header .caption {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.header-logo h2 {
-  padding-top: 30px;
-  
+.header .caption .title {
+  display: flex;
+  justify-content: center;
 }
 
-.header .chat{
-  width:75px;
-  position:sticky;
-  top:85%;
-  left:85%;
-  z-index: 2;
+.header .caption .text {
+  display: flex;
+  justify-content: center;
+
 }
 
-@media screen and (max-width:425px)
-{
-  .header-logo h1 {
-    font-size: 3em;
+.header .img-muscle {
+  border-radius: 50%;
+}
+
+.fade-class:nth-child(2n-1) {
+  position: relative;
+  left: 200px;
+  opacity: 0;
+  transition: left 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+}
+
+.fade-in:nth-child(2n-1) {
+  transition: left 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+  left: 0px;
+  opacity: 1;
+}
+
+.fade-class:nth-child(2n) {
+  position: relative;
+  right: 200px;
+  opacity: 0;
+  transition: right 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+}
+
+.fade-in:nth-child(2n) {
+  transition: right 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s linear;
+  right: 0px;
+  opacity: 1;
+}
+
+.header .logo .title h1,
+.header .logo .buttons,
+.header .right>p {
+  animation: fadeInUp;
+  animation-duration: 2s;
+}
+
+/* Shutter Out Horizontal */
+.header .logo .title h2 {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.header .logo .title h2:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0%;
+  transform-origin: 0%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.header .logo .title h2:hover,
+.header .logo .title h2:focus,
+.header .logo .title h2:active {
+  color: black;
+}
+
+.header .logo .title h2:hover:before,
+.header .logo .title h2:focus:before,
+.header .logo .title h2:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+.header .logo .btn {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.header .logo .btn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #3c8769;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.header .logo .btn:hover,
+.header .logo .btn:focus,
+.header .logo .btn:active {
+  color: white;
+}
+
+.header .logo .btn:hover:before,
+.header .logo .btn:focus:before,
+.header .logo .btn:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+/*for Mobile user*/
+@media screen and (min-width: 320px) {
+  .header .bg-img {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+      url("../../img/background-image/homepage3.jpg");
+    background-size: 100% 40%;
+    position: absolute;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    border-bottom: 2px solid #e5e5e5;
   }
-  
-  .header-logo img{
-    width:2.5rem;
-    height: 2.5rem;
+
+  .header .logo {
+    height: 100vh;
+    display: black;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
   }
-  .header-logo h2 {
-    padding-top: 10px;
-    
-    font-size:20px;
+
+  .header .logo .title {
+    top: 40%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 6rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 1.5rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 30%;
+    width: 150px;
+    margin: 20px 5px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 1.3rem;
+  }
+
+  .header .introduce p {
+    font-size: 2rem;
+  }
+
+  .header .fade-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 70vh;
+  }
+
+  .header .introduce .img-box {
+    width: 50%;
+  }
+
+  .header .introduce img {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  .header .caption .title {
+    font-size: 1.5rem;
+  }
+
+  .header .caption .text {
+    max-width: 50vw;
+    font-size: 1.5rem;
+    padding: 10px 10px;
+  }
+
+  .header .introduce>p {
+    margin: 3.5rem 0px;
+  }
+}
+
+/*for Mobile user*/
+@media screen and (min-width: 425px) and (max-width: 767px) {
+  .header .logo .title {
+    top: 40%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 8rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 2.2rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 30%;
+    width: 200px;
+    margin: 20px 5px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 2rem;
+  }
+
+  .header .introduce p {
+    font-size: 3rem;
+  }
+
+  .header .caption .title {
+    font-size: 2rem;
+  }
+
+  .header .caption .text {
+    font-size: 2rem;
+    padding: 10px 10px;
+  }
+}
+
+/*for tablet user*/
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .header .logo .title {
+    top: 40%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 12rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 3.7rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 40%;
+    width: 300px;
+    margin: 20px 15px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 3rem;
+  }
+
+  .header .introduce p {
+    font-size: 5rem;
+  }
+
+  .header .caption .title {
+    font-size: 3.8rem;
+  }
+
+  .header .caption .text {
+    font-size: 3rem;
+    padding: 10px 10px;
+  }
+}
+
+/*for notebook user*/
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .header .bg-img {
+    background-size: 100% 100%;
+  }
+
+  .header .logo .title {
+    top: 20%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 12rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 3rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 40%;
+    width: 320px;
+    margin: 20px 25px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 3.5rem;
+  }
+
+  .header .introduce p {
+    font-size: 8rem;
+  }
+
+  .header .fade-class {
+    width: 80vw;
+    height: 80vh;
+  }
+
+  .header .caption .title {
+    font-size: 4rem;
+  }
+
+  .header .caption .text {
+    font-size: 3rem;
+    padding: 10px 10px;
+  }
+}
+
+/*for desktop user*/
+@media screen and (min-width: 1440px) {
+  .header .bg-img {
+    background-size: 100% 100%;
+  }
+
+  .header .logo .title {
+    top: 20%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 13rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 4rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 40%;
+    width: 400px;
+    margin: 20px 40px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 4rem;
+  }
+
+  .header .introduce p {
+    font-size: 8rem;
+  }
+
+  .header .fade-class {
+    height: 80vh;
+  }
+
+  .header .introduce img {
+    width: 20vw;
+    height: 20vw;
+  }
+
+  .header .caption .title {
+    font-size: 5rem;
+  }
+
+  .header .caption .text {
+    font-size: 4rem;
+    padding: 10px 10px;
   }
 }

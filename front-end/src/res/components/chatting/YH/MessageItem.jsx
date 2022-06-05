@@ -5,8 +5,13 @@ function MessageItem(props) {
     function SetMode() {
         
         if (isDarkMode) {
-           
-            if (myId === message.memberId) {
+            if(message.memberId === null) {
+              return (
+                <div className="message-server">
+                  <span>{message.message}</span>
+                </div>
+              );
+            } else if (myId === message.memberId) {
               return (
                 <div  className="message-me">
                   <div className="message-text" >
@@ -32,7 +37,13 @@ function MessageItem(props) {
             }
             
         } else {
-            if (myId === message.memberId) {
+          if(message.memberId === null) {
+            return (
+              <div className="message-server">
+                <span>{message.message}</span>
+              </div>
+            );
+          } else if (myId === message.memberId) {
                 return (
                   <div className="message-me">
 

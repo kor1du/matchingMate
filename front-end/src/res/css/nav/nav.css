@@ -26,7 +26,9 @@
 }
 
 #nav .nav-logo p:hover
-/*, #nav .nav-menus p:hover  */ {
+
+/*, #nav .nav-menus p:hover  */
+  {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -65,6 +67,7 @@
 #nav .nav-menus .profile-link {
   color: black;
 }
+
 #nav .row {
   width: 100%;
 }
@@ -117,8 +120,7 @@
     display: block;
     width: 35px;
     height: 35px;
-    filter: invert(100%) sepia(98%) saturate(2%) hue-rotate(32deg)
-      brightness(102%) contrast(101%);
+    filter: invert(100%) sepia(98%) saturate(2%) hue-rotate(32deg) brightness(102%) contrast(101%);
   }
 
   #nav .admin-link {
@@ -129,3 +131,9 @@
 .font {
   font-family: "Nanum Brush Script", cursive !important;
 }
+
+
+.nav-notification {
+  cursor: pointer;
+}
+

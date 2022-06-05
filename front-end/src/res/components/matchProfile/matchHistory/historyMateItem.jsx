@@ -1,41 +1,60 @@
-import React, { useState } from 'react';
-import InputRating from '../matchRating/InputRating';
+import React, { useState } from "react";
+import InputRating from "../matchRating/InputRating";
 import Modal from "react-modal";
-import { Button } from 'react-bootstrap';
-import styles from './historyMateItem.module.css';
-import ReportModal from '../../Modal/ReportModal'
+import { Button } from "react-bootstrap";
+import ReportModal from "../../Modal/ReportModal";
 
 const HistoryMateItem = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [infoShow,setInfoShow]=useState(false);
+  const [infoShow, setInfoShow] = useState(false);
 
   const reportType = "회원";
 
   const [matchingMate, setMatchingMate] = useState(props.matchingMate);
-  const {matchingHistoryId} = props;
+  const { matchingHistoryId } = props;
 
   const updateCompleted = () => {
     setMatchingMate((prevState) => ({
       ...prevState,
-      alreadyCompleted:true
-    }))
+      alreadyCompleted: true,
+    }));
   };
-  
+
   const showReportModal = () => {
     setInfoShow(true);
   };
 
   return (
-    <div className={styles.mateInfo}>
-      <p>이름 : {matchingMate.nickname}</p>
+    <>
+      <div className="info">
+        <p>{matchingMate.nickname}</p>
 
- 
-      <Button disabled={matchingMate.alreadyCompleted} onClick={() => setModalOpen(true)} style={{margin:"0 3px 0 0"}}>평점 남기기</Button>
-      {/* <Button onClick={() => setModalOpen(true)} style={{margin:"0 3px 0 0"}}>평점 남기기</Button> */}
+        <Button
+          variant="dark"
+          disabled={matchingMate.alreadyCompleted}
+          onClick={() => setModalOpen(true)}
+          style={{ margin: "0 3px 0 0" }}
+        >
+          <p>평점</p>
+        </Button>
+        <Button onClick={() => showReportModal()} variant="warning">
+          <p>신고</p>
+        </Button>
+      </div>
+      <ReportModal
+        infoShow={infoShow}
+        setInfoShow={setInfoShow}
+        memberNickname={matchingMate.nickname}
+        reportType={reportType}
+        targetId={matchingMate.id}
+      ></ReportModal>
+
       <Modal
         isOpen={modalOpen}
         onRequestClose={() => setModalOpen(false)}
+        className="input-raiting-modal"
+        ariaHideApp={false}
         style={{
           overlay: {
             position: "fixed",
@@ -44,6 +63,7 @@ const HistoryMateItem = (props) => {
             right: 0,
             bottom: 0,
             backgroundColor: "rgba(126, 147, 149, 0.83)",
+            zIndex: 1055,
           },
           content: {
             position: "absolute",
@@ -62,14 +82,14 @@ const HistoryMateItem = (props) => {
           },
         }}
       >
-
-        <InputRating setModalOpen={setModalOpen} updateCompleted={updateCompleted} targetMemberId={matchingMate.id} matchingHistoryId={matchingHistoryId}/>
-                    
+        <InputRating
+          setModalOpen={setModalOpen}
+          updateCompleted={updateCompleted}
+          targetMemberId={matchingMate.id}
+          matchingHistoryId={matchingHistoryId}
+        />
       </Modal>
-      
-      <Button onClick={() => showReportModal()}>신고하기</Button>
-      <ReportModal infoShow={infoShow} setInfoShow={setInfoShow} memberNickname={matchingMate.nickname} reportType={reportType} targetId={matchingMate.id} />
-    </div>
+    </>
   );
 };
 

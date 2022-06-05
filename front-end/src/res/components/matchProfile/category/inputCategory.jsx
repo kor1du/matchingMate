@@ -1,15 +1,11 @@
-import React, {useState} from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Button from '@mui/material/Button';
-import styles from './category.module.css';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import axios from "axios";
+import { Button } from "react-bootstrap";
 
 function InputCategory(props) {
+
 
     const {categorys,setModalOpen, setInterestCategory  } = props;
     const [interestData, setInterestData] = useState({
@@ -52,6 +48,7 @@ function InputCategory(props) {
             </Box>
         </div>
     );
+
 }
 
 export default InputCategory;
