@@ -62,7 +62,7 @@ export default function Profile() {
             </div>
           </li>
          
-          <li style= {{borderTop:"1px solid black"}}>
+          <li style= {{borderTop:"1px solid black", cursor: "pointer"}}>
             <div style={{width:"100%"}} className='profile-userInfo-logout' onClick={logout}>
               {/* <Button className='profile-userInfo-logout-btn'  onClick={logout} variant="contained">로그아웃</Button> */}
               <h5 className="font" style={{width:"100%", color:"red"}}>로그아웃</h5>

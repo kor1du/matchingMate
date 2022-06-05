@@ -66,6 +66,9 @@ public class MatchingPostDTO {
         private String place;
         private String registerDatetime;
         private Integer inChatNumber;
+
+        private String nickname;
+        private String profileImgAddress;
     }
 
     @Getter
@@ -92,6 +95,7 @@ public class MatchingPostDTO {
         private Float lng;
 
         private boolean isMyPost;
+        private Long chattingRoomId;
     }
 
     @Getter

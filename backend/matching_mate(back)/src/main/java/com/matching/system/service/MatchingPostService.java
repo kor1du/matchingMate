@@ -212,6 +212,8 @@ public class MatchingPostService {
                     .inChatNumber( matchingPostCustomRepository.getJoinChatNumber(matchingPost.getId()) )
                     .views(matchingPost.getViews())
                     .place(matchingPost.getPlace())
+                    .nickname(matchingPost.getMember()==null ? null : matchingPost.getMember().getNickname())
+                    .profileImgAddress(matchingPost.getMember()==null ? null : matchingPost.getMember().getProfileImgAddress())
                     .registerDatetime( matchingPost.getRegisterDatetime()==null ? null : registerFormat.format(matchingPost.getRegisterDatetime()) )
                 .build();
     }
@@ -243,9 +245,11 @@ public class MatchingPostService {
 
         if (findMatchingPost.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 매칭 공고가 존재하지 않습니다.", null);
 
+        Optional<ChattingRoom> findChattingRoom = chattingRoomRepository.findByMatchingPostId(postId);
+        if (findChattingRoom.isEmpty()) return new ResponseData(HttpStatus.NOT_FOUND, "검색한 채팅방이 존재하지 않습니다.", null);
 
-        if (findMatchingPost.get().getMember()==null)
-            System.out.println("member null임 ");
+//        if (findMatchingPost.get().getMember()==null)
+//            System.out.println("member null임 ");
 
         // view ++
         findMatchingPost.get().updateViews();
@@ -273,11 +277,12 @@ public class MatchingPostService {
                 .views(findMatchingPost.get().getViews())
                 .place(findMatchingPost.get().getPlace())
                 .registerDatetime(registerFormat.format(findMatchingPost.get().getRegisterDatetime()))
+                .chattingRoomId( findChattingRoom.get().getId() )
                 .isMyPost( findMatchingPost.get().getMember()==null ?
                             false:
                             (memberId==findMatchingPost.get().getMember().getId() ?
                                     true:
-                                    false))
+                                    false) )
                 .lat(coords[1])
                 .lng(coords[0])
                 .build();
@@ -290,14 +295,20 @@ public class MatchingPostService {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
 
         // 이미 가입 여부 확인
-        Optional<ChattingMember> validateDuplicateRoom = chattingMemberRepository.findByMatchingPostIdAndMemberId(chattingRoomInDTO.getMatchingPostId(), memberId);
+        Optional<ChattingMember> validateDuplicateRoom = chattingMemberRepository.findByChattingRoomIdAndMemberId(chattingRoomInDTO.getChattingRoomId(), memberId);
         if (validateDuplicateRoom.isPresent()) return new ResponseMessage(HttpStatus.CONFLICT, "이미 방에 가입되어 있습니다.");
 
-        matchingPostRepository.findById(chattingRoomInDTO.getMatchingPostId());
+//        matchingPostRepository.findById(chattingRoomInDTO.getMatchingPostId());
 
         // chatting_member 추가
-        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.findMatchingPostRoom(matchingPostRepository.findById(chattingRoomInDTO.getMatchingPostId()).get().getId());
+        Optional<ChattingRoom> chattingRoom = chattingRoomRepository.existRoom(chattingRoomInDTO.getChattingRoomId());
         if (chattingRoom.isEmpty()) return new ResponseMessage(HttpStatus.NOT_FOUND, "검색한 채팅 방이 존재하지 않습니다.");
+
+        // 인원수 체크
+        Integer inChatNumber = matchingPostCustomRepository.getJoinChatNumber(chattingRoomInDTO.getChattingRoomId());
+
+        if (chattingRoom.get().getMatchingPost().getMaxNumberOfPeople() == inChatNumber) return new ResponseMessage(HttpStatus.NOT_ACCEPTABLE, "현재 최대인원이 가입되어 있습니다.");
+
 
         Member member = memberRepository.findById(memberId).get();
 

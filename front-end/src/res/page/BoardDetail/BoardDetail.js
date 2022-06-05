@@ -22,6 +22,7 @@ const BoardDetail = () => {
   const [isLoading, setisLoading] = useState(true);
   const { categorys } = useLocation().state;
 
+
   const token = sessionStorage.getItem("jwtToken");
   console.log('token : ', token);
 
@@ -40,7 +41,7 @@ const BoardDetail = () => {
     if(!board.myPost) {
       console.log("채팅 가입하기할떄 매칭포스트아이디 : ",id)
 
-      axios.post('http://localhost:8080/matchingPost/detail/joinChat', {matchingPostId : id}, {
+      axios.post('http://localhost:8080/matchingPost/detail/joinChat', {chattingRoomId : board.chattingRoomId}, {
         headers: {
           'Authorization': "Bearer " + token
         }
@@ -50,6 +51,7 @@ const BoardDetail = () => {
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
+          
         }
         else if (error.request) {
           // 요청이 이루어 졌으나 응답을 받지 못했습니다.
@@ -119,6 +121,7 @@ const BoardDetail = () => {
     console.log("닉네임 조회 결과", res.data.nickname);
     setReportInfo({ ...reportInfo, targetMemberNickname: res.data.nickname, targetNickname: res.data.nickname });
     setBoard(res.data);
+
 
     setisLoading(false);
   };

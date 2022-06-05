@@ -30,6 +30,8 @@ public class StompChatControl {
     public void message(@RequestBody ChattingDTO.SendMessageDTO sendMessageDTO) {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(sendMessageDTO.getToken()));
 
+        System.out.println("sendMessageDTO.getRoomId() = " + sendMessageDTO.getRoomId());
+
         ChattingDTO.ReadChattingMessageDTO responseMessageDTO = chattingService.sendMessage(sendMessageDTO, memberId);
 
         simpMessagingTemplate.convertAndSend("/sub/chat/in/" + sendMessageDTO.getRoomId(), responseMessageDTO);

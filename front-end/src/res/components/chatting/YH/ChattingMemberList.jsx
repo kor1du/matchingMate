@@ -13,7 +13,7 @@ export default function ChattingMemberList(props) {
   // const roomHost = props.roomHost;
   // const isCompleted = props.isCompleted;
  
-  const { numberOfPeople, maxNumberOfPeople, newMessage, roomId, roomHost, isCompleted, myId, stomp, sockJS } = props;
+  const { numberOfPeople, maxNumberOfPeople, newMessage, roomId, roomHost, isCompleted, myId,  } = props;
   const [show, setShow] = useState(false);
   const [infoShow,setInfoShow]=useState(false);
 
@@ -23,7 +23,7 @@ export default function ChattingMemberList(props) {
 
   const reportType = "채팅";
 
-  const token = "Bearer " + sessionStorage.getItem("jwtToken");
+  // const token = "Bearer " + sessionStorage.getItem("jwtToken");
   
   const openReportModal = () => {
     setReportShow(true);
@@ -52,51 +52,52 @@ export default function ChattingMemberList(props) {
       e.parentNode.classList.add("btn-success");
     }
 
-    sendReady();
+    // sendReady();
   };
 
-  function waitForConnection(ws, callback) {
-    setTimeout(
-      function () {
-        // 연결되었을 때 콜백함수 실행
-        if (sockJS.readyState === 1) {
-          callback();
-          // 연결이 안 되었으면 재호출
-        } else {
-          waitForConnection(stomp, callback);
-        }
-      },
-      1 // 밀리초 간격으로 실행
-    );
-  }
+  // function waitForConnection(ws, callback) {
+  //   setTimeout(
+  //     function () {
+  //       // 연결되었을 때 콜백함수 실행
+  //       if (sockJS.readyState === 1) {
+  //         callback();
+  //         // 연결이 안 되었으면 재호출
+  //       } else {
+  //         waitForConnection(stomp, callback);
+  //       }
+  //     },
+  //     1 // 밀리초 간격으로 실행
+  //   );
+  // }
 
-  function sendComplete(place, matchingTime) {
+  // function sendComplete(place, matchingTime) {
     
-    if (place === null || matchingTime === null) {
-      alert("빈 값이 존재합니다. 다시 확인해주세요!")
-    } else {
-      setShow(false);
+  //   if (place === null || matchingTime === null) {
+  //     alert("빈 값이 존재합니다. 다시 확인해주세요!")
+  //   } else {
+  //     setShow(false);
 
-      waitForConnection(stomp, function () {
-        stomp.send(
-          "/pub/chat/complete",
-          { Authorization: token },
-          JSON.stringify({ chattingRoomId:roomId, place:place, matchingTime:matchingTime })
-        );
-      });
-    }
+  //     waitForConnection(stomp, function () {
+  //       stomp.send(
+  //         "/pub/chat/complete",
+  //         { Authorization: token },
+  //         JSON.stringify({ chattingRoomId:roomId, place:place, matchingTime:matchingTime })
+  //       );
+  //     });
+  //   }
     
-  }
+  // }
 
-  function sendReady() {
-    waitForConnection(stomp, function () {
-      stomp.send(
-        "/pub/chat/ready",
-        { Authorization: token },
-        JSON.stringify({ ready: member.ready, roomId: roomId, token: token, chattingMemberId:member.chattingMemberId,  })
-      );
-    });
-  }
+  // function sendReady() {
+  //   waitForConnection(stomp, function () {
+  //     stomp.send(
+  //       "/pub/chat/ready",
+  //       { Authorization: token },
+  //       JSON.stringify({ ready: member.ready, roomId: roomId, token: token, chattingMemberId:member.chattingMemberId,  })
+  //     );
+  //   });
+  // }
+
 
   useEffect(() => {
   },[newMessage])
@@ -137,7 +138,7 @@ export default function ChattingMemberList(props) {
 
                   <InputModal
                     show={show}
-                    sendComplete={sendComplete}
+                    // sendComplete={sendComplete}
                     setShow={setShow}
                     roomId={roomId}
                   />
@@ -219,7 +220,7 @@ export default function ChattingMemberList(props) {
           {member.priority===2?<h4 className="me">나</h4>: null}
         </div>
         <ChattingInfoModal infoShow={infoShow} setInfoShow={setInfoShow} member={member}></ChattingInfoModal>
-        <ReportModal infoShow={reportShow} setInfoShow={setReportShow} memberNi1ckname={member.nickname} reportType={reportType} targetId={null} />
+        <ReportModal infoShow={reportShow} setInfoShow={setReportShow} memberNickname={member.nickname} reportType={reportType} targetId={null} />
       </div>
     );
   }

@@ -29,7 +29,7 @@ public class MatchingPostCustomRepositoryImpl implements MatchingPostCustomRepos
     }
 
     @Override
-    public Integer getJoinChatNumber(Long matchingPostId) {
+    public Integer getJoinChatNumber(Long chattingRoomId) {
         QChattingRoom qChattingRoom = QChattingRoom.chattingRoom;
         QChattingMember qChattingMember = QChattingMember.chattingMember;
         QMatchingPost qMatchingPost = QMatchingPost.matchingPost;
@@ -37,13 +37,11 @@ public class MatchingPostCustomRepositoryImpl implements MatchingPostCustomRepos
 
         Long countChatMemberNumber = jpaQueryFactory.select( qChattingMember.count() )
                 .from(qChattingMember)
-                .leftJoin(qChattingMember.chattingRoom, qChattingRoom).fetchJoin()
+                .leftJoin(qChattingMember.chattingRoom, qChattingRoom)
                 .on(qChattingMember.chattingRoom.id.eq(qChattingRoom.id))
-                .leftJoin(qChattingRoom.matchingPost, qMatchingPost).fetchJoin()
+                .leftJoin(qChattingRoom.matchingPost, qMatchingPost)
                 .on(qChattingRoom.matchingPost.id.eq(qMatchingPost.id))
-//                .groupBy(qMatchingPost.id)
-//                .having(qMatchingPost.id.eq(matchingPostId))
-                .where(qMatchingPost.id.eq(matchingPostId))
+                .where(qChattingRoom.id.eq(chattingRoomId))
                 .fetchOne();
 
         return countChatMemberNumber.intValue();

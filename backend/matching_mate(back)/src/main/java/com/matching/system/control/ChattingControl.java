@@ -52,9 +52,12 @@ public class ChattingControl {
                 .body(responseMessage);
     }
 
+
+
+
     // 채팅방 삭제       -> O
-    @PostMapping("/out/{chatId}")
-    public ResponseEntity deleteChattingRoom(@PathVariable("chatId") Long chattingMemberId) {
+    @PostMapping("/out/{chattingMemberId}")
+    public ResponseEntity deleteChattingRoom(@PathVariable("chattingMemberId") Long chattingMemberId) {
         ResponseMessage responseMessage = chattingService.deleteChattingRoom(chattingMemberId);
 
         return ResponseEntity

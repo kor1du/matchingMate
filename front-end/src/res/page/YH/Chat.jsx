@@ -47,8 +47,7 @@ function Chat() {
   })
 
   const chatStart = (roomId) => {
-      console.log(roomId);
-    
+      
       setRoomId(roomId);
       
       const header = {
@@ -103,6 +102,7 @@ function Chat() {
                     stomp={stomp} sockJS={sockJS} disconnectWS={disconnectWS} chatStart={chatStart}
                     numberOfPeople={numberOfPeople} maxNumberOfPeople={maxNumberOfPeople} 
                     myId={myId} 
+                    myChattingMemberId={myChattingMemberId}
                     setIsCompleted={setIsCompleted} isCompleted={isCompleted} 
                     isDarkMode={isDarkMode} 
                     setRoomId={setRoomId} roomId={roomId} roomHost={roomHost} memberList={memberList} 

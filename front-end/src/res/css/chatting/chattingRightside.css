@@ -10,6 +10,7 @@
 .rightSideBackgroundImg {
   opacity: 0.8;
 }
+
 .noMessageContainer-lightMode {
   height: 100%;
   background-color: white;
@@ -128,7 +129,7 @@
 
 .chatting-right-side .messageContainer {
   width: 100%;
-  height: 650px;
+  height: 700px;
   margin-top: 5px;
   padding-left: 30px;
   padding-right: 30px;

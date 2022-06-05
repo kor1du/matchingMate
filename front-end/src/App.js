@@ -23,7 +23,8 @@ import MemberProfile from "./res/page/memberProfile/memberProfile";
 import BoardDetail from './res/page/BoardDetail/BoardDetail';
 import BoardRegister from './res/page/BoardRegister/BoardRegister';
 // import ChatRoomList from './res/page/YH/ChatRoomList';
-import ChatRoom from './res/page/YH/ChatRoom';
+import ChatRoom from './res/page/chat/ChatRoom';
+import ChatIn from './res/page/chat/ChatIn'
 import Chat from './res/page/YH/Chat'
 
 import UserPrivateRoute from "./lib/UserPrivateRoute";
@@ -184,11 +185,33 @@ export default function App() {
             } 
             exact 
           />
-          <Route 
+          {/* <Route 
             path="/chat/in" 
             element={
               <UserPrivateRoute>
                 <ChatRoom />
+              </UserPrivateRoute>
+            } 
+            exact 
+          /> */}
+
+
+          {/*  */}
+          <Route 
+            path="/newChat" 
+            element={
+              <UserPrivateRoute>
+                <ChatRoom />
+              </UserPrivateRoute>
+            } 
+            exact 
+          />
+
+          <Route 
+            path="/newChat/in/:id" 
+            element={
+              <UserPrivateRoute>
+                <ChatIn />
               </UserPrivateRoute>
             } 
             exact 

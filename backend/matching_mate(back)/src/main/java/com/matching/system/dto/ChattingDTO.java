@@ -34,13 +34,14 @@ public class ChattingDTO {
         private String modifiedDatetime;
 
         private Integer isCompleted;
+        private Long myChattingMemberId;
     }
 
     @Getter     @Builder    @Setter
     @NoArgsConstructor    @AllArgsConstructor
     public static class ChattingRoomInDTO
     {
-        public Long matchingPostId;
+        public Long chattingRoomId;
     }
 
 
