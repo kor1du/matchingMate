@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { useNavigate } from 'react-router';
 
 
-
+// v6
 function Board(props) {
 
   const { boards, getPopularBoards, getBoards, getLocation, lat, lng, liveAddr, categorys, boardDelete } = props;
