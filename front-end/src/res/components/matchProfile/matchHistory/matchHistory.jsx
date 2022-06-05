@@ -17,9 +17,7 @@ const MatchHistory = () => {
   const offset = (page - 1) * limit;
 
   const readMatchingHistoryList = async () => {
-    const res = await (
-      await axiosGet("/profile/history", { Authorization: token })
-    ).data;
+    const res = await (await axiosGet("/profile/history", { Authorization: token })).data;
 
     setMatchingHistories(res.data);
   };
@@ -31,23 +29,13 @@ const MatchHistory = () => {
   return (
     <div className="history-matching">
       <p>매칭내역</p>
-      {matchingHistories
-        .slice(offset, offset + limit)
-        .map((matchingHistory) => (
-          <div className="history" key={matchingHistory.id}>
-            <HistoryPost matchingPostInfo={matchingHistory.matchingPostDTO} />
-            <HistoryMate
-              matchingMatesInfo={matchingHistory.historyMembers}
-              matchingHistoryId={matchingHistory.id}
-            />
-          </div>
-        ))}
-      <Pagination
-        total={matchingHistories.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
+      {matchingHistories.slice(offset, offset + limit).map((matchingHistory) => (
+        <div className="history" key={matchingHistory.id}>
+          <HistoryPost matchingPostInfo={matchingHistory.matchingPostDTO} />
+          <HistoryMate matchingMatesInfo={matchingHistory.historyMembers} matchingHistoryId={matchingHistory.id} />
+        </div>
+      ))}
+      <Pagination total={matchingHistories.length} limit={limit} page={page} setPage={setPage} />
     </div>
   );
 };

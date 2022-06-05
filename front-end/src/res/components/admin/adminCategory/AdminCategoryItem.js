@@ -51,12 +51,7 @@ export function AdminCategoryItem({ categorys }) {
             return <Item key={category.id} category={category}></Item>;
           })}
         </Row>
-        <Pagination
-          total={categorys.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-        />
+        <Pagination total={categorys.length} limit={limit} page={page} setPage={setPage} />
       </div>
     );
   }

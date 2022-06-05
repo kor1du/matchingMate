@@ -36,11 +36,9 @@ export default function AdminCategoryModify() {
         "Content-Type": "multipart/form-data",
       };
 
-      axios
-        .put("http://localhost:8080/admin/update", formData, { headers })
-        .then(() => {
-          alert("수정완료!");
-        });
+      axios.put("http://localhost:8080/admin/update", formData, { headers }).then(() => {
+        alert("수정완료!");
+      });
     } else if (!imgFile) alert("이미지를 등록해주세요!");
     else if (!name) alert("이름을 입력해주세요!");
     else alert("아이디를 입력해주세요!!");

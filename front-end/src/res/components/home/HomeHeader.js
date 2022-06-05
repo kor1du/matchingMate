@@ -71,9 +71,7 @@ function Header() {
         <div className="fade-class">
           <div className="caption">
             <p className="title">자유로운 소통</p>
-            <p className="text chat-text">
-              채팅메이트의 채팅기능을 사용, 운동메이트들과 소통해보세요!
-            </p>
+            <p className="text chat-text">채팅메이트의 채팅기능을 사용, 운동메이트들과 소통해보세요!</p>
           </div>
           <div className="img-box">
             <img src={Chat} alt="" className="img-muscle" />
@@ -86,18 +84,14 @@ function Header() {
           </div>
           <div className="caption">
             <p className="title">뱃지 시스템</p>
-            <p className="text chat-text">
-              뱃지획득을 통해 성취감을 느껴보세요!
-            </p>
+            <p className="text chat-text">뱃지획득을 통해 성취감을 느껴보세요!</p>
           </div>
         </div>
 
         <div className="fade-class">
           <div className="caption">
             <p className="title">체력 및 근력 향상</p>
-            <p className="text injury-text">
-              꾸준한 운동으로 건강을 챙겨보세요!
-            </p>
+            <p className="text injury-text">꾸준한 운동으로 건강을 챙겨보세요!</p>
           </div>
           <div className="img-box">
             <img src={Muscle} alt="" className="img-muscle" />
@@ -110,9 +104,7 @@ function Header() {
           </div>
           <div className="caption">
             <p className="title">함께 할때 더 즐거운</p>
-            <p className="text chat-text">
-              함께 운동할때 더 커지는 운동효과, 알고 계셨나요?
-            </p>
+            <p className="text chat-text">함께 운동할때 더 커지는 운동효과, 알고 계셨나요?</p>
           </div>
         </div>
       </div>

@@ -28,6 +28,12 @@ public interface ChattingRoomRepository extends JpaRepository<ChattingRoom, Long
             "WHERE cr.id=:chattingRoomId")
     Optional<ChattingRoom> existRoom(@Param("chattingRoomId") Long chattingRoomId);
 
+    @Query("SELECT cr FROM ChattingRoom cr " +
+            "LEFT JOIN cr.matchingPost mp " +
+            "LEFT JOIN mp.member " +
+            "WHERE mp.id=:matchingPostId")
+    Optional<ChattingRoom> findMatchingPostRoom(@Param("matchingPostId") Long matchingPostId);
+
 
     Optional<ChattingRoom> findByMatchingPostId(Long matchingPostId);
 }

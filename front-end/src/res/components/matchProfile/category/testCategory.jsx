@@ -6,8 +6,7 @@ import Modal from "react-modal";
 import InputCategory from "./inputCategory";
 
 const TestCategory = (props) => {
-  const { categorys, categoryDelete, setInterestCategory, interestCategory } =
-    props;
+  const { categorys, categoryDelete, setInterestCategory, interestCategory } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -25,10 +24,7 @@ const TestCategory = (props) => {
             <div key={category.id} className="category">
               <img src={category.categoryImgAddress} alt="" />
               <p>{category.categoryName}</p>
-              <Button
-                onClick={() => categoryDelete(category.id)}
-                variant="danger"
-              >
+              <Button onClick={() => categoryDelete(category.id)} variant="danger">
                 <p>삭제</p>
               </Button>
             </div>

@@ -91,12 +91,7 @@ export default function AdminPostBoard(props) {
             return <Post key={post.id} post={post} />;
           })}
         </div>
-        <Pagination
-          total={posts.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-        />
+        <Pagination total={posts.length} limit={limit} page={page} setPage={setPage} />
       </>
     );
   }

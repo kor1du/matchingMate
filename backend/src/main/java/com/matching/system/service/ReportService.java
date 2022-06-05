@@ -121,7 +121,11 @@ public class ReportService {
         // 처리 결과 상태 업데이트
         report.get().setDisposeResult();
 
-        // 알림
+
+        // 알림 - 거절인 경우
+        if (reportDisposeDTO.getResult().equals("거절")) return new ResponseMessage(HttpStatus.OK, "정상적으로 처리되었습니다.");
+
+        // 알림 - 승인인 경우
         // 신고한 사람 검색
         Member member = memberRepository.findById(report.get().getMember().getId()).get();
 

@@ -13,16 +13,12 @@ const Category = () => {
   const [interestCategory, setInterestCategory] = useState([]);
 
   const readCategorys = async () => {
-    const res = await (
-      await axiosGet("/category", { Authorization: token })
-    ).data;
+    const res = await (await axiosGet("/category", { Authorization: token })).data;
 
     setCategorys(res.data);
   };
   const readInterestCategory = async () => {
-    const res = await (
-      await axiosGet("/profile/interestCategory", { Authorization: token })
-    ).data;
+    const res = await (await axiosGet("/profile/interestCategory", { Authorization: token })).data;
 
     setInterestCategory(res.data);
   };

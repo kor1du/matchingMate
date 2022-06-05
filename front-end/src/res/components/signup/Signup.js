@@ -28,6 +28,7 @@ export default function Signup(props) {
 
   function postData(e) {
     e.preventDefault();
+    console.log(id);
     const data = {
       userId: id,
       userPw: password,
@@ -52,9 +53,7 @@ export default function Signup(props) {
     setId(id);
     setSignupComponent(document.querySelector(".signup-component"));
     setSignupBtnDiv(document.querySelector(".btn-show-signup"));
-    setSignupGreetingBtn(
-      document.querySelector(".signup-component .greeting-btn")
-    );
+    setSignupGreetingBtn(document.querySelector(".signup-component .greeting-btn"));
     setSignupBtn(document.querySelector(".btn-show-signup .btn"));
     setSignupDisplay(document.querySelector(".display-signup"));
   }, [props]);
@@ -142,12 +141,7 @@ export default function Signup(props) {
               <Form.Group className="mb-3 " controlId="formBasicEmail">
                 <Form.Label>ID</Form.Label>
                 <div className="checkID  input-text-btn">
-                  <Form.Control
-                    type="text"
-                    placeholder="ID"
-                    readOnly
-                    value={id}
-                  />
+                  <Form.Control type="text" placeholder="ID" readOnly value={id} />
                   <CheckID setId={setId}></CheckID>
                 </div>
               </Form.Group>
@@ -170,36 +164,20 @@ export default function Signup(props) {
                   <p>주소</p>
                 </Form.Label>
                 <div className="signup-find-address input-text-btn">
-                  <Form.Control
-                    type="text"
-                    placeholder="주소"
-                    readOnly
-                    value={address}
-                  />
-                  <Button
-                    variant="success"
-                    onClick={() => setModalOpen(true)}
-                    className="btn-find-address"
-                  >
+                  <Form.Control type="text" placeholder="주소" readOnly value={address} />
+                  <Button variant="success" onClick={() => setModalOpen(true)} className="btn-find-address">
                     <p>주소찾기</p>
                   </Button>
                 </div>
               </Form.Group>
 
-              <Modal
-                isOpen={modalOpen}
-                onRequestClose={() => setModalOpen(false)}
-                className="modal-address"
-              >
+              <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} className="modal-address">
                 <div className="btn-close">
                   <Button variant="dark" onClick={() => setModalOpen(false)}>
                     <p>닫기</p>
                   </Button>
                 </div>
-                <AddressInput
-                  setAddress={setAddress}
-                  setModalOpen={setModalOpen}
-                />
+                <AddressInput setAddress={setAddress} setModalOpen={setModalOpen} />
               </Modal>
 
               <Form.Group className="mb-3 " controlId="formBasicPassword">
@@ -236,12 +214,7 @@ export default function Signup(props) {
                   <p>별명</p>
                 </Form.Label>
                 <div className="signup-checkID input-text-btn">
-                  <Form.Control
-                    type="text"
-                    placeholder="별명"
-                    readOnly
-                    value={nickname}
-                  />
+                  <Form.Control type="text" placeholder="별명" readOnly value={nickname} />
                   <CheckNickname setNickname={setNickname}></CheckNickname>
                 </div>
               </Form.Group>

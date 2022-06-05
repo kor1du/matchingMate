@@ -62,10 +62,10 @@ export default function AdminReportBoard({ reports }) {
             <Button variant="primary" onClick={handleClose}>
               <p>내용보기</p>
             </Button>
-            <Button variant="success" onClick={(e) => sendAccept(report)}>
+            <Button variant="success" onClick={() => sendAccept(report)}>
               <p>승인</p>
             </Button>
-            <Button variant="danger" onClick={(e) => sendDecline(report)}>
+            <Button variant="danger" onClick={() => sendDecline(report)}>
               <p>거절</p>
             </Button>
           </Modal.Footer>
@@ -104,12 +104,7 @@ export default function AdminReportBoard({ reports }) {
           return <ReportBoard key={report.id} report={report} />;
         })}
       </div>
-      <Pagination
-        total={reports.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
+      <Pagination total={reports.length} limit={limit} page={page} setPage={setPage} />
     </>
   );
 }

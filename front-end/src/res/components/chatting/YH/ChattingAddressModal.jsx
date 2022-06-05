@@ -10,10 +10,7 @@ export default function ChattingAddressModal(props) {
         <p>주소찾기</p>
       </Modal.Header>
       <Modal.Body>
-        <AddressInput
-          setAddress={setAddress}
-          setModalOpen={setModalOpen}
-        ></AddressInput>
+        <AddressInput setAddress={setAddress} setModalOpen={setModalOpen}></AddressInput>
       </Modal.Body>
       <Modal.Footer>
         <Button

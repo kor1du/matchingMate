@@ -8,24 +8,11 @@ import axios from "axios";
 const ARRAY = [0, 1, 2, 3, 4];
 
 const InputRating = (props) => {
-  const { matchingHistoryId, targetMemberId, setModalOpen, updateCompleted } =
-    props;
+  const { matchingHistoryId, targetMemberId, setModalOpen, updateCompleted } = props;
   const token = "Bearer " + sessionStorage.getItem("jwtToken");
 
-  const [skillPoint, setSkillPoint] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
-  const [mannerPoint, setMannerPoint] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [skillPoint, setSkillPoint] = useState([false, false, false, false, false]);
+  const [mannerPoint, setMannerPoint] = useState([false, false, false, false, false]);
   const [content, setContent] = useState("");
 
   const handleSkillPoint = (index) => {
@@ -102,11 +89,7 @@ const InputRating = (props) => {
             );
           })}
         </Stars>
-        <InputText
-          style={{ width: "100%" }}
-          placeholder="내용을 입력하세요."
-          onChange={textChange}
-        ></InputText>
+        <InputText style={{ width: "100%" }} placeholder="내용을 입력하세요." onChange={textChange}></InputText>
       </Wrap>
       <div className="btns">
         <Button
@@ -118,11 +101,7 @@ const InputRating = (props) => {
         >
           <p>완료</p>
         </Button>
-        <Button
-          onClick={() => setModalOpen(false)}
-          style={{ margin: "0 3px 0 0" }}
-          variant="dark"
-        >
+        <Button onClick={() => setModalOpen(false)} style={{ margin: "0 3px 0 0" }} variant="dark">
           <p>닫기</p>
         </Button>
       </div>

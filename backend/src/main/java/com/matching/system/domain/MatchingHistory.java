@@ -41,7 +41,6 @@ public class MatchingHistory {
 
     public void addMatchingMember(MatchingMember matchingMember)
     {
-        System.out.println(matchingMember.getMember().getId());
         this.matchingMemberList
                 .add(matchingMember);
     }

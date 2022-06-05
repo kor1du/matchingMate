@@ -18,12 +18,7 @@ const GoogleMap = (props) => {
 
   return (
     <>
-      <Map
-        google={props.google}
-        zoom={17}
-        style={mapStyles}
-        initialCenter={center}
-      >
+      <Map google={props.google} zoom={17} style={mapStyles} initialCenter={center}>
         <Marker name={`${lat} ${lng}`} />
         <InfoWindow></InfoWindow>
       </Map>

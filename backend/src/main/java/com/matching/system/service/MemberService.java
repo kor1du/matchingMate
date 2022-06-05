@@ -262,6 +262,7 @@ public class MemberService {
                     .tokenDTO(TokenDTO.of(accessToken, refreshToken.getRefreshToken()))
                     .nickname(member.get().getNickname())
                     .profileImgAddress(member.get().getProfileImgAddress())
+                    .role(member.get().getAuthorities().stream().findFirst().toString())
                 .build();
 
         return new ResponseData(HttpStatus.OK, "성공적으로 로그인했습니다.", loginResponseDTO);
@@ -325,7 +326,8 @@ public class MemberService {
 
 
         // 카테고리 분포도
-        List<MatchingHistoryDTO.ChartData> categoryChartData = categoryDistributionChartDataProcess(matchingHistoryCustomRepository.categoryDistribution(memberId));
+//        List<MatchingHistoryDTO.ChartData> categoryChartData = categoryDistributionChartDataProcess(matchingHistoryCustomRepository.categoryDistribution(memberId));
+        List<MatchingHistoryDTO.ChartData> categoryChartData = matchingHistoryCustomRepository.categoryDistribution(memberId);
         MatchingHistoryDTO.ChartDataProcess categoryChartDataProcess = processChartData(categoryChartData);
 
         MemberDTO.ReadMatchingProfile readMatchingProfile = MemberDTO.ReadMatchingProfile.builder()
@@ -408,6 +410,7 @@ public class MemberService {
     private List<MatchingHistoryDTO.ChartData> categoryDistributionChartDataProcess(List<MatchingHistoryDTO.ChartData> chartDataList) {
         chartDataList.stream()
                 .forEach(chartData -> System.out.println("chartData.getLabel() = " + chartData.getLabel()));
+
         List<CategoryDTO.ReadCategoryNameDTO> readCategoryNameDTOList = categoryCustomRepository.readCategoryName();
 
         if (chartDataList.size() == readCategoryNameDTOList.size()) return chartDataList;

@@ -1,10 +1,9 @@
 #nav {
-  display: none;
   position: absolute;
   z-index: 10;
   top: 0;
-  color: black;
-  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  background-color: rgba(0, 0, 0, 1);
   padding: 0 0px;
 }
 
@@ -21,8 +20,15 @@
   position: relative;
 }
 
-#nav .nav-logo p:hover,
-#nav .nav-menus p:hover {
+#nav .nav-logo a p {
+  font-family: "Nanum Brush Script", cursive !important;
+  font-size: 40px;
+}
+
+#nav .nav-logo p:hover
+
+/*, #nav .nav-menus p:hover  */
+  {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -35,7 +41,7 @@
 #nav .nav-logo a {
   text-align: left;
   font-size: 2rem;
-  color: black;
+  color: White;
 }
 
 #nav .nav-menus {
@@ -71,24 +77,26 @@
 }
 
 #nav .nav-notification {
-  width: 45px;
-  height: 45px;
-  margin: 0 15px;
+  width: 30px;
+  height: 30px;
+  margin: 0 30px;
+  margin-top: 8px;
 }
 
 #nav .notification-list {
   width: 400px;
-  margin: 20px 0px;
+  margin: 10px 0px;
 }
 
 #nav .notification-list p {
+  display: inline-block;
   margin: 0 20px;
-  width: 360px;
-  height: 50px;
+  width: 210px;
+  height: 40px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: black;
 }
 
@@ -118,4 +126,12 @@
   #nav .admin-link {
     font-size: 0.5rem !important;
   }
+}
+
+.font {
+  font-family: "Nanum Brush Script", cursive !important;
+}
+
+.nav-notification {
+  cursor: pointer;
 }

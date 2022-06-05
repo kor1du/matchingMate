@@ -66,8 +66,8 @@ public class MatchingPost {
     @Column(name = "is_completed", columnDefinition = "TINYINT(1) default 0", length = 1)
     private Integer isCompleted;
 
-    @OneToOne(mappedBy = "matchingPost")
-    private MatchingHistory matchingHistory;
+//    @OneToOne(mappedBy = "matchingPost")
+//    private MatchingHistory matchingHistory;
 
 //    @OneToOne(mappedBy = "matchingPost", fetch = FetchType.LAZY)
 //    private MatchingHistory matchingHistory;

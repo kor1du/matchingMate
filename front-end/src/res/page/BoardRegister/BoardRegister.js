@@ -78,11 +78,7 @@ const BoardRegister = () => {
   return (
     <div className={styles.container}>
       <section>
-        <BsArrowLeft
-          className={styles.backBtn}
-          size="40"
-          onClick={() => navigate(-1)}
-        ></BsArrowLeft>
+        <BsArrowLeft className={styles.backBtn} size="40" onClick={() => navigate(-1)}></BsArrowLeft>
         <div className={styles.header}>
           <h2>기본 정보 입력</h2>
         </div>
@@ -150,9 +146,7 @@ const BoardRegister = () => {
                   className={styles.datePicker}
                   selected={postInfo.matchingDate}
                   name="matchingDate"
-                  onChange={(date) =>
-                    setPostInfo({ ...postInfo, matchingDate: date })
-                  }
+                  onChange={(date) => setPostInfo({ ...postInfo, matchingDate: date })}
                 />
               </FormControl>
             </Box>
@@ -186,11 +180,7 @@ const BoardRegister = () => {
                 />
               </FormControl>
             </Box>
-            <Button
-              onClick={() => setPostInfo({ ...postInfo, place: liveAddr })}
-            >
-              장소 미정이신가요?
-            </Button>
+            <Button onClick={() => setPostInfo({ ...postInfo, place: liveAddr })}>장소 미정이신가요?</Button>
             <Modal
               isOpen={modalOpen}
               ariaHideApp={false}

@@ -12,6 +12,11 @@ export function isLogin() {
   else return false;
 }
 
+export function isUser() {
+  if (sessionStorage.getItem("role").includes("ROLE_USER")) return true;
+  else return false;
+}
+
 function LoginComponent(props) {
   useEffect(() => {
     setLoginComponent(document.querySelector(".login-component"));
@@ -106,10 +111,8 @@ function LoginComponent(props) {
         const jwtToken = result.data.data.tokenDTO.accessToken;
         sessionStorage.setItem("jwtToken", jwtToken);
         sessionStorage.setItem("nickname", result.data.data.nickname);
-        sessionStorage.setItem(
-          "profileImgAddress",
-          result.data.data.profileImgAddress
-        );
+        sessionStorage.setItem("profileImgAddress", result.data.data.profileImgAddress);
+        sessionStorage.setItem("role", result.data.data.role);
       })
       .catch(() => {
         alert("아이디와 비밀번호를 확인해주세요.");

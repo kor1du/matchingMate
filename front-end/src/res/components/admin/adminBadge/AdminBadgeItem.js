@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { BsFillTrashFill } from "react-icons/bs";
 import { FaWrench } from "react-icons/fa";
@@ -50,12 +50,7 @@ export function AdminbadgeItem({ badges }) {
             return <Item key={badge.id} badge={badge}></Item>;
           })}
         </Row>
-        <Pagination
-          total={badges.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-        />
+        <Pagination total={badges.length} limit={limit} page={page} setPage={setPage} />
       </div>
     );
   }

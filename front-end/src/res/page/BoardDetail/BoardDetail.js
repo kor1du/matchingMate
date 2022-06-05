@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./BoardDetail.module.css";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import { BsArrowLeft } from "react-icons/bs";
 import { Button } from "react-bootstrap";
@@ -32,6 +32,40 @@ const BoardDetail = () => {
     reportClassify: "",
     contents: "",
   });
+
+  const handleInChat = () => {
+    if (!board.myPost) {
+      console.log("채팅 가입하기할떄 매칭포스트아이디 : ", id);
+
+      axios
+        .post(
+          "http://localhost:8080/matchingPost/detail/joinChat",
+          { chattingRoomId: board.chattingRoomId },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .catch((error) => {
+          if (error.response) {
+            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+            // Node.js의 http.ClientRequest 인스턴스입니다.
+            console.log(error.request);
+          } else {
+            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+            console.log("Error", error.message);
+          }
+        });
+    }
+    navigate("/chat");
+  };
 
   const handleReport = (e) => {
     e.preventDefault();
@@ -82,11 +116,7 @@ const BoardDetail = () => {
 
     console.log("detail 조회 결과", res);
     console.log("닉네임 조회 결과", res.data.nickname);
-    setReportInfo({
-      ...reportInfo,
-      targetMemberNickname: res.data.nickname,
-      targetNickname: res.data.nickname,
-    });
+    setReportInfo({ ...reportInfo, targetMemberNickname: res.data.nickname, targetNickname: res.data.nickname });
     setBoard(res.data);
 
     setisLoading(false);
@@ -104,11 +134,7 @@ const BoardDetail = () => {
       ) : (
         <div className={styles.container}>
           <section className={styles.header}>
-            <BsArrowLeft
-              className={styles.backBtn}
-              size="40"
-              onClick={() => navigate(-1)}
-            ></BsArrowLeft>
+            <BsArrowLeft className={styles.backBtn} size="40" onClick={() => navigate(-1)}></BsArrowLeft>
             <div className={styles.title}>{board.postName}</div>
             <div className={styles.userAndDate}>
               <div className={styles.nickName}>{board.nickname}</div>
@@ -116,10 +142,7 @@ const BoardDetail = () => {
                 <div>{board.registerDatetime}</div>
                 {!board.myPost && (
                   <div>
-                    <Button
-                      variant="outlined"
-                      onClick={() => setReportModalOpen(true)}
-                    >
+                    <Button variant="outlined" onClick={() => setReportModalOpen(true)}>
                       신고
                     </Button>
                   </div>
@@ -157,12 +180,8 @@ const BoardDetail = () => {
                 },
               }}
             >
-              <BoardReport
-                reportInfo={reportInfo}
-                setReportInfo={setReportInfo}
-                handleReport={handleReport}
-              />
-              <button onClick={() => setReportInfo(false)}>닫기</button>
+              <BoardReport reportInfo={reportInfo} setReportInfo={setReportInfo} handleReport={handleReport} />
+              <button onClick={() => setReportModalOpen(false)}>닫기</button>
               <button onClick={handleReport}>등록</button>
             </Modal>
             <ul className={styles.boardInfo}>
@@ -185,9 +204,7 @@ const BoardDetail = () => {
               </li>
               <li className={styles.infoBox}>
                 <span className={styles.infoTitle}>추천 실력</span>
-                <span className={styles.infoContent}>
-                  {board.recommendedSkill}
-                </span>
+                <span className={styles.infoContent}>{board.recommendedSkill}</span>
               </li>
             </ul>
           </section>
@@ -253,9 +270,7 @@ const BoardDetail = () => {
                 <Button onClick={() => boardDelete()}>삭제</Button>
               </>
             )}
-            <Link to="/chat">
-              <Button>채팅방 참여하기</Button>
-            </Link>
+            <Button onClick={() => handleInChat()}>채팅방 참여하기</Button>
           </div>
         </div>
       )}

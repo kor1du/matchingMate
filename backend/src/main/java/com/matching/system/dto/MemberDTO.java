@@ -38,6 +38,7 @@ public class MemberDTO {
         private TokenDTO tokenDTO;
         private String nickname;
         private String profileImgAddress;
+        private String role;
     }
 
     @Getter

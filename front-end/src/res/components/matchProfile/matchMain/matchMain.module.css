@@ -1,0 +1,18 @@
+.main_container {
+  /* padding-top: 100px; */
+}
+
+.profile_info {
+  display: block;
+  margin-bottom: 50px;
+}
+
+.profileContenxtHeader {
+  display: inline-flex;
+}
+
+.updateImg {
+  margin-left: 20px;
+  height: 20px;
+  width: 20px;
+}

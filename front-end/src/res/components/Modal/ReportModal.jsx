@@ -6,7 +6,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { TextField } from "@mui/material";
+// import styles from '../matchHistory/historyMateItem.module.css'
 import axios from "axios";
+import styles from "./ReportModal.module.css";
 
 function ReportModal(props) {
   const { infoShow, setInfoShow, memberNickname, reportType, targetId } = props;
@@ -70,26 +72,23 @@ function ReportModal(props) {
   };
 
   return (
-    <Modal show={infoShow} centered={true} className="input-report-modal">
+    <Modal sx="500" sm="6" lg="10" show={infoShow} centered={true}>
       <Modal.Header>
         <p>신고하기</p>
 
-        <p className="report-target">신고대상 : {memberNickname}</p>
+        <p>신고대상 : {memberNickname}</p>
       </Modal.Header>
       <Modal.Body>
         <p>
           신고분류 :
-          <Box sx={{ width: "100%" }}>
+          <Box>
             <FormControl sx={{ width: "100%", marginTop: 2 }}>
-              <InputLabel id="reportClassifySelect" style={{ zIndex: "-1" }}>
-                신고 분류
-              </InputLabel>
+              <InputLabel id="demo-simple-select-label">신고분류</InputLabel>
               <Select
-                labelId="reportClassifySelect"
+                labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                label="report"
                 value={reportClassify}
-                name="reportClassify"
+                label="신고분류"
                 onChange={changeReportClassify}
               >
                 <MenuItem value={"비매너"}>비매너</MenuItem>
@@ -119,22 +118,24 @@ function ReportModal(props) {
         </Box>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          onClick={() => {
-            sendReport();
-          }}
-        >
-          <p>등록</p>
-        </Button>
+        <div className={styles.btnBox}>
+          <Button
+            onClick={() => {
+              sendReport();
+            }}
+          >
+            등록
+          </Button>
 
-        <Button
-          variant="secondary"
-          onClick={() => {
-            setInfoShow(false);
-          }}
-        >
-          <p>닫기</p>
-        </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setInfoShow(false);
+            }}
+          >
+            닫기
+          </Button>
+        </div>
       </Modal.Footer>
     </Modal>
   );

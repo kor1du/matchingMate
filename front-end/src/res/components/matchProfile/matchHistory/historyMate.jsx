@@ -8,11 +8,7 @@ const HistoryMate = (props) => {
     <div className="info-mate">
       <p className="title">Mate List</p>
       {matchingMatesInfo.slice(0, 3).map((matchingMate) => (
-        <HistoryMateItem
-          key={matchingMate.id}
-          matchingMate={matchingMate}
-          matchingHistoryId={matchingHistoryId}
-        />
+        <HistoryMateItem key={matchingMate.id} matchingMate={matchingMate} matchingHistoryId={matchingHistoryId} />
       ))}
       <div className="more">
         {matchingMatesInfo.length > 3 ? (

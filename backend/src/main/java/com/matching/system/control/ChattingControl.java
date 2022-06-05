@@ -31,7 +31,7 @@ public class ChattingControl {
     // 채팅방 입장 및 메시지 반환      -> O
     @GetMapping("/in/{roomId}")
     public ResponseEntity inChattingRoom(@PathVariable("roomId") Long roomId,
-                                         @RequestHeader("Authorization") String token){
+                                         @RequestHeader("Authorization") String token) {
 
         ResponseData responseData = chattingService.inChattingRoomId(roomId, token);
 
@@ -52,9 +52,12 @@ public class ChattingControl {
                 .body(responseMessage);
     }
 
+
+
+
     // 채팅방 삭제       -> O
-    @PostMapping("/out/{chatId}")
-    public ResponseEntity deleteChattingRoom(@PathVariable("chatId") Long chattingMemberId) {
+    @PostMapping("/out/{chattingMemberId}")
+    public ResponseEntity deleteChattingRoom(@PathVariable("chattingMemberId") Long chattingMemberId) {
         ResponseMessage responseMessage = chattingService.deleteChattingRoom(chattingMemberId);
 
         return ResponseEntity

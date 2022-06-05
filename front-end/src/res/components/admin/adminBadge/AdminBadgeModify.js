@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import "../../../css/adminComponents/adminBadgeModifyRightside.css";
 import queryString from "query-string";
-import { axiosPost } from "../../axios/Axios";
 
 export default function AdminbadgeModify() {
   const location = useLocation();
@@ -37,11 +36,9 @@ export default function AdminbadgeModify() {
         "Content-Type": "multipart/form-data",
       };
 
-      axios
-        .put("http://localhost:8080/admin/badge/update", formData, { headers })
-        .then(() => {
-          alert("수정완료!");
-        });
+      axios.put("http://localhost:8080/admin/badge/update", formData, { headers }).then(() => {
+        alert("수정완료!");
+      });
     } else if (!imgFile) alert("이미지를 등록해주세요!");
     else alert("아이디를 입력해주세요!!");
   };

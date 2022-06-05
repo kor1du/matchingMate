@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&family=Jua&family=Lobster&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=Playfair+Display:ital@1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&family=Jua&family=Lobster&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=Playfair+Display:ital@1&display=swap");
 
 html,
 body {
@@ -46,10 +46,15 @@ p {
   margin: 0;
   padding: 0;
   font-family: "Nanum Brush Script", cursive !important;
+  font-family: "Nanum Brush Script", cursive !important;
 }
 
 span {
   font-family: "Nanum Brush Script", cursive !important;
+}
+
+span {
+  font-family: "Jua", sans-serif;
 }
 
 h1,
@@ -59,7 +64,6 @@ h4,
 h5,
 h6 {
   font-family: "Nanum Brush Script", cursive !important;
-  margin: 0;
   padding: 0;
 }
 
@@ -75,4 +79,8 @@ input {
 
 label {
   font-family: "Nanum Brush Script", cursive !important;
+}
+
+label {
+  font-family: "Jua", sans-serif;
 }
