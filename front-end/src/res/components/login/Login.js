@@ -6,6 +6,7 @@ import { redirectURL } from "../url/CheckURL";
 import { axiosPost } from "../axios/Axios";
 import WinkingIcon from "../../img/winkingIcon.png";
 import { client } from "stompjs";
+import {BsArrowLeftSquare} from 'react-icons/bs'
 
 export function isLogin() {
   if (sessionStorage.getItem("jwtToken")) return true;
@@ -136,7 +137,7 @@ function LoginComponent(props) {
       </div>
       <div className="display-login">
         <p className="btn-close" onClick={() => hideLogin()}>
-          X
+          <BsArrowLeftSquare/>
         </p>
         <div className="greeting">
           <span>운동메이트에 오신걸 환영해요!</span>

@@ -5,11 +5,15 @@
 }
 
 .container-match-profile .profile-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 50%;
 }
 
 .container-match-profile .profile-img img {
-  width: 100%;
+  width: 50%;
   height: 70%;
 }
 
@@ -34,7 +38,6 @@
 }
 
 .container-match-profile .profile-info {
-  padding-left: 10%;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -97,10 +100,6 @@
 }
 
 @media screen and (min-width:425px) and (max-width:767px) {
-  .container-match-profile .profile-img img {
-    width: 200px;
-    height: 80%;
-  }
 
   .container-match-profile .profile-info p {
     font-size: 1.5rem;
@@ -159,12 +158,8 @@
 
 
   .container-match-profile .profile-img img {
-    width: 100%;
+    width: 50%;
     height: 70%;
-  }
-
-  .container-match-profile .profile-info {
-    margin-left: 50px;
   }
 
   .container-match-profile .profile-info p {

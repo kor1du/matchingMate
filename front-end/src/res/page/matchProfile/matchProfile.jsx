@@ -3,11 +3,14 @@ import React, { useState, useEffect } from "react";
 import UserProfile from "../../components/matchProfile/profile/userProfile";
 import CategoryChart from "../../components/matchProfile/chart/CategoryChart";
 import MatchingChart from "../../components/matchProfile/chart/MatchingChart";
-import Category from "../../components/matchProfile/category/category";
-import MatchHistory from "../../components/matchProfile/matchHistory/matchHistory";
+import Category from "../../components/matchProfile/category/Category";
+import MatchHistory from "../../components/matchProfile/matchHistory/MatchHistory";
 import NavMatchingProfile from "../../components/nav/matchingProfile/NavMatchingProfile";
 import MatchRating from "../../components/matchProfile/matchRating/matchRating";
+import Nav from "../../components/nav/Nav";
 import "./matchProfile.css";
+import { positions } from "@mui/system";
+import { Button } from "react-bootstrap";
 
 const MatchProfile = () => {
   const [menu, setMenu] = useState("home");
@@ -43,6 +46,7 @@ const MatchProfile = () => {
 
   return (
     <>
+      <Nav></Nav>
       <div className="container-match-profile">
         <div className="left">
           <NavMatchingProfile></NavMatchingProfile>

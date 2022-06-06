@@ -12,6 +12,7 @@ import CategoryItem from '../../components/main/categoryItem';
 import { FaHotjar,FaStar,FaLocationArrow } from 'react-icons/fa';
 import {BsPencilSquare} from 'react-icons/bs';
 import {TiThSmallOutline} from 'react-icons/ti'
+
 import Board from '../../components/main/board';
 import { useNavigate } from 'react-router-dom';
 
@@ -100,7 +101,7 @@ const Main2 = () => {
       }, function (error) {
         console.error(error);
       }, {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         maximumAge: 0,
         timeout: Infinity
       });

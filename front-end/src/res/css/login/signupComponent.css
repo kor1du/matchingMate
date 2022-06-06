@@ -80,6 +80,10 @@
     margin-left: 0 10px;
 }
 
+.form-check-input {
+    cursor: pointer;
+  }
+
 .modal-check-header {
     position: relative;
     display: flex;
