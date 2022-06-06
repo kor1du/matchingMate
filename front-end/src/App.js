@@ -25,7 +25,7 @@ import BoardRegister from './res/page/BoardRegister/BoardRegister';
 // import ChatRoomList from './res/page/YH/ChatRoomList';
 import ChatRoom from './res/page/chat/ChatRoom';
 import ChatIn from './res/page/chat/ChatIn'
-import Chat from './res/page/YH/Chat'
+// import Chat from './res/page/YH/Chat'
 
 import UserPrivateRoute from "./lib/UserPrivateRoute";
 import AdminPrivateRoute from "./lib/AdminPrivateRoute";
@@ -176,31 +176,11 @@ export default function App() {
             }
           />
 
+          {/*  */}
           <Route 
             path="/chat" 
             element={
               <UserPrivateRoute>
-                <Chat />
-              </UserPrivateRoute>
-            } 
-            exact 
-          />
-          {/* <Route 
-            path="/chat/in" 
-            element={
-              <UserPrivateRoute>
-                <ChatRoom />
-              </UserPrivateRoute>
-            } 
-            exact 
-          /> */}
-
-
-          {/*  */}
-          <Route 
-            path="/newChat" 
-            element={
-              <UserPrivateRoute>
                 <ChatRoom />
               </UserPrivateRoute>
             } 
@@ -208,7 +188,7 @@ export default function App() {
           />
 
           <Route 
-            path="/newChat/in/:id" 
+            path="/chat/in/:id" 
             element={
               <UserPrivateRoute>
                 <ChatIn />

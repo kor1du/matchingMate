@@ -22,7 +22,7 @@ public class MatchingPostCustomRepositoryImpl implements MatchingPostCustomRepos
 
         return jpaQueryFactory.select(qMatchingPost.matchingDate)
                 .from(qChattingRoom)
-                .leftJoin(qChattingRoom.matchingPost, qMatchingPost).fetchJoin()
+                .leftJoin(qChattingRoom.matchingPost, qMatchingPost)
                 .on(qChattingRoom.matchingPost.id.eq(qMatchingPost.id))
                 .where(qChattingRoom.id.eq(chattingRoomId))
                 .fetchFirst();

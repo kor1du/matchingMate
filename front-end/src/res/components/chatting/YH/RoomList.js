@@ -24,7 +24,7 @@ function RoomList(props) {
             </div> */}
             
             <div onClick={() => {
-              navigate("/newChat/in/"+room.id,
+              navigate("/chat/in/"+room.id,
                 {state:{isDarkMode:isDarkMode, roomId:room.id}}
               )
             }}>
@@ -52,9 +52,9 @@ function RoomList(props) {
               <DeleteIcon onClick={() => { deleteRoom(); }}/>
             </div> */}
             
-            {/* <Link to={{pathname:"/newChat/in/"+room.id, state:{data:isDarkMode}}} > */}
+            
             <div onClick={() => {
-              navigate("/newChat/in/"+room.id,
+              navigate("/chat/in/"+room.id,
                 {state:{isDarkMode:isDarkMode, roomId:room.id}}
               )
             }}>

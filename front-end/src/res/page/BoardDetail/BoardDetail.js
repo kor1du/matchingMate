@@ -65,7 +65,7 @@ const BoardDetail = () => {
         }
       });
     }
-    navigate("/chat");
+    navigate("/chat/in/"+board.chattingRoomId, {state:{ roomId:board.chattingRoomId}});
   }
 
 

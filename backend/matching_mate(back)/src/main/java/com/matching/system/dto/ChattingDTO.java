@@ -143,4 +143,18 @@ public class ChattingDTO {
         private Date matchingTime;
     }
 
+
+    // 퇴장 및 삭제
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DeleteChattingRoom
+    {
+        private Long chattingRoomId;
+        private Long chattingMemberId;
+    }
+
+
+
 }

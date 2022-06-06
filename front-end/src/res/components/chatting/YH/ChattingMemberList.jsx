@@ -7,26 +7,29 @@ import Crown from "../../../img/crown.png";
 import ChattingInfoModal from "./ChattingInfoModal";
 import ReportModal from '../../Modal/ReportModal'
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+// import {  useNavigate } from 'react-router-dom';
 
 export default function ChattingMemberList(props) {
   // const roomId = props.roomId;
   // const roomHost = props.roomHost;
   // const isCompleted = props.isCompleted;
  
-  const { numberOfPeople, maxNumberOfPeople, newMessage, roomId, roomHost, isCompleted, myId,  } = props;
-  const [show, setShow] = useState(false);
-  const [infoShow,setInfoShow]=useState(false);
+  const { stomp, sockJS, numberOfPeople, maxNumberOfPeople, newMessage, roomId, roomHost, isCompleted, myId, chattingMemberId } = props;
+  const [ show, setShow] = useState(false);
+  const [ infoShow,setInfoShow]=useState(false);
 
   const [reportShow, setReportShow]=useState(false);
 
-  // const [newMessage, setNewMessage] = useState(null);
+  // const navigate = useNavigate();
 
   const reportType = "채팅";
 
-  // const token = "Bearer " + sessionStorage.getItem("jwtToken");
+  const token = "Bearer " + sessionStorage.getItem("jwtToken");
   
   const openReportModal = () => {
     setReportShow(true);
+    console.log("hi")
   };
 
 
@@ -52,51 +55,66 @@ export default function ChattingMemberList(props) {
       e.parentNode.classList.add("btn-success");
     }
 
-    // sendReady();
+    sendReady();
   };
 
-  // function waitForConnection(ws, callback) {
-  //   setTimeout(
-  //     function () {
-  //       // 연결되었을 때 콜백함수 실행
-  //       if (sockJS.readyState === 1) {
-  //         callback();
-  //         // 연결이 안 되었으면 재호출
-  //       } else {
-  //         waitForConnection(stomp, callback);
-  //       }
-  //     },
-  //     1 // 밀리초 간격으로 실행
-  //   );
-  // }
+  function waitForConnection(ws, callback) {
+    setTimeout(
+      function () {
+        // 연결되었을 때 콜백함수 실행
+        if (sockJS.readyState === 1) {
+          callback();
+          // 연결이 안 되었으면 재호출
+        } else {
+          waitForConnection(stomp, callback);
+        }
+      },
+      1 // 밀리초 간격으로 실행
+    );
+  }
 
-  // function sendComplete(place, matchingTime) {
+  function sendComplete(place, matchingTime) {
     
-  //   if (place === null || matchingTime === null) {
-  //     alert("빈 값이 존재합니다. 다시 확인해주세요!")
-  //   } else {
-  //     setShow(false);
+    if (place === null || matchingTime === null) {
+      alert("빈 값이 존재합니다. 다시 확인해주세요!")
+    } else {
+      setShow(false);
 
-  //     waitForConnection(stomp, function () {
-  //       stomp.send(
-  //         "/pub/chat/complete",
-  //         { Authorization: token },
-  //         JSON.stringify({ chattingRoomId:roomId, place:place, matchingTime:matchingTime })
-  //       );
-  //     });
-  //   }
+      waitForConnection(stomp, function () {
+        stomp.send(
+          "/pub/chat/complete",
+          { Authorization: token },
+          JSON.stringify({ chattingRoomId:roomId, place:place, matchingTime:matchingTime })
+        );
+      });
+    }
     
-  // }
+  }
 
-  // function sendReady() {
-  //   waitForConnection(stomp, function () {
-  //     stomp.send(
-  //       "/pub/chat/ready",
-  //       { Authorization: token },
-  //       JSON.stringify({ ready: member.ready, roomId: roomId, token: token, chattingMemberId:member.chattingMemberId,  })
-  //     );
-  //   });
-  // }
+  function sendReady() {
+    waitForConnection(stomp, function () {
+      stomp.send(
+        "/pub/chat/ready",
+        { Authorization: token },
+        JSON.stringify({ ready: member.ready, roomId: roomId, token: token, chattingMemberId:member.chattingMemberId,  })
+      );
+    });
+  }
+
+  const outMember = () => {
+    
+    if (confirm("정말 [" + member.nickname + "] 님을 강퇴하시겠습니까?")) {
+      // navigate("/chat", {state:{isDarkMode:isDarkMode}});
+
+      waitForConnection(stomp, function () {
+          stomp.send(
+            "/pub/chat/out",
+            { Authorization: token },
+            JSON.stringify({ chattingRoomId:roomId, chattingMemberId:chattingMemberId })
+          );
+      });
+    }
+  }
 
 
   useEffect(() => {
@@ -111,9 +129,12 @@ export default function ChattingMemberList(props) {
     return (
       <>
         <div className="host">
-        <div className="report-icon">
-          { member.memberId === myId ? null : <span onClick={() => { openReportModal(); }}><NotificationImportantIcon sx={{color:"red", width:25}}  /></span> } 
-          </div>            
+
+          <div className="report-icon">
+            { member.memberId === myId ? null : <span onClick={() => { openReportModal(); }}><NotificationImportantIcon sx={{color:"red", width:25}}  /></span> } 
+            
+          </div>      
+
           <img src={member.profileImgAddress} className="profile-img" alt="" onClick={(e)=>{e.preventDefault();popupMemberInfo()}}/>
           <div className="member-nickname">
             <span>{member.nickname}</span>
@@ -138,7 +159,7 @@ export default function ChattingMemberList(props) {
 
                   <InputModal
                     show={show}
-                    // sendComplete={sendComplete}
+                    sendComplete={sendComplete}
                     setShow={setShow}
                     roomId={roomId}
                   />
@@ -156,13 +177,15 @@ export default function ChattingMemberList(props) {
           </div>
         </div>
         <ChattingInfoModal infoShow={infoShow} setInfoShow={setInfoShow} member={member}></ChattingInfoModal>
+        <ReportModal infoShow={reportShow} setInfoShow={setReportShow} memberNickname={member.nickname} reportType={reportType} targetId={null} />
       </>
     );
   } else {
     return (
       <div className="member">
         <div className="report-icon">
-      {member.memberId===myId ? null : <span onClick={() => { openReportModal(); }}><NotificationImportantIcon sx={{color:"red", width:25}}  /></span>  }
+      { member.memberId===myId ? null : <span onClick={() => { openReportModal(); }}><NotificationImportantIcon sx={{color:"red", width:25}}  /></span>  }
+      { roomHost===myId && isCompleted===0 ? <span><RemoveCircleOutlineIcon onClick={() => { outMember(); }} /></span> : null }
       </div>
         <img src={member.profileImgAddress} className="profile-img" alt="" onClick={(e)=>{e.preventDefault();popupMemberInfo()}}/>
         <div className="member-nickname">
@@ -223,5 +246,8 @@ export default function ChattingMemberList(props) {
         <ReportModal infoShow={reportShow} setInfoShow={setReportShow} memberNickname={member.nickname} reportType={reportType} targetId={null} />
       </div>
     );
+    
   }
+
+
 }

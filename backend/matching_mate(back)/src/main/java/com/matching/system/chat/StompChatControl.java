@@ -22,15 +22,13 @@ public class StompChatControl {
     public void enter(@RequestBody ChattingDTO.SendMessageDTO sendMessageDTO) {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(sendMessageDTO.getToken()));
 
-        simpMessagingTemplate.convertAndSend("/sub/chat/in/" + sendMessageDTO.getRoomId(), memberId + " 님 입장하셨슴돠~");
+        simpMessagingTemplate.convertAndSend("/sub/chat/in/" + sendMessageDTO.getRoomId(), new ChattingDTO.ServerResponse("새 멤버 입장함", "server"));
     }
 
     // 전송
     @MessageMapping(value = "/chat/message")
     public void message(@RequestBody ChattingDTO.SendMessageDTO sendMessageDTO) {
         Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(sendMessageDTO.getToken()));
-
-        System.out.println("sendMessageDTO.getRoomId() = " + sendMessageDTO.getRoomId());
 
         ChattingDTO.ReadChattingMessageDTO responseMessageDTO = chattingService.sendMessage(sendMessageDTO, memberId);
 
@@ -55,5 +53,14 @@ public class StompChatControl {
         simpMessagingTemplate.convertAndSend("/sub/chat/in/" + completeMatching.getChattingRoomId(), new ChattingDTO.ServerResponse(sendTime, "server"));
 
         simpMessagingTemplate.convertAndSend("/sub/chat/in/" + completeMatching.getChattingRoomId(), new ChattingDTO.ServerResponse(completeMatching.getPlace(), "server"));
+    }
+
+    @MessageMapping(value = "/chat/out")
+    public void outChattingRoom(@RequestBody ChattingDTO.DeleteChattingRoom deleteChattingRoom) {
+        System.out.println("chattingMemberId = " + deleteChattingRoom.getChattingRoomId());
+
+        ResponseMessage responseMessage = chattingService.deleteChattingRoom(deleteChattingRoom.getChattingMemberId());
+
+        simpMessagingTemplate.convertAndSend("/sub/chat/in/" + deleteChattingRoom.getChattingRoomId(), new ChattingDTO.ServerResponse(responseMessage.getMessage(), "server"));
     }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { axiosGet } from '../../components/axios/Axios';
 import ChatInLeftSide from './ChatInLeftSide'
 import ChatInRightSide from './ChatInRightSide'
@@ -9,33 +9,26 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs'
 import axios from 'axios';
 
+import './chattingList.css'
+
 function ChatIn() {
     const state = useLocation().state;
-    // eslint-disable-next-line no-unused-vars
-    const [isDarkMode, setIsDarkMode] = useState(state.isDarkMode);
-    // eslint-disable-next-line no-unused-vars
-    const [ roomId, setRoomId ] = useState(state.roomId);
+    const navigate = useNavigate();
+    
+    const [isDarkMode, setIsDarkMode] = useState(state===null?false:state.isDarkMode);
 
     // eslint-disable-next-line no-unused-vars
+    const [ roomId, setRoomId ] = useState(state.roomId);
     const [messages, setMessages] = useState([]);
-      // eslint-disable-next-line no-unused-vars
     const [memberList, setMemberList] = useState("");
-      // eslint-disable-next-line no-unused-vars
     const [roomHost, setRoomHost] = useState("");
-      // eslint-disable-next-line no-unused-vars
     const [myId,setMyId]=useState("");
-      // eslint-disable-next-line no-unused-vars
     const [myChattingMemberId, setMyChattingMemberId] = useState("");
-  
-      // eslint-disable-next-line no-unused-vars
     const [newMessage, setNewMessage] = useState(null);
-  
-    // eslint-disable-next-line no-unused-vars
     const [numberOfPeople, setNumberOfPeople] = useState(null);
-    // eslint-disable-next-line no-unused-vars
+
     const [maxNumberOfPeople, setMaxNumberOfPeople] = useState(null);
-  
-    // eslint-disable-next-line no-unused-vars
+
     const [isCompleted, setIsCompleted] = useState(0);
 
     const token = "Bearer " + sessionStorage.getItem("jwtToken");
@@ -57,7 +50,16 @@ function ChatIn() {
           setMaxNumberOfPeople(res.data.data.maxNumberOfPeople);
   
           setIsCompleted(res.data.data.isCompleted);
+        }).catch((error) => {
+          console.log(error);
+
+          navigate("/chat", {replace:true}).then(() => {
+            alert("강퇴당하였습니다.");
         });
+          
+          
+        }) ;
+
     };
 
 
@@ -74,14 +76,20 @@ function ChatIn() {
               (data) => {
                 setNewMessage(() => JSON.parse(data.body).message);
 
-                // console.log
-                
+
                 if (JSON.parse(data.body).sender === "server" && String(JSON.parse(data.body).message).substring(0, 7) === "매칭시간 : ") {
                   setIsCompleted(1);
                 }
+
+
   
               },
               { Authorization: token }
+            );
+            stomp.send(
+              "/pub/chat/enter",
+              { Authorization: token },
+              JSON.stringify({ roomId:roomId, token:token })
             );
           });
         });
@@ -103,54 +111,47 @@ function ChatIn() {
         }).then((res) => {7
           console.log(res);
         })
-        // document.querySelector("#sendText").value = "";
         
       }
 
     function waitForConnection(ws, callback) {
-        setTimeout(
-          function () {
-            // 연결되었을 때 콜백함수 실행
-            if (sockJS.readyState === 1) {
-              callback();
-              // 연결이 안 되었으면 재호출
-            } else {
-              waitForConnection(stomp, callback);
-            }
-          },
-          1 // 밀리초 간격으로 실행
-        );
-      }
+    setTimeout(
+        function () {
+        // 연결되었을 때 콜백함수 실행
+        if (sockJS.readyState === 1) {
+            callback();
+            // 연결이 안 되었으면 재호출
+        } else {
+            waitForConnection(stomp, callback);
+        }
+        },
+        1 // 밀리초 간격으로 실행
+    );
+    }
 
 
-      // 내용 전송
-      function sendMessage() {
-        let message = document.querySelector("#sendText").value;
-  
-        waitForConnection(stomp, function () {
-          
-          stomp.send(
-            "/pub/chat/message",
-            { Authorization: token },
-            JSON.stringify({ roomId: roomId, token: token, message: message })
-          );
-        });
-        
-        document.querySelector("#sendText").value = "";
-      }
-
+    // 입장
+    // const enterRoom = () => {
+    //     waitForConnection(stomp, function () {
+    //       stomp.send(
+    //         "/pub/chat/enter",
+    //         { Authorization: token },
+    //         JSON.stringify({ roomId:roomId, token:token })
+    //       );
+    //   });
+    // }
+    
 
 
     useEffect(() => {
-        chatStart();
         connectWS();
+        chatStart();
     }, [newMessage])
 
     return (
         <div>
             <Nav></Nav>
             <div className="chatting">
-
 
             <Row>
                 <Col xs="4">
@@ -160,8 +161,12 @@ function ChatIn() {
                         isDarkMode={isDarkMode}
                         memberList={memberList} 
                         disconnectWS={disconnectWS}
+                        myChattingMemberId={myChattingMemberId}
                         myId={myId}
                         roomHost={roomHost}
+                        stomp={stomp} sockJS={sockJS}
+                        roomId={roomId}
+                        newMessage={newMessage}
                     />
                 </Col>
             
@@ -170,7 +175,8 @@ function ChatIn() {
                         messages={messages} 
                         isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} 
                         myId={myId}
-                        sendMessage={sendMessage}
+                        roomId={roomId}
+                        stomp={stomp} sockJS={sockJS}
                     />
                 </Col>
             </Row>
