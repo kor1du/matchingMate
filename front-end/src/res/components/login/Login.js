@@ -101,7 +101,7 @@ function LoginComponent(props) {
   };
 
   function login() {
-
+    // navigete
     const navigate = useNavigate();
 
     const data = {
