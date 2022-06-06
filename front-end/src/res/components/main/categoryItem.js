@@ -13,7 +13,7 @@ const CategoryItem = (props) => {
             onClick={() => changeCategory(id)}    
         >
             <div className={styles.imgBox}>
-                <img className={styles.img} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDOUBbLZUo5Gif0fPiDwf80LSh-IRbGNy_Zg&usqp=CAU' alt='img'/>
+                <img className={styles.img} src={img} alt='img'/>
             </div>
             <div className={styles.nameBox}>
                 <span>{name}</span>

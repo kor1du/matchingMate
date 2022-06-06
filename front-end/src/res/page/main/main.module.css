@@ -21,6 +21,8 @@
 }
 
 .liveAddr {
+    margin-right: 3rem;
+    margin-bottom: 2rem;
     text-transform: uppercase;
     background-image: linear-gradient(
         -225deg,
@@ -39,13 +41,28 @@
     -webkit-text-fill-color: transparent;
     animation: textclip 2s linear infinite;
     display: inline-block;
-        font-size: 50px;
-    }
+    font-size: 50px;
+}
 
-    @keyframes textclip {
+@keyframes textclip {
     to {
         background-position: 200% center;
     }
+}
+
+.liveAddr .addrText {
+    font-weight: 700;
+    
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #000;
+
 }
 
 .slider{
@@ -81,6 +98,16 @@
     display: flex;
 }
 
+.newhot .all {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #080808;
+    margin: 0 10px;
+}
+
 .newhot .new {
     display: flex;
     align-items: center;
@@ -98,13 +125,47 @@
     cursor: pointer;
     color: #e83a14;
 }
-.location {
+
+.register {
     display: flex;
     align-items: center;
     font-weight: 700;
     font-size: 1.5rem;
     cursor: pointer;
     color: #000;
+}
+
+.categoryMenu {
+    display: flex;
+    grid-gap: 50px;
+    gap: 50px;
+    border-bottom: 3px solid #f2f2f2;
+    padding-bottom: 20px;
+    padding-left: 16px;
+    margin-bottom: 30px;
+}
+.categoryMenuItem {
+    display: flex;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 126.5%;
+    color: #848484;
+    cursor: pointer;
+    position: relative;
+}
+
+.selected {
+    color: rgb(168, 49, 19);
+}
+
+.selected::after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: calc(100% + 26px);
+    background: #ffe579;
+    left: -13px;
+    bottom: -22px;
 }
 
 .categoryBox {
@@ -125,7 +186,9 @@
 
 .header {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 5rem;
     
     

@@ -1,7 +1,11 @@
 .nav-to-chat {
-  position: absolute;
-  top: 85%;
+  /* position: absolute; */
+  /* top: 85%; */
   z-index: 2;
+
+  position: fixed;
+  right: -50px;
+  bottom: 40px;
 }
 
 .nav-to-chat .chatIcon {

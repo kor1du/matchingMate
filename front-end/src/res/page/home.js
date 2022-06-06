@@ -29,7 +29,6 @@ const Home = () => {
         setLatitude(lat);
         setLongitude(lng);
         getAddr(lat, lng);
-        alert('위도 : ' + lat + ' 경도 : ' + lng);
         console.log('위도 : ' + latitude + ' 경도 : ' + longtitue); // 일단 but never used 에러창 방지
       }, function (error) {
         console.error(error);

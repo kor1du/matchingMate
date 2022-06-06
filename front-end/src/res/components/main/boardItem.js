@@ -44,7 +44,7 @@ const BoardItem = (props) => {
             </div>
             <h1 className={styles.title}>{board.postName}</h1>
             <div className={styles.categoryImg}>
-                <img className={styles.userImg} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDOUBbLZUo5Gif0fPiDwf80LSh-IRbGNy_Zg&usqp=CAU" alt='img'/>
+                <img className={styles.userImg} src={board.categoryImgAddress} alt='img'/>
                     <div className={styles.waviy}>
                         <span>{board.inChatNumber} 명 참여중 !</span>
                     </div>

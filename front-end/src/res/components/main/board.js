@@ -20,18 +20,19 @@ const Board = (props) => {
   console.log("보드데이터: ",boards );
 
   return (
-    <div className={styles.boardBox}>
-
-    {boards.slice(offset, offset + limit).map((board) => <BoardItem key={board.id} board={board} categorys={categorys} />)}
-    
-    <div >
-        <BoardPagination
-          total={boards.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-        />
-    </div>
+    <div className={styles.container}>
+      <div className={styles.boardBox}>
+        {boards.slice(offset, offset + limit).map((board) => <BoardItem key={board.id} board={board} categorys={categorys} />)}
+      </div>
+      
+      <div >
+          <BoardPagination
+            total={boards.length}
+            limit={limit}
+            page={page}
+            setPage={setPage}
+          />
+      </div>
     </div>
   );
 }

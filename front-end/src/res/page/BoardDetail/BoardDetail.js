@@ -74,7 +74,7 @@ const BoardDetail = () => {
     if(!board.myPost) {
       console.log("채팅 가입하기할떄 매칭포스트아이디 : ",id)
 
-      axios.post('http://localhost:8050/matchingPost/detail/joinChat', {matchingPostId : id}, {
+      axios.post('http://localhost:8050/matchingPost/detail/joinChat', {chattingRoomId : board.chattingRoomId}, {
         headers: {
           'Authorization': "Bearer " + token
         }
@@ -116,7 +116,7 @@ const BoardDetail = () => {
     //const res = await (await axiosGet(`matchingPost/detail/${id}`, header)).data; // 이코드하면 에러뜸 
 
     console.log("detail 조회 결과", res);
-    console.log("닉네임 조회 결과", res.data.nickname);
+    
     setReportInfo({ ...reportInfo, targetMemberNickname: res.data.nickname, targetNickname: res.data.nickname });
     setBoard(res.data);
 

@@ -10,7 +10,10 @@ import { motion } from 'framer-motion';
 import styles from './main.module.css'
 import CategoryItem from '../../components/main/categoryItem';
 import { FaHotjar,FaStar,FaLocationArrow } from 'react-icons/fa';
+import {BsPencilSquare} from 'react-icons/bs';
+import {TiThSmallOutline} from 'react-icons/ti'
 import Board from '../../components/main/board';
+import { useNavigate } from 'react-router-dom';
 
 const Main2 = () => {
 
@@ -20,27 +23,66 @@ const Main2 = () => {
   const [longtitue, setLongitude] = useState("");
   const [categorys, setCategorys] = useState();
 
+
+  const [selectCategoryId, setSelectCategoryId] = useState('');
+  const [selectCategoryMenu, setSelectCategoryMenu] = useState(1);
+
   const token = sessionStorage.getItem("jwtToken");
 
-  const getPopularBoards = async (lat, lng) => {
-    const res = await (await axiosGet(`/popular?lat=${lat}&lng=${lng}`)).data;
-    setBoards(res.data);
-  };
+  const navigate = useNavigate();
 
   // 기본 조회는 최신순 zzzz
-
   const getBoards = async (lat, lng) => {
     const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}`)).data;
     // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
     setBoards(res.data);
+    setSelectCategoryId('');
+  };
+
+  const getPopularBoards = async (lat, lng) => {
+    if(selectCategoryId) {
+      const res = await (await axiosGet(`/popular?lat=${lat}&lng=${lng}&categoryId=${selectCategoryId}`)).data;
+      setBoards(res.data);
+    } else {
+      const res = await (await axiosGet(`/popular?lat=${lat}&lng=${lng}`)).data;
+      setBoards(res.data);
+    }
+  };
+
+  const getRecentBoards = async (lat, lng) => {
+
+    if(selectCategoryId) {
+      const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}&categoryId=${selectCategoryId}`)).data;
+      // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
+      console.log("통신데이터", res);
+      setBoards(res.data);
+    }else {
+      const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}`)).data;
+      // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
+      console.log("통신데이터", res);
+      setBoards(res.data);
+    }
   };
 
   const changeCategory = async (categoryId) => {
+    
     const res = await (await axios.get(`http://localhost:8050/recent?lat=${latitude}&lng=${longtitue}&categoryId=${categoryId}`)).data;
     // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
     setBoards(res.data);
+    setSelectCategoryId(categoryId);
+  }
+
+  const getInterestCategory = async () => {
+    setSelectCategoryMenu(2);
+    const res = await (await axios.get(`http://localhost:8050/myInterest`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }}
+    )).data;
+    console.log("관심카테고리데이터 : ", res.data);
+    setCategorys(res.data);
   }
 
   const getLocation = async () => {
@@ -53,7 +95,7 @@ const Main2 = () => {
         setLongitude(lng);
         getBoards(lat, lng);
         getAddr(lat, lng);
-        alert('위도 : ' + lat + ' 경도 : ' + lng);
+
         console.log('위도 : ' + latitude + ' 경도 : ' + longtitue); // 일단 but never used 에러창 방지
       }, function (error) {
         console.error(error);
@@ -69,6 +111,8 @@ const Main2 = () => {
   }
 
   const getCategorys = async () => {
+
+    setSelectCategoryMenu(1);
 
     console.log("카테고리검색시작..");
     const res = await (await axios.get('http://localhost:8050/category')).data;
@@ -136,14 +180,22 @@ const Main2 = () => {
         <motion.section>
             <div className={styles.headerBox}>
                 <div className={styles.header}>
+                  <motion.div className={styles.location} whileHover={{scale: 1.1,  ease: "easeIn", duration: 0.2 }}>
+                    <FaLocationArrow style={{marginRight : "5px", marginLeft: "5px"}}/>
+                      <span>위치 갱신하기</span>
+                  </motion.div>
                     <motion.h2
                         className={styles.liveAddr}
                         animate={{ y: [-300 , 0] }}
                         transition={{  duration: 1 }}
-                    >oo님은 현재 {liveAddr} 입니다.</motion.h2>
+                    >{token===null?"방문자":sessionStorage.getItem("nickname")} 님은 현재 <span className={styles.addrText}>{liveAddr}</span> 입니다.</motion.h2>
                 </div>
             </div>
             <div className={styles.container}>
+                <ul className={styles.categoryMenu}>
+                  <li className={`${styles.categoryMenuItem} ${selectCategoryMenu === 1 ? styles.selected : ''}`} onClick={()=> getCategorys()}>전체</li>
+                  <li className={`${styles.categoryMenuItem} ${selectCategoryMenu === 2 ? styles.selected : ''}`} onClick={()=> getInterestCategory()}>관심 카테고리</li>
+                </ul>
                 <motion.div className={styles.categoryBox}
                             animate={{ scale: [0.5 , 1] }}
                             transition={{  duration: 1 }}    
@@ -152,6 +204,7 @@ const Main2 = () => {
                       categorys &&
                         categorys.map((item) => <CategoryItem key={item.id} id={item.id} name={item.name} img={item.imgAddress} changeCategory={changeCategory} />)
                     }
+    
                 </motion.div> 
                 <motion.ul className={`${styles.ull} `}
                     animate={{ scale: [0.5 , 1] }}
@@ -159,25 +212,42 @@ const Main2 = () => {
                 >
                   <div className={styles.filter}>
                         <section className={styles.newhot}>
+                            <motion.div className={styles.all}
+                                whileHover={{scale: 1.1,  ease: "easeIn", duration: 0.2 }}
+                                onClick={()=> getBoards(latitude,longtitue)}
+                            >
+                                <TiThSmallOutline style={{marginRight : "5px"}}/>
+                                <span>전체보기</span>
+                            </motion.div>
                             <motion.div className={styles.new}
                                 whileHover={{scale: 1.1,  ease: "easeIn", duration: 0.2 }}
+                                onClick={()=> getRecentBoards(latitude,longtitue)}
                             >
                                 <FaStar style={{marginRight : "5px"}}/>
                                 <span>최신</span>
                             </motion.div>
                             <motion.div className={styles.hot}
                                 whileHover={{scale: 1.1,  ease: "easeIn", duration: 0.2 }}
+                                onClick={()=> getPopularBoards(latitude,longtitue)}
                             >
                                 <FaHotjar style={{marginRight : "5px"}}/>
                                 <span>인기</span>
                             </motion.div>
                         </section>
-                        <motion.div className={styles.location}
-                            whileHover={{scale: 1.1,  ease: "easeIn", duration: 0.2 }}
-                        >
-                            <FaLocationArrow style={{marginRight : "5px"}}/>
-                            <span>위치갱신</span>
-                        </motion.div>
+                            <motion.div className={styles.register} whileHover={{scale: 1.1,  ease: "easeIn", duration: 0.2 }}
+                              onClick={() => {
+                                navigate('/register', {
+                                  state: {
+                                    categorys: categorys,
+                                    liveAddr: liveAddr
+                                  }
+                                });
+                              }}
+                            >
+                              <BsPencilSquare style={{marginRight : "5px"}}/>
+                                <span>모집하기</span>
+                            </motion.div>
+                        
                     </div>
                   <Board
                     boards={boards}
