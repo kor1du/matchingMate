@@ -18,7 +18,7 @@ function ChatMemberList(props) {
     const outRoom = () => {
 
         if (confirm("정말 채팅방을 나가시겠습니까?")) {
-            axios.post("http://localhost:8080/chat/out/" + myChattingMemberId, 
+            axios.post("http://kor1du.gonetis.com:8080/chat/out/" + myChattingMemberId, 
                 null,
                 {headers:{Authorization:token}})
             .then((res) => {

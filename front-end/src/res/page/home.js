@@ -29,7 +29,7 @@ const Home = () => {
         setLatitude(lat);
         setLongitude(lng);
         getAddr(lat, lng);
-        console.log('위도 : ' + latitude + ' 경도 : ' + longtitue); // 일단 but never used 에러창 방지
+        console.log('607코드수정 위도 : ' + lat + ' 경도 : ' + lng); // 일단 but never used 에러창 방지
       }, function (error) {
         console.error(error);
       }, {
@@ -46,7 +46,7 @@ const Home = () => {
   const getCategorys = async () => {
 
     console.log("카테고리검색시작..");
-    const res = await (await axios.get('http://localhost:8050/category')).data;
+    const res = await (await axios.get('http://kor1du.gonetis.com:8080/category')).data;
 
     setCategorys(res.data);
 
@@ -59,7 +59,7 @@ const Home = () => {
 
   const updateLocation = (addr, token) => {
     console.log("최근위치 업데이트 시작....");
-    axios.put('http://localhost:8050/location', { location: addr }, {
+    axios.put('http://kor1du.gonetis.com:8080/location', { location: addr }, {
       headers: {
         'Authorization': "Bearer " + token
       }

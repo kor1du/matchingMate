@@ -30,7 +30,7 @@ export function AdminCategoryItem({ categorys }) {
   }
 
   function deleteItem(id) {
-    const url = "http://localhost:8080/admin/category/delete/" + id;
+    const url = "http://kor1du.gonetis.com:8080/admin/category/delete/" + id;
     if (confirm("삭제하시겠습니까?")) {
       axios.delete(url).then(() => {
         location.reload();

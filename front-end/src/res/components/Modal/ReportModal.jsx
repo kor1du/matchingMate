@@ -33,7 +33,7 @@ function ReportModal(props) {
     console.log(reportType);
     axios
       .post(
-        "http://localhost:8080/report/create",
+        "http://kor1du.gonetis.com:8080/report/create",
         {
           targetMemberNickname: memberNickname,
           reportType: reportType,

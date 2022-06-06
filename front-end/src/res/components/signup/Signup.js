@@ -9,6 +9,7 @@ import CheckID from "./CheckID";
 import CheckNickname from "./CheckNickname";
 import PartyFace from "../../img/partyFace.png";
 import {BsArrowLeftSquare} from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup(props) {
   const { loginBtn } = props;
@@ -28,6 +29,9 @@ export default function Signup(props) {
   const [signupDisplay, setSignupDisplay] = useState("");
 
   function postData(e) {
+
+    const navigate = useNavigate();
+
     e.preventDefault();
     console.log(id);
     const data = {
@@ -43,7 +47,7 @@ export default function Signup(props) {
 
     axiosPost("/signUp", data)
       .then(() => {
-        redirectURL("signup");
+        navigate("/login");
       })
       .catch(() => {
         alert("정보를 다시 입력해주세요.");

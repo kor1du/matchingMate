@@ -28,7 +28,7 @@ const BoardItem = (props) => {
             </div>
             <div className={styles.summaryInfo}>
                 <span>운동 장소 |</span>
-                <span>{board.place}</span>
+                <span className={styles.summaryPlace}>{board.place}</span>
             </div>
             <div className={styles.summaryInfo}>
                 <span>시간 |</span>

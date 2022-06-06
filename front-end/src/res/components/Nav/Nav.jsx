@@ -115,7 +115,7 @@ export default function Nav() {
     alarms.classList.toggle("active");
 
     axios
-      .put("http://localhost:8050/notification", null, {
+      .put("http://kor1du.gonetis.com:8080/notification", null, {
         headers: headers,
       })
       .then((res) => {

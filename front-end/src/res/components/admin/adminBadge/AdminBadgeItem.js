@@ -29,7 +29,7 @@ export function AdminbadgeItem({ badges }) {
   }
 
   function deleteItem(id) {
-    const url = "http://localhost:8080/admin/badge/delete/" + id;
+    const url = "http://kor1du.gonetis.com:8080/admin/badge/delete/" + id;
     if (confirm("삭제하시겠습니까?")) {
       axios.delete(url).then(() => {
         location.reload();

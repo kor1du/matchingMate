@@ -32,7 +32,7 @@ const Main2 = () => {
 
   // 기본 조회는 최신순 zzzz
   const getBoards = async (lat, lng) => {
-    const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}`)).data;
+    const res = await (await axios.get(`http://kor1du.gonetis.com:8080/recent?lat=${lat}&lng=${lng}`)).data;
     // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
     setBoards(res.data);
@@ -52,13 +52,13 @@ const Main2 = () => {
   const getRecentBoards = async (lat, lng) => {
     if (selectCategoryId) {
       const res = await (
-        await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}&categoryId=${selectCategoryId}`)
+        await axios.get(`http://kor1du.gonetis.com:8080/recent?lat=${lat}&lng=${lng}&categoryId=${selectCategoryId}`)
       ).data;
       // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
       console.log("통신데이터", res);
       setBoards(res.data);
     } else {
-      const res = await (await axios.get(`http://localhost:8050/recent?lat=${lat}&lng=${lng}`)).data;
+      const res = await (await axios.get(`http://kor1du.gonetis.com:8080/recent?lat=${lat}&lng=${lng}`)).data;
       // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
       console.log("통신데이터", res);
       setBoards(res.data);
@@ -67,7 +67,7 @@ const Main2 = () => {
 
   const changeCategory = async (categoryId) => {
     const res = await (
-      await axios.get(`http://localhost:8080/recent?lat=${latitude}&lng=${longtitue}&categoryId=${categoryId}`)
+      await axios.get(`http://kor1du.gonetis.com:8080/recent?lat=${latitude}&lng=${longtitue}&categoryId=${categoryId}`)
     ).data;
     // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
@@ -78,7 +78,7 @@ const Main2 = () => {
   const getInterestCategory = async () => {
     setSelectCategoryMenu(2);
     const res = await (
-      await axios.get(`http://localhost:8050/myInterest`, {
+      await axios.get(`http://kor1du.gonetis.com:8080/myInterest`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -121,7 +121,7 @@ const Main2 = () => {
     setSelectCategoryMenu(1);
 
     console.log("카테고리검색시작..");
-    const res = await (await axios.get("http://localhost:8050/category")).data;
+    const res = await (await axios.get("http://kor1du.gonetis.com:8080/category")).data;
 
     setCategorys(res.data);
 
@@ -135,7 +135,7 @@ const Main2 = () => {
   const updateLocation = (addr, token) => {
     console.log("최근위치 업데이트 시작....");
     axios.put(
-      "http://localhost:8050/location",
+      "http://kor1du.gonetis.com:8080/location",
       { location: addr },
       {
         headers: {

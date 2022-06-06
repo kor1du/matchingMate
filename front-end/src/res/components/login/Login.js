@@ -7,6 +7,7 @@ import { axiosPost } from "../axios/Axios";
 import WinkingIcon from "../../img/winkingIcon.png";
 import { client } from "stompjs";
 import {BsArrowLeftSquare} from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom';
 
 export function isLogin() {
   if (sessionStorage.getItem("jwtToken")) return true;
@@ -100,14 +101,16 @@ function LoginComponent(props) {
   };
 
   function login() {
+
+    const navigate = useNavigate();
+
     const data = {
       userId: id,
       userPw: password,
     };
     axiosPost("/login", data)
       .then((result) => {
-        redirectURL("login");
-        redirectURL("");
+        navigate(-1);
 
         const jwtToken = result.data.data.tokenDTO.accessToken;
         sessionStorage.setItem("jwtToken", jwtToken);

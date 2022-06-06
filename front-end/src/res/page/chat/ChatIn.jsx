@@ -64,7 +64,7 @@ function ChatIn() {
 
 
 
-    let sockJS = new SockJS("http://localhost:8050/stomp/chat");
+    let sockJS = new SockJS("http://kor1du.gonetis.com:8080/stomp/chat");
     let stomp = Stomp.over(sockJS);
 
     function connectWS() {
@@ -104,7 +104,7 @@ function ChatIn() {
           console.log(error);
         }
         
-        axios.put(`http://localhost:8050/chat/out/${myChattingMemberId}`, "",{
+        axios.put(`http://kor1du.gonetis.com:8080/chat/out/${myChattingMemberId}`, "",{
           headers: {
             Authorization: token
           }

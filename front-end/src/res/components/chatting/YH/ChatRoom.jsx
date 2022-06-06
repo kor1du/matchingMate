@@ -14,7 +14,7 @@ import { Button, Col, Row } from "react-bootstrap";
 
 
 function ChatRoom() {
-  let sockJS = new sockjs("http://localhost:8080/stomp/chat");
+  let sockJS = new sockjs("http://kor1du.gonetis.com:8080/stomp/chat");
   let Stomp = stomp.over(sockJS);
   Stomp.debug = null;
 
@@ -104,7 +104,7 @@ function ChatRoom() {
       console.log(error);
     }
     
-    axios.put(`http://localhost:8080/chat/out/${myChattingMemberId}`, "",{
+    axios.put(`http://kor1du.gonetis.com:8080/chat/out/${myChattingMemberId}`, "",{
       headers: {
         Authorization: token
       }
