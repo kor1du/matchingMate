@@ -54,7 +54,6 @@ export default function AdminPostBoard(props) {
     );
   }
 
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;

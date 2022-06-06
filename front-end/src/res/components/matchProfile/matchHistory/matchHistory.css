@@ -1,0 +1,238 @@
+.container-match-profile .history-matching {
+  display: none;
+  width: 90vw;
+}
+
+.container-match-profile .history-matching.active {
+  display: block;
+}
+
+.container-match-profile .history-matching>p {
+  text-align: center;
+  font-size: 2.25rem;
+  margin: 5px 0px;
+}
+
+.container-match-profile .history-matching .history {
+  display: flex;
+}
+
+.container-match-profile .history>div {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  width: 50%;
+}
+
+.container-match-profile .history .title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.container-match-profile .history p {
+  font-size: 1.2rem;
+}
+
+.container-match-profile .history .overflow {
+  min-width: 121px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container-match-profile .info-mate .info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 5px 0px;
+}
+
+.container-match-profile .info-mate .info>p {
+  width: 40%;
+  position: relative;
+  top: 3px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container-match-profile .info-mate .info button {
+  width: 30%;
+  height: 30px;
+  padding: 6px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-match-profile .info-mate .info button p {
+  font-size: 0.9rem;
+}
+
+.container-match-profile .info-mate .more {
+  width: 100%;
+  text-align: center;
+}
+
+.container-match-profile .info-mate .more label {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 5px;
+  border-radius: 5%;
+  color: black;
+  width: 60px;
+  font-size: 1.2rem;
+}
+
+.input-raiting-modal {
+  width: 90vw !important;
+  height: 85vh !important;
+}
+
+.input-raiting-modal .text-raiting {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.input-raiting-modal .text-skill,
+.input-raiting-modal .text-manner {
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+.input-raiting-modal textarea {
+  margin: 10px 0px;
+}
+
+.input-raiting-modal .btns {
+  display: flex;
+  justify-content: center;
+}
+
+.input-raiting-modal button {
+  margin-right: 20px;
+  width: 80px;
+  height: 35px;
+}
+
+.input-raiting-modal button>p {
+  font-size: 1.5rem;
+  position: relative;
+  bottom: 6px;
+}
+
+.input-report-modal {
+  height: 100vh;
+}
+
+.input-report-modal .modal-dialog,
+.input-report-modal .modal-content {
+  overflow: scroll;
+  height: 90vh;
+}
+
+.input-report-modal .report-target {
+  width: 150px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.input-report-modal p,
+.input-report-modal label {
+  font-size: 1.5rem;
+}
+
+.input-report-modal .modal-footer {
+  justify-content: center;
+}
+
+.input-report-modal .modal-footer button {
+  width: 80px;
+  height: 35px;
+  margin: 0 10px;
+}
+
+.input-report-modal .modal-footer button p {
+  position: relative;
+  bottom: 6px;
+}
+
+@media screen and (min-width:425px) and (max-width:767px) {
+  .container-match-profile .history-matching>p {
+    font-size: 2.5rem;
+  }
+
+  .container-match-profile .history .title {
+    font-size: 2.3rem;
+  }
+
+  .container-match-profile .history p {
+    font-size: 1.5rem;
+  }
+
+  .container-match-profile .info-mate .info button {
+    height: 30px;
+  }
+
+  .container-match-profile .info-mate .info button p {
+    font-size: 1.2rem;
+  }
+
+  .container-match-profile .info-mate .more label {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .container-match-profile .history-matching>p {
+    font-size: 3.5rem;
+    margin: 20px 0px;
+  }
+
+  .container-match-profile .history .title {
+    font-size: 3rem;
+  }
+
+  .container-match-profile .history p {
+    font-size: 2rem;
+  }
+
+  .container-match-profile .info-mate .info button {
+    height: 30px;
+  }
+
+  .container-match-profile .info-mate .info button p {
+    font-size: 1.2rem;
+  }
+
+  .container-match-profile .info-mate .more label {
+    font-size: 2.0rem;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .container-match-profile .history-matching>p {
+    font-size: 4rem;
+    margin: 20px 0px;
+  }
+
+  .container-match-profile .history .title {
+    font-size: 3.5rem;
+  }
+
+  .container-match-profile .history p {
+    font-size: 2.5rem;
+  }
+
+  .container-match-profile .info-mate .info button {
+    height: 30px;
+  }
+
+  .container-match-profile .info-mate .info button p {
+    font-size: 1.4rem;
+  }
+
+  .container-match-profile .info-mate .more label {
+    font-size: 2.0rem;
+  }
+}

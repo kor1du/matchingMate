@@ -190,6 +190,7 @@ public class MatchingPostService {
         return new ResponseData(HttpStatus.OK, "정상적으로 조회했습니다.", readDTOList);
     }
 
+
     private String getMemberAddress(Double longitude, Double latitude)
     {
         return mapProcess.coordToAddr(longitude, latitude);
@@ -203,6 +204,7 @@ public class MatchingPostService {
         return MatchingPostDTO.ReadSimpleMatchingPostDTO.builder()
                     .id(matchingPost.getId())
                     .categoryName(matchingPost.getCategory()==null?null:matchingPost.getCategory().getName())
+                    .categoryImgAddress(matchingPost.getCategory()==null?null: matchingPost.getCategory().getImgAddress())
                     .postName(matchingPost.getPostName())
                     .matchingDate(matchingPost.getMatchingDate().toString())
                     .matchingTime( matchingPost.getMatchingTime()==null ? null : timeFormat.format(matchingPost.getMatchingTime()))

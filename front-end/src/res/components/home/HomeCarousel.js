@@ -2,18 +2,10 @@ import React, { useState } from "react";
 import { Carousel, Row, Col } from "react-bootstrap";
 import "../../css/home/homeCarousel.css";
 
-
 function CarouselBody(props) {
   function ShowCategory({ category }) {
     return (
-      <Col
-        lg="3"
-        md="6"
-        sm="6"
-        xs="2"
-        className="carousel-col"
-        onClick={(e) => categoryFilter(e, category.name)}
-      >
+      <Col lg="3" md="6" sm="6" xs="2" className="carousel-col" onClick={(e) => categoryFilter(e, category.name)}>
         <a href="">
           <img src={category.imgAddress} alt="" />
         </a>

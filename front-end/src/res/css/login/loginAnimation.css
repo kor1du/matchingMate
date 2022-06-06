@@ -1,0 +1,306 @@
+@media screen and (max-width:1023px) {
+
+    /*login-bounceInDown*/
+    @keyframes bounceInDown {
+
+        from,
+        60%,
+        75%,
+        90%,
+        to {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        0% {
+            opacity: 0;
+            transform: translate3d(0, -3000px, 0) scaleY(3);
+        }
+
+        60% {
+            opacity: 1;
+            transform: translate3d(0, 25px, 0) scaleY(0.9);
+        }
+
+        75% {
+            opacity: 1;
+            transform: translate3d(0, -10px, 0) scaleY(0.95);
+        }
+
+        90% {
+            opacity: 1;
+            transform: translate3d(0, 5px, 0) scaleY(0.985);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .login-enter {
+        animation-name: bounceInDown;
+        animation-duration: 1.5s;
+    }
+
+    /*login-bounceOutUp*/
+
+    @keyframes bounceOutUp {
+        0% {
+            display: flex;
+        }
+
+        20% {
+            transform: translate3d(0, -10px, 0) scaleY(0.985);
+        }
+
+        40%,
+        45% {
+            opacity: 1;
+            transform: translate3d(0, 20px, 0) scaleY(0.9);
+        }
+
+        to {
+            opacity: 0;
+            display: none;
+            transform: translate3d(0, -2000px, 0) scaleY(3);
+        }
+    }
+
+    .login-leave {
+        animation-name: bounceOutUp;
+        animation-duration: 1.5s;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    @keyframes fadeInLeft {
+        0% {
+            opacity: 0;
+            transform: translate3d(-100%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+
+    .login-enter-left {
+        position: relative;
+        animation: fadeInLeft 1s;
+    }
+
+    @keyframes fadeInRight {
+        0% {
+            opacity: 0;
+            transform: translate3d(100%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+
+    .login-enter-right {
+        position: relative;
+        animation: fadeInRight 1s;
+    }
+
+    @keyframes fadeInLeftHide {
+        0% {
+            opacity: 1;
+            transform: translate3d(-100%, 0, 0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateZ(0);
+        }
+    }
+
+    .login-enter-left-hide {
+        position: relative;
+        animation: fadeInLeftHide 1s;
+    }
+
+    @keyframes fadeInRightHide {
+        0% {
+            opacity: 1;
+            transform: translate3d(100%, 0, 0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateZ(0);
+        }
+    }
+
+    .login-enter-right-hide {
+        position: relative;
+        animation: fadeInRightHide 1s;
+    }
+}
+
+/* Buzz Out */
+@-webkit-keyframes login {
+    10% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+
+    20% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+
+    30% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+
+    40% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+
+    50% {
+        -webkit-transform: translateX(2px) rotate(1deg);
+        transform: translateX(2px) rotate(1deg);
+    }
+
+    60% {
+        -webkit-transform: translateX(-2px) rotate(-1deg);
+        transform: translateX(-2px) rotate(-1deg);
+    }
+
+    70% {
+        -webkit-transform: translateX(2px) rotate(1deg);
+        transform: translateX(2px) rotate(1deg);
+    }
+
+    80% {
+        -webkit-transform: translateX(-2px) rotate(-1deg);
+        transform: translateX(-2px) rotate(-1deg);
+    }
+
+    90% {
+        -webkit-transform: translateX(1px) rotate(0);
+        transform: translateX(1px) rotate(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(-1px) rotate(0);
+        transform: translateX(-1px) rotate(0);
+    }
+}
+
+@keyframes login {
+    10% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+
+    20% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+
+    30% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+
+    40% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+
+    50% {
+        -webkit-transform: translateX(2px) rotate(1deg);
+        transform: translateX(2px) rotate(1deg);
+    }
+
+    60% {
+        -webkit-transform: translateX(-2px) rotate(-1deg);
+        transform: translateX(-2px) rotate(-1deg);
+    }
+
+    70% {
+        -webkit-transform: translateX(2px) rotate(1deg);
+        transform: translateX(2px) rotate(1deg);
+    }
+
+    80% {
+        -webkit-transform: translateX(-2px) rotate(-1deg);
+        transform: translateX(-2px) rotate(-1deg);
+    }
+
+    90% {
+        -webkit-transform: translateX(1px) rotate(0);
+        transform: translateX(1px) rotate(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(-1px) rotate(0);
+        transform: translateX(-1px) rotate(0);
+    }
+}
+
+.login-component .login>button {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.login-component .btn-show-login>button:hover,
+.login-component .btn-show-login>button:focus,
+.login-component .btn-show-login>button:active,
+.signup-component .btn-show-signup>button:hover,
+.signup-component .btn-show-signup>button:focus,
+.signup-component .btn-show-signup>button:active {
+    -webkit-animation-name: login;
+    animation-name: login;
+    -webkit-animation-duration: 0.75s;
+    animation-duration: 0.75s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+/* Pop */
+@-webkit-keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+
+@keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+
+.signup-component .btn-signup {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.signup-component .btn-signup>button:hover {
+    -webkit-animation-name: hvr-pop;
+    animation-name: hvr-pop;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}

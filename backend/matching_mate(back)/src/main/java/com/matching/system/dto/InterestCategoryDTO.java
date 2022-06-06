@@ -38,5 +38,16 @@ public class InterestCategoryDTO {
         private String categoryImgAddress;
     }
 
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ReadMyInterestDTO
+    {
+        private Long id;
+        private String name;
+        private String imgAddress;
+    }
+
 
 }

@@ -17,6 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "http://localhost:3000/",
                         "http://kalzake.gonetis.com:3000/",
                         "http://localhost:8080",
+                        "http://localhost:8050",
                         "http://localhost:3000"
                 )
                 .allowedMethods(HttpMethod.GET.name(),

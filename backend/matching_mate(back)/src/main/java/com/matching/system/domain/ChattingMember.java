@@ -32,7 +32,7 @@ public class ChattingMember {
     @Column(name = "is_ready", columnDefinition = "TINYINT(1) default 0")
     private boolean isReady;
 
-    @Column(name = "out_datetime")
+    @Column(name = "out_datetime", columnDefinition = "DATETIME(6) DEFAULT CURRENT_DATE")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date outDatetime;
 

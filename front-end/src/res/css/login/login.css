@@ -1,28 +1,40 @@
-.login-component{
-  width:100vw;
-  height:100vh;
-  background-color: #ffd59e;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-component .card{
-  width:800px;
-}
-.login-component .card .card-header {
-  text-align: center;
-}
-
-.login-component .login-btns {
+.container-login {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../img/Image/login-bg.png");
+  background-size: 100% 100%;
+  background-color: rgba(0, 0, 0, 1);
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.login-component .login-btns button {
-  margin: 0 15px;
+.container-login .card {
+  width: 90vw;
+  height: 50vh;
+  border: none;
 }
 
-.login-component .signup-btn a {
-  color: white;
+.container-login .card .card-body {
+  display: flex;
+  padding: 0;
+  height: 100%;
+}
+
+.container-login .btn-close {
+  position: relative;
+  bottom: 0%;
+  right: 2%;
+  background: none;
+  padding: 0;
+  width: 100%;
+  opacity: 1;
+  font-size: 1.2rem;
+  margin: 10px 0px;
+  text-align: right;
+}
+
+.btn-close {
+  cursor: pointer;
 }

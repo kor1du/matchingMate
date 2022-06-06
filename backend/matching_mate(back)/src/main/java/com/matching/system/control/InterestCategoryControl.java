@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/profile")
+@RequestMapping("")
 public class InterestCategoryControl {
     private final InterestCategoryService interestCategoryService;
 
     // 관심 카테고리 추가   -> O
-    @PostMapping("/interestCategory/create")
+    @PostMapping("/profile/interestCategory/create")
     public ResponseEntity create(@RequestBody InterestCategoryDTO.CreateDTO interestCategoryDTO,
                                  @RequestHeader("Authorization") String token) {
         ResponseData responseData = interestCategoryService.save(interestCategoryDTO, token);
@@ -26,7 +26,7 @@ public class InterestCategoryControl {
     }
 
     // 관심 카테고리 수정   -> O
-    @PutMapping("/interestCategory/update")
+    @PutMapping("/profile/interestCategory/update")
     public ResponseEntity update(@RequestBody InterestCategoryDTO.UpdateDTO interestCategoryDTO,
                                  @RequestHeader("Authorization") String token) {
         ResponseMessage responseMessage = interestCategoryService.update(interestCategoryDTO, token);
@@ -37,7 +37,7 @@ public class InterestCategoryControl {
     }
 
     // 관심 카테고리 삭제   -> O
-    @DeleteMapping("/interestCategory/delete/{id}")
+    @DeleteMapping("/profile/interestCategory/delete/{id}")
     public ResponseEntity delete(@PathVariable(name = "id") Long interestCategoryId) {
         ResponseMessage responseMessage = interestCategoryService.delete(interestCategoryId);
 
@@ -47,9 +47,19 @@ public class InterestCategoryControl {
     }
 
     // 관심 카테고리 조회   -> O
-    @GetMapping("/interestCategory")
+    @GetMapping("/profile/interestCategory")
     public ResponseEntity read(@RequestHeader("Authorization") String token) {
         ResponseData responseData =  interestCategoryService.read(token);
+
+        return ResponseEntity
+                .status(responseData.getStatus())
+                .body(responseData);
+    }
+
+    // 관심 카테고리 조회   -> O
+    @GetMapping("/myInterest")
+    public ResponseEntity readMyInterest(@RequestHeader("Authorization") String token) {
+        ResponseData responseData =  interestCategoryService.readMyInterest(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())

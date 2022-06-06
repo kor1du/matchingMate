@@ -5,15 +5,14 @@ import "../../css/home-board/homeBoardCreate.css";
 import ChattingAddressModal from "../chatting/YH/ChattingAddressModal";
 
 export default function InputModal(props) {
-  const { show , setShow, sendComplete } = props;
+  const { show, setShow, sendComplete } = props;
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
-  const completeMatching=()=>{
+  const completeMatching = () => {
     sendComplete(address, time);
-
-  }
+  };
   const handleClose = () => setShow(false);
   useEffect(() => {
     if (props.show) {
@@ -28,15 +27,10 @@ export default function InputModal(props) {
         </Modal.Header>
         <Modal.Body>
           <span>시간 : </span>
-          <input type="time" value={time} onChange={(e)=>setTime(e.target.value)}/>
+          <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
           <br></br>
           <span>장소 : </span>
-          <input
-            type="text"
-            readOnly
-            value={address}
-            className="address-input"
-          />
+          <input type="text" readOnly value={address} className="address-input" />
           <Button
             onClick={() => {
               setModalOpen(() => true);
@@ -51,9 +45,11 @@ export default function InputModal(props) {
           ></ChattingAddressModal>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="warning" onClick={()=>completeMatching()}><p>전송</p></Button>
+          <Button variant="warning" onClick={() => completeMatching()}>
+            <p>전송</p>
+          </Button>
           <Button variant="secondary" onClick={handleClose}>
-           <p>닫기</p>
+            <p>닫기</p>
           </Button>
         </Modal.Footer>
       </Modal>

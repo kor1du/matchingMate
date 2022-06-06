@@ -56,6 +56,7 @@ public class MatchingPostDTO {
     public static class ReadSimpleMatchingPostDTO {
         private Long id;
         private String categoryName;
+        private String categoryImgAddress;
         private String postName;
         private String matchingDate;
         private String matchingTime;
@@ -129,6 +130,16 @@ public class MatchingPostDTO {
     public static class SearchConditionDTO {
         private Long categoryId;
         private String level;
+        private Double lat;
+        private Double lng;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class MyCategoryDTO {
         private Double lat;
         private Double lng;
     }

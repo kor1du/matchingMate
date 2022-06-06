@@ -29,7 +29,7 @@ public class MatchingPostCustomRepositoryImpl implements MatchingPostCustomRepos
     }
 
     @Override
-    public Integer getJoinChatNumber(Long chattingRoomId) {
+    public Integer getJoinChatNumber(Long matchingPostId) {
         QChattingRoom qChattingRoom = QChattingRoom.chattingRoom;
         QChattingMember qChattingMember = QChattingMember.chattingMember;
         QMatchingPost qMatchingPost = QMatchingPost.matchingPost;
@@ -41,7 +41,7 @@ public class MatchingPostCustomRepositoryImpl implements MatchingPostCustomRepos
                 .on(qChattingMember.chattingRoom.id.eq(qChattingRoom.id))
                 .leftJoin(qChattingRoom.matchingPost, qMatchingPost)
                 .on(qChattingRoom.matchingPost.id.eq(qMatchingPost.id))
-                .where(qChattingRoom.id.eq(chattingRoomId))
+                .where(qMatchingPost.id.eq(matchingPostId))
                 .fetchOne();
 
         return countChatMemberNumber.intValue();

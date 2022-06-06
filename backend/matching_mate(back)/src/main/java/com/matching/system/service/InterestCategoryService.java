@@ -109,4 +109,26 @@ public class InterestCategoryService {
         return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", updateReadDTOList);
     }
 
+
+    public ResponseData readMyInterest(String token) {
+        Long memberId = jwtTokenUtil.getMemberId(jwtTokenUtil.resolveToken(token));
+
+        Optional<Member> findMember = memberRepository.findById(memberId);
+
+        List<InterestCategory> interestCategoryList = interestCategoryRepository.findByMemberId(findMember.get());
+
+        if (interestCategoryList.isEmpty()) return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", null);
+
+        List<InterestCategoryDTO.ReadMyInterestDTO> updateReadDTOList = interestCategoryList.stream()
+                .map(interestCategory ->  InterestCategoryDTO.ReadMyInterestDTO.builder()
+                        .id(interestCategory.getCategory().getId())
+                        .name(interestCategory.getCategory().getName())
+                        .imgAddress(interestCategory.getCategory().getImgAddress())
+                        .build())
+                .sorted(Comparator.comparing(InterestCategoryDTO.ReadMyInterestDTO::getId))
+                .collect(Collectors.toList());
+
+        return new ResponseData(HttpStatus.OK, "정상적으로 조회되었습니다.", updateReadDTOList);
+    }
+
 }

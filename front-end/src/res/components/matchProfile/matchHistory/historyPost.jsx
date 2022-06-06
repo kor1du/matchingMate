@@ -1,20 +1,18 @@
-import React from 'react';
-// import { useEffect } from 'react';
-import styles from './historyMain.module.css';
+import React from "react";
 
 function HistoryPost(props) {
-  const {matchingPostInfo} = props;
-  
+  const { matchingPostInfo } = props;
+
   return (
-    <div className={styles.box}>
-      <h1>매칭 정보</h1>
-      <div className={styles.text}>종목 : {matchingPostInfo.categoryName}</div>
-      <div className={styles.text}>날짜 : {matchingPostInfo.matchingDate}</div>
-      <div className={styles.text}>시간 : {matchingPostInfo.matchingTime}</div>
-      <div className={styles.text}>장소 : {matchingPostInfo.place}</div>
+    <div className="info-matching">
+      <p className="title">매칭 정보</p>
+      <p>종목 : {matchingPostInfo.categoryName}</p>
+      <p className="overflow">제목 : {matchingPostInfo.postName}</p>
+      <p className="overflow">날짜 : {matchingPostInfo.matchingDate}</p>
+      <p>시간 : {matchingPostInfo.matchingTime}</p>
+      <p className="overflow">장소 : {matchingPostInfo.place}</p>
     </div>
-    
   );
-};
+}
 
 export default HistoryPost;

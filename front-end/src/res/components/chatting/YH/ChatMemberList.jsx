@@ -1,142 +1,142 @@
-// import React, { useEffect, } from 'react';
-// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-// import ChattingMemberList from '../../components/chatting/YH/ChattingMemberList'
-// import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import React, { useEffect, } from 'react';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-// function ChatMemberList(props) {
-//     const { myChattingMemberId, newMessage, sockJS, stomp, maxNumberOfPeople, numberOfPeople, memberList, myId, isCompleted, setIsCompleted, setShowMessage, roomId, roomHost, disconnectWS, isDarkMode} = props;
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import ChattingMemberList from './ChattingMemberList';
 
-//     const token = "Bearer " + sessionStorage.getItem("jwtToken");
+function ChatMemberList(props) {
+    const { myChattingMemberId, newMessage, sockJS, stomp, maxNumberOfPeople, numberOfPeople, memberList, myId, isCompleted, setIsCompleted, setShowMessage, roomId, roomHost, disconnectWS, isDarkMode} = props;
 
-//     const navigate = useNavigate();
+    const token = "Bearer " + sessionStorage.getItem("jwtToken");
 
-//     useEffect(() => {
-//     },[isCompleted, newMessage])
+    const navigate = useNavigate();
 
-//     const outRoom = () => {
+    useEffect(() => {
+    },[isCompleted, newMessage])
 
-//         if (confirm("정말 채팅방을 나가시겠습니까?")) {
-//             axios.post("http://localhost:8080/chat/out/" + myChattingMemberId, 
-//                 null,
-//                 {headers:{Authorization:token}})
-//             .then((res) => {
-//                 console.log(res.data);
+    const outRoom = () => {
+
+        if (confirm("정말 채팅방을 나가시겠습니까?")) {
+            axios.post("http://localhost:8080/chat/out/" + myChattingMemberId, 
+                null,
+                {headers:{Authorization:token}})
+            .then((res) => {
+                console.log(res.data);
                 
-//             })
-//             navigate("/chat")
-//         }
-//     }
+            })
+            navigate("/chat")
+        }
+    }
 
-//     function SetMode (props) {
-//         const isDarkMode = props.isDarkMode;
-//         const isCompleted = props.isCompleted;
+    function SetMode (props) {
+        const isDarkMode = props.isDarkMode;
+        const isCompleted = props.isCompleted;
 
         
-//         if (isDarkMode) {
-//           return (
-//               <div className='chatting-member-dark'>
-//                 <div className="chatting-left-side">
-//                     <ArrowBackIcon className="hvr_grow" onClick={() => {setShowMessage(false); disconnectWS();} }/>
+        if (isDarkMode) {
+          return (
+              <div className='chatting-member-dark'>
+                <div className="chatting-left-side">
+                    <ArrowBackIcon className="hvr_grow" onClick={() => {setShowMessage(false); disconnectWS();} }/>
 
-//                     <div style={{textAlign:"center"}}>
-//                     {
-//                         isCompleted === 0 
-//                         ?
-//                             <h4>{numberOfPeople} / {maxNumberOfPeople}</h4>
-//                         :
-//                             <h4>완료된 매칭입니다.</h4>
-//                     }
-//                     </div>
+                    <div style={{textAlign:"center"}}>
+                    {
+                        isCompleted === 0 
+                        ?
+                            <h4>{numberOfPeople} / {maxNumberOfPeople}</h4>
+                        :
+                            <h4>완료된 매칭입니다.</h4>
+                    }
+                    </div>
 
-//                     <div className="chatting-member-list">
-//                     {memberList.length > 0
-//                         ? memberList.map((member) => {
-//                             return (
-//                             <ChattingMemberList
-//                                 setIsCompleted={setIsCompleted}
-//                                 newMessage={newMessage}
-//                                 stomp={stomp}
-//                                 sockJS={sockJS}
-//                                 maxNumberOfPeople={maxNumberOfPeople}
-//                                 numberOfPeople={numberOfPeople}
-//                                 key={member.memberId}
-//                                 roomId={roomId}
-//                                 roomHost={roomHost}
-//                                 member={member}
-//                                 isCompleted={isCompleted}
-//                                 myId={myId}
-//                             />
-//                             );
-//                         })
-//                         : 
-//                         null}
-//                     </div>
+                    <div className="chatting-member-list">
+                    {memberList.length > 0
+                        ? memberList.map((member) => {
+                            return (
+                            <ChattingMemberList
+                                setIsCompleted={setIsCompleted}
+                                newMessage={newMessage}
+                                stomp={stomp}
+                                sockJS={sockJS}
+                                maxNumberOfPeople={maxNumberOfPeople}
+                                numberOfPeople={numberOfPeople}
+                                key={member.memberId}
+                                roomId={roomId}
+                                roomHost={roomHost}
+                                member={member}
+                                isCompleted={isCompleted}
+                                myId={myId}
+                            />
+                            );
+                        })
+                        : null}
+                    </div>
 
                     
-//                 </div>
-//             </div>
-//           );
+                </div>
+            </div>
+          );
     
-//         } else {
-//           return (
-//               <div className='chatting-member-light'>
-//             <div className="chatting-left-side">
-//                 <ArrowBackIcon className="hvr_grow" onClick={() => {setShowMessage(false); disconnectWS(); } }/>
+        } else {
+          return (
+              <div className='chatting-member-light'>
+            <div className="chatting-left-side">
+                <ArrowBackIcon className="hvr_grow" onClick={() => {setShowMessage(false); disconnectWS(); } }/>
 
-//                 <div style={{textAlign:"center"}}>
-//                 {
-//                     isCompleted === 0 
-//                     ?
-//                         <h4>{numberOfPeople} / {maxNumberOfPeople}</h4>
-//                     :
-//                     <h4>완료된 매칭입니다.</h4>
-//                 }
+                <div style={{textAlign:"center"}}>
+                {
+                    isCompleted === 0 
+                    ?
+                        <h4>{numberOfPeople} / {maxNumberOfPeople}</h4>
+                    :
+                    <h4>완료된 매칭입니다.</h4>
+                }
                 
-//                 </div>
+                </div>
 
-//                 <div className="chatting-member-list">
-//                 { memberList.length > 0
-//                     ? memberList.map((member) => {
-//                         return (
-//                         <ChattingMemberList
-//                             setIsCompleted={setIsCompleted}
-//                             newMessage={newMessage}
-//                             stomp={stomp}
-//                             sockJS={sockJS}
-//                             maxNumberOfPeople={maxNumberOfPeople}
-//                             numberOfPeople={numberOfPeople}
-//                             key={member.memberId}
-//                             roomId={roomId}
-//                             roomHost={roomHost}
-//                             member={member}
-//                             isCompleted={isCompleted}
-//                             myId={myId}
-//                         />
-//                         );
-//                     })
-//                     : null}
-//                 </div>
+                <div className="chatting-member-list">
+                { memberList.length > 0
+                    ? memberList.map((member) => {
+                        return (
+                        <ChattingMemberList
+                            setIsCompleted={setIsCompleted}
+                            newMessage={newMessage}
+                            stomp={stomp}
+                            sockJS={sockJS}
+                            maxNumberOfPeople={maxNumberOfPeople}
+                            numberOfPeople={numberOfPeople}
+                            key={member.memberId}
+                            roomId={roomId}
+                            roomHost={roomHost}
+                            member={member}
+                            isCompleted={isCompleted}
+                            myId={myId}
+                        />
+                        );
+                    })
+                    : null}
+                </div>
 
-//                 {/* <button  onClick={() => { outRoom(); }}> */}
-//                     <div className="chatting-out-container" onClick={outRoom}>
-//                         <h3>나가기</h3>
-//                     </div>
-//                 {/* </button> */}
-//             </div>
-//             </div>
-//           );
-//         }
+                {/* <button  onClick={() => { outRoom(); }}> */}
+                    <div className="chatting-out-container" onClick={outRoom}>
+                        <h3>나가기</h3>
+                    </div>
+                {/* </button> */}
+            </div>
+            </div>
+          );
+        }
     
-//       }
+      }
 
     
-//     return (
-//         <div>
-//             <SetMode isCompleted={isCompleted} isDarkMode={isDarkMode}/>
+    return (
+        <div>
+            <SetMode isCompleted={isCompleted} isDarkMode={isDarkMode}/>
             
-//         </div>
-//     );
-// }
+        </div>
+    );
+}
 
-// export default ChatMemberList;
+export default ChatMemberList;

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from './BoardDetail.module.css';
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {  useLocation, useNavigate, useParams } from "react-router-dom";
 import Nav from '../../components/nav/Nav';
 import { BsArrowLeft } from "react-icons/bs";
 import { Button } from 'react-bootstrap';
 // import { axiosGet } from '../../axios/Axios';
 import Modal from "react-modal";
 import axios from 'axios';
-import GoogleMap from '../../components/googleMap/googleMap';
+// import GoogleMap from '../../components/googleMap/googleMap';
 import { axiosDelete } from '../../components/axios/Axios';
 import BoardReport from '../../components/home-board/BoardReport';
+import KakaoMap from '../../components/googleMap/kakaoMap';
 
 
 const BoardDetail = () => {
@@ -21,7 +22,6 @@ const BoardDetail = () => {
   const [board, setBoard] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   const { categorys } = useLocation().state;
-
 
   const token = sessionStorage.getItem("jwtToken");
   console.log('token : ', token);
@@ -36,45 +36,13 @@ const BoardDetail = () => {
     contents: ''
   });
 
-  const handleInChat = () => {
-
-    if(!board.myPost) {
-      console.log("채팅 가입하기할떄 매칭포스트아이디 : ",id)
-
-      axios.post('http://localhost:8080/matchingPost/detail/joinChat', {chattingRoomId : board.chattingRoomId}, {
-        headers: {
-          'Authorization': "Bearer " + token
-        }
-      }).catch((error) => {
-        if (error.response) {
-          // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-          
-        }
-        else if (error.request) {
-          // 요청이 이루어 졌으나 응답을 받지 못했습니다.
-          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-          // Node.js의 http.ClientRequest 인스턴스입니다.
-          console.log(error.request);
-        }
-        else {
-          // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
-          console.log('Error', error.message);
-        }
-      });
-    }
-    navigate("/chat/in/"+board.chattingRoomId, {state:{ roomId:board.chattingRoomId}});
-  }
-
 
   const handleReport = (e) => {
     e.preventDefault();
 
     console.log("신고 보내는 데이터", reportInfo);
 
-    axios.post('http://localhost:8080/report/create', reportInfo, {
+    axios.post('http://localhost:8050/report/create', reportInfo, {
       headers: {
         'Authorization': "Bearer " + token
       }
@@ -100,7 +68,38 @@ const BoardDetail = () => {
     navigate(-1);
   }
 
+  const handleInChat = (e) => {
+    e.preventDefault();
 
+    if(!board.myPost) {
+      console.log("채팅 가입하기할떄 매칭포스트아이디 : ",id)
+
+      axios.post('http://localhost:8050/matchingPost/detail/joinChat', {chattingRoomId : board.chattingRoomId}, {
+        headers: {
+          'Authorization': "Bearer " + token
+        }
+      }).catch((error) => {
+        if (error.response) {
+          // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        else if (error.request) {
+          // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+          // Node.js의 http.ClientRequest 인스턴스입니다.
+          console.log(error.request);
+        }
+        else {
+          // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+          console.log('Error', error.message);
+        }
+      });
+    }
+
+    navigate("/chat/in/"+board.chattingRoomId, {state:{ roomId:board.chattingRoomId}});
+  }
 
   const boardDelete = () => {
     axiosDelete(`/matchingPost/detail/delete/${id}`);
@@ -109,7 +108,7 @@ const BoardDetail = () => {
   }
 
   const getBoard = async () => {
-    const res = await (await axios.get(`http://localhost:8080/matchingPost/detail/${id}`, {
+    const res = await (await axios.get(`http://localhost:8050/matchingPost/detail/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -121,7 +120,6 @@ const BoardDetail = () => {
     console.log("닉네임 조회 결과", res.data.nickname);
     setReportInfo({ ...reportInfo, targetMemberNickname: res.data.nickname, targetNickname: res.data.nickname });
     setBoard(res.data);
-
 
     setisLoading(false);
   };
@@ -240,7 +238,8 @@ const BoardDetail = () => {
                 },
               }}
             >
-              <GoogleMap lat={board.lat} lng={board.lng} />
+              <KakaoMap lat={board.lat} lng={board.lng} />
+              {/* <GoogleMap lat={board.lat} lng={board.lng} /> */}
               <button onClick={() => setModalOpen(false)}>닫기</button>
             </Modal>
 
@@ -252,8 +251,14 @@ const BoardDetail = () => {
             </div>
             <div className={styles.chatBtnBox}>
               {
+                board.inChatNumber === board.maxNumberOfPeople ?
+                  <Button>현재 채팅방이 가득 찼어요</Button>
+                  :
+                  <Button onClick={(e)=> handleInChat(e)}>채팅방 참여하기</Button>
+              }
+              {
                 (board.myPost) &&
-                <>
+                <div className={styles.myBtn}>
                   <Button onClick={() => {
                     navigate('/register', {
                       state: {
@@ -266,9 +271,9 @@ const BoardDetail = () => {
                   }}>수정</Button>
 
                   <Button onClick={() => boardDelete()}>삭제</Button>
-                </>
+                </div>
               }
-              <Button onClick={()=> handleInChat()}>채팅방 참여하기</Button>
+              
             </div>
           </div>
         )

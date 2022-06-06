@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { axiosPost } from "../axios/Axios";
 
@@ -21,7 +21,7 @@ export default function CheckNickname(props) {
         props.setNickname(nickname);
         setShow(false);
       })
-      .catch(() => {
+      .catch((error) => {
         alert("중복된 닉네임 입니다 다른 닉네임을 사용해주세요!");
         props.setNickname("");
       });

@@ -59,7 +59,7 @@ const UserProfile = (props) => {
         'Authorization': token
     };
 
-    axios.post("http://localhost:8080/profile/updateProfileImg", formData, { headers }).then((res) => {
+    axios.post("http://localhost:8050/profile/updateProfileImg", formData, { headers }).then((res) => {
       console.log(res);
     });
     

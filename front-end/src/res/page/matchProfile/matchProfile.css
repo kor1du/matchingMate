@@ -1,0 +1,29 @@
+.container-match-profile {
+  margin-top: 50px;
+}
+
+.container-match-profile .container-match-profile .left {
+  min-height: calc(100vh - 50px);
+  max-height: calc(100vh - 50px);
+  position: fixed;
+  top: 0px;
+  width: 30vw;
+  height: 100vh;
+}
+
+.container-match-profile .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+}
+
+@media screen and (min-width: 1024px) {
+  .container-match-profile {
+    display: flex;
+  }
+
+  .container-match-profile .right {
+  }
+}

@@ -15,15 +15,15 @@ export default function NavLeftSide() {
         </p>
         <div className="profile">
           <img src={profileImgAddress} alt="person7" className="profile-img" />
-          <h1>{nickname}</h1> <h3 style={{marginLeft:"15px"}}>님 안녕하세요?</h3>
+          <h1>{nickname}</h1> <h3 style={{ marginLeft: "15px" }}>님 안녕하세요?</h3>
         </div>
         <div className="menus">
           <Link to="/member">
-              <h1>계정</h1>
-            </Link>
-            <Link to="/match" >
-              <h1>매칭프로필</h1>
-            </Link>
+            <h1>계정</h1>
+          </Link>
+          <Link to="/match">
+            <h1>매칭프로필</h1>
+          </Link>
           <Link to="/chat">
             <h1>채팅</h1>
           </Link>

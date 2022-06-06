@@ -38,7 +38,6 @@ export function AdminbadgeItem({ badges }) {
     } else alert("삭제를 취소했습니다!");
   }
 
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(8);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;

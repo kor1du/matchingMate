@@ -1,24 +1,29 @@
-import React from 'react';
-import { Card, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-
+import React from "react";
+import { Card, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import View from "../../img/view.png";
 
 const BoardItem = (props) => {
-
   const { board, categorys } = props;
   const navigate = useNavigate();
 
   return (
     <>
-      <Col xl="3" lg="6" md="6" sm="6" className='board-item' onClick={() => {
-        navigate(`/post/${board.id}`, {
-          state: {
-            categorys
-          }
-        });
-      }}>
+      <Col
+        xl="3"
+        lg="6"
+        md="6"
+        sm="6"
+        className="board-item"
+        onClick={() => {
+          navigate(`/post/${board.id}`, {
+            state: {
+              categorys,
+            },
+          });
+        }}
+      >
         {/* <Link to={`/post/${board.id}`}></Link> */}
         <Card border="primary">
           <Card.Header>
@@ -40,7 +45,6 @@ const BoardItem = (props) => {
           </Card.Body>
         </Card>
       </Col>
-
     </>
   );
 };

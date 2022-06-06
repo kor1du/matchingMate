@@ -41,6 +41,7 @@
 .nav-left-side .menus h1:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 @media screen and (max-width: 1023px) {
   .nav-left-side.active {
     display: block;

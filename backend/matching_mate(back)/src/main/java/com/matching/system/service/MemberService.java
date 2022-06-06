@@ -63,7 +63,7 @@ public class MemberService {
                 .sex((signUpDTO.getSex().equals("남자") ? 1 : 2))
                 .birthday(signUpDTO.getBirthday())
                 .phone(signUpDTO.getPhone())
-                .profileImgAddress("https://i.ibb.co/F8N7yP9/image.png")
+                .profileImgAddress("https://i.ibb.co/nwJNrYz/facebook-profile-image.png")
                 .build();
 
         // 권한

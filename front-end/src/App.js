@@ -30,6 +30,7 @@ import ChatIn from './res/page/chat/ChatIn'
 import UserPrivateRoute from "./lib/UserPrivateRoute";
 import AdminPrivateRoute from "./lib/AdminPrivateRoute";
 import UserPublicRoute from "./lib/UserPublicRoute";
+import Main2 from './res/page/main/main2';
 
 
 export default function App() {
@@ -40,15 +41,22 @@ export default function App() {
       <BrowserRouter>
         <Routes>
 
-          <Route 
-            path="/" 
+        <Route
+            path="/"
             element={
               <UserPublicRoute>
                 <Home />
               </UserPublicRoute>
-            } 
+            }
           />
-
+          <Route
+            path="/main"
+            element={
+              <UserPublicRoute>
+                <Main2 />
+              </UserPublicRoute>
+            }
+          />
           <Route 
             path="/signUp" 
             element={

@@ -1,15 +1,19 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import MatchMain from '../../components/matchProfile/matchMain/matchMain';
-//import { axiosGet } from '../../components/axios/Axios';
-
-import MatchProfileNav from '../../components/matchProfile/matchProfileNav/matchProfileNav';
-import UserProfile from '../../components/userProfile/userProfile';
-import styles from './matchProfile.module.css';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import UserProfile from "../../components/matchProfile/profile/userProfile";
+import CategoryChart from "../../components/matchProfile/chart/CategoryChart";
+import MatchingChart from "../../components/matchProfile/chart/MatchingChart";
+import Category from "../../components/matchProfile/category/Category";
+import MatchHistory from "../../components/matchProfile/matchHistory/MatchHistory";
+import NavMatchingProfile from "../../components/nav/matchingProfile/NavMatchingProfile";
+import MatchRating from "../../components/matchProfile/matchRating/matchRating";
+import Nav from "../../components/nav/Nav";
+import "./matchProfile.css";
+import { positions } from "@mui/system";
+import { Button } from "react-bootstrap";
 
 const MatchProfile = () => {
-
-  const [menu,setMenu] = useState('home');
+  const [menu, setMenu] = useState("home");
   const [profileInfo, setProfileInfo] = useState("");
 
   const [matchingCountLabelList, setMatchingCountLabelList] = useState([]);
@@ -19,52 +23,51 @@ const MatchProfile = () => {
 
   const token = sessionStorage.getItem("jwtToken");
 
-  function changeMenu(menu) {
-    console.log("선택된 메뉴는 ", menu); //테스트
-    return setMenu(menu);
-  }
-  
   const getProfileInfo = async () => {
-
-    const res = await (await axios.get('http://localhost:8080/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
-    )).data;
-
-    console.log("매칭프로필조회결과: ",res);
+    const res = await (
+      await axios.get("http://localhost:8050/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    ).data;
 
     setProfileInfo(res.data);
 
-    setMatchingCountLabelList(res.data.matchingCountChart.labelList);  
+    setMatchingCountLabelList(res.data.matchingCountChart.labelList);
     setMatchingCountDataList(res.data.matchingCountChart.dataList);
-    setCategoryLabelList(res.data.categoryDistributionChart.labelList);  
+    setCategoryLabelList(res.data.categoryDistributionChart.labelList);
     setCategoryDataList(res.data.categoryDistributionChart.dataList);
-    
   };
-  
+
   useEffect(() => {
     getProfileInfo();
   }, []);
 
-
   return (
     <>
-    <div className={styles.home}>
-      <div className={styles.header}></div>
-      <MatchProfileNav changeMenu={changeMenu}/>
-      <section className={styles.section}>
-        <aside className={styles.profile_box}>
-          <UserProfile profileInfo={profileInfo} />
-        </aside>
-        <div className={styles.main}>
-          <MatchMain profileInfo={profileInfo} menu={menu} 
-              matchingCountLabelList={matchingCountLabelList} matchingCountDataList={matchingCountDataList}
-              categoryLabelList={categoryLabelList} categoryDataList={categoryDataList}
-          />
+      <Nav></Nav>
+      <div className="container-match-profile">
+        <div className="left">
+          <NavMatchingProfile></NavMatchingProfile>
         </div>
-      </section>
+        <div className="right">
+          <UserProfile profileInfo={profileInfo}></UserProfile>
+          <Category></Category>
+
+          <MatchHistory></MatchHistory>
+          <MatchRating></MatchRating>
+
+          <CategoryChart
+            nickname={profileInfo.memberNickname}
+            categoryLabelList={categoryLabelList}
+            categoryDataList={categoryDataList}
+          ></CategoryChart>
+          <MatchingChart
+            matchingCountDataList={matchingCountDataList}
+            matchingCountLabelList={matchingCountLabelList}
+          ></MatchingChart>
+        </div>
       </div>
     </>
   );
