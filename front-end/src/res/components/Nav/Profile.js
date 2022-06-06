@@ -5,7 +5,7 @@ import "../../css/nav/profile.css";
 import { Link } from "react-router-dom";
 import { toggle } from "../toggle/Toggle";
 import { logout } from "../logout/Logout";
-// import Button from '@mui/material/Button';
+import { BsFillChatDotsFill } from "react-icons/bs";
 
 
 function showProfileMenus(event) {
@@ -42,9 +42,12 @@ export default function Profile() {
                   {nickname}
                 </h3>
 
-                {/* <Link to="/chat" className="profile-link">
-                  <Button sx={{width:"100%"}} variant="contained">채팅하러 가기~</Button>
-                </Link> */}
+                
+                {/* <Link to="/chat" className="chat-icon"> */}
+                <Link to="/chat" className="chat-icon-container">
+                  <BsFillChatDotsFill className="chat-icon"/>
+                </Link>
+                {/* </Link> */}
               </div>
 
             </div>

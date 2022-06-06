@@ -50,6 +50,19 @@
   text-overflow: ellipsis;
 }
 
+.chat-icon-container {
+  position: fixed;
+  top: -60px;
+  right: -140px;
+}
+
+.chat-icon {
+  color: #f8cb2e;
+
+  cursor: pointer;
+  font-size: 45px;
+}
+
 .profile-link {
   /* min-height: 100px; */
   margin: 10px 0px;
