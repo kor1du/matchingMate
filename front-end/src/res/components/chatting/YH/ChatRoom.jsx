@@ -12,7 +12,7 @@ import axios from 'axios';
 import { axiosGet } from "../../components/axios/Axios";
 import { Button, Col, Row } from "react-bootstrap";
 
-
+//j7
 function ChatRoom() {
   let sockJS = new sockjs("http://kor1du.gonetis.com:8080/stomp/chat");
   let Stomp = stomp.over(sockJS);
