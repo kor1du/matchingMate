@@ -62,14 +62,17 @@
 }
 
 .location {
-    font-family: "Jua" !important;
     display: flex;
     align-items: center;
     font-weight: 700;
     font-size: 2rem;
     cursor: pointer;
     color: #000;
-
+    margin-bottom: 20px;
+    
+}
+.locationText {
+    font-family: "Jua" !important;
 }
 
 .slider{

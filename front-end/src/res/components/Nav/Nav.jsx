@@ -115,7 +115,7 @@ export default function Nav() {
     alarms.classList.toggle("active");
 
     axios
-      .put("http://kor1du.gonetis.com:8080/notification", null, {
+      .put(" https://2adb-60-253-18-218.jp.ngrok.io/notification", null, {
         headers: headers,
       })
       .then((res) => {
@@ -149,7 +149,7 @@ export default function Nav() {
   }, []);
 
   function buttonClickHandler() {
-    document.querySelector(".container-match-profile .nav-matching-profile").classList.toggle("active");
+    document.querySelector(".container-match-profile .nav-matching-profile").classList.toggle("actived");
   }
 
   return (

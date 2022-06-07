@@ -8,7 +8,7 @@ import ChattingMemberList from "../../components/chatting/YH/ChattingMemberList"
 import "../../css/chatting/chattingLeftside.css";
 import "../../css/chatting/chattingRightside.css";
 import "../../css/chatting/chatting.css";
-import axios from "axios";
+
 import { axiosGet } from "../../components/axios/Axios";
 import { Button, Col, Row } from "react-bootstrap";
 
@@ -18,14 +18,11 @@ function ChatRoom() {
   Stomp.debug = null;
 
   const [messages, setMessages] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [messageText, setMessageText] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [memberList, setMemberList] = useState("");
   const [roomHost, setRoomHost] = useState("");
   const [myId, setMyId] = useState("");
-
-  const [myChattingMemberId, setMyChattingMemberId] = useState("");
 
   const roomId = Number(useLocation().state.roomId);
 
@@ -36,12 +33,10 @@ function ChatRoom() {
       Authorization: token,
     };
     axiosGet("/chat/in/" + roomId, header).then((res) => {
-      console.log(res.data);
       setMyId(() => res.data.data.myMemberId);
       setRoomHost(() => res.data.data.postMemberId);
       setMemberList(() => res.data.data.readMemberList);
       setMessages(() => res.data.data.readMessageList);
-      setMyChattingMemberId(() => res.data.data.chattingMemberId);
     });
   };
 
@@ -102,16 +97,6 @@ function ChatRoom() {
     } catch (error) {
       console.log(error);
     }
-
-    axios
-      .put(` https://2adb-60-253-18-218.jp.ngrok.io/chat/out/${myChattingMemberId}`, "", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
   }
   return (
     <>
@@ -120,14 +105,7 @@ function ChatRoom() {
         <Col xs="4">
           <div className="chatting-left-side">
             <div className="btn-exit-div">
-              <Button
-                className="btn-exit"
-                variant="danger"
-                type="submit"
-                onClick={() => {
-                  disconnectWS();
-                }}
-              >
+              <Button className="btn-exit" variant="danger" type="submit" onClick={() => disconnectWS}>
                 <Link to="/chat/">
                   <p>나가기</p>
                 </Link>

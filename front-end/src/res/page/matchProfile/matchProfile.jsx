@@ -25,7 +25,7 @@ const MatchProfile = () => {
 
   const getProfileInfo = async () => {
     const res = await (
-      await axios.get("http://kor1du.gonetis.com:8080/profile", {
+      await axios.get(" https://2adb-60-253-18-218.jp.ngrok.io/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

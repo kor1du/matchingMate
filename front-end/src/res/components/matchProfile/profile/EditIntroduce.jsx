@@ -16,8 +16,7 @@ export default function editIntroduce(props) {
 
   const clickUpdateImg = () => {
     document.querySelector(".user-profile .introduce>p").style.display = "none";
-    document.querySelector(".user-profile .introduce .btn-dark").style.display =
-      "none";
+    document.querySelector(".user-profile .introduce .btn-dark").style.display = "none";
     setChecked(!checked);
   };
 
@@ -32,16 +31,14 @@ export default function editIntroduce(props) {
 
     const res = await (
       await axios.post(
-        "http://kor1du.gonetis.com:8080/profile/updateProfileContent",
+        " https://2adb-60-253-18-218.jp.ngrok.io/profile/updateProfileContent",
         { profileContent: inputText },
         { headers: headers }
       )
     ).data;
 
-    document.querySelector(".user-profile .introduce>p").style.display =
-      "block";
-    document.querySelector(".user-profile .introduce .btn-dark").style.display =
-      "block";
+    document.querySelector(".user-profile .introduce>p").style.display = "block";
+    document.querySelector(".user-profile .introduce .btn-dark").style.display = "block";
   };
 
   const updateInput = (e) => {

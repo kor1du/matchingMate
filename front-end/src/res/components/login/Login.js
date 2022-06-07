@@ -6,10 +6,12 @@ import { redirectURL } from "../url/CheckURL";
 import { axiosPost } from "../axios/Axios";
 import WinkingIcon from "../../img/winkingIcon.png";
 import { client } from "stompjs";
-import {BsArrowLeftSquare} from 'react-icons/bs'
+import { BsArrowLeftSquare } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 
+
 export function isLogin() {
+  
   if (sessionStorage.getItem("jwtToken")) return true;
   else return false;
 }
@@ -20,6 +22,7 @@ export function isUser() {
 }
 
 function LoginComponent(props) {
+
   useEffect(() => {
     setLoginComponent(document.querySelector(".login-component"));
     setloginBtnDiv(document.querySelector(".btn-show-login"));
@@ -27,6 +30,8 @@ function LoginComponent(props) {
     setLoginBtn(document.querySelector(".btn-show-login .btn"));
     setLoginGreetingBtn(document.querySelector(".greeting-btn"));
   }, [props]);
+
+
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loginComponent, setLoginComponent] = useState("");
@@ -35,6 +40,8 @@ function LoginComponent(props) {
   const [loginDisplay, setLoginDisplay] = useState("");
   const [loginGreetingBtn, setLoginGreetingBtn] = useState("");
   const { signupBtn } = props;
+
+  const navigate = useNavigate();
 
   const toggleActive = () => {
     loginComponent.classList.toggle("active");
@@ -101,24 +108,24 @@ function LoginComponent(props) {
   };
 
   function login() {
-    // navigete
-    const navigate = useNavigate();
-
     const data = {
       userId: id,
       userPw: password,
     };
     axiosPost("/login", data)
       .then((result) => {
-        navigate(-1);
-
+        console.log(result.data);
+        
         const jwtToken = result.data.data.tokenDTO.accessToken;
         sessionStorage.setItem("jwtToken", jwtToken);
         sessionStorage.setItem("nickname", result.data.data.nickname);
         sessionStorage.setItem("profileImgAddress", result.data.data.profileImgAddress);
         sessionStorage.setItem("role", result.data.data.role);
+
+        navigate(-1);
       })
       .catch(() => {
+        console.log(Error);
         alert("아이디와 비밀번호를 확인해주세요.");
       });
   }
@@ -140,7 +147,7 @@ function LoginComponent(props) {
       </div>
       <div className="display-login">
         <p className="btn-close" onClick={() => hideLogin()}>
-          <BsArrowLeftSquare/>
+          <BsArrowLeftSquare />
         </p>
         <div className="greeting">
           <span>운동메이트에 오신걸 환영해요!</span>

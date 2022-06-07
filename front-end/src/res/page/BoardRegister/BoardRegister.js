@@ -60,12 +60,12 @@ const BoardRegister = () => {
     e.preventDefault();
     console.log("넣는데이터", postInfo);
 
-    axios.post("http://kor1du.gonetis.com:8080/matchingPost/create", postInfo, {
+    axios.post(" https://2adb-60-253-18-218.jp.ngrok.io/matchingPost/create", postInfo, {
       headers: {
         Authorization: "Bearer " + token,
       },
     });
-    navigate("/");
+    navigate("/main");
   };
   const onUpdate = (e) => {
     e.preventDefault();
@@ -73,7 +73,7 @@ const BoardRegister = () => {
 
     console.log("넣는데이터", updateInfo);
 
-    axios.put("http://kor1du.gonetis.com:8080/matchingPost/detail/update", updateInfo);
+    axios.put(" https://2adb-60-253-18-218.jp.ngrok.io/matchingPost/detail/update", updateInfo);
 
     navigate("/");
   };

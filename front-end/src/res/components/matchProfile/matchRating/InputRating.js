@@ -40,7 +40,7 @@ const InputRating = (props) => {
     let mannerPointValue = mannerPoint.filter(Boolean).length;
 
     const res = axios.post(
-      "http://kor1du.gonetis.com:8080/profile/history/detail/rating",
+      " https://2adb-60-253-18-218.jp.ngrok.io/profile/history/detail/rating",
       {
         matchingHistoryId: matchingHistoryId,
         targetMemberId: targetMemberId,

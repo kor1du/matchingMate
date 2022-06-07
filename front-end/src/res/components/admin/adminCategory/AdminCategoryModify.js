@@ -36,7 +36,7 @@ export default function AdminCategoryModify() {
         "Content-Type": "multipart/form-data",
       };
 
-      axios.put("http://kor1du.gonetis.com:8080/admin/update", formData, { headers }).then(() => {
+      axios.put(" https://2adb-60-253-18-218.jp.ngrok.io/admin/update", formData, { headers }).then(() => {
         alert("수정완료!");
       });
     } else if (!imgFile) alert("이미지를 등록해주세요!");

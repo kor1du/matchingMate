@@ -12,6 +12,7 @@ import Muscle from "../../img/Image/muscle.gif";
 import Badge from "../../img/Image/badge.gif";
 import Together from "../../img/Image/together.gif";
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 
 const Header = (props) => {
 
@@ -51,25 +52,25 @@ const Header = (props) => {
     <div className="header">
       <div className="bg-img"></div>
       <div className="logo">
-        <div className="title">
+        <motion.div className="title" animate={{ y: [-300, 0] }} transition={{ duration: 1 }}>
           <p>혼자서만 하는 운동, 지겹지 않으신가요?</p>
           <h1>운동메이트</h1>
           <div className="buttons">
-            <Button className="btn btn-category-find" onClick={()=> navigate("/main")}>
+            <motion.Button className="btn btn-category-find" onClick={()=> navigate("/main")}  >
               <p>운동메이트 찾기</p>
-            </Button>
-            <Button className="btn btn-category-create" onClick={() => {
+            </motion.Button>
+            <motion.Button className="btn btn-category-create" onClick={() => {
               navigate('/register', {
                 state: {
                   categorys: categorys,
                   liveAddr: liveAddr
                 }
               });
-            }}>
+            }} >
               <p>운동메이트 모집하기</p>
-            </Button>
+            </motion.Button>
           </div>
-        </div>
+        </motion.div>
       </div>
       <div className="introduce">
         <p>운동메이트를 통해</p>

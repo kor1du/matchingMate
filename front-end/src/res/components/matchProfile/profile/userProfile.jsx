@@ -58,7 +58,7 @@ const UserProfile = (props) => {
     };
 
     axios
-      .post("http://kor1du.gonetis.com:8080/profile/updateProfileImg", formData, {
+      .post(" https://2adb-60-253-18-218.jp.ngrok.io/profile/updateProfileImg", formData, {
         headers,
       })
       .then((res) => {

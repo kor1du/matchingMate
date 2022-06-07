@@ -10,8 +10,12 @@ import CheckNickname from "./CheckNickname";
 import PartyFace from "../../img/partyFace.png";
 import {BsArrowLeftSquare} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Signup(props) {
+
+  const navigate = useNavigate();
+
   const { loginBtn } = props;
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -30,9 +34,13 @@ export default function Signup(props) {
 
   function postData(e) {
 
-    const navigate = useNavigate();
-
+    console.log("여기진입-------------")
+    
+    
     e.preventDefault();
+    
+    
+    
     console.log(id);
     const data = {
       userId: id,
@@ -45,13 +53,19 @@ export default function Signup(props) {
       sex: sex,
     };
 
+    
+
+    // axios.post(" https://2adb-60-253-18-218.jp.ngrok.io/signUp", data );
     axiosPost("/signUp", data)
       .then(() => {
-        navigate("/login");
+        navigate("/");
       })
       .catch(() => {
         alert("정보를 다시 입력해주세요.");
       });
+    
+    
+
   }
 
   useEffect(() => {
