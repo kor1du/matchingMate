@@ -18,7 +18,10 @@ public class WebConfig implements WebMvcConfigurer {
                         "http://kalzake.gonetis.com:3000/",
                         "http://localhost:8080",
                         "http://localhost:8050",
-                        "http://localhost:3000"
+                        "http://localhost:3000",
+                        "http://kor1du.gonetis.com:3000/",
+                        "https://6c74-117-20-199-47.ngrok.io",
+                        "https://sprotsmate.netlify.app"
                 )
                 .allowedMethods(HttpMethod.GET.name(),
                         HttpMethod.PUT.name(),

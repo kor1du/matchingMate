@@ -3,7 +3,6 @@ function MessageItem(props) {
     const { message, isDarkMode, myId, scrollRef } = props;
 
     function SetMode() {
-        
         if (isDarkMode) {
             if(message.memberId === null) {
               return (

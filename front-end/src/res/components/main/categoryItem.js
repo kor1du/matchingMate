@@ -16,7 +16,7 @@ const CategoryItem = (props) => {
                 <img className={styles.img} src={img} alt='img'/>
             </div>
             <div className={styles.nameBox}>
-                <span>{name}</span>
+                <span className={styles.jua}>{name}</span>
             </div>
         </motion.div>
     );

@@ -1,3 +1,27 @@
+.chatting-list h1,
+.chatting-list h2,
+.chatting-list h3,
+.chatting-list h4,
+.chatting-list h5,
+.chatting-list h6,
+.chatting-list span,
+.chatting-list p,
+.chatting-list label {
+  font-family: "Jua" !important;
+}
+
+.chatting h1,
+.chatting h2,
+.chatting h3,
+.chatting h4,
+.chatting h5,
+.chatting h6,
+.chatting span,
+.chatting p,
+.chatting label {
+  font-family: "Jua" !important;
+}
+
 .chatting-list {
   /* background-color: #faf0d7; */
   /* padding: 0px 10px; */

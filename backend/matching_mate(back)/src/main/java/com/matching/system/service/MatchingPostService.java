@@ -148,6 +148,11 @@ public class MatchingPostService {
     public ResponseData readRecentPosts(MatchingPostDTO.SearchConditionDTO searchCondition) {
         String address = getMemberAddress(searchCondition.getLng(), searchCondition.getLat());
 
+
+        String[] splitAddress = address.split(" ");
+
+        address = splitAddress[0] + " " + splitAddress[1];
+
         System.out.println("address = " + address);
 
         List<MatchingPost> matchingPostList;
@@ -172,6 +177,10 @@ public class MatchingPostService {
     // 매칭 공고 조회 -> 인기
     public ResponseData readPopularPosts(MatchingPostDTO.SearchConditionDTO searchCondition) {
         String address = getMemberAddress(searchCondition.getLng(), searchCondition.getLat());
+
+        String[] splitAddress = address.split(" ");
+
+        address = splitAddress[0] + " " + splitAddress[1];
 
         List<MatchingPost> matchingPostList;
 
@@ -217,6 +226,7 @@ public class MatchingPostService {
                     .nickname(matchingPost.getMember()==null ? null : matchingPost.getMember().getNickname())
                     .profileImgAddress(matchingPost.getMember()==null ? null : matchingPost.getMember().getProfileImgAddress())
                     .registerDatetime( matchingPost.getRegisterDatetime()==null ? null : registerFormat.format(matchingPost.getRegisterDatetime()) )
+
                 .build();
     }
 

@@ -42,7 +42,7 @@ const BoardDetail = () => {
 
     console.log("신고 보내는 데이터", reportInfo);
 
-    axios.post('http://localhost:8050/report/create', reportInfo, {
+    axios.post('http://localhost:8080/report/create', reportInfo, {
       headers: {
         'Authorization': "Bearer " + token
       }
@@ -74,7 +74,7 @@ const BoardDetail = () => {
     if(!board.myPost) {
       console.log("채팅 가입하기할떄 매칭포스트아이디 : ",id)
 
-      axios.post('http://localhost:8050/matchingPost/detail/joinChat', {chattingRoomId : board.chattingRoomId}, {
+      axios.post('http://localhost:8080/matchingPost/detail/joinChat', {chattingRoomId : board.chattingRoomId}, {
         headers: {
           'Authorization': "Bearer " + token
         }
@@ -97,7 +97,6 @@ const BoardDetail = () => {
         }
       });
     }
-
     navigate("/chat/in/"+board.chattingRoomId, {state:{ roomId:board.chattingRoomId}});
   }
 
@@ -108,7 +107,7 @@ const BoardDetail = () => {
   }
 
   const getBoard = async () => {
-    const res = await (await axios.get(`http://localhost:8050/matchingPost/detail/${id}`, {
+    const res = await (await axios.get(`http://localhost:8080/matchingPost/detail/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -117,7 +116,7 @@ const BoardDetail = () => {
     //const res = await (await axiosGet(`matchingPost/detail/${id}`, header)).data; // 이코드하면 에러뜸 
 
     console.log("detail 조회 결과", res);
-    console.log("닉네임 조회 결과", res.data.nickname);
+    
     setReportInfo({ ...reportInfo, targetMemberNickname: res.data.nickname, targetNickname: res.data.nickname });
     setBoard(res.data);
 
@@ -246,7 +245,7 @@ const BoardDetail = () => {
             <div className={styles.contentBox}>
               <h2 className={styles.contentHeader}>상세내용</h2>
               <div className={styles.contentWrap}>
-                <p>{board.postContents}</p>
+                <p className={styles.contentText}>{board.postContents}</p>
               </div>
             </div>
             <div className={styles.chatBtnBox}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProfileComponent from "./Profile";
 import "../../css/nav/nav.css";
@@ -33,7 +33,6 @@ export const showLoginBtn = () => {
     barCSS.style.display = "block;";
 
     if (notificationCss != null) notificationCss.style.display = "block";
-
   } else {
     loginCSS.style.display = "block";
     barCSS.style.display = "none";
@@ -41,7 +40,6 @@ export const showLoginBtn = () => {
     // logoutCSS.style.display = "none";
 
     if (notificationCss != null) notificationCss.style.display = "none";
-
   }
 };
 
@@ -75,12 +73,11 @@ export default function Nav() {
 
   const ref = useRef(null);
   const headers = {
-    'Authorization': "Bearer " + sessionStorage.getItem("jwtToken"),
+    Authorization: "Bearer " + sessionStorage.getItem("jwtToken"),
   };
 
   function ShowNotification({ notification }) {
     return (
-
       <Link style={{ height: "20px", fontSize: "0rem" }} to="/match">
         <li className="notification-list">
           <p style={{ width: "40px", margin: "0px", marginLeft: "10px" }}>
@@ -101,14 +98,12 @@ export default function Nav() {
             {notification.registerDatetime}
           </p>
         </li>
-
       </Link>
     );
   }
 
   function ShowNoNotification() {
     return (
-
       <li style={{ textAlign: "center" }} className="notification-list">
         <p>오늘 알림이 없습니다.</p>
       </li>
@@ -120,7 +115,7 @@ export default function Nav() {
     alarms.classList.toggle("active");
 
     axios
-      .put("http://localhost:8050/notification", null, {
+      .put("http://localhost:8080/notification", null, {
         headers: headers,
       })
       .then((res) => {
@@ -153,6 +148,10 @@ export default function Nav() {
     showLoginBtn();
   }, []);
 
+  function buttonClickHandler() {
+    document.querySelector(".container-match-profile .nav-matching-profile").classList.toggle("active");
+  }
+
   return (
     <Container fluid id="nav">
       <Row>
@@ -178,16 +177,27 @@ export default function Nav() {
                 return <ShowNotification key={notification.id} notification={notification}></ShowNotification>;
               })}
             </div>
-
           ) : (
             <div className="nav-notification-box">
               <ShowNoNotification />
             </div>
           )}
 
-
           <ProfileComponent></ProfileComponent>
           <img src={Bars} alt="nav-bars" className="bar" onClick={showLeft} />
+
+          {document.querySelector(".container-match-profile") !== null ? (
+            <Button
+              variant="success"
+              style={{ position: "static", marginLeft: "30px" }}
+              onClick={(e) => {
+                e.preventDefault();
+                buttonClickHandler();
+              }}
+            >
+              Menu
+            </Button>
+          ) : null}
         </Col>
       </Row>
       <NavLeftSide></NavLeftSide>

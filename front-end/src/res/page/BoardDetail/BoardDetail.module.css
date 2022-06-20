@@ -7,6 +7,19 @@
   padding: 5rem 1.5rem 5rem;
 }
 
+.container label,
+.container input,
+.container span,
+.container li,
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6 {
+  font-family: "Jua" !important;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -33,13 +46,11 @@
   align-items: center;
 }
 
-
 .nickName {
+  width: 200px;
   color: #333;
-  cursor: pointer;
   font-size: 18px;
   font-weight: 700;
-  padding-right: 15px;
   border-right: 2px solid #e1e1e1;
 }
 
@@ -82,7 +93,7 @@
   min-height: 250px;
   word-break: break-all;
   line-height: 1.7;
-  letter-spacing: -.004em;
+  letter-spacing: -0.004em;
 }
 
 .contentHeader {
@@ -94,11 +105,14 @@
   border-bottom: 3px solid #f2f2f2;
 }
 
-
 .contentWrap {
-
+  font-family: "Jua" !important;
   width: 100%;
   margin: 40px auto 0;
+}
+
+.contentText {
+  font-family: "Jua" !important;
 }
 
 .chatBtnBox {
@@ -107,5 +121,3 @@
   padding: 3rem 0;
   margin-top: 1rem;
 }
-
-

@@ -8,6 +8,7 @@ import { redirectURL } from "../url/CheckURL";
 import CheckID from "./CheckID";
 import CheckNickname from "./CheckNickname";
 import PartyFace from "../../img/partyFace.png";
+import {BsArrowLeftSquare} from 'react-icons/bs'
 
 export default function Signup(props) {
   const { loginBtn } = props;
@@ -127,7 +128,7 @@ export default function Signup(props) {
       </div>
       <div className="display-signup">
         <p className="btn-close" onClick={() => hideSignup()}>
-          X
+          <BsArrowLeftSquare/>
         </p>
         <div className="greeting">
           <p className="greeting">

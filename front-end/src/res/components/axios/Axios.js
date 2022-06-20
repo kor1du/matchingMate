@@ -1,14 +1,14 @@
 import axios from "axios";
 
 
-var url = "http://localhost:8050";
-// var url = "http://localhost:8050";
+var url = "http://localhost:8080";
+// var url = "http://localhost:8080";
 
 // eslint-disable-next-line no-unused-vars
 
 export function axiosPost(path, data, header) {
-  if (url !== "http://localhost:8050") {
-    url = "http://localhost:8050" + path;
+  if (url !== "http://localhost:8080") {
+    url = "http://localhost:8080" + path;
   } else {
     url += path;
   }
@@ -19,8 +19,8 @@ export function axiosPost(path, data, header) {
 
 
 export function axiosDelete(path, headers) {
-  if (url !== "http://localhost:8050") {
-    url = "http://localhost:8050" + path;
+  if (url !== "http://localhost:8080") {
+    url = "http://localhost:8080" + path;
 
   } else {
     url += path;
@@ -32,8 +32,8 @@ export function axiosDelete(path, headers) {
 
 
 export function axiosGet(path, headers) {
-  if (url !== "http://localhost:8050") {
-    url = "http://localhost:8050" + path;
+  if (url !== "http://localhost:8080") {
+    url = "http://localhost:8080" + path;
 
   } else {
     url += path;
@@ -44,8 +44,8 @@ export function axiosGet(path, headers) {
 }
 
 export function axiosPut(path, data) {
-  if (url !== "http://localhost:8050") {
-    url = "http://localhost:8050" + path;
+  if (url !== "http://localhost:8080") {
+    url = "http://localhost:8080" + path;
   } else {
     url += path;
   }

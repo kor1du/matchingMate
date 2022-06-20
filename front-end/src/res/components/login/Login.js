@@ -6,7 +6,7 @@ import { redirectURL } from "../url/CheckURL";
 import { axiosPost } from "../axios/Axios";
 import WinkingIcon from "../../img/winkingIcon.png";
 import { client } from "stompjs";
-import { useLocation } from "react-router-dom";
+import {BsArrowLeftSquare} from 'react-icons/bs'
 
 export function isLogin() {
   if (sessionStorage.getItem("jwtToken")) return true;
@@ -34,10 +34,6 @@ function LoginComponent(props) {
   const [loginDisplay, setLoginDisplay] = useState("");
   const [loginGreetingBtn, setLoginGreetingBtn] = useState("");
   const { signupBtn } = props;
-
-  const location = useLocation().state;
-  console.log(useLocation());
-  
 
   const toggleActive = () => {
     loginComponent.classList.toggle("active");
@@ -141,7 +137,7 @@ function LoginComponent(props) {
       </div>
       <div className="display-login">
         <p className="btn-close" onClick={() => hideLogin()}>
-          X
+          <BsArrowLeftSquare/>
         </p>
         <div className="greeting">
           <span>운동메이트에 오신걸 환영해요!</span>

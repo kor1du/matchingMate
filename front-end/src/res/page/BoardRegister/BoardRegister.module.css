@@ -1,4 +1,14 @@
-
+.container label,
+.container input,
+.container span,
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6 {
+  font-family: "Jua" !important;
+}
 
 .container {
 
@@ -45,7 +55,7 @@
   border-radius: 4px;
 }
 
-.inputTime{
+.inputTime {
   width: 100%;
   padding: 1rem;
   border: 1px solid rgb(196, 192, 192);

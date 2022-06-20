@@ -41,7 +41,7 @@ public class MatchingPostCustomRepositoryImpl implements MatchingPostCustomRepos
                 .on(qChattingMember.chattingRoom.id.eq(qChattingRoom.id))
                 .leftJoin(qChattingRoom.matchingPost, qMatchingPost)
                 .on(qChattingRoom.matchingPost.id.eq(qMatchingPost.id))
-                .where(qMatchingPost.id.eq(matchingPostId))
+                .where(qChattingRoom.id.eq(matchingPostId))
                 .fetchOne();
 
         return countChatMemberNumber.intValue();

@@ -14,8 +14,11 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/stomp/chat")
                 .setAllowedOrigins("http://localhost:8080")
-                .setAllowedOrigins("http://localhost:8050")
+                .setAllowedOrigins("https://localhost:8050")
                 .setAllowedOrigins("http://localhost:3000")
+                .setAllowedOrigins("http://kor1du.gonetis.com:3000/")
+                .setAllowedOrigins("https://6c74-117-20-199-47.ngrok.io")
+                .setAllowedOrigins("https://sprotsmate.netlify.app")
                 .withSockJS();
     }
 
