@@ -2,6 +2,8 @@ import React  from 'react';
 function MessageItem(props) {
     const { message, isDarkMode, myId, scrollRef } = props;
 
+    console.log("메세지 :: ",props.message);
+
     function SetMode() {
         if (isDarkMode) {
             if(message.memberId === null) {

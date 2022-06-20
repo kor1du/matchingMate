@@ -12,6 +12,10 @@ import Muscle from "../../img/Image/muscle.gif";
 import Badge from "../../img/Image/badge.gif";
 import Together from "../../img/Image/together.gif";
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import { motion } from "framer-motion";
+>>>>>>> origin/junwoo7
 
 const Header = (props) => {
 
@@ -51,6 +55,7 @@ const Header = (props) => {
     <div className="header">
       <div className="bg-img"></div>
       <div className="logo">
+<<<<<<< HEAD
         <div className="title">
           <p>혼자서만 하는 운동, 지겹지 않으신가요?</p>
           <h1>운동메이트</h1>
@@ -59,17 +64,35 @@ const Header = (props) => {
               <p>운동메이트 찾기</p>
             </Button>
             <Button className="btn btn-category-create" onClick={() => {
+=======
+        <motion.div className="title" animate={{ y: [-300, 0] }} transition={{ duration: 1 }}>
+          <p>혼자서만 하는 운동, 지겹지 않으신가요?</p>
+          <h1>운동메이트</h1>
+          <div className="buttons">
+            <motion.Button className="btn btn-category-find" onClick={()=> navigate("/main")}  >
+              <p>운동메이트 찾기</p>
+            </motion.Button>
+            <motion.Button className="btn btn-category-create" onClick={() => {
+>>>>>>> origin/junwoo7
               navigate('/register', {
                 state: {
                   categorys: categorys,
                   liveAddr: liveAddr
                 }
               });
+<<<<<<< HEAD
             }}>
               <p>운동메이트 모집하기</p>
             </Button>
           </div>
         </div>
+=======
+            }} >
+              <p>운동메이트 모집하기</p>
+            </motion.Button>
+          </div>
+        </motion.div>
+>>>>>>> origin/junwoo7
       </div>
       <div className="introduce">
         <p>운동메이트를 통해</p>

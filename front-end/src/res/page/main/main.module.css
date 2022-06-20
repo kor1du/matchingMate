@@ -62,14 +62,25 @@
 }
 
 .location {
+<<<<<<< HEAD
     font-family: "Jua" !important;
+=======
+>>>>>>> origin/junwoo7
     display: flex;
     align-items: center;
     font-weight: 700;
     font-size: 2rem;
     cursor: pointer;
     color: #000;
+<<<<<<< HEAD
 
+=======
+    margin-bottom: 20px;
+    
+}
+.locationText {
+    font-family: "Jua" !important;
+>>>>>>> origin/junwoo7
 }
 
 .slider{

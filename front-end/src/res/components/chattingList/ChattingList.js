@@ -12,12 +12,12 @@ import { isLogin } from "../login/Login";
 
 export default function ChattingListComponent() {
   useEffect(() => {
-    if (!isLogin()) {
-      //로그인한 상태가 아니라면
-      const result = confirm("로그인이 필요합니다. 로그인하시겠습니까?");
-      if (result === true) redirectURL("login");
-      else redirectURL("");
-    }
+    // if (!isLogin()) {
+    //   //로그인한 상태가 아니라면
+    //   const result = confirm("로그인이 필요합니다. 로그인하시겠습니까?");
+    //   if (result === true) redirectURL("login");
+    //   else redirectURL("");
+    // }
   });
 
   return (

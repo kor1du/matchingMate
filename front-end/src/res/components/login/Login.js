@@ -6,9 +6,16 @@ import { redirectURL } from "../url/CheckURL";
 import { axiosPost } from "../axios/Axios";
 import WinkingIcon from "../../img/winkingIcon.png";
 import { client } from "stompjs";
+<<<<<<< HEAD
 import {BsArrowLeftSquare} from 'react-icons/bs'
+=======
+import { BsArrowLeftSquare } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom';
+
+>>>>>>> origin/junwoo7
 
 export function isLogin() {
+  
   if (sessionStorage.getItem("jwtToken")) return true;
   else return false;
 }
@@ -19,6 +26,10 @@ export function isUser() {
 }
 
 function LoginComponent(props) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/junwoo7
   useEffect(() => {
     setLoginComponent(document.querySelector(".login-component"));
     setloginBtnDiv(document.querySelector(".btn-show-login"));
@@ -26,6 +37,11 @@ function LoginComponent(props) {
     setLoginBtn(document.querySelector(".btn-show-login .btn"));
     setLoginGreetingBtn(document.querySelector(".greeting-btn"));
   }, [props]);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/junwoo7
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loginComponent, setLoginComponent] = useState("");
@@ -34,6 +50,7 @@ function LoginComponent(props) {
   const [loginDisplay, setLoginDisplay] = useState("");
   const [loginGreetingBtn, setLoginGreetingBtn] = useState("");
   const { signupBtn } = props;
+<<<<<<< HEAD
 
   const toggleActive = () => {
     loginComponent.classList.toggle("active");
@@ -60,6 +77,36 @@ function LoginComponent(props) {
       toggleActive();
     }, 500);
 
+=======
+
+  const navigate = useNavigate();
+
+  const toggleActive = () => {
+    loginComponent.classList.toggle("active");
+    loginBtnDiv.classList.toggle("active");
+    loginDisplay.classList.toggle("active");
+  };
+
+  const showLogin = () => {
+    const clientWidth = document.body.clientWidth;
+
+    setTimeout(() => {
+      if (clientWidth < 1024) {
+        loginDisplay.classList.toggle("login-enter");
+      } else {
+        loginBtnDiv.style.left = "50%";
+        loginDisplay.style.right = "50%";
+        loginBtnDiv.classList.toggle("login-enter-left");
+        loginDisplay.classList.toggle("login-enter-right");
+        loginBtn.classList.toggle("active");
+        loginGreetingBtn.classList.toggle("active");
+      }
+
+      signupBtn.style.display = "none";
+      toggleActive();
+    }, 500);
+
+>>>>>>> origin/junwoo7
     setTimeout(() => {
       if (clientWidth < 1024) {
         loginDisplay.classList.toggle("login-enter");
@@ -106,16 +153,27 @@ function LoginComponent(props) {
     };
     axiosPost("/login", data)
       .then((result) => {
+<<<<<<< HEAD
         redirectURL("login");
         redirectURL("");
 
+=======
+        console.log(result.data);
+        
+>>>>>>> origin/junwoo7
         const jwtToken = result.data.data.tokenDTO.accessToken;
         sessionStorage.setItem("jwtToken", jwtToken);
         sessionStorage.setItem("nickname", result.data.data.nickname);
         sessionStorage.setItem("profileImgAddress", result.data.data.profileImgAddress);
         sessionStorage.setItem("role", result.data.data.role);
+<<<<<<< HEAD
+=======
+
+        navigate(-1);
+>>>>>>> origin/junwoo7
       })
       .catch(() => {
+        console.log(Error);
         alert("아이디와 비밀번호를 확인해주세요.");
       });
   }
@@ -137,7 +195,11 @@ function LoginComponent(props) {
       </div>
       <div className="display-login">
         <p className="btn-close" onClick={() => hideLogin()}>
+<<<<<<< HEAD
           <BsArrowLeftSquare/>
+=======
+          <BsArrowLeftSquare />
+>>>>>>> origin/junwoo7
         </p>
         <div className="greeting">
           <span>운동메이트에 오신걸 환영해요!</span>

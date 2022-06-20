@@ -17,8 +17,13 @@
 .container h4,
 .container h5,
 .container h6 {
+<<<<<<< HEAD
   font-family: "Jua" !important;
+=======
+    font-family: "Jua" !important;
+>>>>>>> origin/junwoo7
 }
+
 
 .header {
   display: flex;
@@ -93,7 +98,12 @@
   min-height: 250px;
   word-break: break-all;
   line-height: 1.7;
+<<<<<<< HEAD
   letter-spacing: -0.004em;
+=======
+  letter-spacing: -.004em;
+  
+>>>>>>> origin/junwoo7
 }
 
 .contentHeader {
@@ -105,6 +115,10 @@
   border-bottom: 3px solid #f2f2f2;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/junwoo7
 .contentWrap {
   font-family: "Jua" !important;
   width: 100%;
@@ -121,3 +135,5 @@
   padding: 3rem 0;
   margin-top: 1rem;
 }
+
+

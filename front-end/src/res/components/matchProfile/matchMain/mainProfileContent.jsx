@@ -44,7 +44,11 @@ const mainProfileContent = (props) => {
 
     const res = await (
       await axios.post(
+<<<<<<< HEAD
         "http://localhost:8080/profile/updateProfileContent",
+=======
+        " https://2adb-60-253-18-218.jp.ngrok.io/profile/updateProfileContent",
+>>>>>>> origin/junwoo7
         { profileContent: inputText },
         { headers: headers }
       )

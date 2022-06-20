@@ -25,7 +25,11 @@ const MatchProfile = () => {
 
   const getProfileInfo = async () => {
     const res = await (
+<<<<<<< HEAD
       await axios.get("http://localhost:8080/profile", {
+=======
+      await axios.get(" https://2adb-60-253-18-218.jp.ngrok.io/profile", {
+>>>>>>> origin/junwoo7
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -8,5 +8,4 @@ export function logout() {
   sessionStorage.removeItem("role");
 
   location.reload();
-  redirectURL("");
 }

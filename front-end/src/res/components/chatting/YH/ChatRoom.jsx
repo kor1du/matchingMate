@@ -8,23 +8,25 @@ import ChattingMemberList from "../../components/chatting/YH/ChattingMemberList"
 import "../../css/chatting/chattingLeftside.css";
 import "../../css/chatting/chattingRightside.css";
 import "../../css/chatting/chatting.css";
-import axios from 'axios';
+
+import axios from "axios";
 import { axiosGet } from "../../components/axios/Axios";
 import { Button, Col, Row } from "react-bootstrap";
 
-
 function ChatRoom() {
-  let sockJS = new sockjs("http://localhost:8080/stomp/chat");
+  let sockJS = new sockjs(" https://2adb-60-253-18-218.jp.ngrok.io/stomp/chat");
   let Stomp = stomp.over(sockJS);
   Stomp.debug = null;
 
   const [messages, setMessages] = useState([]);
+
   // eslint-disable-next-line no-unused-vars
   const [messageText, setMessageText] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [memberList, setMemberList] = useState("");
   const [roomHost, setRoomHost] = useState("");
-  const [myId,setMyId]=useState("");
+  const [myId, setMyId] = useState("");
+
 
   const [myChattingMemberId, setMyChattingMemberId] = useState("");
 
@@ -37,11 +39,13 @@ function ChatRoom() {
       Authorization: token,
     };
     axiosGet("/chat/in/" + roomId, header).then((res) => {
-      console.log(res.data)
-      setMyId(()=>res.data.data.myMemberId);
+
+      console.log(res.data);
+      setMyId(() => res.data.data.myMemberId);
       setRoomHost(() => res.data.data.postMemberId);
       setMemberList(() => res.data.data.readMemberList);
       setMessages(() => res.data.data.readMessageList);
+
       setMyChattingMemberId(() => res.data.data.chattingMemberId);
     });
   };
@@ -103,14 +107,17 @@ function ChatRoom() {
     } catch (error) {
       console.log(error);
     }
-    
-    axios.put(`http://localhost:8080/chat/out/${myChattingMemberId}`, "",{
-      headers: {
-        Authorization: token
-      }
-    }).then((res) => {
-      console.log(res);
-    })
+
+
+    axios
+      .put(` https://2adb-60-253-18-218.jp.ngrok.io/chat/out/${myChattingMemberId}`, "", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
   }
   return (
     <>
@@ -119,11 +126,14 @@ function ChatRoom() {
         <Col xs="4">
           <div className="chatting-left-side">
             <div className="btn-exit-div">
+
               <Button
                 className="btn-exit"
                 variant="danger"
                 type="submit"
-                onClick={() => {disconnectWS()}}
+                onClick={() => {
+                  disconnectWS();
+                }}
               >
                 <Link to="/chat/">
                   <p>나가기</p>
@@ -149,7 +159,7 @@ function ChatRoom() {
         <Col xs="8">
           <div className="chatting-right-side">
             <div>
-              <RoomMessage messages={messages} setMessages={setMessages} myId={myId}/>
+              <RoomMessage messages={messages} setMessages={setMessages} myId={myId} />
             </div>
             <div></div>
             <div className="btn-send">

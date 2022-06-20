@@ -28,7 +28,11 @@ const BoardItem = (props) => {
             </div>
             <div className={styles.summaryInfo}>
                 <span>운동 장소 |</span>
+<<<<<<< HEAD
                 <span>{board.place}</span>
+=======
+                <span className={styles.summaryPlace}>{board.place}</span>
+>>>>>>> origin/junwoo7
             </div>
             <div className={styles.summaryInfo}>
                 <span>시간 |</span>

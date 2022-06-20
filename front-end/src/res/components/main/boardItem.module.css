@@ -30,16 +30,37 @@
 .summaryInfo {
     display: flex;
     font-size: 18px;
+<<<<<<< HEAD
+=======
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+>>>>>>> origin/junwoo7
     grid-gap: 10px;
     gap: 10px;
     color: rgba(0, 0, 0, .4);
 }
 
+<<<<<<< HEAD
 .title {
+=======
+.summaryPlace {
+    display: block;
+}
+.title {
+    
+>>>>>>> origin/junwoo7
     font-size: 24px;
     min-height: 46px;
     line-height: 36px;
     font-weight: 400;
+<<<<<<< HEAD
+=======
+    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+>>>>>>> origin/junwoo7
     letter-spacing: -.04em;
     margin: 16px 0;
     display: -webkit-box;

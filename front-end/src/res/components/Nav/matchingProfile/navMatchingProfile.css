@@ -2,7 +2,11 @@
     display: none;
 }
 
+<<<<<<< HEAD
 .container-match-profile .nav-matching-profile.active {
+=======
+.container-match-profile .nav-matching-profile.actived {
+>>>>>>> origin/junwoo7
     z-index: 1;
     display: flex;
     flex-direction: column;

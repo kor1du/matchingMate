@@ -42,7 +42,11 @@ export default function MemberEdit() {
 
     axios({
       method: "put",
+<<<<<<< HEAD
       url: `http://localhost:8080/myAccount/update`,
+=======
+      url: ` https://2adb-60-253-18-218.jp.ngrok.io/myAccount/update`,
+>>>>>>> origin/junwoo7
       data: data,
       headers: {
         Authorization: "bearer " + sessionStorage.getItem("jwtToken") || null,
