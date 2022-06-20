@@ -1,0 +1,51 @@
+.chatting-left-side {
+  background-color: white;
+}
+
+.chatting-left-side.active{
+  width:100vw;
+}
+
+
+.chatting-left-side ul {
+  min-height: calc(100vh - 50px);
+  max-height: calc(100vh - 50px);
+  margin-top: 50px;
+  margin-bottom: 0px;
+  width:100%;
+}
+
+.chatting-left-side ul li{
+  justify-content: center;
+}
+
+.chatting-left-side .me {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+}
+
+.chatting-left-side .detail {
+  display: flex;
+  align-items: center;
+}
+
+.chatting-left-side .ready-btn.active {
+  background-color: red;
+}
+
+@media screen and (max-width: 1023px) {
+  .chatting-left-side {
+    display: none;
+  }
+  .chatting-left-side.active {
+    display: block;
+  }
+}

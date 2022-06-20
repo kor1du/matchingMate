@@ -1,0 +1,13 @@
+.profile {
+  height: 15rem;
+  margin-bottom: 2rem;
+  padding: 20px 15px 15px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / 7%);
+
+  width: 300px;
+  height: 400px;
+
+  margin-top: -10rem;
+}

@@ -1,0 +1,52 @@
+.profile-component {
+  position: relative;
+}
+
+.profile-component img {
+  position: relative;
+  width: 40px;
+}
+
+.profile-list {
+  right: 3px;
+  position: absolute;
+}
+
+.profile-list ul {
+  display: none;
+}
+
+.profile-list ul.active {
+  font-size: 0;
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.profile-list li,
+.profile-list a {
+  font-size: 2rem;
+  text-align: center;
+  
+  width: 100%;
+}
+
+@media screen and (min-width: 425px) {
+  .profile-list {
+    top: 45px;
+    right: 3px;
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .profile-list ul {
+    width: 200px;
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,97 @@
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto;
+}
+
+.carousel-item{
+  padding-bottom:30px;
+}
+
+.carousel-item h1 {
+  padding: 20px 0px;
+  text-align: center;
+  font-family: "Black Han Sans", sans-serif;
+}
+
+.carousel-row {
+  justify-content: center;
+  margin: 0;
+}
+
+.carousel-col {
+  text-align: center;
+  padding: 0;
+}
+
+.carousel-col a img {
+  width: 100px;
+}
+
+.carousel-col:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-col p {
+  font-size: 2rem;
+  margin: 0;
+  
+}
+
+.carousel-control-prev-icon {
+  background-color: transparent !important;
+  background-image: url("../../img/carousel-prev-btn.png");
+  justify-content: left;
+}
+
+.carousel-control-next-icon {
+  background-color: transparent !important;
+  background-image: url("../../img/carousel-next-btn.png");
+  justify-content: left;
+}
+
+.carousel-control-next {
+  justify-content: right;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: gray;
+}
+
+@media screen and (max-width: 575px) {
+  .carousel-row {
+    justify-content: center;
+  }
+
+  .carousel-col {
+    margin: 0 15px;
+  }
+
+  .carousel-col a img {
+    width: 70px;
+  }
+
+  .carousel-col p {
+    font-size: 1.7rem;
+    
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .carousel-item h1 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-col a img {
+    width: 50px;
+  }
+
+  .carousel-col {
+    margin: 0 5px;
+  }
+
+  .carousel-col p {
+    font-size: 1rem;
+    
+  }
+}
