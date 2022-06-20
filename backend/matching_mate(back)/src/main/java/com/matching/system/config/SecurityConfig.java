@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    private final JwtTokenUtil jwtTokenUtil;
+    //    private final JwtTokenUtil jwtTokenUtil;
 //    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
@@ -84,29 +84,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().permitAll() // 그외 나머지 요청은 누구나 접근 가능
 
                 // 쉽게할려고
-                .antMatchers("/**").permitAll()
-                .antMatchers("/ws/info",
-                        "/ws/**"                        )
-                .permitAll()
+//                .antMatchers("/**").permitAll()
+//                .antMatchers("/ws/info",
+//                        "/ws/**"                        )
+//                .permitAll()
 
 
                 // 설정 풀어야됨
-//                .antMatchers("/signUp").permitAll()
-//                .antMatchers("/signUp/checkId").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/category").permitAll()
-//                .antMatchers("/logout").permitAll()
-//                .antMatchers("/recent", "/popular").permitAll()
-//                .antMatchers("/matchingPost/**").permitAll()
-//                .antMatchers("/topic/**").permitAll()
-//                .antMatchers("/chat/**").permitAll()
-//                .antMatchers("/report/**").permitAll()
-//                .antMatchers("/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs").permitAll()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/myAccount/**", "/profile/**", "/report/**").hasRole("USER")
-////                .antMatchers(HttpMethod5.OPTIONS, "/**").permitAll()
-//                .antMatchers("/stomp/chat", "/pub/**", "/sub/**").permitAll()
-//                .anyRequest().authenticated()
+                .antMatchers("/ws/info", "/ws/**").permitAll()
+                .antMatchers("/signUp").permitAll()
+                .antMatchers("/signUp/checkId").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/category").permitAll()
+                .antMatchers("/logout").permitAll()
+                .antMatchers("/recent", "/popular").permitAll()
+                .antMatchers("/matchingPost/**").permitAll()
+                .antMatchers("/topic/**").permitAll()
+                .antMatchers("/chat/**").permitAll()
+                .antMatchers("/report/**").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/myAccount/**", "/profile/**", "/report/**").hasRole("USER")
+                .antMatchers("/stomp/chat", "/pub/**", "/sub/**").permitAll()
+                .anyRequest().authenticated()
 
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
