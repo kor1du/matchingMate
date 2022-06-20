@@ -1,0 +1,266 @@
+/*for Mobile user*/
+@media screen and (min-width: 320px) {
+  .header .bg-img {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+      url("../../img/background-image/homepage3.jpg");
+    background-size: 100% 40%;
+    position: absolute;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    border-bottom: 2px solid #e5e5e5;
+  }
+
+  .header .logo {
+    height: 100vh;
+    display: black;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+  }
+
+  .header .logo .title {
+    top: 40%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 6rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 1.5rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 30%;
+    width: 150px;
+    margin: 20px 5px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 1.3rem;
+  }
+
+  .header .introduce p {
+    font-size: 2rem;
+  }
+
+  .header .fade-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 70vh;
+  }
+
+  .header .introduce .img-box {
+    width: 50%;
+  }
+
+  .header .introduce img {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  .header .caption .title {
+    font-size: 1.5rem;
+  }
+
+  .header .caption .text {
+    max-width: 50vw;
+    font-size: 1.5rem;
+    padding: 10px 10px;
+  }
+
+  .header .introduce>p {
+    margin: 3.5rem 0px;
+  }
+}
+
+/*for Mobile user*/
+@media screen and (min-width: 425px) and (max-width: 767px) {
+  .header .logo .title {
+    top: 40%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 8rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 2.2rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 30%;
+    width: 200px;
+    margin: 20px 5px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 2rem;
+  }
+
+  .header .introduce p {
+    font-size: 3rem;
+  }
+
+  .header .caption .title {
+    font-size: 2rem;
+  }
+
+  .header .caption .text {
+    font-size: 2rem;
+    padding: 10px 10px;
+  }
+}
+
+/*for tablet user*/
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .header .logo .title {
+    top: 40%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 12rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 3.7rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 40%;
+    width: 300px;
+    margin: 20px 15px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 3rem;
+  }
+
+  .header .introduce p {
+    font-size: 5rem;
+  }
+
+  .header .caption .title {
+    font-size: 3.8rem;
+  }
+
+  .header .caption .text {
+    font-size: 3rem;
+    padding: 10px 10px;
+  }
+}
+
+/*for notebook user*/
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .header .bg-img {
+    background-size: 100% 100%;
+  }
+
+  .header .logo .title {
+    top: 20%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 12rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 3rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 40%;
+    width: 320px;
+    margin: 20px 25px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 3.5rem;
+  }
+
+  .header .introduce p {
+    font-size: 8rem;
+  }
+
+  .header .fade-class {
+    width: 80vw;
+    height: 80vh;
+  }
+
+  .header .caption .title {
+    font-size: 4rem;
+  }
+
+  .header .caption .text {
+    font-size: 3rem;
+    padding: 10px 10px;
+  }
+}
+
+/*for desktop user*/
+@media screen and (min-width: 1440px) {
+  .header .bg-img {
+    background-size: 100% 100%;
+  }
+
+  .header .logo .title {
+    top: 20%;
+  }
+
+  .header .logo .title h1 {
+    position: relative;
+    top: 5%;
+    font-size: 13rem;
+  }
+
+  .header .logo .title>p {
+    font-size: 4rem;
+  }
+
+  .header .logo .btn {
+    position: relative;
+    top: 40%;
+    width: 400px;
+    margin: 20px 40px;
+  }
+
+  .header .buttons .btn>p {
+    font-size: 4rem;
+  }
+
+  .header .introduce p {
+    font-size: 8rem;
+  }
+
+  .header .fade-class {
+    height: 80vh;
+  }
+
+  .header .introduce img {
+    width: 20vw;
+    height: 20vw;
+  }
+
+  .header .caption .title {
+    font-size: 5rem;
+  }
+
+  .header .caption .text {
+    font-size: 4rem;
+    padding: 10px 10px;
+  }
+}

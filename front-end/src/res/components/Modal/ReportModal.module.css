@@ -1,0 +1,10 @@
+.btnBox {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.modal_container {
+  width: 30%;
+  margin: 0px;
+}

@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+.board {
+  width: 100%;
+}
+
+>>>>>>> origin/jungYH
 .board .card {
   margin: 10px 5px;
 }
@@ -6,6 +13,10 @@
   width: 40px;
   height: 40px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/jungYH
 .board p {
   padding: 0;
   margin: 0;
@@ -21,20 +32,46 @@
   justify-content: center;
 }
 
+<<<<<<< HEAD
 .board .new-hot .col-12 a {
+=======
+.board .new-hot .col-12 div {
+>>>>>>> origin/jungYH
   display: flex;
   align-items: center;
   padding: 0;
   font-size: 3rem;
+<<<<<<< HEAD
   margin:0 20px;
+=======
+  margin: 0 20px;
+>>>>>>> origin/jungYH
 }
 
 .board .new {
   color: #42c2ff;
+<<<<<<< HEAD
+=======
+  cursor: pointer;
+}
+
+.board .new:hover {
+  box-sizing: border-box;
+  border-bottom: 3px solid #42c2ff;
+>>>>>>> origin/jungYH
 }
 
 .board .hot {
   color: #e83a14;
+<<<<<<< HEAD
+=======
+  cursor: pointer;
+}
+
+.board .hot:hover {
+  box-sizing: border-box;
+  border-bottom: 3px solid #e83a14;
+>>>>>>> origin/jungYH
 }
 
 .board .card-header {
@@ -62,12 +99,17 @@
   font-size: 2rem;
 }
 
+<<<<<<< HEAD
 .board-detail{
+=======
+.board-detail {
+>>>>>>> origin/jungYH
   display: flex;
   justify-content: center;
   margin: 10px 0px;
 }
 
+<<<<<<< HEAD
 .board-detail-btn{
   width:50%;
 }
@@ -101,6 +143,58 @@
 @media screen and (min-width:320px) and (max-width:424px){
   .board{
     margin:0 50px;
+=======
+.board-detail-btn {
+  width: 50%;
+}
+
+/* 보드 리스트 */
+
+.board-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: flex-start;
+}
+
+.board-item {
+  width: 300px;
+}
+
+.board-item:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all 0.1s;
+}
+
+@media screen and (min-width:2560px) {
+  .board {
+    margin: 0 150px;
+  }
+}
+
+@media screen and (min-width:1440px) and (max-width:2559px) {
+  .board {
+    margin: 0 130px;
+  }
+}
+
+@media screen and (min-width:1024px) and (max-width:1439px) {
+  .board {
+    margin: 0 100px;
+  }
+}
+
+@media screen and (min-width:425px) and (max-width:1023px) {
+  .board {
+    margin: 0 100px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:424px) {
+  .board {
+    margin: 0 50px;
+>>>>>>> origin/jungYH
   }
 }
 
@@ -111,13 +205,21 @@
 }
 
 @media screen and (max-width: 767px) {
+<<<<<<< HEAD
   .board .new,
   .board .hot{
     width:100vw;
+=======
+
+  .board .new,
+  .board .hot {
+    width: 100vw;
+>>>>>>> origin/jungYH
     justify-content: center;
   }
 
   .board .new p,
+<<<<<<< HEAD
   .board .hot p{
     font-size: 1.8rem;
   }
@@ -127,3 +229,14 @@
     height: 20px;
   }
 }
+=======
+  .board .hot p {
+    font-size: 1.8rem;
+  }
+
+  .board .new-hot img {
+    width: 20px;
+    height: 20px;
+  }
+}
+>>>>>>> origin/jungYH

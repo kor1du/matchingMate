@@ -4,6 +4,7 @@
 
 .profile-component img {
   position: relative;
+<<<<<<< HEAD
   width: 40px;
 }
 
@@ -11,20 +12,110 @@
   right: 3px;
   position: absolute;
 }
+=======
+  width: 45px;
+}
+
+/* .profile-list {
+  right: 50px;
+  position: absolute;
+  width: 300px;
+} */
+>>>>>>> origin/jungYH
 
 .profile-list ul {
   display: none;
 }
 
+<<<<<<< HEAD
+=======
+.profile-img,
+.profile-userInfo-img {
+  border-radius: 50%;
+}
+
+.profile-userInfo-info {
+  padding-top: 10px;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.profile-userInfo {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.font {
+  font-family: "Nanum Brush Script", cursive !important;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.profile-userInfo-info h6 {
+  margin-top: 5px;
+  width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-icon-container {
+  position: fixed;
+  top: -60px;
+  right: -140px;
+}
+
+.chat-icon {
+  color: #f8cb2e;
+
+  cursor: pointer;
+  font-size: 45px;
+}
+
+.profile-link {
+  /* min-height: 100px; */
+  margin: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-userInfo-logout {
+  padding: 0px 10px;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.profile-list {
+  color: black;
+}
+
+.profile-list span:hover {
+  color: #2155cd;
+}
+
+.profile-list div span:hover {
+  color: #2155cd;
+}
+
+>>>>>>> origin/jungYH
 .profile-list ul.active {
   font-size: 0;
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   width: 120px;
+=======
+  width: 350px;
+>>>>>>> origin/jungYH
   margin: 0;
   list-style: none;
   padding: 0;
   color: black;
+<<<<<<< HEAD
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -34,11 +125,37 @@
   text-align: center;
   
   width: 100%;
+=======
+  background-color: rgba(255, 255, 255, 0.76);
+}
+
+.profile-userInfo-logout-btn {
+  background-color: red;
+  width: 100%;
+}
+
+.profile-userInfo-logout-btn:hover {
+  background-color: rgb(179, 2, 2);
+}
+
+.profile-list li {
+  /* height: 68px; */
+  display: inline-block;
+}
+
+.profile-list a {
+  font-size: 1rem;
+  text-align: center;
+>>>>>>> origin/jungYH
 }
 
 @media screen and (min-width: 425px) {
   .profile-list {
+<<<<<<< HEAD
     top: 45px;
+=======
+    top: 48px;
+>>>>>>> origin/jungYH
     right: 3px;
     position: absolute;
   }
@@ -49,4 +166,8 @@
     width: 200px;
     font-size: 2rem;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/jungYH

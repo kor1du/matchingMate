@@ -2,8 +2,13 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
+<<<<<<< HEAD
 import AdminCategoryAdd from "../../components/admin/AdminCategoryAdd";
 import NavAdmin from "../../components/Nav/NavAdmin";
+=======
+import AdminCategoryAdd from "../../components/admin/adminCategory/AdminCategoryAdd";
+import NavAdmin from "../../components/nav/NavAdmin";
+>>>>>>> origin/jungYH
 
 export default function adminCategoryAdd() {
   return (

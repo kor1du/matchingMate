@@ -1,5 +1,12 @@
 {
+<<<<<<< HEAD
     "singleQuote": false,
     "printWidth": 80,
     "endOfLine": "auto"
 }
+=======
+  "singleQuote": false,
+  "printWidth": 120,
+  "endOfLine": "auto"
+}
+>>>>>>> origin/jungYH

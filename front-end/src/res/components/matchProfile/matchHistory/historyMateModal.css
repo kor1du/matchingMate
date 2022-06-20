@@ -1,0 +1,33 @@
+.modal-matching-mate .modal-header p {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.modal-matching-mate .modal-body .info {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.modal-matching-mate .modal-body .info > p {
+  width: 40%;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-matching-mate .modal-body .info button {
+  width: 30%;
+  height: 30px;
+}
+
+.modal-matching-mate .modal-body .info button p {
+  font-size: 1.3rem;
+  position: relative;
+  bottom: 7px;
+}
+
+.modal-matching-mate .modal-footer {
+  justify-content: center;
+}

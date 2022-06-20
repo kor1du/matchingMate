@@ -6,11 +6,15 @@ module.exports = {
     node: true,
   },
   // eslint-disable-next-line prettier/prettier
+<<<<<<< HEAD
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
   ],
+=======
+  extends: ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
+>>>>>>> origin/jungYH
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -22,9 +26,13 @@ module.exports = {
   rules: {
     "prettier/prettier": 0,
     "react/prop-types": "off",
+<<<<<<< HEAD
     "no-unused-vars": [
       "error",
       { vars: "all", args: "after-used", ignoreRestSiblings: false },
     ],
+=======
+    "no-unused-vars": "off",
+>>>>>>> origin/jungYH
   },
 };

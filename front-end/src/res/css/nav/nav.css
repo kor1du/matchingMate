@@ -1,27 +1,55 @@
 #nav {
+<<<<<<< HEAD
   position: absolute;
   z-index: 10;
   top: 0;
   color: white;
   background-color: rgba(0, 0, 0, 1.0);
+=======
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 1);
+>>>>>>> origin/jungYH
   padding: 0 0px;
 }
 
 #nav .nav-logo {
   text-align: left;
   padding-left: 10px;
+<<<<<<< HEAD
   height:50px;
 }
 
 #nav .nav-logo a {
   display:flex;
+=======
+  height: 50px;
+}
+
+#nav .nav-logo a {
+  display: flex;
+>>>>>>> origin/jungYH
   height: 100%;
   align-items: center;
   position: relative;
 }
 
+<<<<<<< HEAD
 #nav .nav-logo p:hover,
 #nav .nav-menus p:hover {
+=======
+#nav .nav-logo a p {
+  font-family: "Nanum Brush Script", cursive !important;
+  font-size: 40px;
+}
+
+#nav .nav-logo p:hover
+
+/*, #nav .nav-menus p:hover  */
+  {
+>>>>>>> origin/jungYH
   background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -60,10 +88,15 @@
 #nav .nav-menus .profile-link {
   color: black;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/jungYH
 #nav .row {
   width: 100%;
 }
 
+<<<<<<< HEAD
 #nav .nav-menus .bar{
   display:none;
 }
@@ -89,4 +122,69 @@
   #nav .admin-link{
     font-size:0.5rem !important;
   }
+=======
+#nav .nav-menus .bar {
+  display: none;
+}
+
+#nav .nav-notification {
+  width: 30px;
+  height: 30px;
+  margin: 0 30px;
+  margin-top: 8px;
+}
+
+#nav .notification-list {
+  width: 400px;
+  margin: 10px 0px;
+}
+
+#nav .notification-list p {
+  display: inline-block;
+  margin: 0 20px;
+  width: 210px;
+  height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.6rem;
+  color: black;
+}
+
+#nav .nav-notification-box {
+  display: none;
+}
+
+#nav .nav-notification-box.active {
+  position: absolute;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 50px;
+}
+
+@media screen and (max-width: 1023px) {
+  #nav .nav-menus .profile-component {
+    display: none;
+  }
+
+  #nav .nav-menus .bar {
+    display: block;
+    width: 35px;
+    height: 35px;
+    filter: invert(100%) sepia(98%) saturate(2%) hue-rotate(32deg) brightness(102%) contrast(101%);
+  }
+
+  #nav .admin-link {
+    font-size: 0.5rem !important;
+  }
+}
+
+.font {
+  font-family: "Nanum Brush Script", cursive !important;
+}
+
+
+.nav-notification {
+  cursor: pointer;
+>>>>>>> origin/jungYH
 }

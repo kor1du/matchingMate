@@ -2,7 +2,11 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import ChattingRightside from "../components/chatting/ChattingRightside";
 import ChattingLeftside from "../components/chatting/ChattingLeftside";
+<<<<<<< HEAD
 import NavChatting from "../components/Nav/NavChatting";
+=======
+import NavChatting from "../components/nav/NavChatting";
+>>>>>>> origin/jungYH
 
 export default function Chat() {
   return (

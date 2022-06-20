@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "study",
   "version": "0.1.0",
   "private": true,
@@ -21,6 +22,53 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
+=======
+  "name": "front-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.0",
+    "@mui/material": "^5.7.0",
+    "animate.css": "^4.1.1",
+    "autoprefixer": "10.4.5",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.1.3",
+    "chart.js": "^3.8.0",
+    "chartjs-plugin-datalabels": "^2.0.0",
+    "eslint": "^8.15.0",
+    "framer-motion": "^6.3.10",
+    "global": "^4.4.0",
+    "google-maps-react": "^2.0.6",
+    "hover.css": "^2.3.2",
+    "modal": "^1.2.0",
+    "moment": "^2.29.3",
+    "net": "^1.0.2",
+    "netlify-cli": "^10.4.0",
+    "query-string": "^7.1.1",
+    "react": "^18.1.0",
+    "react-bootstrap": "^2.3.1",
+    "react-bootstrap-validation": "^0.1.11",
+    "react-chartjs-2": "^4.1.0",
+    "react-cookie": "^4.1.1",
+    "react-datepicker": "^4.7.0",
+    "react-daum-postcode": "^3.0.1",
+    "react-dom": "^18.1.0",
+    "react-geocode": "^0.2.3",
+    "react-icons": "^4.3.1",
+    "react-input-time": "^3.0.0",
+    "react-kakao-maps-sdk": "^1.1.1",
+    "react-modal": "^3.15.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "sockjs": "^0.3.24",
+    "sockjs-client": "^1.6.0",
+    "stomp": "^0.1.1",
+    "stompjs": "^2.3.3",
+    "styled-components": "^5.3.5"
+>>>>>>> origin/jungYH
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,12 +78,15 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+<<<<<<< HEAD
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
   },
+=======
+>>>>>>> origin/jungYH
   "browserslist": {
     "production": [
       ">0.2%",
@@ -55,5 +106,10 @@
     "eslint-plugin-react": "^7.29.4",
     "gh-pages": "^3.2.3",
     "prettier": "2.6.1"
+<<<<<<< HEAD
   }
+=======
+  },
+  "repository": "https://github.com/kor1du/matchingMate"
+>>>>>>> origin/jungYH
 }

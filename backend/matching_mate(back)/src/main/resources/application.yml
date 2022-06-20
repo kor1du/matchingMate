@@ -1,4 +1,6 @@
 
+server:
+  port: 8080
 
 spring:
 
@@ -14,7 +16,7 @@ spring:
 
   properties:
     hibernate:
-      default_batch_fetch_size: 10
+      default_batch_fetch_size: 1000
 
   jwt:
     headar: Authorization
@@ -43,6 +45,15 @@ spring:
     pathmatch:
       matching_strategy: ant_path_matcher
 
+    servlet:
+        load-on-startup: 1
+
+
   output:
     ansi:
       enabled: always
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      maxRequestSize: 10MB

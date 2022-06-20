@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .login-component{
   width:100vw;
   height:100vh;
@@ -26,3 +27,42 @@
 .login-component .signup-btn a {
   color: white;
 }
+=======
+.container-login {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../img/Image/login-bg.png");
+  background-size: 100% 100%;
+  background-color: rgba(0, 0, 0, 1.0);
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-login .card {
+  width: 90vw;
+  height: 50vh;
+  border: none
+}
+
+.container-login .card .card-body {
+  display: flex;
+  padding: 0;
+  height: 100%;
+}
+
+.container-login .btn-close {
+  position: relative;
+  bottom: 0%;
+  right: 2%;
+  background: none;
+  padding: 0;
+  width: 100%;
+  opacity: 1;
+  font-size: 1.2rem;
+  margin: 10px 0px;
+  text-align: right;
+  cursor: pointer;
+}
+>>>>>>> origin/jungYH

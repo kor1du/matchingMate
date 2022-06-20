@@ -9,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -32,14 +32,19 @@ public class ChattingMember {
     @Column(name = "is_ready", columnDefinition = "TINYINT(1) default 0")
     private boolean isReady;
 
+    @Column(name = "out_datetime", columnDefinition = "DATETIME(6) DEFAULT CURRENT_DATE")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private Date outDatetime;
+
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(name = "register_datetime")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date registerDatetime;
 
     @OneToMany(mappedBy = "chattingMember", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ChattingMessage> chattingMessageList;
+    private Set<ChattingMessage> chattingMessageList;
 
     public void updateReady(boolean isReady) { this.isReady = isReady; }
+    public void updateOutDatetime(Date outDatetime) { this.outDatetime = outDatetime; }
 }

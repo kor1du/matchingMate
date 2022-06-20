@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import styles from '../css/memberProfile.module/memberProfile.module.css';
 import { BsFillChatDotsFill } from 'react-icons/bs';
@@ -5,6 +6,13 @@ import { BsFillChatDotsFill } from 'react-icons/bs';
 const MemberProfile = (props) => {
 
   const {member} = props;
+=======
+import React from "react";
+import styles from "../css/memberProfile.module/memberProfile.module.css";
+
+const MemberProfile = (props) => {
+  const { member } = props;
+>>>>>>> origin/jungYH
 
   return (
     <div className={styles.main}>
@@ -20,10 +28,17 @@ const MemberProfile = (props) => {
           <button>계정 정보 수정하기</button>
         </div>
       </div>
+<<<<<<< HEAD
       
       <BsFillChatDotsFill size="30" color="yellow"/>
+=======
+>>>>>>> origin/jungYH
     </div>
   );
 };
 
+<<<<<<< HEAD
 export default MemberProfile;
+=======
+export default MemberProfile;
+>>>>>>> origin/jungYH

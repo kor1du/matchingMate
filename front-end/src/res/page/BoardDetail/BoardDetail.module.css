@@ -1,0 +1,139 @@
+.container {
+  width: 48rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 5rem;
+}
+
+.container label,
+.container input,
+.container span,
+.container li,
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6 {
+<<<<<<< HEAD
+  font-family: "Jua" !important;
+=======
+    font-family: "Jua" !important;
+>>>>>>> origin/junwoo7
+}
+
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.backBtn:hover {
+  cursor: pointer;
+}
+
+.title {
+  margin-top: 2.5rem;
+  font-weight: 800;
+  font-size: 3rem;
+}
+
+.userAndDate {
+  margin-top: 32px;
+  padding-bottom: 32px;
+  border-bottom: 3px solid #f2f2f2;
+  display: flex;
+  grid-gap: 15px;
+  gap: 15px;
+  align-items: center;
+}
+
+.nickName {
+  width: 200px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  border-right: 2px solid #e1e1e1;
+}
+
+.registerDate {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 18px;
+  color: #717171;
+}
+
+.boardInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  grid-row-gap: 24px;
+  row-gap: 24px;
+  margin-top: 60px;
+}
+
+.infoBox {
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.infoTitle {
+  color: #717171;
+  margin-right: 40px;
+}
+
+.infoContent {
+  color: #333;
+}
+
+.contentBox {
+  margin-top: 72px;
+  font-size: 1.125rem;
+  min-height: 250px;
+  word-break: break-all;
+  line-height: 1.7;
+<<<<<<< HEAD
+  letter-spacing: -0.004em;
+=======
+  letter-spacing: -.004em;
+  
+>>>>>>> origin/junwoo7
+}
+
+.contentHeader {
+  margin: 0;
+  color: #333;
+  font-size: 26px;
+  font-weight: 700;
+  padding-bottom: 24px;
+  border-bottom: 3px solid #f2f2f2;
+}
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/junwoo7
+.contentWrap {
+  font-family: "Jua" !important;
+  width: 100%;
+  margin: 40px auto 0;
+}
+
+.contentText {
+  font-family: "Jua" !important;
+}
+
+.chatBtnBox {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 0;
+  margin-top: 1rem;
+}
+
+

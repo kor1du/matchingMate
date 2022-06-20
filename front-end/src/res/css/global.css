@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&family=Jua&family=Lobster&display=swap&family=Anton&display=swap");
+=======
+
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&family=Jua&family=Lobster&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=Playfair+Display:ital@1&display=swap");
+>>>>>>> origin/jungYH
 
 html,
 body {
@@ -7,6 +12,10 @@ body {
 
 * {
   font-family: "Anton", sans-serif;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> origin/jungYH
 }
 
 a {
@@ -45,10 +54,22 @@ h1 {
 p {
   margin: 0;
   padding: 0;
+<<<<<<< HEAD
   font-family: "Jua", sans-serif;
 }
 
 span{
+=======
+  font-family: "Nanum Brush Script", cursive !important;
+  font-family: "Nanum Brush Script", cursive !important;
+}
+
+span {
+  font-family: "Nanum Brush Script", cursive !important;
+}
+
+span {
+>>>>>>> origin/jungYH
   font-family: "Jua", sans-serif;
 }
 
@@ -58,6 +79,7 @@ h3,
 h4,
 h5,
 h6 {
+<<<<<<< HEAD
   font-family: "Jua", sans-serif;
   margin:0;
   padding:0;
@@ -76,3 +98,30 @@ input{
 label{
   font-family: "Jua", sans-serif;
 }
+=======
+
+  font-family: "Nanum Brush Script", cursive !important;
+
+  padding: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+input {
+
+  font-family: "Nanum Brush Script", cursive !important;
+}
+
+label {
+  font-family: "Nanum Brush Script", cursive !important;
+
+}
+
+label {
+  font-family: "Jua", sans-serif;
+}
+>>>>>>> origin/jungYH

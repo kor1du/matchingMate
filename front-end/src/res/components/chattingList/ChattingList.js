@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+import React, { useEffect } from "react";
+>>>>>>> origin/jungYH
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../css/chattingList/chattingList.css";
@@ -7,13 +11,33 @@ import Person2 from "../../img/person2.png";
 import Person3 from "../../img/person3.png";
 import Person4 from "../../img/person4.png";
 import Person5 from "../../img/person5.png";
+<<<<<<< HEAD
 
 export default function ChattingListComponent() {
+=======
+import { redirectURL } from "../url/CheckURL";
+import { isLogin } from "../login/Login";
+
+export default function ChattingListComponent() {
+  useEffect(() => {
+    // if (!isLogin()) {
+    //   //로그인한 상태가 아니라면
+    //   const result = confirm("로그인이 필요합니다. 로그인하시겠습니까?");
+    //   if (result === true) redirectURL("login");
+    //   else redirectURL("");
+    // }
+  });
+
+>>>>>>> origin/jungYH
   return (
     <Container className="chatting-list-component">
       <ul>
         <li>
+<<<<<<< HEAD
           <Link to="/chatting">
+=======
+          <Link to="/chat">
+>>>>>>> origin/jungYH
             <img src={Person1} alt="person1" />
             <div className="detail">
               <h2>
@@ -24,7 +48,11 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
+<<<<<<< HEAD
           <Link to="/chatting">
+=======
+          <Link to="/chat">
+>>>>>>> origin/jungYH
             <img src={Person2} alt="person2" />
             <div className="detail">
               <h2>
@@ -35,7 +63,11 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
+<<<<<<< HEAD
           <Link to="/chatting">
+=======
+          <Link to="/chat">
+>>>>>>> origin/jungYH
             <img src={Person3} alt="person3" />
             <div className="detail">
               <h2>
@@ -46,7 +78,11 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
+<<<<<<< HEAD
           <Link to="/chatting">
+=======
+          <Link to="/chat">
+>>>>>>> origin/jungYH
             <img src={Person4} alt="person4" />
             <div className="detail">
               <h2>
@@ -57,7 +93,11 @@ export default function ChattingListComponent() {
           </Link>
         </li>
         <li>
+<<<<<<< HEAD
           <Link to="/chatting">
+=======
+          <Link to="/chat">
+>>>>>>> origin/jungYH
             <img src={Person5} alt="person5" />
             <div className="detail">
               <h2>

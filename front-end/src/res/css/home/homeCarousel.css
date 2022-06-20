@@ -28,7 +28,14 @@
 }
 
 .carousel-col:hover {
+<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.5);
+=======
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  cursor: pointer;
+  transform: scale(1.15);
+  transition: all 0.5s;
+>>>>>>> origin/jungYH
 }
 
 .carousel-col p {

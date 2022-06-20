@@ -1,16 +1,29 @@
 .signup-component {
   width: 100vw;
+<<<<<<< HEAD
   height: 100vh;
   display: flex;
   max-width: 100vw !important;
+=======
+  margin-top: 50px;
+  display: flex;
+  max-width: 100vw !important;
+  height:100vh;
+>>>>>>> origin/jungYH
   justify-content: center;
   align-items: center;
   background-color: #ffd59e;
 }
 
+<<<<<<< HEAD
 .signup-component .header-title{
   color:black !important;
   font-size:2rem !important;
+=======
+.signup-component .header-title {
+  color: black !important;
+  font-size: 2rem;
+>>>>>>> origin/jungYH
 }
 
 .signup-component .signup-separate {
@@ -22,8 +35,17 @@
 }
 
 .signup-component .card-header {
+<<<<<<< HEAD
   font-size: 2rem;
   text-align: center;
+=======
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2rem;
+  text-align: center;
+  min-height: 100px;
+>>>>>>> origin/jungYH
 }
 
 .signup-component .card-header p {
@@ -32,10 +54,34 @@
   margin: 5px 0px;
 }
 
+<<<<<<< HEAD
 .signup-component .form-check label {
 
 }
+=======
+>>>>>>> origin/jungYH
 .signup-component .signup-btn {
   display: flex;
   justify-content: center;
 }
+<<<<<<< HEAD
+=======
+
+.signup-component .id-chk-input {
+  max-height: 40px;
+}
+
+@media screen and (max-width: 1023px) {
+  .signup-component .card-header {
+    padding: 0;
+  }
+
+  .signup-component .signup-separate {
+    flex-direction: column;
+  }
+
+  .signup-component .signup-part1 {
+    margin: 0;
+  }
+}
+>>>>>>> origin/jungYH

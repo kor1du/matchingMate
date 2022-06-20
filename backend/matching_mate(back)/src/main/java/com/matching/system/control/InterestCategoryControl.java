@@ -1,8 +1,8 @@
 package com.matching.system.control;
 
 import com.matching.system.dto.InterestCategoryDTO;
-import com.matching.system.filter.ResponseData;
-import com.matching.system.filter.ResponseMessage;
+import com.matching.system.response.ResponseData;
+import com.matching.system.response.ResponseMessage;
 import com.matching.system.service.InterestCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,24 +10,26 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/matchingProfile")
+@RequestMapping("")
 public class InterestCategoryControl {
     private final InterestCategoryService interestCategoryService;
 
     // 관심 카테고리 추가   -> O
-    @PostMapping("/interestCategory/create")
-    public ResponseEntity create(@RequestBody InterestCategoryDTO.CreateDTO interestCategoryDTO) {
-        ResponseMessage responseMessage = interestCategoryService.save(interestCategoryDTO);
+    @PostMapping("/profile/interestCategory/create")
+    public ResponseEntity create(@RequestBody InterestCategoryDTO.CreateDTO interestCategoryDTO,
+                                 @RequestHeader("Authorization") String token) {
+        ResponseData responseData = interestCategoryService.save(interestCategoryDTO, token);
 
         return ResponseEntity
-                .status(responseMessage.getStatus())
-                .body(responseMessage);
+                .status(responseData.getStatus())
+                .body(responseData);
     }
 
     // 관심 카테고리 수정   -> O
-    @PutMapping("/interestCategory/update")
-    public ResponseEntity update(@RequestBody InterestCategoryDTO.UpdateDTO interestCategoryDTO) {
-        ResponseMessage responseMessage = interestCategoryService.update(interestCategoryDTO);
+    @PutMapping("/profile/interestCategory/update")
+    public ResponseEntity update(@RequestBody InterestCategoryDTO.UpdateDTO interestCategoryDTO,
+                                 @RequestHeader("Authorization") String token) {
+        ResponseMessage responseMessage = interestCategoryService.update(interestCategoryDTO, token);
 
         return ResponseEntity
                 .status(responseMessage.getStatus())
@@ -35,7 +37,7 @@ public class InterestCategoryControl {
     }
 
     // 관심 카테고리 삭제   -> O
-    @DeleteMapping("/interestCategory/delete/{id}")
+    @DeleteMapping("/profile/interestCategory/delete/{id}")
     public ResponseEntity delete(@PathVariable(name = "id") Long interestCategoryId) {
         ResponseMessage responseMessage = interestCategoryService.delete(interestCategoryId);
 
@@ -45,10 +47,19 @@ public class InterestCategoryControl {
     }
 
     // 관심 카테고리 조회   -> O
-    @GetMapping("/interestCategory/{id}")
-    public ResponseEntity read(@RequestHeader("Authorization") String accessToken,
-                                @PathVariable(name = "id") Long memberId) {
-        ResponseData responseData =  interestCategoryService.read(memberId, accessToken);
+    @GetMapping("/profile/interestCategory")
+    public ResponseEntity read(@RequestHeader("Authorization") String token) {
+        ResponseData responseData =  interestCategoryService.read(token);
+
+        return ResponseEntity
+                .status(responseData.getStatus())
+                .body(responseData);
+    }
+
+    // 관심 카테고리 조회   -> O
+    @GetMapping("/myInterest")
+    public ResponseEntity readMyInterest(@RequestHeader("Authorization") String token) {
+        ResponseData responseData =  interestCategoryService.readMyInterest(token);
 
         return ResponseEntity
                 .status(responseData.getStatus())
