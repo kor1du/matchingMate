@@ -9,10 +9,6 @@ import CheckID from "./CheckID";
 import CheckNickname from "./CheckNickname";
 import PartyFace from "../../img/partyFace.png";
 import {BsArrowLeftSquare} from 'react-icons/bs'
-<<<<<<< HEAD
-
-export default function Signup(props) {
-=======
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -20,7 +16,6 @@ export default function Signup(props) {
 
   const navigate = useNavigate();
 
->>>>>>> origin/junwoo7
   const { loginBtn } = props;
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -38,17 +33,8 @@ export default function Signup(props) {
   const [signupDisplay, setSignupDisplay] = useState("");
 
   function postData(e) {
-
-    console.log("여기진입-------------")
-    
-    
     e.preventDefault();
-<<<<<<< HEAD
-=======
     
-    
-    
->>>>>>> origin/junwoo7
     console.log(id);
     const data = {
       userId: id,
@@ -61,23 +47,15 @@ export default function Signup(props) {
       sex: sex,
     };
 
-    
 
-    // axios.post(" https://2adb-60-253-18-218.jp.ngrok.io/signUp", data );
     axiosPost("/signUp", data)
       .then(() => {
-<<<<<<< HEAD
-        redirectURL("signup");
-=======
         navigate("/");
->>>>>>> origin/junwoo7
       })
       .catch(() => {
         alert("정보를 다시 입력해주세요.");
       });
-    
-    
-
+  
   }
 
   useEffect(() => {
@@ -88,7 +66,6 @@ export default function Signup(props) {
     setSignupBtn(document.querySelector(".btn-show-signup .btn"));
     setSignupDisplay(document.querySelector(".display-signup"));
   }, [props]);
-<<<<<<< HEAD
 
   const toggleActive = () => {
     signupComponent.classList.toggle("active");
@@ -146,65 +123,6 @@ export default function Signup(props) {
     }
   }
 
-=======
-
-  const toggleActive = () => {
-    signupComponent.classList.toggle("active");
-    signupBtnDiv.classList.toggle("active");
-    signupDisplay.classList.toggle("active");
-  };
-
-  function showSignup() {
-    const clientWidth = document.body.clientWidth;
-
-    setTimeout(() => {
-      if (clientWidth < 1024) {
-        signupDisplay.classList.add("login-enter");
-      } else {
-        signupBtnDiv.style.left = "50%";
-        signupDisplay.style.right = "50%";
-        signupBtnDiv.classList.toggle("login-enter-left");
-        signupDisplay.classList.toggle("login-enter-right");
-        signupBtn.classList.toggle("active");
-        signupGreetingBtn.classList.toggle("active");
-      }
-      loginBtn.style.display = "none";
-      toggleActive();
-    }, 500);
-  }
-
-  function hideSignup() {
-    const clientWidth = document.body.clientWidth;
-
-    if (clientWidth < 1024) {
-      signupDisplay.classList.toggle("login-leave");
-      setTimeout(() => {
-        toggleActive();
-        loginBtn.style.display = "flex";
-      }, 1200);
-
-      setTimeout(() => {
-        signupDisplay.classList.toggle("login-leave");
-      }, 1250);
-    } else {
-      signupBtnDiv.style.left = "0%";
-      signupDisplay.style.right = "0%";
-      signupBtnDiv.classList.toggle("login-enter-right-hide");
-      signupDisplay.classList.toggle("login-enter-left-hide");
-      setTimeout(() => {
-        signupBtnDiv.classList.remove("login-enter-left");
-        signupDisplay.classList.remove("login-enter-right");
-        toggleActive();
-        signupBtnDiv.classList.toggle("login-enter-right-hide");
-        signupDisplay.classList.toggle("login-enter-left-hide");
-        loginBtn.style.display = "flex";
-        signupBtn.classList.toggle("active");
-        signupGreetingBtn.classList.toggle("active");
-      }, 950);
-    }
-  }
-
->>>>>>> origin/junwoo7
   return (
     <div className="signup-component">
       <div className="btn-show-signup">

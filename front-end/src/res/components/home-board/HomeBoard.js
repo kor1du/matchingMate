@@ -74,4 +74,5 @@ const Layout = styled.div`
   max-width: 1420px;
   margin: 0 auto;
 `;
+
 export default Board;

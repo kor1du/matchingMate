@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 // import ProfileComponent from "./Profile";
 import "../../css/nav/navAdmin.css";
 import Bars from "../../img/bars-solid.png";
@@ -21,6 +22,12 @@ const disableActiveOver1024px = (event) => {
   const windowWidth = document.documentElement.clientWidth;
   const adminLeftside = document.querySelector(".admin-left-side");
   const adminRightside = document.querySelector(".admin-right-side");
+
+  if (windowWidth > 1023 && adminLeftside.classList.contains("active") && adminRightside.classList.contains("active")) {
+    toggle(".admin-left-side");
+    toggle(".admin-right-side");
+
+
   if (windowWidth > 1023 && adminLeftside.classList.contains("active") && adminRightside.classList.contains("active")) {
     toggle(".admin-left-side");
     toggle(".admin-right-side");
@@ -30,7 +37,7 @@ const disableActiveOver1024px = (event) => {
 export default function NavAdmin() {
   useEffect(() => {
     window.addEventListener("resize", disableActiveOver1024px);
-    // eslint-disable-next-line no-unused-vars
+
     const barCSS = document.querySelector(".bar");
 
     if (document.querySelector(".bar")) showLoginBtn();
@@ -50,6 +57,8 @@ export default function NavAdmin() {
     <Container fluid id="nav-admin">
       <Row>
         <Col xs="6" className="nav-logo">
+
+
           <Link to="/admin/post/management">
             <p>운동메이트</p>
           </Link>
@@ -58,10 +67,10 @@ export default function NavAdmin() {
           <Link to="/login" className="login">
             <p>로그인</p>
           </Link>
+          <ProfileComponent/>
           <p className="logout-1024px" onClick={logout}>
             로그아웃
           </p>
-          {/* <ProfileComponent></ProfileComponent> */}
           <p className="nav-admin-menus" onClick={toggleAdminActive}>
             관리자 메뉴
           </p>
@@ -71,4 +80,4 @@ export default function NavAdmin() {
       <NavLeftSide></NavLeftSide>
     </Container>
   );
-}
+}}

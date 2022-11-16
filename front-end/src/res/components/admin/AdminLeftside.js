@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 function parseCategoryName() {
   const entireUrl = document.location.href;
   const url = entireUrl.split("/");
-  const categoryName = url[4] + url[5];
+
+  const categoryName = url[url.length - 2] + url[url.length - 1];
+
   return categoryName;
 }
 
@@ -47,6 +49,15 @@ function changePropertyColor(property) {
 }
 
 function highlightCurrentCategory() {
+
+  var categoryName = parseCategoryName();
+
+  categoryName = changeCategoryName(categoryName);
+
+  if (categoryName.indexOf(".") != -1) {
+    const property = findCategoryProperty(categoryName);
+    changePropertyColor(property);
+
   let categoryName = parseCategoryName();
   if (categoryName.includes("modify")) return;
   else {
@@ -85,12 +96,15 @@ export default function AdminLeftside() {
 
         <ul className="category-management">
           <h1 className="category-title">카테고리관리</h1>
-          <Link to="/admin/add">
+
+          <Link to="/admin/category/add">
+
             <li className="category-item category-add">
               <p>카테고리추가</p>
             </li>
           </Link>
-          <Link to="/admin/view">
+
+          <Link to="/admin/category/view">
             <li className="category-item category-view">
               <p>카테고리조회</p>
             </li>
@@ -112,4 +126,5 @@ export default function AdminLeftside() {
       </div>
     </>
   );
+}
 }

@@ -5,6 +5,7 @@ import AdminLeftside from "../../components/admin/AdminLeftside";
 import AdminBadgeModify from "../../components/admin/adminBadge/AdminBadgeModify";
 import NavAdmin from "../../components/nav/NavAdmin";
 
+
 export default function adminCategoryModify() {
   return (
     <>

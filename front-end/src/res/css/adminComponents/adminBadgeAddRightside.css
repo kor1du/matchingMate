@@ -40,32 +40,35 @@
 
 .admin-badge-add-rightside .detail .file,
 .admin-badge-add-rightside .detail .name,
-.admin-badge-add-rightside .detail .count {
-  margin: 20px 0px;
-  display: flex;
-  justify-content: center;
+.admin-badge-add-rightside .detail .tag{
+    margin:20px 0px;
+    display:flex;
+    justify-content: center;
 }
 
-.admin-badge-add-rightside .btn-upload {
-  font-size: 1.5rem;
+.admin-badge-add-rightside .btn-upload{
+    font-size:1.5rem;
 }
 
-@media screen and (max-width: 1023px) {
-  .admin-badge-add-rightside {
-    width: 100%;
-  }
+@media screen and (max-width:1023px)
+{
+    .admin-badge-add-rightside{
+        width:100%;
+    } 
 }
 
-@media screen and (max-width: 767px) {
-  .admin-badge-add-rightside .admin-category {
-    text-align: center;
-    font-size: 1.5rem;
-  }
+@media screen and (max-width:767px)
+{
+    .admin-badge-add-rightside .admin-category{
+        text-align: center;
+        font-size:1.5rem;
+    }
 }
 
-@media screen and (max-width: 424px) {
-  .admin-badge-add-rightside .admin-category {
-    text-align: center;
-    font-size: 1rem;
-  }
+@media screen and (max-width:424px)
+{
+    .admin-badge-add-rightside .admin-category{
+        text-align: center;
+        font-size:1rem;
+    }
 }

@@ -5,6 +5,7 @@ import ProfileComponent from "./Profile";
 import "../../css/nav/navChatting.css";
 import Bars from "../../img/bars-solid.png";
 import NavLeftSide from "./NavLeftSide";
+
 import { logout } from "../logout/Logout";
 import { showLeft, showLoginBtn } from "./Nav";
 import { toggle } from "../toggle/Toggle";
@@ -39,6 +40,7 @@ const disableChattingLeftByWindowResize = (event) => {
 export default function navChatting() {
   useEffect(() => {
     window.addEventListener("resize", disableChattingLeftByWindowResize);
+
     showLoginBtn();
     return () => {
       window.removeEventListener("resize", disableChattingLeftByWindowResize);
@@ -57,6 +59,7 @@ export default function navChatting() {
           <Link to="/login" className="login">
             <p>로그인</p>
           </Link>
+
           <p className="logout-1024px" onClick={logout}>
             로그아웃
           </p>

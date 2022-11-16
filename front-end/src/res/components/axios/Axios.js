@@ -19,7 +19,8 @@ export function axiosPost(path, data, headers) {
 
 export function axiosDelete(path, headers) {
   if (url !== " https://2adb-60-253-18-218.jp.ngrok.io") {
-    url = " https://2adb-60-253-18-218.jp.ngrok.io" + path;  
+    url = " https://2adb-60-253-18-218.jp.ngrok.io" + path;
+
   } else {
     url += path;
   }

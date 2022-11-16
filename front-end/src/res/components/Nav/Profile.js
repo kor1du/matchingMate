@@ -1,6 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-// import DefaultProfile from "../../img/default-profile.png";
+import { Container } from "react-bootstrap"
 import "../../css/nav/profile.css";
 import { Link } from "react-router-dom";
 import { toggle } from "../toggle/Toggle";
@@ -92,4 +91,6 @@ export default function Profile() {
       </div>
     </Container>
   );
+
 }
+

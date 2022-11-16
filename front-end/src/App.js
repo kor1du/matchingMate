@@ -1,10 +1,6 @@
-/* eslint-disable no-undef */
-
 import React from "react";
 import "./res/css/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Home from "./res/page/home";
@@ -18,6 +14,7 @@ import AdminCategoryView from "./res/page/admin/adminCategoryView";
 import AdminBadgeAdd from "./res/page/admin/adminBadgeAdd";
 import AdminBadgeModify from "./res/page/admin/adminBadgeModify";
 import AdminBadgeView from "./res/page/admin/adminBadgeView";
+
 import MatchProfile from "./res/page/matchProfile/matchProfile";
 import MemberProfile from "./res/page/memberProfile/memberProfile";
 import BoardDetail from './res/page/BoardDetail/BoardDetail';
@@ -113,7 +110,7 @@ export default function App() {
           />
 
           <Route 
-            path="/admin/add" 
+            path="/admin/category/add" 
             element={
               <AdminPrivateRoute>
                 <AdminCategoryAdd />
@@ -122,7 +119,7 @@ export default function App() {
           />
 
           <Route
-            path="/admin/modify/"
+            path="/admin/category/modify/"
             element={
               <AdminPrivateRoute>
                 <AdminCategoryModify />
@@ -131,7 +128,7 @@ export default function App() {
           />
 
           <Route 
-            path="/admin/view" 
+            path="/admin/category/view" 
             element={
               <AdminPrivateRoute>
                 <AdminCategoryView />
@@ -210,4 +207,5 @@ export default function App() {
       
     </div>
   );
+
 }
