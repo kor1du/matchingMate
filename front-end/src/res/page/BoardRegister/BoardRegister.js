@@ -60,20 +60,13 @@ const BoardRegister = () => {
     e.preventDefault();
     console.log("넣는데이터", postInfo);
 
-<<<<<<< HEAD
-    axios.post("http://localhost:8080/matchingPost/create", postInfo, {
-=======
-    axios.post(" https://2adb-60-253-18-218.jp.ngrok.io/matchingPost/create", postInfo, {
->>>>>>> origin/junwoo7
+    axios.post("https://c0f9-1-235-210-229.jp.ngrok.io/matchingPost/create", postInfo, {
       headers: {
         Authorization: "Bearer " + token,
       },
     });
-<<<<<<< HEAD
-    navigate("/");
-=======
+
     navigate("/main");
->>>>>>> origin/junwoo7
   };
   const onUpdate = (e) => {
     e.preventDefault();
@@ -81,11 +74,8 @@ const BoardRegister = () => {
 
     console.log("넣는데이터", updateInfo);
 
-<<<<<<< HEAD
-    axios.put("http://localhost:8080/matchingPost/detail/update", updateInfo);
-=======
-    axios.put(" https://2adb-60-253-18-218.jp.ngrok.io/matchingPost/detail/update", updateInfo);
->>>>>>> origin/junwoo7
+
+    axios.put("https://c0f9-1-235-210-229.jp.ngrok.io/matchingPost/detail/update", updateInfo);
 
     navigate("/");
   };

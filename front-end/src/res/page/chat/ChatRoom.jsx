@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ChatLeftSide from "./ChatLeftSide";
 import ChatRightSide from "./ChatRightSide";
 import { Col, Row } from "react-bootstrap";
-import Nav from "../../components/nav/Nav";
+import Nav from "../../components/Nav/Nav";
 import { axiosGet } from '../../components/axios/Axios';
 import { useLocation } from 'react-router-dom';
 

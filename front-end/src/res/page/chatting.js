@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import ChattingRightside from "../components/chatting/ChattingRightside";
 import ChattingLeftside from "../components/chatting/ChattingLeftside";
 
-import NavChatting from "../components/nav/NavChatting";
+import NavChatting from "../components/Nav/NavChatting";
 
 export default function Chat() {
   return (

@@ -58,11 +58,8 @@ const UserProfile = (props) => {
     };
 
     axios
-<<<<<<< HEAD
-      .post("http://localhost:8080/profile/updateProfileImg", formData, {
-=======
-      .post(" https://2adb-60-253-18-218.jp.ngrok.io/profile/updateProfileImg", formData, {
->>>>>>> origin/junwoo7
+      .post("https://c0f9-1-235-210-229.jp.ngrok.io/profile/updateProfileImg", formData, {
+
         headers,
       })
       .then((res) => {

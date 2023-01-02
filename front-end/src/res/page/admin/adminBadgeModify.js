@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import "../../css/admin/admin.css";
 import AdminLeftside from "../../components/admin/AdminLeftside";
 import AdminBadgeModify from "../../components/admin/adminBadge/AdminBadgeModify";
-import NavAdmin from "../../components/nav/NavAdmin";
+import NavAdmin from "../../components/Nav/NavAdmin";
 
 
 export default function adminCategoryModify() {

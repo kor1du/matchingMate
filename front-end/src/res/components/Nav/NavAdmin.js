@@ -33,6 +33,7 @@ const disableActiveOver1024px = (event) => {
     toggle(".admin-right-side");
   }
 };
+}
 
 export default function NavAdmin() {
   useEffect(() => {
@@ -80,4 +81,4 @@ export default function NavAdmin() {
       <NavLeftSide></NavLeftSide>
     </Container>
   );
-}}
+}

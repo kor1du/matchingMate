@@ -59,7 +59,7 @@ const UserProfile = (props) => {
     };
 
     axios
-      .post(" https://2adb-60-253-18-218.jp.ngrok.io/profile/updateProfileImg", formData, { headers })
+      .post("https://c0f9-1-235-210-229.jp.ngrok.io/profile/updateProfileImg", formData, { headers })
       .then((res) => {
         console.log(res);
       });

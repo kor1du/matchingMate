@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 
 import AdminBadgeAdd from "../../components/admin/adminBadge/AdminBadgeAdd";
 import AdminLeftside from "../../components/admin/AdminLeftside";
-import NavAdmin from "../../components/nav/NavAdmin";
+import NavAdmin from "../../components/Nav/NavAdmin";
 
 export default function adminBadgeAdd() {
   return (

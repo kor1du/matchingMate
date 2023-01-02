@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import AdminBadgeView from "../../components/admin/adminBadge/AdminBadgeView";
 import AdminLeftside from "../../components/admin/AdminLeftside";
-import NavAdmin from "../../components/nav/NavAdmin";
+import NavAdmin from "../../components/Nav/NavAdmin";
 
 export default function adminBadgeView() {
   return (

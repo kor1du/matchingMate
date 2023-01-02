@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import Nav from "../../components/nav/Nav";
+import Nav from "../../components/Nav/Nav";
 import sockjs from "sockjs-client";
 import stomp from "stompjs";
 import RoomMessage from "../../components/chatting/YH/RoomMessage";
@@ -14,7 +14,7 @@ import { axiosGet } from "../../components/axios/Axios";
 import { Button, Col, Row } from "react-bootstrap";
 
 function ChatRoom() {
-  let sockJS = new sockjs(" https://2adb-60-253-18-218.jp.ngrok.io/stomp/chat");
+  let sockJS = new sockjs("https://c0f9-1-235-210-229.jp.ngrok.io/stomp/chat");
   let Stomp = stomp.over(sockJS);
   Stomp.debug = null;
 
@@ -110,7 +110,7 @@ function ChatRoom() {
 
 
     axios
-      .put(` https://2adb-60-253-18-218.jp.ngrok.io/chat/out/${myChattingMemberId}`, "", {
+      .put(`https://c0f9-1-235-210-229.jp.ngrok.io/chat/out/${myChattingMemberId}`, "", {
         headers: {
           Authorization: token,
         },

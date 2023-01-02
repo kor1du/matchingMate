@@ -115,11 +115,8 @@ export default function Nav() {
     alarms.classList.toggle("active");
 
     axios
-<<<<<<< HEAD
-      .put("http://localhost:8080/notification", null, {
-=======
-      .put(" https://2adb-60-253-18-218.jp.ngrok.io/notification", null, {
->>>>>>> origin/junwoo7
+      .put("https://c0f9-1-235-210-229.jp.ngrok.io/notification", null, {
+
         headers: headers,
       })
       .then((res) => {
@@ -153,11 +150,9 @@ export default function Nav() {
   }, []);
 
   function buttonClickHandler() {
-<<<<<<< HEAD
-    document.querySelector(".container-match-profile .nav-matching-profile").classList.toggle("active");
-=======
+
     document.querySelector(".container-match-profile .nav-matching-profile").classList.toggle("actived");
->>>>>>> origin/junwoo7
+
   }
 
   return (

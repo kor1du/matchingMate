@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import UserProfile from "../../components/matchProfile/profile/userProfile";
 import CategoryChart from "../../components/matchProfile/chart/CategoryChart";
 import MatchingChart from "../../components/matchProfile/chart/MatchingChart";
-import Category from "../../components/matchProfile/category/Category";
-import MatchHistory from "../../components/matchProfile/matchHistory/MatchHistory";
-import NavMatchingProfile from "../../components/nav/matchingProfile/NavMatchingProfile";
+import Category from "../../components/matchProfile/category/category";
+import MatchHistory from "../../components/matchProfile/matchHistory/matchHistory";
+import NavMatchingProfile from "../../components/Nav/matchingProfile/NavMatchingProfile";
 import MatchRating from "../../components/matchProfile/matchRating/matchRating";
-import Nav from "../../components/nav/Nav";
+import Nav from "../../components/Nav/Nav";
 import "./matchProfile.css";
 import { positions } from "@mui/system";
 import { Button } from "react-bootstrap";
@@ -25,11 +25,8 @@ const MatchProfile = () => {
 
   const getProfileInfo = async () => {
     const res = await (
-<<<<<<< HEAD
-      await axios.get("http://localhost:8080/profile", {
-=======
-      await axios.get(" https://2adb-60-253-18-218.jp.ngrok.io/profile", {
->>>>>>> origin/junwoo7
+
+      await axios.get("https://c0f9-1-235-210-229.jp.ngrok.io/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import LoginComponent from "../components/login/Login";
 import SignupComponent from "../components/signup/Signup";
-import Nav from "../components/nav/Nav";
+import Nav from "../components/Nav/Nav";
 import "../css/login/login.css";
 
 function Login() {

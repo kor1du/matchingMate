@@ -1,33 +1,18 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import styles from './BoardDetail.module.css';
-import {  useLocation, useNavigate, useParams } from "react-router-dom";
-import Nav from '../../components/nav/Nav';
-=======
 import React, { useEffect, useState } from "react";
 import styles from "./BoardDetail.module.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Nav from "../../components/nav/Nav";
->>>>>>> origin/junwoo7
+import Nav from "../../components/Nav/Nav";
 import { BsArrowLeft } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 // import { axiosGet } from '../../axios/Axios';
 import Modal from "react-modal";
-<<<<<<< HEAD
-import axios from 'axios';
-// import GoogleMap from '../../components/googleMap/googleMap';
-import { axiosDelete } from '../../components/axios/Axios';
-import BoardReport from '../../components/home-board/BoardReport';
-import KakaoMap from '../../components/googleMap/kakaoMap';
 
-=======
 import axios from "axios";
 // import GoogleMap from '../../components/googleMap/googleMap';
 import { axiosDelete } from "../../components/axios/Axios";
 import BoardReport from "../../components/home-board/BoardReport";
 import KakaoMap from "../../components/googleMap/kakaoMap";
 import ReportModal from '../../components/Modal/ReportModal';
->>>>>>> origin/junwoo7
 
 const BoardDetail = () => {
   const { id } = useParams();
@@ -38,11 +23,8 @@ const BoardDetail = () => {
   const [isLoading, setisLoading] = useState(true);
   const { categorys } = useLocation().state;
 
-<<<<<<< HEAD
-=======
   const reportType = "매칭공고";
 
->>>>>>> origin/junwoo7
   const token = sessionStorage.getItem("jwtToken");
   console.log("token : ", token);
 
@@ -56,41 +38,14 @@ const BoardDetail = () => {
     contents: "",
   });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/junwoo7
   const handleReport = (e) => {
     e.preventDefault();
 
     console.log("신고 보내는 데이터", reportInfo);
 
-<<<<<<< HEAD
-    axios.post('http://localhost:8080/report/create', reportInfo, {
-      headers: {
-        'Authorization': "Bearer " + token
-      }
-    }).catch((error) => {
-      if (error.response) {
-        // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      }
-      else if (error.request) {
-        // 요청이 이루어 졌으나 응답을 받지 못했습니다.
-        // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-        // Node.js의 http.ClientRequest 인스턴스입니다.
-        console.log(error.request);
-      }
-      else {
-        // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
-        console.log('Error', error.message);
-      }
-    });
-=======
+
     axios
-      .post(" https://2adb-60-253-18-218.jp.ngrok.io/report/create", reportInfo, {
+      .post("https://c0f9-1-235-210-229.jp.ngrok.io/report/create", reportInfo, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -111,7 +66,6 @@ const BoardDetail = () => {
           console.log("Error", error.message);
         }
       });
->>>>>>> origin/junwoo7
     alert("신고 완료되었습니다.");
     navigate(-1);
   };
@@ -119,45 +73,13 @@ const BoardDetail = () => {
   const handleInChat = (e) => {
     e.preventDefault();
 
-<<<<<<< HEAD
-  const handleInChat = (e) => {
-    e.preventDefault();
 
-    if(!board.myPost) {
-      console.log("채팅 가입하기할떄 매칭포스트아이디 : ",id)
-
-      axios.post('http://localhost:8080/matchingPost/detail/joinChat', {chattingRoomId : board.chattingRoomId}, {
-        headers: {
-          'Authorization': "Bearer " + token
-        }
-      }).catch((error) => {
-        if (error.response) {
-          // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-        else if (error.request) {
-          // 요청이 이루어 졌으나 응답을 받지 못했습니다.
-          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-          // Node.js의 http.ClientRequest 인스턴스입니다.
-          console.log(error.request);
-        }
-        else {
-          // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
-          console.log('Error', error.message);
-        }
-      });
-    }
-    navigate("/chat/in/"+board.chattingRoomId, {state:{ roomId:board.chattingRoomId}});
-  }
-=======
     if (!board.myPost) {
       console.log("채팅 가입하기할떄 매칭포스트아이디 : ", id);
 
       axios
         .post(
-          " https://2adb-60-253-18-218.jp.ngrok.io/matchingPost/detail/joinChat",
+          "https://c0f9-1-235-210-229.jp.ngrok.io/matchingPost/detail/joinChat",
           { chattingRoomId: board.chattingRoomId },
           {
             headers: {
@@ -184,7 +106,6 @@ const BoardDetail = () => {
     }
     navigate("/chat/in/" + board.chattingRoomId, { state: { roomId: board.chattingRoomId } });
   };
->>>>>>> origin/junwoo7
 
   const boardDelete = () => {
     axiosDelete(`/matchingPost/detail/delete/${id}`);
@@ -194,7 +115,7 @@ const BoardDetail = () => {
 
   const getBoard = async () => {
     const res = await (
-      await axios.get(` https://2adb-60-253-18-218.jp.ngrok.io/matchingPost/detail/${id}`, {
+      await axios.get(`https://c0f9-1-235-210-229.jp.ngrok.io/matchingPost/detail/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -203,11 +124,7 @@ const BoardDetail = () => {
     //const res = await (await axiosGet(`matchingPost/detail/${id}`, header)).data; // 이코드하면 에러뜸
 
     console.log("detail 조회 결과", res);
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> origin/junwoo7
     setReportInfo({ ...reportInfo, targetMemberNickname: res.data.nickname, targetNickname: res.data.nickname });
     setBoard(res.data);
 
@@ -242,66 +159,7 @@ const BoardDetail = () => {
               </div>
               <ReportModal infoShow={reportShow} setInfoShow={setReportShow} memberNickname={board.nickname} reportType={reportType} targetId={id} />
             </div>
-            {/* <Modal
-              isOpen={reportModalOpen}
-              ariaHideApp={false}
-              shouldFocusAfterRender={true}
-              onRequestClose={() => setReportModalOpen(false)}
-              style={{
-                overlay: {
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: "rgba(126, 147, 149, 0.83)",
-                },
-                content: {
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  border: "1px solid #ccc",
-                  background: "#fff",
-                  overflow: "auto",
-                  WebkitOverflowScrolling: "touch",
-                  borderRadius: "4px",
-                  outline: "none",
-                  padding: "20px",
-                  width: "800px",
-                  height: "800px",
-                },
-              }}
-            >
-<<<<<<< HEAD
-              <KakaoMap lat={board.lat} lng={board.lng} />
-              {/* <GoogleMap lat={board.lat} lng={board.lng} /> */}
-              <button onClick={() => setModalOpen(false)}>닫기</button>
-            </Modal>
-
-            <div className={styles.contentBox}>
-              <h2 className={styles.contentHeader}>상세내용</h2>
-              <div className={styles.contentWrap}>
-                <p className={styles.contentText}>{board.postContents}</p>
-              </div>
-            </div>
-            <div className={styles.chatBtnBox}>
-              {
-                board.inChatNumber === board.maxNumberOfPeople ?
-                  <Button>현재 채팅방이 가득 찼어요</Button>
-                  :
-                  <Button onClick={(e)=> handleInChat(e)}>채팅방 참여하기</Button>
-              }
-              {
-                (board.myPost) &&
-                <div className={styles.myBtn}>
-                  <Button onClick={() => {
-                    navigate('/register', {
-=======
-              <BoardReport reportInfo={reportInfo} setReportInfo={setReportInfo} handleReport={handleReport} />
-              <button onClick={() => setReportModalOpen(false)}>닫기</button>
-              <button onClick={handleReport}>등록</button>
-            </Modal> */}
+            
             <ul className={styles.boardInfo}>
               <li className={styles.infoBox}>
                 <span className={styles.infoTitle}>종목</span>
@@ -379,7 +237,6 @@ const BoardDetail = () => {
                 <Button
                   onClick={() => {
                     navigate("/register", {
->>>>>>> origin/junwoo7
                       state: {
                         board,
                         categorys,
@@ -392,17 +249,9 @@ const BoardDetail = () => {
                   수정
                 </Button>
 
-<<<<<<< HEAD
-                  <Button onClick={() => boardDelete()}>삭제</Button>
-                </div>
-              }
-              
-            </div>
-=======
                 <Button onClick={() => boardDelete()}>삭제</Button>
               </div>
             )}
->>>>>>> origin/junwoo7
           </div>
         </div>
       )}

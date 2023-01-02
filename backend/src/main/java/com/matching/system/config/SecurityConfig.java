@@ -85,8 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 쉽게할려고
                 .antMatchers("/**").permitAll()
-                .antMatchers("/ws/info",
-                        "/ws/**"                        )
+                .antMatchers("/ws/info","/ws/**")
                 .permitAll()
 
 
@@ -104,7 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs").permitAll()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/myAccount/**", "/profile/**", "/report/**").hasRole("USER")
-////                .antMatchers(HttpMethod5.OPTIONS, "/**").permitAll()
+//                .antMatchers(HttpMethod5.OPTIONS, "/**").permitAll()
 //                .antMatchers("/stomp/chat", "/pub/**", "/sub/**").permitAll()
 //                .anyRequest().authenticated()
 

@@ -30,7 +30,7 @@ export function AdminCategoryItem({ categorys }) {
   }
 
   function deleteItem(id) {
-    const url = " https://2adb-60-253-18-218.jp.ngrok.io/admin/category/delete/" + id;
+    const url = " https://c0f9-1-235-210-229.jp.ngrok.io/admin/category/delete/" + id;
     if (confirm("삭제하시겠습니까?")) {
       axios.delete(url).then(() => {
         location.reload();

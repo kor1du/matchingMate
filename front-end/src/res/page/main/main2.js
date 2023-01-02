@@ -1,9 +1,9 @@
 /* global kakao */
 
 import React, { useEffect, useState } from "react";
-import Nav from "../../components/nav/Nav";
+import Nav from "../../components/Nav/Nav";
 
-import NavToChat from "../../components/nav/NavToChat";
+import NavToChat from "../../components/Nav/NavToChat";
 import { axiosGet } from "../../components/axios/Axios";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -15,10 +15,6 @@ import { TiThSmallOutline } from "react-icons/ti";
 import Board from "../../components/main/board";
 import { useNavigate } from "react-router-dom";
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/junwoo7
 const Main2 = () => {
   const [boards, setBoards] = useState([]);
   const [liveAddr, setLiveAddr] = useState("");
@@ -33,26 +29,17 @@ const Main2 = () => {
 
   const navigate = useNavigate();
 
-<<<<<<< HEAD
-  // 기본 조회는 최신순 zzzz
-  const getBoards = async (lat, lng) => {
-    const res = await (await axios.get(`http://localhost:8080/recent?lat=${lat}&lng=${lng}`)).data;
-    // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
-    console.log("통신데이터", res);
-    setBoards(res.data);
-    setSelectCategoryId("");
-=======
+
   
-  // 기본 조회는 최신순 zzzz
+  // 기본 조회는 최신순 
   const getBoards = async (lat, lng) => {
-    const res = await (await axios.get(` https://2adb-60-253-18-218.jp.ngrok.io/recent?lat=${lat}&lng=${lng}`)).data;
+    const res = await (await axios.get(`https://c0f9-1-235-210-229.jp.ngrok.io/recent?lat=${lat}&lng=${lng}`)).data;
     // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
 
     setBoards(res.data);
     setSelectCategoryId("");
 
->>>>>>> origin/junwoo7
   };
 
   const getPopularBoards = async (lat, lng) => {
@@ -68,23 +55,18 @@ const Main2 = () => {
   const getRecentBoards = async (lat, lng) => {
     if (selectCategoryId) {
       const res = await (
-<<<<<<< HEAD
-        await axios.get(`http://localhost:8080/recent?lat=${lat}&lng=${lng}&categoryId=${selectCategoryId}`)
-=======
+
         await axios.get(
-          ` https://2adb-60-253-18-218.jp.ngrok.io/recent?lat=${lat}&lng=${lng}&categoryId=${selectCategoryId}`
+          `https://c0f9-1-235-210-229.jp.ngrok.io/recent?lat=${lat}&lng=${lng}&categoryId=${selectCategoryId}`
         )
->>>>>>> origin/junwoo7
       ).data;
       // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
       console.log("통신데이터", res);
       setBoards(res.data);
     } else {
-<<<<<<< HEAD
-      const res = await (await axios.get(`http://localhost:8080/recent?lat=${lat}&lng=${lng}`)).data;
-=======
-      const res = await (await axios.get(` https://2adb-60-253-18-218.jp.ngrok.io/recent?lat=${lat}&lng=${lng}`)).data;
->>>>>>> origin/junwoo7
+
+      const res = await (await axios.get(`https://c0f9-1-235-210-229.jp.ngrok.io/recent?lat=${lat}&lng=${lng}`)).data;
+
       // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
       console.log("통신데이터", res);
       setBoards(res.data);
@@ -93,13 +75,10 @@ const Main2 = () => {
 
   const changeCategory = async (categoryId) => {
     const res = await (
-<<<<<<< HEAD
-      await axios.get(`http://localhost:8080/recent?lat=${latitude}&lng=${longtitue}&categoryId=${categoryId}`)
-=======
+
       await axios.get(
-        ` https://2adb-60-253-18-218.jp.ngrok.io/recent?lat=${latitude}&lng=${longtitue}&categoryId=${categoryId}`
+        `https://c0f9-1-235-210-229.jp.ngrok.io/recent?lat=${latitude}&lng=${longtitue}&categoryId=${categoryId}`
       )
->>>>>>> origin/junwoo7
     ).data;
     // const res = await (await axiosGet(`/recent?lat=${lat}&lng=${lng}`)).data;
     console.log("통신데이터", res);
@@ -110,11 +89,8 @@ const Main2 = () => {
   const getInterestCategory = async () => {
     setSelectCategoryMenu(2);
     const res = await (
-<<<<<<< HEAD
-      await axios.get(`http://localhost:8080/myInterest`, {
-=======
-      await axios.get(` https://2adb-60-253-18-218.jp.ngrok.io/myInterest`, {
->>>>>>> origin/junwoo7
+
+      await axios.get(`https://c0f9-1-235-210-229.jp.ngrok.io/myInterest`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -157,11 +133,9 @@ const Main2 = () => {
     setSelectCategoryMenu(1);
 
     console.log("카테고리검색시작..");
-<<<<<<< HEAD
-    const res = await (await axios.get("http://localhost:8080/category")).data;
-=======
-    const res = await (await axios.get(" https://2adb-60-253-18-218.jp.ngrok.io/category")).data;
->>>>>>> origin/junwoo7
+
+    const res = await (await axios.get("https://c0f9-1-235-210-229.jp.ngrok.io/category")).data;
+
 
     setCategorys(res.data);
 
@@ -175,11 +149,8 @@ const Main2 = () => {
   const updateLocation = (addr, token) => {
     console.log("최근위치 업데이트 시작....");
     axios.put(
-<<<<<<< HEAD
-      "http://localhost:8080/location",
-=======
-      " https://2adb-60-253-18-218.jp.ngrok.io/location",
->>>>>>> origin/junwoo7
+
+      "https://c0f9-1-235-210-229.jp.ngrok.io/location",
       { location: addr },
       {
         headers: {
@@ -228,15 +199,10 @@ const Main2 = () => {
       <motion.section>
         <div className={styles.headerBox}>
           <div className={styles.header}>
-<<<<<<< HEAD
-            <motion.div className={styles.location} whileHover={{ scale: 1.1, ease: "easeIn", duration: 0.2 }}>
-              <FaLocationArrow style={{ marginRight: "5px", marginLeft: "5px" }} />
-              <span className={styles.location}>위치 갱신하기</span>
-=======
             <motion.div className={styles.location} animate={{ y: [-300, 0] }} transition={{ duration: 1 }} whileHover={{ scale: 1.1, ease: "easeIn", duration: 0.2 }}>
               <FaLocationArrow style={{ marginRight: "5px", marginLeft: "5px" }} />
               <span className={styles.locationText}>위치 갱신하기</span>
->>>>>>> origin/junwoo7
+
             </motion.div>
             <motion.h2 className={styles.liveAddr} animate={{ y: [-300, 0] }} transition={{ duration: 1 }}>
               {token === null ? "방문자" : sessionStorage.getItem("nickname")} 님은 현재{" "}
@@ -245,11 +211,9 @@ const Main2 = () => {
           </div>
         </div>
         <div className={styles.container}>
-<<<<<<< HEAD
-          <ul className={styles.categoryMenu}>
-=======
+
           <motion.ul className={styles.categoryMenu}  animate={{ scale: [0.5, 1] }} transition={{ duration: 1 }}>
->>>>>>> origin/junwoo7
+
             <li
               className={`${styles.categoryMenuItem} ${selectCategoryMenu === 1 ? styles.selected : ""}`}
               onClick={() => getCategorys()}
@@ -262,11 +226,8 @@ const Main2 = () => {
             >
               관심 카테고리
             </li>
-<<<<<<< HEAD
-          </ul>
-=======
+
           </motion.ul>
->>>>>>> origin/junwoo7
           <motion.div className={styles.categoryBox} animate={{ scale: [0.5, 1] }} transition={{ duration: 1 }}>
             {categorys &&
               categorys.map((item) => (
@@ -340,8 +301,5 @@ const Main2 = () => {
   );
 };
 
-<<<<<<< HEAD
+
 export default Main2;
-=======
-export default Main2;
->>>>>>> origin/junwoo7

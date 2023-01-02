@@ -16,12 +16,8 @@ export default function editIntroduce(props) {
 
   const clickUpdateImg = () => {
     document.querySelector(".user-profile .introduce>p").style.display = "none";
-<<<<<<< HEAD
-    document.querySelector(".user-profile .introduce .btn-dark").style.display =
-      "none";
-=======
     document.querySelector(".user-profile .introduce .btn-dark").style.display = "none";
->>>>>>> origin/junwoo7
+
     setChecked(!checked);
   };
 
@@ -36,25 +32,14 @@ export default function editIntroduce(props) {
 
     const res = await (
       await axios.post(
-<<<<<<< HEAD
-        "http://localhost:8080/profile/updateProfileContent",
-=======
-        " https://2adb-60-253-18-218.jp.ngrok.io/profile/updateProfileContent",
->>>>>>> origin/junwoo7
+        "https://c0f9-1-235-210-229.jp.ngrok.io/profile/updateProfileContent",
         { profileContent: inputText },
         { headers: headers }
       )
     ).data;
 
-<<<<<<< HEAD
-    document.querySelector(".user-profile .introduce>p").style.display =
-      "block";
-    document.querySelector(".user-profile .introduce .btn-dark").style.display =
-      "block";
-=======
     document.querySelector(".user-profile .introduce>p").style.display = "block";
     document.querySelector(".user-profile .introduce .btn-dark").style.display = "block";
->>>>>>> origin/junwoo7
   };
 
   const updateInput = (e) => {

@@ -1,9 +1,11 @@
+// import Body from "./Body";
+/* global kakao */
 import HomeHeader from "../components/home/HomeHeader";
 import React, { useEffect, useState } from "react";
-import Nav from "../components/nav/Nav";
+import Nav from "../components/Nav/Nav";
 import HomeCarousel from "../components/home/HomeCarousel";
 import Board from "../components/home-board/HomeBoard";
-import NavToChat from "../components/nav/NavToChat";
+import NavToChat from "../components/Nav/NavToChat";
 // import { axiosGet } from '../axios/Axios';
 import axios from "axios";
 import { axiosGet } from "../components/axios/Axios";
@@ -47,7 +49,7 @@ const Home = () => {
   const getCategorys = async () => {
 
     console.log("카테고리검색시작..");
-    const res = await (await axios.get(" https://2adb-60-253-18-218.jp.ngrok.io/category")).data;
+    const res = await (await axios.get("https://c0f9-1-235-210-229.jp.ngrok.io/category")).data;
 
     setCategorys(res.data);
 
@@ -55,7 +57,7 @@ const Home = () => {
   const updateLocation = (addr, token) => {
     console.log("최근위치 업데이트 시작....");
     axios.put(
-      " https://2adb-60-253-18-218.jp.ngrok.io/location",
+      "https://c0f9-1-235-210-229.jp.ngrok.io/location",
       { location: addr },
       {
         headers: {

@@ -1,13 +1,13 @@
 import axios from "axios";
 
 
-var url = " https://2adb-60-253-18-218.jp.ngrok.io";
+var url = "https://c0f9-1-235-210-229.jp.ngrok.io";
 
 // eslint-disable-next-line no-unused-vars
 
 export function axiosPost(path, data, headers) {
-  if (url !== " https://2adb-60-253-18-218.jp.ngrok.io") {
-    url = " https://2adb-60-253-18-218.jp.ngrok.io" + path;
+  if (url !== "https://c0f9-1-235-210-229.jp.ngrok.io") {
+    url = "https://c0f9-1-235-210-229.jp.ngrok.io" + path;
   } else {
     url += path;
   }
@@ -18,8 +18,8 @@ export function axiosPost(path, data, headers) {
 
 
 export function axiosDelete(path, headers) {
-  if (url !== " https://2adb-60-253-18-218.jp.ngrok.io") {
-    url = " https://2adb-60-253-18-218.jp.ngrok.io" + path;
+  if (url !== "https://c0f9-1-235-210-229.jp.ngrok.io") {
+    url = "https://c0f9-1-235-210-229.jp.ngrok.io" + path;
 
   } else {
     url += path;
@@ -32,8 +32,8 @@ export function axiosDelete(path, headers) {
 
 export function axiosGet(path, headers) {
 
-  if (url !== " https://2adb-60-253-18-218.jp.ngrok.io") {
-    url = " https://2adb-60-253-18-218.jp.ngrok.io" + path;
+  if (url !== "https://c0f9-1-235-210-229.jp.ngrok.io") {
+    url = "https://c0f9-1-235-210-229.jp.ngrok.io" + path;
   } else {
     url += path;
   }
@@ -43,8 +43,8 @@ export function axiosGet(path, headers) {
 }
 
 export function axiosPut(path, data) {
-  if (url !== " https://2adb-60-253-18-218.jp.ngrok.io") {
-    url = " https://2adb-60-253-18-218.jp.ngrok.io" + path;
+  if (url !== "https://c0f9-1-235-210-229.jp.ngrok.io") {
+    url = "https://c0f9-1-235-210-229.jp.ngrok.io" + path;
   } else {
     url += path;
   }

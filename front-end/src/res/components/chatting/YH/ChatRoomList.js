@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import RoomList from "../../components/chatting/YH/RoomList";
 import { axiosGet } from "../../components/axios/Axios";
-// import Nav from "../../components/nav/Nav";
+// import Nav from "../../components/Nav/Nav";
 import "../../css/chattingList/chattingList.css";
 
 

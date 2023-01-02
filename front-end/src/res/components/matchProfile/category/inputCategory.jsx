@@ -18,11 +18,7 @@ function InputCategory(props) {
 
   const saveInterest = async () => {
     let rsp = (
-<<<<<<< HEAD
-      await axios.post("http://localhost:8080/profile/interestCategory/create", interestData, {
-=======
-      await axios.post(" https://2adb-60-253-18-218.jp.ngrok.io/profile/interestCategory/create", interestData, {
->>>>>>> origin/junwoo7
+      await axios.post("https://c0f9-1-235-210-229.jp.ngrok.io/profile/interestCategory/create", interestData, {
         headers: { Authorization: token },
       })
     ).data;

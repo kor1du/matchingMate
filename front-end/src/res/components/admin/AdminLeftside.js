@@ -69,6 +69,7 @@ function highlightCurrentCategory() {
     }
   }
 }
+}
 
 export default function AdminLeftside() {
   useEffect(() => {
@@ -127,4 +128,4 @@ export default function AdminLeftside() {
     </>
   );
 }
-}
+

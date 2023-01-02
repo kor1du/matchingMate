@@ -32,12 +32,7 @@ function ReportModal(props) {
   const sendReport = () => {
     console.log(reportType);
     axios
-      .post(
-<<<<<<< HEAD
-        "http://localhost:8080/report/create",
-=======
-        " https://2adb-60-253-18-218.jp.ngrok.io/report/create",
->>>>>>> origin/junwoo7
+      .post("https://c0f9-1-235-210-229.jp.ngrok.io/report/create",
         {
           targetMemberNickname: memberNickname,
           reportType: reportType,
